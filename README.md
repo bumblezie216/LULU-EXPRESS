@@ -1,1137 +1,1115 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#12070d">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#170910">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
 <title>Lulu Express 🚂💗</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --bg:#12070d;
-  --bg2:#1e0c16;
-  --panel:#2b1220;
-  --panel2:#351729;
-  --pink:#ff8fbd;
-  --pink2:#ffb8d6;
-  --light:#ffe8f2;
-  --muted:#cfaabc;
-  --burg:#741f43;
-  --green:#77e0a0;
-  --gold:#ffd66b;
-  --red:#ff6f83;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
-html,body{
+
+html,
+body{
   margin:0;
+  padding:0;
   width:100%;
   min-height:100%;
-  background:radial-gradient(circle at top,#321426 0,#12070d 60%);
-  color:var(--light);
+  background:#12070d;
+  color:#fff;
   font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
 }
-body{overflow-x:hidden}
-button,input{font:inherit}
+
+body{
+  overscroll-behavior:none;
+  -webkit-text-size-adjust:100%;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
 button{
   border:0;
   cursor:pointer;
-  color:white;
-}
-.hidden{display:none!important}
-
-#app{min-height:100vh}
-
-/* GLOBAL JOURNEY HEADER */
-#journeyHeader{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(18,7,13,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(255,143,189,.18);
-  padding:10px 14px;
-}
-.headerInner{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-}
-.logo{
-  font-weight:900;
-  font-size:17px;
-  white-space:nowrap;
-}
-.stats{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.stat{
-  background:#29111e;
-  border:1px solid #54263d;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:12px;
-}
-.headerButtons{
-  display:flex;
-  gap:5px;
-}
-.smallBtn{
-  background:#4b1c32;
-  border:1px solid #71304d;
-  padding:7px 9px;
-  border-radius:10px;
-  font-size:12px;
-}
-.smallBtn:hover{background:#682543}
-
-#musicPanel{
-  position:fixed;
-  bottom:12px;
-  left:12px;
-  z-index:80;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  background:rgba(25,8,15,.94);
-  border:1px solid #71304d;
-  padding:7px;
-  border-radius:15px;
-}
-#musicToggle{
-  background:#7d2950;
-  padding:9px 13px;
-  border-radius:10px;
-  font-weight:bold;
-}
-#musicToggle.on{background:#32774f}
-#volume{
-  width:80px;
-  accent-color:var(--pink);
-}
-
-/* JOURNEY */
-#journey{
-  min-height:100vh;
-  padding-bottom:90px;
-}
-.hero{
-  max-width:900px;
-  margin:auto;
-  text-align:center;
-  padding:34px 18px 18px;
-}
-.hero h1{
-  font-size:clamp(34px,9vw,66px);
-  margin:0;
-  line-height:1;
-}
-.hero p{
-  color:var(--muted);
-  max-width:620px;
-  margin:14px auto;
-  line-height:1.6;
-}
-.nameBox{
-  max-width:400px;
-  margin:20px auto;
-  display:flex;
-  gap:8px;
-}
-.nameBox input{
-  flex:1;
-  min-width:0;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #6b2d4a;
-  background:#1d0b14;
-  color:white;
-  outline:none;
-}
-.primary{
-  background:linear-gradient(135deg,#a92e61,#76203f);
-  padding:13px 18px;
-  border-radius:12px;
-  font-weight:800;
-  box-shadow:0 7px 20px rgba(0,0,0,.25);
-}
-.primary:active{transform:scale(.97)}
-.progressWrap{
-  max-width:700px;
-  margin:20px auto;
-}
-.progressText{
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-  font-size:13px;
-}
-.progress{
-  height:10px;
-  background:#29101c;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:7px;
-}
-.progress>div{
-  height:100%;
-  background:linear-gradient(90deg,#ff77ac,#ffc0da);
-  transition:width .4s;
-}
-.map{
-  max-width:900px;
-  margin:25px auto;
-  padding:0 14px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-.level{
-  min-height:112px;
-  background:linear-gradient(145deg,#2c1220,#1d0b14);
-  border:1px solid #4d2136;
-  border-radius:17px;
-  padding:12px;
-  text-align:left;
-  position:relative;
-  transition:.2s;
-}
-.level.available{
-  border-color:#bd4677;
-  box-shadow:0 0 20px rgba(255,105,160,.08);
-}
-.level.completed{
-  border-color:#4d8c69;
-}
-.level.locked{
-  opacity:.42;
-  filter:saturate(.5);
-}
-.level:not(.locked):active{transform:scale(.97)}
-.levelNum{
-  font-size:11px;
-  color:var(--pink);
-  font-weight:bold;
-}
-.levelIcon{
-  font-size:27px;
-  margin:7px 0;
-}
-.levelName{
-  font-weight:bold;
-  font-size:13px;
-}
-.levelStatus{
-  position:absolute;
-  right:10px;
-  top:10px;
-  font-size:16px;
-}
-@media(max-width:650px){
-  .headerInner{flex-wrap:wrap}
-  .logo{width:100%;text-align:center}
-  .map{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:390px){
-  .map{grid-template-columns:1fr}
-}
-
-/* GAME SCREEN */
-#gameScreen{
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 50% 0,#351426 0,#15080f 48%,#0e060a 100%);
-}
-.gameTop{
-  width:100%;
-  max-width:1000px;
-  margin:auto;
-  padding:18px 16px 8px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-.gameTop h2{
-  margin:0;
-  font-size:clamp(22px,6vw,36px);
-}
-.gameMini{
-  color:var(--muted);
-  font-size:13px;
-  text-align:right;
-}
-.gameContent{
-  max-width:850px;
-  margin:auto;
-  min-height:calc(100vh - 90px);
-  padding:12px 16px 45px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.instruction{
-  color:var(--muted);
-  text-align:center;
-  max-width:650px;
-  line-height:1.5;
-  margin:8px 0 18px;
-}
-.gameBox{
-  width:min(100%,700px);
-  background:rgba(40,16,29,.88);
-  border:1px solid #57243d;
-  border-radius:22px;
-  padding:18px;
-  box-shadow:0 15px 50px rgba(0,0,0,.3);
-}
-.gameActions{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:18px;
-}
-.backBtn{
-  background:#321421;
-  border:1px solid #59263f;
-  padding:10px 15px;
-  border-radius:10px;
-}
-.bigBtn{
-  background:#8d2855;
-  padding:13px 20px;
-  border-radius:13px;
-  font-weight:bold;
-  min-width:120px;
-}
-.success{
-  text-align:center;
-  padding:45px 20px;
-}
-.success .emoji{font-size:65px}
-.success h2{font-size:38px;margin:10px 0}
-.success p{color:var(--muted);line-height:1.6}
-.nextBtn{
-  margin-top:18px;
-  background:linear-gradient(135deg,#d24c86,#8e2755);
-  padding:16px 30px;
-  border-radius:14px;
-  font-size:17px;
-  font-weight:900;
-}
-.failBox{text-align:center;padding:25px}
-.failBox h3{font-size:28px}
-.muted{color:var(--muted)}
-.gameStat{
-  text-align:center;
-  font-weight:bold;
-  margin:8px;
-}
-
-/* 1 BROKEN HEARTS */
-#heartCatch{
-  height:470px;
-  max-width:430px;
-  margin:auto;
-  position:relative;
-  overflow:hidden;
-  border-radius:18px;
-  background:linear-gradient(#21101d,#10080e);
-  border:1px solid #5b2942;
-}
-.catchHeart{
-  position:absolute;
-  font-size:31px;
   user-select:none;
-  transition:none;
-}
-.catcher{
-  position:absolute;
-  bottom:12px;
-  width:80px;
-  height:28px;
-  border-radius:20px;
-  background:#e66d9e;
-  box-shadow:0 0 15px rgba(255,130,180,.35);
-}
-.heartControls{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-top:10px;
-}
-.moveBtn{
-  width:70px;
-  height:50px;
-  border-radius:13px;
-  background:#622443;
-  font-size:24px;
+  -webkit-user-select:none;
+  touch-action:manipulation;
 }
 
-/* 2 MEMORY */
-.memoryGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  max-width:440px;
-  margin:15px auto;
+input{
+  font-size:16px !important;
 }
-.memoryTile{
-  aspect-ratio:1;
-  border-radius:13px;
-  background:#4a1b31;
-  border:2px solid #71304f;
-  font-size:23px;
-}
-.memoryTile.show,.memoryTile.selected{
-  background:#c34c80;
-}
-.memoryTile.correctFlash{background:#39845b}
-.memoryTile.wrongFlash{background:#9d3449}
 
-/* QUIZZES */
-.quizQuestion{
-  font-size:21px;
-  font-weight:bold;
-  line-height:1.4;
-  text-align:center;
-  margin:15px auto 20px;
-  max-width:650px;
+.hidden{
+  display:none!important;
 }
-.answerGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.answer{
-  min-height:62px;
-  border-radius:13px;
-  background:#351729;
-  border:1px solid #61304a;
-  padding:12px;
-  text-align:left;
-}
-.answer:hover{background:#55213c}
-.answer.correct{background:#286844;border-color:#67d08d}
-.answer.wrong{background:#7c293d;border-color:#e06a80}
-.timerBar{
-  height:9px;
-  background:#180a10;
-  border-radius:10px;
-  overflow:hidden;
-}
-.timerBar div{
-  height:100%;
-  background:#ff83b4;
+
+.screen{
+  min-height:100svh;
   width:100%;
-  transition:width linear;
+  display:none;
+  padding:
+    max(18px,env(safe-area-inset-top))
+    max(16px,env(safe-area-inset-right))
+    max(22px,env(safe-area-inset-bottom))
+    max(16px,env(safe-area-inset-left));
 }
 
-/* SLOT */
-.slotMachine{
-  text-align:center;
-}
-.reels{
-  display:flex;
-  justify-content:center;
-  gap:9px;
-  margin:20px 0;
-}
-.reel{
-  width:90px;
-  height:100px;
-  background:#12090e;
-  border:3px solid #8b3c5e;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:48px;
-}
-.lever{
-  width:55px;
-  height:100px;
-  border-radius:30px;
-  background:#542039;
-  position:relative;
-  margin:10px auto;
-}
-.lever:after{
-  content:"";
-  position:absolute;
-  top:8px;
-  left:17px;
-  width:21px;
-  height:45px;
-  border-radius:20px;
-  background:#f08ab4;
-}
-.slotResult{
-  min-height:28px;
-  font-weight:bold;
-  color:var(--gold);
-}
-
-/* MIND */
-.patternRow,.patternOptions{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.patternCard{
-  width:65px;
-  height:65px;
-  border-radius:12px;
-  background:#4b1c33;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:29px;
-}
-.patternOption{
-  width:80px;
-  height:65px;
-}
-
-/* BLUFF */
-.cards{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-.playCard{
-  width:75px;
-  height:105px;
-  border-radius:12px;
-  background:linear-gradient(145deg,#6c2350,#301124);
-  border:2px solid #a64b79;
-  font-size:25px;
-  font-weight:bold;
-}
-.playCard.revealed{
-  background:#f6dce7;
-  color:#4b172e;
-}
-
-/* SURVIVAL */
-.survivalIcon{
-  text-align:center;
-  font-size:70px;
-  margin:10px;
-}
-.survivalChoices{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-/* RACE */
-.raceTrack{
-  height:270px;
-  background:repeating-linear-gradient(
-    0deg,
-    #25101a 0,
-    #25101a 45px,
-    #321522 45px,
-    #321522 90px
-  );
-  border-radius:18px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid #62314a;
-}
-.horseRow{
-  position:absolute;
-  left:0;
-  width:100%;
-  height:50%;
-  display:flex;
-  align-items:center;
-  padding:0 12px;
-  gap:10px;
-}
-.horseRow:nth-child(2){top:50%}
-.horse{
-  font-size:45px;
-  transition:margin-left .3s;
-}
-.raceFinish{
-  position:absolute;
-  right:8px;
-  top:0;
-  bottom:0;
-  border-left:4px dashed white;
-}
-.timingBar{
-  height:40px;
-  border-radius:20px;
-  background:#1a0b11;
-  position:relative;
-  overflow:hidden;
-  margin:18px 0;
-}
-.timingZone{
-  position:absolute;
-  left:43%;
-  width:18%;
-  top:0;
-  bottom:0;
-  background:#4a9568;
-}
-.timingMarker{
-  position:absolute;
-  top:3px;
-  bottom:3px;
-  width:9px;
-  border-radius:10px;
-  background:#fff;
-}
-
-/* ESCAPE */
-.sceneGrid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.sceneObject{
-  min-height:110px;
-  border-radius:15px;
-  background:#351727;
-  border:1px solid #623049;
-  font-size:18px;
-}
-.clues{
-  display:flex;
-  gap:7px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:15px;
-}
-.clue{
-  padding:7px 10px;
-  border-radius:9px;
-  background:#5a2340;
-  font-size:12px;
-}
-
-/* BOXING */
-.fighters{
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  margin:20px 0;
-}
-.fighter{
-  text-align:center;
-  font-size:65px;
-}
-.health{
-  width:150px;
-  height:12px;
-  background:#16090f;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:8px;
-}
-.health div{
-  height:100%;
-  background:#66d88b;
-}
-.enemyHealth div{background:#e65e77}
-.combatActions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-.combatBtn{
-  padding:14px;
-  border-radius:12px;
-  background:#622340;
-}
-
-/* MATCH */
-.matchArea{
-  position:relative;
-  min-height:350px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-.matchColumn{
+.screen.active{
   display:flex;
   flex-direction:column;
-  gap:12px;
-}
-.matchItem{
-  min-height:55px;
-  padding:13px;
-  background:#54203b;
-  border:2px solid #7b3657;
-  border-radius:13px;
-  text-align:center;
-  touch-action:none;
-}
-.matchItem.selected{outline:3px solid var(--gold)}
-.matchTarget{
-  min-height:55px;
-  padding:13px;
-  border:2px dashed #a64d78;
-  border-radius:13px;
-  text-align:center;
-  color:#b9859d;
-}
-.matchTarget.filled{
-  background:#275d43;
-  border-style:solid;
-  color:white;
 }
 
-/* REACTION */
-.reactionPad{
-  min-height:330px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:20px;
-  background:#190b12;
-}
-.reactionTarget{
-  width:190px;
-  height:190px;
-  border-radius:50%;
-  background:#ad3c6e;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  font-weight:900;
-}
-.reactionTarget.danger{background:#913347}
-
-/* HEART HUNT */
-.huntArea{
-  height:440px;
-  position:relative;
+.game-screen{
+  padding:0;
+  min-height:100svh;
+  height:100svh;
   overflow:hidden;
-  border-radius:20px;
   background:
-    radial-gradient(circle at 20% 30%,#542039 0 8%,transparent 9%),
-    radial-gradient(circle at 80% 70%,#321525 0 12%,transparent 13%),
-    #160a10;
-}
-.huntHeart{
-  position:absolute;
-  font-size:30px;
-  cursor:pointer;
-  animation:floatHeart 2.8s ease-in-out infinite alternate;
-}
-@keyframes floatHeart{
-  from{transform:translateY(-5px)}
-  to{transform:translateY(8px)}
+    radial-gradient(circle at 50% 15%,#492034 0,#24101c 35%,#10070c 100%);
 }
 
-/* LOCK */
-.lockDisplay{
-  background:#10070c;
-  border:1px solid #5f2943;
-  border-radius:12px;
-  padding:15px;
+.game-inner{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  min-height:100svh;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:
+    max(12px,env(safe-area-inset-top))
+    max(12px,env(safe-area-inset-right))
+    max(12px,env(safe-area-inset-bottom))
+    max(12px,env(safe-area-inset-left));
+}
+
+h1,h2,h3,p{
+  margin-top:0;
+}
+
+h1{
+  font-size:clamp(2rem,8vw,3.5rem);
+  margin-bottom:10px;
+}
+
+h2{
+  font-size:clamp(1.4rem,6vw,2.2rem);
+}
+
+p{
+  color:#e8cbd8;
+  line-height:1.5;
+}
+
+.card{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  background:rgba(43,18,32,.92);
+  border:1px solid #69324e;
+  border-radius:24px;
+  padding:24px;
+  box-shadow:0 18px 60px rgba(0,0,0,.4);
+}
+
+.logo{
+  font-size:clamp(2.5rem,12vw,5rem);
   text-align:center;
-  font-size:28px;
-  letter-spacing:8px;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#e7b8cc;
+}
+
+.name-input{
+  width:100%;
+  height:56px;
+  border-radius:16px;
+  border:2px solid #753954;
+  background:#170a11;
+  color:#fff;
+  padding:0 16px;
+  outline:none;
+  margin:15px 0;
+}
+
+.name-input:focus{
+  border-color:#ff8fbd;
+}
+
+.primary,
+.secondary,
+.danger{
+  width:100%;
+  min-height:52px;
+  border-radius:16px;
+  margin-top:10px;
+  font-weight:800;
+  padding:12px 18px;
+}
+
+.primary{
+  background:#d85c91;
+  color:#fff;
+}
+
+.secondary{
+  background:#472034;
+  color:#ffd7e7;
+  border:1px solid #78415b;
+}
+
+.danger{
+  background:#6d2438;
+  color:#fff;
+}
+
+.primary:active,
+.secondary:active,
+.danger:active,
+.control-button:active{
+  transform:scale(.97);
+}
+
+.menu-tools{
+  width:100%;
+  max-width:700px;
+  margin:0 auto 15px;
+  display:flex;
+  gap:8px;
+}
+
+.menu-tools button{
+  flex:1;
+  min-height:48px;
+  border-radius:14px;
+  background:#2e1422;
+  color:#ffd9e8;
+  border:1px solid #66334b;
+}
+
+.journey{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+}
+
+.journey-title{
+  text-align:center;
   margin-bottom:15px;
 }
-.keypad{
+
+.level-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.level{
+  width:100%;
+  min-height:62px;
+  border-radius:18px;
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+  background:#281320;
+  color:#fff;
+  border:1px solid #583047;
+}
+
+.level.unlocked{
+  background:#3a1a2b;
+  border-color:#a04c70;
+}
+
+.level.completed{
+  background:#422034;
+  border-color:#d878a0;
+}
+
+.level.locked{
+  opacity:.42;
+  cursor:not-allowed;
+}
+
+.level-number{
+  min-width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#170a11;
+  font-weight:900;
+}
+
+.level-name{
+  flex:1;
+  font-weight:800;
+}
+
+.level-status{
+  font-size:1.3rem;
+}
+
+.journey-bottom{
+  margin-top:15px;
+}
+
+.game-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.game-title{
+  font-size:clamp(1.25rem,6vw,2rem);
+  font-weight:900;
+}
+
+.game-small{
+  color:#dcb7c8;
+  font-size:.9rem;
+}
+
+.game-content{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.game-card{
+  width:100%;
+  background:rgba(38,16,28,.96);
+  border:1px solid #713650;
+  border-radius:22px;
+  padding:16px;
+  overflow:hidden;
+}
+
+.game-card h2{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.game-card p{
+  text-align:center;
+  margin-bottom:12px;
+}
+
+.game-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.game-buttons.three{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.game-buttons.four{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.answer-button{
+  min-height:58px;
+  padding:10px;
+  border-radius:15px;
+  background:#321728;
+  color:#fff;
+  border:1px solid #75405a;
+  font-weight:700;
+  font-size:1rem;
+}
+
+.answer-button.correct{
+  background:#28734e;
+}
+
+.answer-button.wrong{
+  background:#84384c;
+}
+
+.answer-button:disabled{
+  opacity:.9;
+}
+
+.result-box{
+  text-align:center;
+  background:#2c1522;
+  border:1px solid #743750;
+  border-radius:22px;
+  padding:25px;
+  width:100%;
+  max-width:600px;
+  margin:auto;
+}
+
+.result-box .big{
+  font-size:3rem;
+}
+
+.result-box button{
+  margin-top:12px;
+}
+
+.progress-bar{
+  width:100%;
+  height:13px;
+  border-radius:20px;
+  background:#180a11;
+  overflow:hidden;
+  border:1px solid #66334b;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:#ed76a7;
+  transition:width .25s;
+}
+
+/* =========================================================
+   BROKEN HEARTS
+========================================================= */
+
+.heart-game{
+  position:relative;
+  width:100%;
+  flex:1;
+  min-height:0;
+  max-height:600px;
+  margin:auto;
+  overflow:hidden;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 0,#522139 0,#28121e 48%,#13080e 100%);
+  border:1px solid #713650;
+}
+
+.heart-lanes{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+
+.heart-lane{
+  border-left:1px solid rgba(255,255,255,.035);
+}
+
+.falling-heart{
+  position:absolute;
+  transform:translateX(-50%);
+  font-size:2rem;
+  z-index:3;
+  pointer-events:none;
+}
+
+.catcher{
+  position:absolute;
+  bottom:20px;
+  width:19%;
+  min-width:48px;
+  height:50px;
+  border-radius:17px;
+  background:#d85c91;
+  display:grid;
+  place-items:center;
+  font-size:1.5rem;
+  z-index:5;
+  transition:left .12s ease;
+  box-shadow:0 5px 18px rgba(0,0,0,.35);
+}
+
+.heart-info{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 0;
+  font-weight:800;
+}
+
+.move-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:9px;
+}
+
+.move-button{
+  min-height:70px;
+  border-radius:20px;
+  background:#d85c91;
+  color:#fff;
+  font-size:1.15rem;
+  font-weight:900;
+  border:2px solid #f39ac0;
+  box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.move-button span{
+  display:block;
+  font-size:1.7rem;
+}
+
+/* =========================================================
+   MEMORY
+========================================================= */
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  max-width:430px;
+  width:100%;
+  margin:10px auto;
+}
+
+.memory-tile{
+  aspect-ratio:1;
+  border-radius:13px;
+  background:#3b1b2c;
+  border:1px solid #75405a;
+  color:#fff;
+  font-size:1.4rem;
+}
+
+.memory-tile.flash{
+  background:#d85c91;
+}
+
+.memory-tile.selected{
+  background:#71324f;
+}
+
+/* =========================================================
+   SLOTS
+========================================================= */
+
+.reels{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  max-width:300px;
-  margin:auto;
-}
-.key{
-  padding:16px;
-  border-radius:11px;
-  background:#512039;
-  font-weight:bold;
+  margin:15px 0;
 }
 
-/* CUPID */
-.shootArea{
-  height:430px;
-  position:relative;
-  overflow:hidden;
+.reel{
+  height:100px;
   border-radius:20px;
-  background:radial-gradient(circle,#3a1729,#13080e);
-}
-.shootTarget{
-  position:absolute;
-  font-size:34px;
-  cursor:pointer;
-  user-select:none;
+  background:#160910;
+  border:2px solid #7b3b58;
+  display:grid;
+  place-items:center;
+  font-size:3rem;
 }
 
-/* COUNTDOWN */
-.miniGame{
-  min-height:300px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+.slot-result{
+  min-height:35px;
   text-align:center;
+  font-weight:900;
+  color:#ffb6d1;
 }
-.stopBar{
-  width:90%;
-  height:35px;
-  background:#16090f;
+
+/* =========================================================
+   RACE
+========================================================= */
+
+.race-track{
+  background:#160910;
+  border:1px solid #713650;
   border-radius:20px;
+  padding:15px;
+}
+
+.horse-row{
   position:relative;
+  height:55px;
+  background:#24111b;
+  border-radius:15px;
+  margin:8px 0;
   overflow:hidden;
 }
-.stopZone{
+
+.horse{
+  position:absolute;
+  left:0;
+  top:5px;
+  font-size:2.3rem;
+  transition:left .35s ease;
+}
+
+.timing-meter{
+  height:42px;
+  border-radius:20px;
+  background:#170910;
+  border:2px solid #70405a;
+  position:relative;
+  overflow:hidden;
+  margin:14px 0;
+}
+
+.timing-perfect{
   position:absolute;
   left:42%;
   width:16%;
   height:100%;
-  background:#4c986a;
+  background:#4a9d70;
 }
-.stopMarker{
+
+.timing-good{
   position:absolute;
-  left:0;
-  top:3px;
-  bottom:3px;
-  width:10px;
-  border-radius:10px;
-  background:white;
-}
-.circleRow{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.countCircle{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  background:#74305a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
+  left:27%;
+  width:46%;
+  height:100%;
+  border-left:2px solid #c77b99;
+  border-right:2px solid #c77b99;
 }
 
-/* GAMBLE */
-.pot{
-  font-size:50px;
+.timing-marker{
+  position:absolute;
+  top:0;
+  width:5px;
+  height:100%;
+  background:#fff;
+}
+
+/* =========================================================
+   BOXING
+========================================================= */
+
+.fighter{
   text-align:center;
-  font-weight:900;
-  color:var(--gold);
-  margin:20px;
-}
-.gambleActions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  font-size:5rem;
+  margin:10px;
 }
 
-/* BOSS */
-.boss{
-  text-align:center;
-  font-size:90px;
-  animation:breathe 2s infinite ease-in-out;
-}
-@keyframes breathe{
-  50%{transform:scale(1.05)}
-}
-.bossPhase{
-  text-align:center;
-  color:var(--pink);
-  font-weight:bold;
-}
-.bossActions{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
+.health{
+  height:18px;
+  border-radius:20px;
+  background:#160910;
+  overflow:hidden;
+  border:1px solid #69334c;
+  margin:7px 0 12px;
 }
 
-/* WORD FIND */
-.wordFindWrap{
-  overflow:auto;
-}
-.wordList{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
-}
-.wordTag{
-  background:#321523;
-  border:1px solid #57263e;
-  padding:5px 8px;
-  border-radius:8px;
-  font-size:11px;
-}
-.wordTag.found{
-  background:#337050;
-  text-decoration:line-through;
-}
-.wordGrid{
-  display:grid;
-  grid-template-columns:repeat(14,1fr);
-  gap:2px;
-  max-width:620px;
-  margin:auto;
-  touch-action:none;
-}
-.letter{
-  aspect-ratio:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#301522;
-  border-radius:4px;
-  font-size:clamp(10px,2.8vw,17px);
-  font-weight:bold;
-  user-select:none;
-}
-.letter.selecting{background:#92506d}
-.letter.found{background:#3c7d59;color:white}
-
-/* DRAW */
-#drawCanvas{
+.health-fill{
+  height:100%;
+  background:#d85c91;
   width:100%;
-  max-width:650px;
-  height:420px;
-  background:#fff8fb;
-  border-radius:15px;
-  touch-action:none;
-  display:block;
+  transition:width .25s;
 }
-.drawTools{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin:10px 0;
-}
-.drawTools button{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:#743053;
-}
-.drawTools button.active{outline:3px solid white}
 
-/* DERBY */
-.derbyHorses{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.derbyHorse{
-  padding:18px 8px;
-  background:#3b1729;
-  border:2px solid #5c2742;
-  border-radius:15px;
-  font-size:30px;
-}
-.derbyHorse.selected{
-  border-color:var(--gold);
-  box-shadow:0 0 20px rgba(255,214,107,.12);
-}
-.derbyTrack{
-  margin:15px 0;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-.derbyLane{
-  height:38px;
-  border-radius:10px;
-  background:#17090f;
+/* =========================================================
+   MATCHING
+========================================================= */
+
+.match-board{
   position:relative;
+  min-height:360px;
+  border-radius:20px;
+  background:#180a11;
+  border:1px solid #713650;
+}
+
+.match-item{
+  position:absolute;
+  width:60px;
+  height:60px;
+  border-radius:18px;
+  background:#3a1b2b;
+  display:grid;
+  place-items:center;
+  font-size:2rem;
+  border:2px solid #a45275;
+  z-index:3;
+}
+
+.match-target{
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:20px;
+  border:2px dashed #b76789;
+  display:grid;
+  place-items:center;
+  font-size:1.5rem;
+  opacity:.5;
+}
+
+/* =========================================================
+   HEART HUNT
+========================================================= */
+
+.hunt-area{
+  position:relative;
+  height:55vh;
+  min-height:330px;
+  max-height:500px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 30% 25%,#4c2038,#22101b 55%,#13080e);
+  border:1px solid #713650;
   overflow:hidden;
 }
-.derbyRunner{
+
+.hunt-heart{
   position:absolute;
-  left:4px;
-  top:3px;
-  font-size:27px;
-  transition:left .4s;
-}
-.triviaCounter{
-  text-align:center;
-  color:var(--muted);
+  font-size:2rem;
+  transition:all .4s ease;
+  z-index:3;
 }
 
-/* FINAL */
-.finalScore{
-  font-size:30px;
-  text-align:center;
-  color:var(--gold);
+/* =========================================================
+   LOVE LOCK
+========================================================= */
+
+.lock-display{
+  height:65px;
+  border-radius:17px;
+  background:#13080e;
+  border:2px solid #753953;
+  display:grid;
+  place-items:center;
+  font-size:2rem;
+  letter-spacing:8px;
+  margin-bottom:10px;
 }
 
-/* COMPLETION */
-#completion{
-  min-height:100vh;
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.keypad button{
+  min-height:58px;
+  border-radius:15px;
+  background:#3a1a2b;
+  color:#fff;
+  font-weight:900;
+  font-size:1.15rem;
+  border:1px solid #78405a;
+}
+
+/* =========================================================
+   CUPID
+========================================================= */
+
+.shoot-area{
+  position:relative;
+  height:55vh;
+  min-height:330px;
+  max-height:500px;
+  background:#170910;
+  border:1px solid #713650;
+  border-radius:22px;
+  overflow:hidden;
+}
+
+.shoot-heart{
+  position:absolute;
+  font-size:2.4rem;
+  padding:8px;
+}
+
+/* =========================================================
+   DRAW
+========================================================= */
+
+.canvas-wrap{
+  width:100%;
+  height:min(55vh,470px);
+  background:#f8e4c6;
+  border-radius:20px;
+  overflow:hidden;
+  touch-action:none;
+}
+
+#drawingCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+}
+
+.brush-row{
+  display:flex;
+  gap:7px;
+  margin:8px 0;
+}
+
+.brush-row button{
+  flex:1;
+  min-height:45px;
+  border-radius:13px;
+  background:#3a1a2b;
+  color:#fff;
+  border:1px solid #75405a;
+}
+
+/* =========================================================
+   WORD FIND
+========================================================= */
+
+.word-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:2px;
+  max-width:550px;
+  width:100%;
+  margin:7px auto;
+  touch-action:none;
+}
+
+.word-letter{
+  aspect-ratio:1;
+  min-width:0;
+  border-radius:4px;
+  background:#2d1421;
+  display:grid;
+  place-items:center;
+  font-size:clamp(.55rem,3.1vw,1rem);
+  font-weight:900;
+  color:#f6d5e2;
+  border:1px solid #4c2638;
+}
+
+.word-letter.selected{
+  background:#9b4d70;
+}
+
+.word-letter.found{
+  background:#438261;
+}
+
+.word-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  max-height:110px;
+  overflow:auto;
+  margin-top:5px;
+}
+
+.word-chip{
+  padding:5px 8px;
+  border-radius:9px;
+  background:#321728;
+  border:1px solid #61334a;
+  font-size:.72rem;
+}
+
+.word-chip.done{
+  background:#347252;
+  text-decoration:line-through;
+}
+
+/* =========================================================
+   DERBY
+========================================================= */
+
+.derby-horses{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+  margin:10px 0;
+}
+
+.horse-choice{
+  min-height:80px;
+  border-radius:18px;
+  background:#341726;
+  border:2px solid #6e3b54;
+  color:#fff;
+  font-size:2rem;
+}
+
+.horse-choice.selected{
+  border-color:#ff9dc3;
+  background:#61304a;
+}
+
+.derby-track{
+  background:#170910;
+  border-radius:20px;
+  border:1px solid #713650;
+  padding:10px;
+}
+
+.derby-line{
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:20px;
+  gap:8px;
+  margin:7px 0;
 }
-.completionCard{
-  width:min(600px,100%);
-  text-align:center;
-  background:#2a1120;
-  border:1px solid #672a47;
-  border-radius:25px;
-  padding:35px 20px;
-}
-.completionEmoji{font-size:70px}
 
-/* MOBILE */
-@media(max-width:600px){
-  .answerGrid{grid-template-columns:1fr}
-  .gameContent{padding-left:10px;padding-right:10px}
-  .gameBox{padding:13px}
-  .gameTop{padding:13px 10px}
-  .gameTop h2{font-size:23px}
-  .matchArea{gap:8px}
-  .matchItem,.matchTarget{font-size:13px;padding:10px}
-  .reel{width:75px;height:85px}
-  .bossActions{grid-template-columns:1fr}
+.derby-name{
+  width:65px;
+  font-size:.8rem;
+}
+
+.derby-bar{
+  flex:1;
+  height:24px;
+  border-radius:20px;
+  background:#29131f;
+  overflow:hidden;
+}
+
+.derby-progress{
+  height:100%;
+  width:0%;
+  background:#d85c91;
+  transition:width .3s;
+}
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown-bar{
+  position:relative;
+  height:55px;
+  background:#170910;
+  border:2px solid #69334c;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.countdown-zone{
+  position:absolute;
+  left:40%;
+  width:20%;
+  top:0;
+  bottom:0;
+  background:#438261;
+}
+
+.countdown-marker{
+  position:absolute;
+  width:6px;
+  height:100%;
+  background:#fff;
+}
+
+/* =========================================================
+   GAMBLE
+========================================================= */
+
+.gamble-pot{
+  text-align:center;
+  font-size:3.2rem;
+  font-weight:900;
+  color:#ffc0d7;
+}
+
+.coin{
+  text-align:center;
+  font-size:4rem;
+  min-height:100px;
+}
+
+/* =========================================================
+   BOSS
+========================================================= */
+
+.boss{
+  text-align:center;
+  font-size:5rem;
+  animation:bob 1.5s infinite ease-in-out;
+}
+
+@keyframes bob{
+  50%{transform:translateY(-7px)}
+}
+
+/* =========================================================
+   GENERAL MINI GAME
+========================================================= */
+
+.mini-display{
+  min-height:180px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-size:2rem;
+  font-weight:900;
+  background:#180a11;
+  border:1px solid #66334b;
+  border-radius:20px;
+  padding:15px;
+}
+
+.score-display{
+  text-align:center;
+  font-weight:900;
+  color:#ffb5d1;
+  margin:8px 0;
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(min-width:700px){
+  .game-inner{
+    padding-left:25px;
+    padding-right:25px;
+  }
+
+  .game-card{
+    padding:22px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div id="app">
+<!-- =======================================================
+     START SCREEN
+======================================================= -->
 
-  <!-- JOURNEY SCREEN -->
-  <section id="journey">
-    <div id="journeyHeader">
-      <div class="headerInner">
-        <div class="logo">🚂 Lulu Express</div>
-        <div class="stats">
-          <div class="stat">⭐ <span id="score">0</span></div>
-          <div class="stat">💗 <span id="tokens">0</span></div>
-          <div class="stat">👤 <span id="playerNameHeader">Player</span></div>
-        </div>
-        <div class="headerButtons">
-          <button class="smallBtn" onclick="toggleMusic()">🎵 Music</button>
-          <button class="smallBtn" onclick="resetGame()">↻ Reset</button>
-        </div>
-      </div>
-    </div>
+<section id="startScreen" class="screen active">
+  <div class="card">
+    <div class="logo">🚂💗</div>
+    <h1 style="text-align:center">Lulu Express</h1>
+    <p class="subtitle">
+      A little journey made especially for Liliana.
+    </p>
 
-    <div class="hero">
-      <h1>Lulu Express 🚂💗</h1>
-      <p>
-        A little journey made especially for Liliana.
-        Pass each challenge to unlock the next stop.
-      </p>
+    <input
+      id="playerName"
+      class="name-input"
+      type="text"
+      maxlength="25"
+      autocomplete="off"
+      placeholder="Enter your name"
+    >
 
-      <div id="nameEntry" class="nameBox">
-        <input id="playerName" maxlength="25" placeholder="Enter your name">
-        <button class="primary" onclick="startJourney()">Start Journey</button>
-      </div>
+    <button class="primary" onclick="startJourney()">
+      🚂 Start Journey
+    </button>
 
-      <div id="welcomeText" class="hidden">
-        <h2>Welcome aboard, <span id="welcomeName"></span> 💗</h2>
-        <p>Your next unlocked challenge is waiting for you.</p>
-      </div>
+    <button class="secondary" onclick="showJourney()">
+      Continue Journey
+    </button>
+  </div>
+</section>
 
-      <div class="progressWrap">
-        <div class="progressText">
-          <span>Journey Progress</span>
-          <span id="progressText">0 / 23</span>
-        </div>
-        <div class="progress">
-          <div id="progressFill" style="width:0%"></div>
-        </div>
-      </div>
-    </div>
+<!-- =======================================================
+     JOURNEY SCREEN
+======================================================= -->
 
-    <div id="levelMap" class="map"></div>
-  </section>
+<section id="journeyScreen" class="screen">
 
-  <!-- GAME SCREEN -->
-  <section id="gameScreen" class="hidden">
-    <div class="gameTop">
-      <div>
-        <h2 id="gameTitle"></h2>
-        <div id="gameSubtitle" class="muted"></div>
-      </div>
-      <div class="gameMini">
-        Level <span id="gameNumber">1</span>/23
-      </div>
-    </div>
-
-    <div id="gameContent" class="gameContent"></div>
-  </section>
-
-  <!-- COMPLETION SCREEN -->
-  <section id="completion" class="hidden">
-    <div class="completionCard">
-      <div class="completionEmoji">🎉</div>
-      <h1 id="completionTitle">Level Complete!</h1>
-      <p id="completionMessage"></p>
-      <p><strong>⭐ Points earned: <span id="earnedPoints">0</span></strong></p>
-      <p><strong>💗 Tokens earned: <span id="earnedTokens">0</span></strong></p>
-      <button class="nextBtn" onclick="nextLevel()">Next Level →</button>
-    </div>
-  </section>
-
-  <!-- SIMPLE BUILT-IN MUSIC -->
-  <div id="musicPanel" class="hidden">
-    <button id="musicToggle" onclick="toggleMusic()">🎵 Music Off</button>
-    <input id="volume" type="range" min="0" max="1" step=".05" value=".12"
-           onchange="setVolume(this.value)">
+  <div class="menu-tools">
+    <button onclick="toggleMusic()" id="musicButton">🎵 Music Off</button>
+    <button onclick="resetJourney()">↻ Reset</button>
   </div>
 
-</div>
+  <div class="journey">
+    <div class="card" style="margin-bottom:15px">
+      <h2 class="journey-title">🚂 Lulu Express</h2>
+      <p id="welcomeText" style="text-align:center"></p>
+
+      <div style="display:flex;justify-content:space-around;text-align:center">
+        <div>
+          <strong id="menuScore">0</strong>
+          <br>
+          <small>Points</small>
+        </div>
+        <div>
+          <strong id="menuTokens">0</strong>
+          <br>
+          <small>Tokens</small>
+        </div>
+        <div>
+          <strong id="menuProgress">0/23</strong>
+          <br>
+          <small>Levels</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="level-list" id="levelList"></div>
+
+    <div class="journey-bottom">
+      <button class="primary" onclick="continueJourney()">
+        Continue Journey 🚂
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- =======================================================
+     GAME SCREEN
+======================================================= -->
+
+<section id="gameScreen" class="screen game-screen">
+  <div class="game-inner">
+
+    <div id="gameContent" class="game-content"></div>
+
+  </div>
+</section>
 
 <script>
 /* =========================================================
-   LULU EXPRESS
-   23 FULL GAMES
-   ========================================================= */
+   GLOBAL STATE
+========================================================= */
 
 const TOTAL_LEVELS = 23;
 
-const levels = [
-  ["💔","Broken Hearts"],
-  ["🧠","Memory Vault"],
-  ["⏱️","Pressure Quiz"],
-  ["🎰","High Roller"],
-  ["🧩","Mind Games"],
-  ["🃏","The Bluff"],
-  ["🛡️","Survival Round"],
-  ["🏇","The Admirer Race"],
-  ["🔎","Heartbreak Chamber"],
-  ["🥊","Heartbreak Boxing"],
-  ["🧲","Perfect Match"],
-  ["💗","Who Knows Liliana Best?"],
-  ["⚡","Reaction Gauntlet"],
-  ["🕵️","Heart Hunt"],
-  ["🔐","Love Lock"],
-  ["🏹","Cupid Shootout"],
-  ["⏳","The Countdown"],
-  ["🎲","Ultimate Gamble"],
-  ["👑","Admirer's Last Stand"],
-  ["🔎","Liliana's Word Find"],
-  ["🌻","Draw a Sunflower"],
-  ["🏇","THE LULU DERBY"],
-  ["💕","THE FINAL CHALLENGE"]
+const gameNames = [
+  "💔 Broken Hearts",
+  "🧠 Memory Vault",
+  "⏱️ Pressure Quiz",
+  "🎰 High Roller",
+  "🧩 Mind Games",
+  "🃏 The Bluff",
+  "🛡️ Survival Round",
+  "🏇 The Admirer Race",
+  "🔎 Heartbreak Chamber",
+  "🥊 Heartbreak Boxing Match",
+  "🧲 Perfect Match",
+  "💗 Who Knows Liliana Best?",
+  "⚡ Reaction Gauntlet",
+  "🕵️ Heart Hunt",
+  "🔐 Love Lock",
+  "🏹 Cupid Shootout",
+  "⏳ The Countdown",
+  "🎲 Ultimate Gamble",
+  "👑 Admirer's Last Stand",
+  "🔎 Liliana's Word Find",
+  "🌻 Draw a Sunflower",
+  "🏇 THE LULU DERBY",
+  "💕 THE FINAL CHALLENGE"
 ];
 
 let state = {
@@ -1143,54 +1121,170 @@ let state = {
   current:0
 };
 
-let cleanupGame = null;
-let gameTimer = null;
-
-function loadState(){
-  try{
-    const saved = JSON.parse(localStorage.getItem("luluExpressState"));
-    if(saved) state = {...state,...saved};
-  }catch(e){}
-}
+let timers = [];
+let animationFrames = [];
+let cleanupFunctions = [];
 
 function saveState(){
   localStorage.setItem("luluExpressState",JSON.stringify(state));
 }
 
-function updateHeader(){
-  document.getElementById("score").textContent=state.score;
-  document.getElementById("tokens").textContent=state.tokens;
-  document.getElementById("playerNameHeader").textContent=state.name||"Player";
-  const done=state.completed.length;
-  document.getElementById("progressText").textContent=done+" / "+TOTAL_LEVELS;
-  document.getElementById("progressFill").style.width=(done/TOTAL_LEVELS*100)+"%";
+function loadState(){
+  try{
+    const saved=JSON.parse(localStorage.getItem("luluExpressState"));
+    if(saved){
+      state={...state,...saved};
+    }
+  }catch(e){}
 }
 
-function renderMap(){
-  const map=document.getElementById("levelMap");
-  map.innerHTML="";
+loadState();
 
-  levels.forEach((level,i)=>{
-    const n=i+1;
-    const completed=state.completed.includes(n);
-    const available=n<=state.unlocked;
-
-    const el=document.createElement("button");
-    el.className="level "+(completed?"completed ":"")+
-      (available?"available":"locked");
-
-    el.disabled=!available;
-
-    el.innerHTML=`
-      <div class="levelNum">LEVEL ${n}</div>
-      <div class="levelIcon">${level[0]}</div>
-      <div class="levelName">${level[1]}</div>
-      <div class="levelStatus">${completed?"✅":available?"▶️":"🔒"}</div>
-    `;
-
-    if(available) el.onclick=()=>openLevel(n);
-    map.appendChild(el);
+function clearGameTimers(){
+  timers.forEach(clearTimeout);
+  timers.forEach(clearInterval);
+  timers=[];
+  animationFrames.forEach(cancelAnimationFrame);
+  animationFrames=[];
+  cleanupFunctions.forEach(fn=>{
+    try{fn()}catch(e){}
   });
+  cleanupFunctions=[];
+}
+
+function later(fn,ms){
+  const id=setTimeout(fn,ms);
+  timers.push(id);
+  return id;
+}
+
+function every(fn,ms){
+  const id=setInterval(fn,ms);
+  timers.push(id);
+  return id;
+}
+
+function raf(fn){
+  const id=requestAnimationFrame(fn);
+  animationFrames.push(id);
+  return id;
+}
+
+function addPoints(n){
+  state.score+=n;
+  saveState();
+}
+
+function addTokens(n){
+  state.tokens+=n;
+  saveState();
+}
+
+/* =========================================================
+   MUSIC
+   Simple Web Audio game music. No external audio.
+========================================================= */
+
+let audioCtx=null;
+let musicGain=null;
+let musicTimer=null;
+let musicOn=false;
+
+const melody=[
+  261.63,329.63,392.00,329.63,
+  293.66,349.23,440.00,349.23,
+  261.63,329.63,392.00,523.25,
+  392.00,329.63,293.66,261.63
+];
+
+function startMusic(){
+  if(musicOn) return;
+
+  try{
+    const AudioContext=window.AudioContext||window.webkitAudioContext;
+    if(!AudioContext) return;
+
+    if(!audioCtx){
+      audioCtx=new AudioContext();
+      musicGain=audioCtx.createGain();
+      musicGain.gain.value=.055;
+      musicGain.connect(audioCtx.destination);
+    }
+
+    if(audioCtx.state==="suspended"){
+      audioCtx.resume();
+    }
+
+    musicOn=true;
+    playMusicNote(0);
+
+    updateMusicButtons();
+
+  }catch(e){
+    console.log("Music unavailable");
+  }
+}
+
+function playMusicNote(index){
+  if(!musicOn || !audioCtx) return;
+
+  const osc=audioCtx.createOscillator();
+  const gain=audioCtx.createGain();
+
+  osc.type="sine";
+  osc.frequency.value=melody[index%melody.length];
+
+  gain.gain.setValueAtTime(0,audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(.75,audioCtx.currentTime+.025);
+  gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.32);
+
+  osc.connect(gain);
+  gain.connect(musicGain);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime+.34);
+
+  musicTimer=setTimeout(
+    ()=>playMusicNote(index+1),
+    370
+  );
+}
+
+function stopMusic(){
+  musicOn=false;
+
+  if(musicTimer){
+    clearTimeout(musicTimer);
+    musicTimer=null;
+  }
+
+  updateMusicButtons();
+}
+
+function toggleMusic(){
+  if(musicOn) stopMusic();
+  else startMusic();
+}
+
+function updateMusicButtons(){
+  const b=document.getElementById("musicButton");
+  if(b){
+    b.textContent=musicOn ? "🎵 Music On" : "🎵 Music Off";
+  }
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>{
+    s.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  window.scrollTo(0,0);
 }
 
 function startJourney(){
@@ -1199,2928 +1293,221 @@ function startJourney(){
 
   if(!name){
     input.focus();
-    input.placeholder="Please enter your name 💗";
+    input.placeholder="Please enter your name first 💗";
     return;
   }
 
   state.name=name;
+
+  if(state.unlocked<1) state.unlocked=1;
+
   saveState();
-
-  document.getElementById("nameEntry").classList.add("hidden");
-  document.getElementById("welcomeText").classList.remove("hidden");
-
-  updateHeader();
-  renderMap();
+  renderJourney();
+  showScreen("journeyScreen");
 }
 
 function showJourney(){
-  clearGame();
-  document.getElementById("gameScreen").classList.add("hidden");
-  document.getElementById("completion").classList.add("hidden");
-  document.getElementById("journey").classList.remove("hidden");
-  document.getElementById("journeyHeader").classList.remove("hidden");
-  document.getElementById("musicPanel").classList.remove("hidden");
-  updateHeader();
-  renderMap();
-}
-
-function openLevel(n){
-  if(n>state.unlocked)return;
-
-  clearGame();
-  state.current=n;
-  saveState();
-
-  document.getElementById("journey").classList.add("hidden");
-  document.getElementById("completion").classList.add("hidden");
-  document.getElementById("gameScreen").classList.remove("hidden");
-
-  /* IMPORTANT:
-     The journey header, tokens, score and music controls
-     disappear while the game is being played.
-  */
-  document.getElementById("journeyHeader").classList.add("hidden");
-  document.getElementById("musicPanel").classList.add("hidden");
-
-  document.getElementById("gameNumber").textContent=n;
-  document.getElementById("gameTitle").textContent=levels[n-1][0]+" "+levels[n-1][1];
-  document.getElementById("gameSubtitle").textContent=
-    state.name ? "Good luck, "+state.name+" 💗" : "";
-
-  gameLaunchers[n]();
-}
-
-function clearGame(){
-  if(cleanupGame){
-    try{cleanupGame()}catch(e){}
-    cleanupGame=null;
-  }
-  if(gameTimer){
-    clearInterval(gameTimer);
-    clearTimeout(gameTimer);
-    gameTimer=null;
-  }
-}
-
-function award(points,tokens=1){
-  state.score+=points;
-  state.tokens+=tokens;
-}
-
-function passGame(points,tokens=1,message="You passed the challenge!"){
-  clearGame();
-
-  const n=state.current;
-
-  if(!state.completed.includes(n)){
-    state.completed.push(n);
-    if(n===state.unlocked && state.unlocked<TOTAL_LEVELS){
-      state.unlocked++;
-    }
-  }
-
-  const oldScore=state.score;
-  award(points,tokens);
-  const earned=state.score-oldScore;
-
-  saveState();
-
-  document.getElementById("gameScreen").classList.add("hidden");
-  document.getElementById("completion").classList.remove("hidden");
-  document.getElementById("musicPanel").classList.remove("hidden");
-
-  document.getElementById("completionTitle").textContent=
-    n===TOTAL_LEVELS ? "You finished Lulu Express! 💗" : "Level Complete! 🎉";
-
-  document.getElementById("completionMessage").textContent=message;
-  document.getElementById("earnedPoints").textContent=earned;
-  document.getElementById("earnedTokens").textContent=tokens;
-
-  if(n===TOTAL_LEVELS){
-    document.querySelector("#completion .nextBtn").textContent="Back to Journey";
-  }else{
-    document.querySelector("#completion .nextBtn").textContent="Next Level →";
-  }
-}
-
-function nextLevel(){
-  const n=state.current;
-
-  if(n>=TOTAL_LEVELS){
-    showJourney();
+  if(!state.name){
+    showScreen("startScreen");
     return;
   }
 
-  openLevel(n+1);
+  renderJourney();
+  showScreen("journeyScreen");
 }
 
-function failGame(message, retry=true){
-  clearGame();
+function continueJourney(){
+  let level=state.completed.length+1;
 
-  const box=document.createElement("div");
-  box.className="failBox gameBox";
-  box.innerHTML=`
-    <div style="font-size:55px">💗</div>
-    <h3>${message||"Not quite!"}</h3>
-    <p class="muted">Don't worry. This challenge is meant to be fun.</p>
-    <div class="gameActions">
-      <button class="bigBtn" onclick="openLevel(${state.current})">Try Again</button>
-      <button class="backBtn" onclick="showJourney()">Journey</button>
+  if(level<1) level=1;
+  if(level>23) level=23;
+
+  if(level>state.unlocked){
+    level=state.unlocked;
+  }
+
+  startGame(level);
+}
+
+function renderJourney(){
+  document.getElementById("welcomeText").textContent=
+    state.name
+    ? `Welcome back, ${state.name} 💗`
+    : "Your Lulu Express journey awaits.";
+
+  document.getElementById("menuScore").textContent=state.score;
+  document.getElementById("menuTokens").textContent=state.tokens;
+  document.getElementById("menuProgress").textContent=
+    `${state.completed.length}/23`;
+
+  const list=document.getElementById("levelList");
+  list.innerHTML="";
+
+  for(let i=1;i<=23;i++){
+
+    const unlocked=i<=state.unlocked;
+    const completed=state.completed.includes(i);
+
+    const button=document.createElement("button");
+
+    button.className=
+      "level "+
+      (completed?"completed ":"")+
+      (unlocked?"unlocked":"locked");
+
+    button.disabled=!unlocked;
+
+    button.innerHTML=`
+      <span class="level-number">${i}</span>
+      <span class="level-name">${gameNames[i-1]}</span>
+      <span class="level-status">
+        ${completed?"✓":unlocked?"▶":"🔒"}
+      </span>
+    `;
+
+    if(unlocked){
+      button.onclick=()=>startGame(i);
+    }
+
+    list.appendChild(button);
+  }
+}
+
+function startGame(level){
+  if(level>state.unlocked) return;
+
+  clearGameTimers();
+
+  state.current=level;
+  saveState();
+
+  /*
+    IMPORTANT:
+    We only show the game screen here.
+    The journey HUD, token display and music button
+    are therefore completely off-screen while playing.
+  */
+
+  showScreen("gameScreen");
+
+  const content=document.getElementById("gameContent");
+  content.innerHTML="";
+
+  switch(level){
+    case 1: gameBrokenHearts(); break;
+    case 2: gameMemory(); break;
+    case 3: gamePressureQuiz(); break;
+    case 4: gameSlots(); break;
+    case 5: gameMindGames(); break;
+    case 6: gameBluff(); break;
+    case 7: gameSurvival(); break;
+    case 8: gameRace(); break;
+    case 9: gameChamber(); break;
+    case 10: gameBoxing(); break;
+    case 11: gamePerfectMatch(); break;
+    case 12: gameLilianaQuiz(); break;
+    case 13: gameReaction(); break;
+    case 14: gameHeartHunt(); break;
+    case 15: gameLoveLock(); break;
+    case 16: gameCupid(); break;
+    case 17: gameCountdown(); break;
+    case 18: gameGamble(); break;
+    case 19: gameLastStand(); break;
+    case 20: gameWordFind(); break;
+    case 21: gameSunflower(); break;
+    case 22: gameDerby(); break;
+    case 23: gameFinalChallenge(); break;
+  }
+}
+
+function gameHeader(title,subtitle=""){
+  return `
+    <div class="game-top">
+      <div class="game-title">${title}</div>
+      <div class="game-small">${subtitle}</div>
     </div>
   `;
-  document.getElementById("gameContent").innerHTML="";
-  document.getElementById("gameContent").appendChild(box);
 }
 
-/* =========================================================
-   MUSIC
-   Simple Web Audio game music.
-   No external file or URL required.
-   ========================================================= */
+function finishGame(level,passed,message,points=0){
+  clearGameTimers();
 
-let audioCtx=null;
-let musicGain=null;
-let musicInterval=null;
-let musicOn=false;
+  if(passed){
+    addPoints(points);
+    addTokens(Math.max(1,Math.floor(points/25)));
 
-function ensureAudio(){
-  if(!audioCtx){
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    musicGain=audioCtx.createGain();
-    musicGain.gain.value=.12;
-    musicGain.connect(audioCtx.destination);
-  }
-  if(audioCtx.state==="suspended")audioCtx.resume();
-}
+    if(!state.completed.includes(level)){
+      state.completed.push(level);
+    }
 
-function playNote(freq,duration=.16){
-  if(!musicOn)return;
-  ensureAudio();
+    if(level===state.unlocked && state.unlocked<TOTAL_LEVELS){
+      state.unlocked++;
+    }
 
-  const osc=audioCtx.createOscillator();
-  const gain=audioCtx.createGain();
-
-  osc.type="triangle";
-  osc.frequency.value=freq;
-
-  gain.gain.setValueAtTime(0,audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(.35,audioCtx.currentTime+.02);
-  gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
-
-  osc.connect(gain);
-  gain.connect(musicGain);
-
-  osc.start();
-  osc.stop(audioCtx.currentTime+duration+.03);
-}
-
-const melody=[261.63,329.63,392,329.63,293.66,349.23,440,349.23];
-let melodyIndex=0;
-
-function startMusic(){
-  ensureAudio();
-  musicOn=true;
-
-  if(musicInterval)return;
-
-  melodyIndex=0;
-  playNote(melody[melodyIndex++]);
-
-  musicInterval=setInterval(()=>{
-    playNote(melody[melodyIndex%melody.length]);
-    melodyIndex++;
-  },360);
-
-  updateMusicButton();
-}
-
-function stopMusic(){
-  musicOn=false;
-  if(musicInterval){
-    clearInterval(musicInterval);
-    musicInterval=null;
-  }
-  updateMusicButton();
-}
-
-function toggleMusic(){
-  if(musicOn)stopMusic();
-  else startMusic();
-}
-
-function updateMusicButton(){
-  const btn=document.getElementById("musicToggle");
-  btn.textContent=musicOn?"🎵 Music On":"🎵 Music Off";
-  btn.classList.toggle("on",musicOn);
-}
-
-function setVolume(v){
-  ensureAudio();
-  musicGain.gain.value=Number(v);
-}
-
-/* =========================================================
-   GAME 1 — BROKEN HEARTS
-   ========================================================= */
-
-function game1(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Catch the whole hearts 💗 and golden hearts 💛.
-      Avoid the broken hearts 💔. Use the buttons or drag the catcher.
-      Catch 18 good hearts before you lose all 3 lives.
-    </p>
-
-    <div class="gameBox">
-      <div class="gameStat">
-        💗 <span id="catchScore">0</span>/18
-        &nbsp;&nbsp; ❤️ Lives: <span id="catchLives">3</span>
-      </div>
-
-      <div id="heartCatch">
-        <div id="catcher" class="catcher"></div>
-      </div>
-
-      <div class="heartControls">
-        <button class="moveBtn" id="leftCatch">←</button>
-        <button class="moveBtn" id="rightCatch">→</button>
-      </div>
-    </div>
-  `;
-
-  const area=document.getElementById("heartCatch");
-  const catcher=document.getElementById("catcher");
-  let x=area.clientWidth/2-40;
-  let score=0;
-  let lives=3;
-  let hearts=[];
-  let spawnTimer;
-  let running=true;
-
-  catcher.style.left=x+"px";
-
-  function move(dx){
-    x=Math.max(0,Math.min(area.clientWidth-80,x+dx));
-    catcher.style.left=x+"px";
+    saveState();
   }
 
-  document.getElementById("leftCatch").onclick=()=>move(-45);
-  document.getElementById("rightCatch").onclick=()=>move(45);
+  const next=level<TOTAL_LEVELS;
 
-  function pointerMove(e){
-    const rect=area.getBoundingClientRect();
-    x=Math.max(0,Math.min(area.clientWidth-80,
-      e.clientX-rect.left-40));
-    catcher.style.left=x+"px";
-  }
+  document.getElementById("gameContent").innerHTML=`
+    <div class="result-box">
+      <div class="big">${passed?"🎉":"💔"}</div>
 
-  area.addEventListener("pointermove",pointerMove);
+      <h2>
+        ${passed?"Level Passed!":"Try Again"}
+      </h2>
 
-  function spawn(){
-    if(!running)return;
+      <p>${message}</p>
 
-    const el=document.createElement("div");
-    const good=Math.random()>.22;
-    const golden=good&&Math.random()<.12;
+      ${points ? `<p><strong>+${points} points</strong></p>`:""}
 
-    el.className="catchHeart";
-    el.textContent=golden?"💛":good?"💗":"💔";
-    el.style.left=Math.random()*(area.clientWidth-40)+"px";
-    el.style.top="-40px";
-
-    area.appendChild(el);
-
-    hearts.push({
-      el,
-      y:-40,
-      good,
-      golden,
-      speed:2+Math.random()*1.7
-    });
-  }
-
-  let last=performance.now();
-
-  function loop(now){
-    if(!running)return;
-
-    const dt=Math.min(32,now-last);
-    last=now;
-
-    hearts.forEach((h,i)=>{
-      h.y+=h.speed*(dt/16);
-      h.el.style.top=h.y+"px";
-
-      const hx=parseFloat(h.el.style.left);
-      const hy=h.y;
-
-      if(
-        hy>area.clientHeight-65 &&
-        hy<area.clientHeight-5 &&
-        hx+32>x &&
-        hx<x+80
-      ){
-        if(h.good){
-          score+=h.golden?2:1;
-          document.getElementById("catchScore").textContent=score;
-
-          if(score>=18){
-            running=false;
-            passGame(120,3,
-              "You caught enough hearts and made it safely through Broken Hearts! 💗");
-          }
-        }else{
-          lives--;
-          document.getElementById("catchLives").textContent=lives;
-
-          if(lives<=0){
-            running=false;
-            failGame("Too many broken hearts got through!");
-          }
-        }
-
-        h.el.remove();
-        hearts.splice(i,1);
-      }else if(hy>area.clientHeight+20){
-        if(h.good){
-          lives--;
-          document.getElementById("catchLives").textContent=lives;
-
-          if(lives<=0){
-            running=false;
-            failGame("Too many hearts slipped past!");
-          }
-        }
-        h.el.remove();
-        hearts.splice(i,1);
+      ${
+        passed && next
+        ?
+        `<button class="primary" onclick="startGame(${level+1})">
+          Next Level →
+        </button>`
+        :
+        passed
+        ?
+        `<button class="primary" onclick="showFinalResults()">
+          Finish Journey 💕
+        </button>`
+        :
+        `<button class="primary" onclick="startGame(${level})">
+          Try Again
+        </button>`
       }
-    });
 
-    requestAnimationFrame(loop);
-  }
-
-  spawnTimer=setInterval(spawn,650);
-  requestAnimationFrame(loop);
-
-  cleanupGame=()=>{
-    running=false;
-    clearInterval(spawnTimer);
-    area.removeEventListener("pointermove",pointerMove);
-  };
-}
-
-/* =========================================================
-   GAME 2 — MEMORY VAULT
-   ========================================================= */
-
-function game2(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Watch the glowing tiles, then tap them in the same order.
-      You only need 7 successful rounds.
-    </p>
-    <div class="gameBox">
-      <div class="gameStat">
-        Round <span id="memoryRound">1</span>/7
-      </div>
-      <div id="memoryGrid" class="memoryGrid"></div>
-      <div id="memoryMessage" class="gameStat muted">Get ready...</div>
+      <button class="secondary" onclick="showJourney()">
+        Journey Map
+      </button>
     </div>
   `;
-
-  const grid=document.getElementById("memoryGrid");
-  const message=document.getElementById("memoryMessage");
-
-  const symbols=["💗","⭐","🌙","🌸","💎","🦋","🌻","✨"];
-  let sequence=[];
-  let input=[];
-  let round=1;
-  let accepting=false;
-  let timer;
-
-  function build(){
-    grid.innerHTML="";
-    for(let i=0;i<16;i++){
-      const b=document.createElement("button");
-      b.className="memoryTile";
-      b.dataset.i=i;
-      b.textContent=symbols[i%symbols.length];
-      b.onclick=()=>choose(i);
-      grid.appendChild(b);
-    }
-  }
-
-  function showSequence(){
-    accepting=false;
-    input=[];
-    message.textContent="Watch carefully...";
-
-    const tiles=[...grid.children];
-
-    tiles.forEach(t=>t.classList.remove("show","selected"));
-
-    sequence=[];
-    const length=Math.min(2+round-1,8);
-
-    while(sequence.length<length){
-      const n=Math.floor(Math.random()*16);
-      if(!sequence.includes(n))sequence.push(n);
-    }
-
-    sequence.forEach((n,i)=>{
-      timer=setTimeout(()=>{
-        tiles[n].classList.add("show");
-        setTimeout(()=>tiles[n].classList.remove("show"),300);
-      },i*450);
-    });
-
-    timer=setTimeout(()=>{
-      accepting=true;
-      message.textContent="Your turn!";
-    },sequence.length*450+250);
-  }
-
-  function choose(i){
-    if(!accepting)return;
-
-    input.push(i);
-    grid.children[i].classList.add("selected");
-
-    const pos=input.length-1;
-
-    if(input[pos]!==sequence[pos]){
-      accepting=false;
-      message.textContent="Almost! Watch it again.";
-      grid.children[i].classList.add("wrongFlash");
-
-      setTimeout(()=>{
-        grid.children[i].classList.remove("wrongFlash","selected");
-        showSequence();
-      },650);
-      return;
-    }
-
-    if(input.length===sequence.length){
-      accepting=false;
-      message.textContent="Perfect! 💗";
-
-      grid.querySelectorAll(".selected").forEach(x=>{
-        x.classList.remove("selected");
-        x.classList.add("correctFlash");
-      });
-
-      if(round>=7){
-        setTimeout(()=>{
-          passGame(140,3,"Your memory was strong enough to open the Memory Vault! 🧠💗");
-        },700);
-      }else{
-        round++;
-        document.getElementById("memoryRound").textContent=round;
-
-        setTimeout(()=>{
-          grid.querySelectorAll(".correctFlash")
-            .forEach(x=>x.classList.remove("correctFlash"));
-          showSequence();
-        },750);
-      }
-    }
-  }
-
-  build();
-  timer=setTimeout(showSequence,600);
-
-  cleanupGame=()=>clearTimeout(timer);
 }
 
-/* =========================================================
-   QUIZ DATA
-   ========================================================= */
+function showFinalResults(){
+  clearGameTimers();
 
-const pressureQuestions=[
- ["What is the capital of Australia?",["Canberra","Sydney","Melbourne","Perth"],0],
- ["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"],0],
- ["What is the chemical symbol for gold?",["Au","Ag","Gd","Go"],0],
- ["How many continents are there?",["7","5","6","8"],0],
- ["Which is the largest ocean?",["Pacific","Atlantic","Indian","Arctic"],0],
- ["Which animal is the fastest on land?",["Cheetah","Lion","Horse","Leopard"],0],
- ["How many sides does an octagon have?",["8","6","7","10"],0],
- ["Which gas makes up most of Earth's atmosphere?",["Nitrogen","Oxygen","Carbon dioxide","Hydrogen"],0],
- ["Which author wrote Pride and Prejudice?",["Jane Austen","Emily Brontë","Mary Shelley","Virginia Woolf"],0],
- ["What is the currency of Japan?",["Yen","Won","Dollar","Rupee"],0],
- ["How many chambers does the human heart have?",["4","2","3","5"],0],
- ["What is H₂O?",["Water","Oxygen","Hydrogen","Salt"],0],
- ["Which planet is famous for its rings?",["Saturn","Mars","Venus","Earth"],0],
- ["What is the largest planet in our solar system?",["Jupiter","Saturn","Neptune","Earth"],0],
- ["What is the smallest prime number?",["2","1","3","0"],0],
- ["Who painted the Mona Lisa?",["Leonardo da Vinci","Michelangelo","Raphael","Van Gogh"],0],
- ["How long does Earth take to orbit the Sun?",["About 365 days","About 30 days","About 180 days","About 700 days"],0],
- ["What is the boiling point of water at sea level?",["100°C","50°C","90°C","120°C"],0],
- ["Which country is the Eiffel Tower in?",["France","Italy","Spain","Belgium"],0],
- ["Which animal is a mammal?",["Whale","Shark","Octopus","Trout"],0],
- ["What is the capital of New Zealand?",["Wellington","Auckland","Christchurch","Hamilton"],0],
- ["Which shape has three sides?",["Triangle","Square","Pentagon","Hexagon"],0],
- ["Which organ is primarily responsible for breathing?",["Lungs","Heart","Liver","Kidneys"],0],
- ["Which metal has the symbol Fe?",["Iron","Fluorine","Silver","Copper"],0],
- ["Which ocean surrounds Antarctica?",["Southern Ocean","Pacific Ocean","Indian Ocean","Atlantic Ocean"],0],
- ["Which instrument commonly has 88 keys?",["Piano","Violin","Flute","Trumpet"],0],
- ["Which country is famous for the Great Wall?",["China","Japan","India","Korea"],0],
- ["What do bees produce?",["Honey","Silk","Milk","Wax only"],0],
- ["Which natural satellite orbits Earth?",["Moon","Mars","Titan","Europa"],0],
- ["What is the square root of 81?",["9","8","7","10"],0]
-];
+  const privateCall=state.score>3000;
 
-const lilianaQuestions=[
- ["What is Liliana's favourite colour?",["Baby pink","Burgundy","Sky blue","Purple"],0],
- ["What is Liliana's favourite number?",["3","7","13","22"],0],
- ["Which food does Liliana like?",["Sushi","Porridge","Fish and chips","Tacos"],0],
- ["Which animal does Liliana like?",["Dolphins","Penguins","Tigers","Rabbits"],0],
- ["Which flower is one of Liliana's favourites?",["Sunflowers","Tulips","Lilies","Orchids"],0],
- ["Which other flower does Liliana like?",["Roses","Daisies","Lavender","Daffodils"],0],
- ["When is Liliana's birthday?",["22 July","22 June","12 July","27 July"],0],
- ["What colour are Liliana's eyes?",["Green","Brown","Blue","Hazel"],0],
- ["What is Liliana's zodiac sign?",["Leo","Cancer","Virgo","Gemini"],0],
- ["What is Liliana afraid of?",["Drowning","Flying","Spiders","Heights"],0],
- ["Which movie is a favourite of Liliana's?",["Me Before You","Titanic","The Notebook","Frozen"],0],
- ["What type of songs does Liliana enjoy?",["Sad songs","Country songs","Only rock","Only jazz"],0],
- ["What kind of writing does Liliana like?",["Poetry","News articles","Manuals","Cookbooks"],0],
- ["Which card game style does Liliana enjoy?",["Poker","Bridge","Go Fish","Snap"],0],
- ["What kind of games does Liliana enjoy?",["Gambling games","Puzzle books","Only racing games","Only sports games"],0],
- ["What did Liliana study at university?",["Psychology","Law","Engineering","Accounting"],0],
- ["How many nieces does Liliana have?",["1","2","3","4"],0],
- ["How many nephews does Liliana have?",["4","2","5","6"],0],
- ["How many siblings does Liliana have?",["5","3","4","6"],0],
- ["How many piercings does Liliana have?",["4","2","3","5"],0],
- ["Which pair are Liliana's dogs?",["Aayla and Arlo","Luna and Milo","Bella and Coco","Ayla and Archie"],0],
- ["How long have Bree and Liliana been best friends?",["6 years","3 years","5 years","7 years"],0],
- ["Which word describes Liliana well?",["Caring","Cold","Unfriendly","Impatient"],0],
- ["What quality is Liliana known for?",["Empathy","Cruelty","Impatience","Selfishness"],0],
- ["What does Liliana like about children?",["She likes children","She dislikes children","She avoids children","She is afraid of children"],0],
- ["What does Liliana hope to be someday?",["A mum","A pilot","A chef","A singer"],0],
- ["What kind of baby does Liliana dream of having?",["A baby girl","Twin boys","A baby boy","Triplets"],0],
- ["What does Liliana want to see someday?",["The ocean","The desert","The Arctic","A volcano"],0],
- ["Which combination belongs to Liliana?",["Sushi and dolphins","Pizza and wolves","Curry and horses","Pasta and bears"],0],
- ["Which combination matches her flowers?",["Sunflowers and roses","Tulips and orchids","Lilies and daisies","Lavender and tulips"],0],
- ["Which date correctly represents her birthday?",["22 July","7 February","27 July","2 June"],0],
- ["Which field is connected to Liliana's university studies?",["Psychology","Physics","Chemistry","Architecture"],0],
- ["How many nieces and nephews does Liliana have altogether?",["5","4","6","7"],0],
- ["Which of these is one of Liliana's pets?",["Aayla","Nala","Misty","Kiki"],0],
- ["Which of these is her other dog?",["Arlo","Oscar","Toby","Max"],0],
- ["Which number connects strongly with Liliana?",["3","8","11","14"],0],
- ["Which colour best matches her favourite aesthetic?",["Baby pink","Neon green","Orange","Black"],0],
- ["Which activity fits Liliana's interests?",["Poker","Surfing","Fishing","Rock climbing"],0],
- ["Which statement is true about her personality?",["She is charismatic","She is careless","She is distant","She is rude"],0],
- ["Which statement is true about Liliana?",["She likes poetry","She hates all writing","She dislikes music","She never watches films"],0]
-];
+  showScreen("journeyScreen");
 
-function shuffle(arr){
-  const a=[...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
-  }
-  return a;
-}
-
-function randomisedQuestion(q){
-  const options=q[1].map((text,i)=>({
-    text,
-    correct:i===q[2]
-  }));
-  return shuffle(options);
-}
-
-/* =========================================================
-   GAME 3 — PRESSURE QUIZ
-   ========================================================= */
-
-function game3(){
-  quizGame(
-    pressureQuestions,
-    10,
-    6,
-    "Answer quickly! You need 6 correct answers out of 10.",
-    "Pressure Quiz",
-    7
+  alert(
+    privateCall
+    ? `🎉 ${state.name}, you finished Lulu Express with ${state.score} points! You unlocked the private call reward! 💗`
+    : `🎉 ${state.name}, you finished Lulu Express with ${state.score} points! 💗`
   );
+
+  renderJourney();
 }
 
-/* =========================================================
-   GENERIC QUIZ
-   ========================================================= */
-
-function quizGame(bank,total,needed,instruction,title,timeSeconds){
-  const root=document.getElementById("gameContent");
-  let questions=shuffle(bank).slice(0,total);
-  let index=0;
-  let correct=0;
-  let answered=false;
-  let timer;
-
-  root.innerHTML=`
-    <p class="instruction">${instruction}</p>
-    <div class="gameBox">
-      <div class="gameStat">
-        Question <span id="quizIndex">1</span>/${total}
-        &nbsp; • &nbsp; Correct: <span id="quizCorrect">0</span>
-      </div>
-      <div class="timerBar"><div id="quizTimer"></div></div>
-      <div id="quizQuestion" class="quizQuestion"></div>
-      <div id="quizAnswers" class="answerGrid"></div>
-      <div id="quizFeedback" class="gameStat muted"></div>
-    </div>
-  `;
-
-  function load(){
-    answered=false;
-    clearTimeout(timer);
-
-    const q=randomisedQuestion(questions[index]);
-    document.getElementById("quizIndex").textContent=index+1;
-    document.getElementById("quizQuestion").textContent=q.question||questions[index][0];
-
-    const qText=questions[index][0];
-    document.getElementById("quizQuestion").textContent=qText;
-
-    const answers=document.getElementById("quizAnswers");
-    answers.innerHTML="";
-
-    q.forEach((a,i)=>{
-      const b=document.createElement("button");
-      b.className="answer";
-      b.textContent=a.text;
-      b.onclick=()=>answer(b,a.correct);
-      answers.appendChild(b);
-    });
-
-    const bar=document.getElementById("quizTimer");
-    bar.style.transition="none";
-    bar.style.width="100%";
-
-    requestAnimationFrame(()=>{
-      bar.style.transition=`width ${timeSeconds}s linear`;
-      bar.style.width="0%";
-    });
-
-    timer=setTimeout(()=>answer(null,false,true),timeSeconds*1000);
-  }
-
-  function answer(button,isCorrect,timeout=false){
-    if(answered)return;
-    answered=true;
-    clearTimeout(timer);
-
-    const all=[...document.querySelectorAll("#quizAnswers .answer")];
-
-    all.forEach((b,i)=>{
-      const q=randomisedQuestion(questions[index]);
-      /* We do not use this result to reveal answers. */
-      b.disabled=true;
-    });
-
-    if(isCorrect){
-      correct++;
-      document.getElementById("quizCorrect").textContent=correct;
-      if(button)button.classList.add("correct");
-      document.getElementById("quizFeedback").textContent="Correct! 💗";
-    }else{
-      if(button)button.classList.add("wrong");
-      document.getElementById("quizFeedback").textContent=
-        timeout?"Time! ⏰":"Not quite!";
-    }
-
-    index++;
-
-    if(index>=total){
-      setTimeout(()=>{
-        if(correct>=needed){
-          passGame(
-            100+correct*8,
-            2,
-            `You scored ${correct}/${total}. Great job, ${state.name}! 💗`
-          );
-        }else{
-          failGame(`You got ${correct}/${total}. You need ${needed} to pass.`);
-        }
-      },650);
-    }else{
-      setTimeout(load,600);
-    }
-  }
-
-  load();
-  cleanupGame=()=>clearTimeout(timer);
-}
-
-/* =========================================================
-   GAME 4 — HIGH ROLLER
-   ========================================================= */
-
-function game4(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Pull the lever to spin the three reels. You get 6 spins.
-      Two matching symbols wins. Three matching symbols is a jackpot!
-    </p>
-
-    <div class="gameBox slotMachine">
-      <div>Spins left: <strong id="slotSpins">6</strong></div>
-
-      <div class="reels">
-        <div class="reel" id="reel1">🍒</div>
-        <div class="reel" id="reel2">⭐</div>
-        <div class="reel" id="reel3">💎</div>
-      </div>
-
-      <button class="lever" id="slotLever" aria-label="Spin"></button>
-
-      <div id="slotResult" class="slotResult">Pull the lever!</div>
-      <div class="gameActions">
-        <button class="bigBtn" id="spinBtn">SPIN 🎰</button>
-      </div>
-    </div>
-  `;
-
-  const symbols=["🍒","⭐","💎","7️⃣","💗","🌟"];
-  let spins=6;
-  let wins=0;
-  let spinning=false;
-
-  function spin(){
-    if(spinning||spins<=0)return;
-    spinning=true;
-    spins--;
-    document.getElementById("slotSpins").textContent=spins;
-
-    const reels=[
-      document.getElementById("reel1"),
-      document.getElementById("reel2"),
-      document.getElementById("reel3")
-    ];
-
-    reels.forEach((r,i)=>{
-      let count=0;
-      const t=setInterval(()=>{
-        r.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-        count++;
-        if(count>8+i*3)clearInterval(t);
-      },80);
-    });
-
-    setTimeout(()=>{
-      let a=symbols[Math.floor(Math.random()*symbols.length)];
-      let b=Math.random()<.45?a:symbols[Math.floor(Math.random()*symbols.length)];
-      let c=Math.random()<.4?b:symbols[Math.floor(Math.random()*symbols.length)];
-
-      reels[0].textContent=a;
-      reels[1].textContent=b;
-      reels[2].textContent=c;
-
-      if(a===b&&b===c){
-        wins+=3;
-        document.getElementById("slotResult").textContent=
-          "🎉 JACKPOT! Three matched!";
-      }else if(a===b||b===c||a===c){
-        wins++;
-        document.getElementById("slotResult").textContent=
-          "✨ Two matched! Nice!";
-      }else{
-        document.getElementById("slotResult").textContent="No match. Try again!";
-      }
-
-      spinning=false;
-
-      if(wins>=2){
-        setTimeout(()=>{
-          passGame(130,3,"You hit enough winning combinations to beat the High Roller! 🎰💗");
-        },500);
-      }else if(spins<=0){
-        setTimeout(()=>{
-          failGame("The reels didn't give you enough wins this time.");
-        },500);
-      }
-    },900);
-  }
-
-  document.getElementById("spinBtn").onclick=spin;
-  document.getElementById("slotLever").onclick=spin;
-}
-
-/* =========================================================
-   GAME 5 — MIND GAMES
-   ========================================================= */
-
-function game5(){
-  const patterns=[
-    [["🌸","🌸","⭐","🌸","🌸","?"],["⭐","🌸","💗","🌸"]],
-    [["1","2","3","4","?"],["5","6","7","8"]],
-    [["🔴","🔵","🔴","🔵","?"],["🔴","🔵","🟢","🟡"]],
-    [["🌙","⭐","🌙","⭐","?"],["🌙","☀️","💗","🌙"]],
-    [["2","4","6","8","?"],["9","10","12","11"]],
-    [["A","C","E","G","?"],["H","I","J","K"]],
-    [["⬆️","➡️","⬇️","⬅️","?"],["⬆️","↗️","➡️","⬇️"]],
-    [["🐶","🐱","🐶","🐱","?"],["🐶","🐭","🐱","🐰"]]
-  ];
-
-  const root=document.getElementById("gameContent");
-  let round=0;
-  let score=0;
-
-  root.innerHTML=`
-    <p class="instruction">
-      Look for the simple pattern and choose what comes next.
-      You need 5 out of 8.
-    </p>
-    <div class="gameBox">
-      <div class="gameStat">Puzzle <span id="mindRound">1</span>/8</div>
-      <div id="mindPattern" class="patternRow"></div>
-      <div id="mindOptions" class="patternOptions"></div>
-      <div id="mindFeedback" class="gameStat muted"></div>
-    </div>
-  `;
-
-  function load(){
-    const p=patterns[round];
-    const pattern=document.getElementById("mindPattern");
-    const opts=document.getElementById("mindOptions");
-
-    pattern.innerHTML="";
-    p[0].forEach(x=>{
-      const d=document.createElement("div");
-      d.className="patternCard";
-      d.textContent=x;
-      pattern.appendChild(d);
-    });
-
-    opts.innerHTML="";
-
-    const correct={
-      0:"⭐",
-      1:"5",
-      2:"🔴",
-      3:"🌙",
-      4:"10",
-      5:"I",
-      6:"⬆️",
-      7:"🐶"
-    }[round];
-
-    shuffle(p[1]).forEach(x=>{
-      const b=document.createElement("button");
-      b.className="patternCard patternOption";
-      b.textContent=x;
-      b.onclick=()=>{
-        [...opts.children].forEach(z=>z.disabled=true);
-
-        if(x===correct){
-          score++;
-          document.getElementById("mindFeedback").textContent="Correct! 🧩";
-        }else{
-          document.getElementById("mindFeedback").textContent="Not quite!";
-        }
-
-        round++;
-
-        if(round>=patterns.length){
-          setTimeout(()=>{
-            score>=5
-              ?passGame(120,2,`You solved ${score}/8 logic puzzles! 🧩💗`)
-              :failGame(`You solved ${score}/8. You need 5 to pass.`);
-          },500);
-        }else{
-          document.getElementById("mindRound").textContent=round+1;
-          setTimeout(load,500);
-        }
-      };
-      opts.appendChild(b);
-    });
-  }
-
-  load();
-}
-
-/* =========================================================
-   GAME 6 — THE BLUFF
-   ========================================================= */
-
-function game6(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Choose a hidden card. Then decide whether to bank your points
-      or double them. Higher cards are safer.
-    </p>
-    <div class="gameBox">
-      <div class="gameStat">Round <span id="bluffRound">1</span>/5</div>
-      <div class="cards" id="bluffCards"></div>
-      <div id="bluffValue" class="gameStat"></div>
-      <div id="bluffActions" class="gameActions"></div>
-      <div id="bluffTotal" class="gameStat">Bank: 0</div>
-    </div>
-  `;
-
-  let round=1;
-  let bank=0;
-  let selected=0;
-  let value=0;
-
-  function newRound(){
-    selected=0;
-    value=0;
-
-    document.getElementById("bluffValue").textContent="Choose a card";
-    document.getElementById("bluffActions").innerHTML="";
-
-    const cards=document.getElementById("bluffCards");
-    cards.innerHTML="";
-
-    for(let i=0;i<4;i++){
-      const b=document.createElement("button");
-      b.className="playCard";
-      b.textContent="❔";
-      b.onclick=()=>chooseCard(b);
-      cards.appendChild(b);
-    }
-  }
-
-  function chooseCard(button){
-    if(value)return;
-
-    value=5+Math.floor(Math.random()*16);
-
-    button.classList.add("revealed");
-    button.textContent=value;
-
-    [...document.querySelectorAll(".playCard")].forEach(b=>b.disabled=true);
-
-    document.getElementById("bluffValue").textContent=
-      `Your card is ${value}. What do you want to do?`;
-
-    const actions=document.getElementById("bluffActions");
-
-    const bankBtn=document.createElement("button");
-    bankBtn.className="bigBtn";
-    bankBtn.textContent="Bank "+value+" 💰";
-    bankBtn.onclick=()=>finishRound(value);
-
-    const doubleBtn=document.createElement("button");
-    doubleBtn.className="bigBtn";
-    doubleBtn.textContent="Double or Risk 🎲";
-    doubleBtn.onclick=()=>{
-      if(value>=11){
-        finishRound(value*2);
-      }else{
-        document.getElementById("bluffValue").textContent=
-          "The risk failed! But you can continue.";
-        finishRound(0);
-      }
-    };
-
-    actions.append(bankBtn,doubleBtn);
-  }
-
-  function finishRound(points){
-    bank+=points;
-    document.getElementById("bluffTotal").textContent="Bank: "+bank;
-
-    if(round>=5){
-      bank>=35
-        ?passGame(120,2,`You finished with ${bank} points in The Bluff! 🃏`)
-        :failGame(`You finished with ${bank}. Try taking a few more risks!`);
-      return;
-    }
-
-    round++;
-    document.getElementById("bluffRound").textContent=round;
-    setTimeout(newRound,500);
-  }
-
-  newRound();
-}
-
-/* =========================================================
-   GAME 7 — SURVIVAL ROUND
-   ========================================================= */
-
-function game7(){
-  const waves=[
-    ["🌊","A wave is rushing toward you!","Jump","Duck","Run","Freeze",0],
-    ["⚡","Lightning is close!","Stay under tree","Go indoors","Stand outside","Hold metal",1],
-    ["🔥","A small fire blocks the path!","Walk through","Find another route","Sit beside it","Add wood",1],
-    ["🪨","Rocks are falling!","Move away","Look up only","Run underneath","Stand still",0],
-    ["🌧️","Heavy rain starts!","Find shelter","Lie down","Climb a pole","Ignore it",0],
-    ["🐝","A swarm appears!","Swat wildly","Move calmly away","Scream","Run into them",1],
-    ["🌪️","A strong wind hits!","Find shelter","Hold a leaf","Stand on roof","Run toward it",0],
-    ["🧊","The ground is slippery!","Slow down","Sprint","Jump repeatedly","Spin",0]
-  ];
-
-  const root=document.getElementById("gameContent");
-  let wave=0;
-  let score=0;
-  let timer;
-
-  root.innerHTML=`
-    <p class="instruction">
-      Choose the safest action. You need 6 safe decisions out of 8.
-    </p>
-    <div class="gameBox">
-      <div class="gameStat">Wave <span id="survivalWave">1</span>/8</div>
-      <div id="survivalIcon" class="survivalIcon"></div>
-      <div id="survivalQuestion" class="quizQuestion"></div>
-      <div id="survivalChoices" class="survivalChoices"></div>
-      <div id="survivalTimer" class="gameStat muted">3 seconds</div>
-    </div>
-  `;
-
-  function load(){
-    const w=waves[wave];
-
-    document.getElementById("survivalIcon").textContent=w[0];
-    document.getElementById("survivalQuestion").textContent=w[1];
-
-    const choices=document.getElementById("survivalChoices");
-    choices.innerHTML="";
-
-    w[2].slice().forEach((text,i)=>{
-      const b=document.createElement("button");
-      b.className="answer";
-      b.textContent=text;
-      b.onclick=()=>choose(i);
-      choices.appendChild(b);
-    });
-
-    let seconds=3;
-    document.getElementById("survivalTimer").textContent=seconds+" seconds";
-
-    clearInterval(timer);
-    timer=setInterval(()=>{
-      seconds--;
-      document.getElementById("survivalTimer").textContent=seconds+" seconds";
-      if(seconds<=0){
-        clearInterval(timer);
-        choose(-1);
-      }
-    },1000);
-  }
-
-  function choose(i){
-    clearInterval(timer);
-
-    if(i===waves[wave][6]){
-      score++;
-      document.getElementById("survivalTimer").textContent="Safe! 🛡️";
-    }else{
-      document.getElementById("survivalTimer").textContent="Oops!";
-    }
-
-    wave++;
-
-    if(wave>=waves.length){
-      setTimeout(()=>{
-        score>=6
-          ?passGame(125,2,`You survived ${score}/8 hazards! 🛡️💗`)
-          :failGame(`You survived ${score}/8. You need 6.`);
-      },500);
-    }else{
-      document.getElementById("survivalWave").textContent=wave+1;
-      setTimeout(load,500);
-    }
-  }
-
-  load();
-  cleanupGame=()=>clearInterval(timer);
-}
-
-/* =========================================================
-   GAME 8 — ADMIRER RACE
-   No obstacles. Timing race.
-   ========================================================= */
-
-function game8(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Time your gallop! Tap <strong>GALLop!</strong> when the marker
-      enters the green zone. Perfect timing gives the biggest boost.
-      Beat the admirer after 10 rounds.
-    </p>
-
-    <div class="gameBox">
-      <div class="raceTrack">
-        <div class="horseRow">
-          <span>🏇</span>
-          <div id="playerHorse" class="horse">🐎</div>
-        </div>
-        <div class="horseRow">
-          <span>🤵</span>
-          <div id="aiHorse" class="horse">🐎</div>
-        </div>
-        <div class="raceFinish"></div>
-      </div>
-
-      <div class="gameStat">
-        Round <span id="raceRound">1</span>/10
-        &nbsp; • &nbsp;
-        You: <span id="racePlayer">0</span>
-        &nbsp; • &nbsp;
-        Admirer: <span id="raceAI">0</span>
-      </div>
-
-      <div class="timingBar" id="timingBar">
-        <div class="timingZone"></div>
-        <div class="timingMarker" id="timingMarker"></div>
-      </div>
-
-      <div class="gameActions">
-        <button class="bigBtn" id="gallopBtn">GALLop! 🏇</button>
-      </div>
-
-      <div id="raceMessage" class="gameStat muted">Wait for the green zone...</div>
-    </div>
-  `;
-
-  let round=1;
-  let player=0;
-  let ai=0;
-  let marker=0;
-  let direction=1;
-  let raceTimer;
-  let running=true;
-
-  function moveMarker(){
-    marker+=direction*1.8;
-
-    if(marker>=96){
-      marker=96;
-      direction=-1;
-    }
-    if(marker<=0){
-      marker=0;
-      direction=1;
-    }
-
-    document.getElementById("timingMarker").style.left=marker+"%";
-  }
-
-  raceTimer=setInterval(moveMarker,25);
-
-  document.getElementById("gallopBtn").onclick=()=>{
-    if(!running)return;
-
-    let gain;
-
-    if(marker>=43&&marker<=61){
-      gain=9;
-      document.getElementById("raceMessage").textContent="PERFECT! ✨ +9";
-    }else if(marker>=30&&marker<=75){
-      gain=5;
-      document.getElementById("raceMessage").textContent="Good gallop! 💗 +5";
-    }else{
-      gain=2;
-      document.getElementById("raceMessage").textContent="Missed the sweet spot! +2";
-    }
-
-    player+=gain;
-    ai+=6+Math.floor(Math.random()*2);
-
-    document.getElementById("racePlayer").textContent=player;
-    document.getElementById("raceAI").textContent=ai;
-
-    round++;
-
-    if(round>10){
-      running=false;
-      clearInterval(raceTimer);
-
-      if(player>ai){
-        passGame(150,3,
-          `You won the race ${player} to ${ai}! 🏇💗`);
-      }else{
-        failGame(`The admirer won ${ai} to ${player}. Try your timing again!`);
-      }
-    }else{
-      document.getElementById("raceRound").textContent=round;
-    }
-  };
-
-  cleanupGame=()=>{
-    running=false;
-    clearInterval(raceTimer);
-  };
-}
-
-/* =========================================================
-   GAME 9 — HEARTBREAK CHAMBER
-   ========================================================= */
-
-function game9(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Search the room for four clues. Tap objects to investigate them.
-      Find all four clues to unlock the door.
-    </p>
-
-    <div class="gameBox">
-      <div class="sceneGrid" id="sceneGrid">
-        <button class="sceneObject" data-clue="desk">📝 Desk</button>
-        <button class="sceneObject" data-clue="drawer">🗄️ Drawer</button>
-        <button class="sceneObject" data-clue="flower">🌻 Flower Pot</button>
-        <button class="sceneObject" data-clue="photo">🖼️ Photo Frame</button>
-        <button class="sceneObject" data-clue="clock">🕰️ Clock</button>
-        <button class="sceneObject" data-clue="lamp">💡 Lamp</button>
-      </div>
-
-      <div class="clues" id="clues"></div>
-      <div id="chamberMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  const found=new Set();
-  const texts={
-    desk:"Clue: the first number is 0.",
-    drawer:"Clue: the second number is 6.",
-    flower:"Clue: the third number is 0.",
-    photo:"Clue: the final two numbers are 22.",
-    clock:"Nothing useful here.",
-    lamp:"The lamp flickers, but reveals nothing."
-  };
-
-  document.querySelectorAll(".sceneObject").forEach(btn=>{
-    btn.onclick=()=>{
-      const key=btn.dataset.clue;
-
-      if(!found.has(key)){
-        found.add(key);
-        btn.style.background="#275c42";
-
-        if(["desk","drawer","flower","photo"].includes(key)){
-          const d=document.createElement("span");
-          d.className="clue";
-          d.textContent=texts[key];
-          document.getElementById("clues").appendChild(d);
-        }
-      }
-
-      if(found.size>=4){
-        document.getElementById("chamberMessage").textContent=
-          "All clues found! The door opens... 🚪💗";
-        setTimeout(()=>{
-          passGame(125,2,"You escaped the Heartbreak Chamber! 🔎💗");
-        },700);
-      }
-    };
-  });
-}
-
-/* =========================================================
-   GAME 10 — BOXING
-   ========================================================= */
-
-function game10(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Defeat the opponent. Punch for steady damage, use Heavy Punch
-      for more damage, and block or dodge when the opponent attacks.
-    </p>
-
-    <div class="gameBox">
-      <div class="fighters">
-        <div class="fighter">
-          🥊
-          <div class="health"><div id="playerHP" style="width:100%"></div></div>
-          <small>You</small>
-        </div>
-        <div class="fighter">
-          😈
-          <div class="health enemyHealth"><div id="enemyHP" style="width:100%"></div></div>
-          <small>Opponent</small>
-        </div>
-      </div>
-
-      <div id="fightMessage" class="gameStat muted">Fight!</div>
-
-      <div class="combatActions">
-        <button class="combatBtn" onclick="boxAction('punch')">👊 Punch</button>
-        <button class="combatBtn" onclick="boxAction('heavy')">💥 Heavy Punch</button>
-        <button class="combatBtn" onclick="boxAction('block')">🛡️ Block</button>
-        <button class="combatBtn" onclick="boxAction('dodge')">💨 Dodge</button>
-      </div>
-    </div>
-  `;
-
-  let playerHP=100;
-  let enemyHP=80;
-  let cooldown=false;
-  let over=false;
-
-  window.boxAction=function(action){
-    if(over||cooldown)return;
-
-    let damage=0;
-
-    if(action==="punch")damage=10;
-    if(action==="heavy"){
-      if(cooldown)return;
-      damage=18;
-      cooldown=true;
-      setTimeout(()=>cooldown=false,1000);
-    }
-
-    if(damage){
-      enemyHP=Math.max(0,enemyHP-damage);
-      document.getElementById("enemyHP").style.width=(enemyHP/80*100)+"%";
-    }
-
-    if(enemyHP<=0){
-      over=true;
-      passGame(140,3,"You won the Heartbreak Boxing Match! 🥊💗");
-      return;
-    }
-
-    let enemyDamage=8+Math.floor(Math.random()*7);
-
-    if(action==="block")enemyDamage=Math.floor(enemyDamage*.3);
-    if(action==="dodge"){
-      if(Math.random()<.75)enemyDamage=0;
-      else enemyDamage=4;
-    }
-
-    playerHP=Math.max(0,playerHP-enemyDamage);
-    document.getElementById("playerHP").style.width=playerHP+"%";
-
-    const messages={
-      punch:"Solid punch! 👊",
-      heavy:"Heavy hit! 💥",
-      block:"Good block! 🛡️",
-      dodge:enemyDamage===0?"Perfect dodge! 💨":"The dodge was late!"
-    };
-
-    document.getElementById("fightMessage").textContent=
-      messages[action]+` Enemy hit you for ${enemyDamage}.`;
-
-    if(playerHP<=0){
-      over=true;
-      failGame("You were knocked out! Give the match another go.");
-    }
-  };
-
-  cleanupGame=()=>{
-    over=true;
-    delete window.boxAction;
-  };
-}
-
-/* =========================================================
-   GAME 11 — PERFECT MATCH
-   ========================================================= */
-
-function game11(){
-  const pairs=[
-    ["🌸","Flower"],
-    ["🐬","Dolphin"],
-    ["🌻","Sunflower"],
-    ["🍣","Sushi"],
-    ["💗","Heart"]
-  ];
-
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Match each object with its correct target. Tap an object, then tap
-      the matching target. Five correct matches wins.
-    </p>
-
-    <div class="gameBox">
-      <div class="matchArea">
-        <div class="matchColumn" id="matchItems"></div>
-        <div class="matchColumn" id="matchTargets"></div>
-      </div>
-      <div id="matchMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  const items=document.getElementById("matchItems");
-  const targets=document.getElementById("matchTargets");
-  let selected=null;
-  let found=0;
-
-  shuffle(pairs).forEach((p,i)=>{
-    const b=document.createElement("button");
-    b.className="matchItem";
-    b.dataset.key=p[1];
-    b.textContent=p[0]+" "+p[1];
-    b.onclick=()=>{
-      selected=b;
-      document.querySelectorAll(".matchItem").forEach(x=>x.classList.remove("selected"));
-      b.classList.add("selected");
-    };
-    items.appendChild(b);
-  });
-
-  shuffle(pairs).forEach(p=>{
-    const b=document.createElement("button");
-    b.className="matchTarget";
-    b.dataset.key=p[1];
-    b.textContent="Match: "+p[1]+" ❔";
-    b.onclick=()=>{
-      if(!selected)return;
-
-      if(selected.dataset.key===b.dataset.key){
-        b.classList.add("filled");
-        b.textContent="✓ "+p[0]+" "+p[1];
-        selected.disabled=true;
-        selected.style.opacity=".45";
-        selected=null;
-        found++;
-
-        if(found===pairs.length){
-          passGame(125,2,"Every object found its perfect match! 🧲💗");
-        }
-      }else{
-        document.getElementById("matchMessage").textContent=
-          "Not that one. Try another target!";
-      }
-    };
-    targets.appendChild(b);
-  });
-}
-
-/* =========================================================
-   GAME 12 — WHO KNOWS LILIANA BEST
-   ========================================================= */
-
-function game12(){
-  quizGame(
-    lilianaQuestions,
-    12,
-    8,
-    "How well do you know Liliana? You need 8 correct answers out of 12.",
-    "Who Knows Liliana Best?",
-    12
-  );
-}
-
-/* =========================================================
-   GAME 13 — REACTION GAUNTLET
-   ========================================================= */
-
-function game13(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Follow the command as quickly as you can. Some rounds tell you
-      NOT to tap. You need 7 out of 10.
-    </p>
-
-    <div class="gameBox">
-      <div class="gameStat">Round <span id="reactionRound">1</span>/10</div>
-      <div id="reactionPad" class="reactionPad">
-        <button id="reactionTarget" class="reactionTarget">GET READY</button>
-      </div>
-      <div id="reactionMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  let round=0;
-  let score=0;
-  let startTime=0;
-  let command="";
-  let timeout;
-
-  function next(){
-    round++;
-    if(round>10){
-      score>=7
-        ?passGame(130,2,`You completed the Reaction Gauntlet with ${score}/10! ⚡`)
-        :failGame(`You got ${score}/10. You need 7.`);
-      return;
-    }
-
-    const tap=Math.random()>.25;
-    command=tap?"TAP NOW!":"DON'T TAP!";
-
-    const btn=document.getElementById("reactionTarget");
-    btn.textContent=command;
-    btn.className="reactionTarget"+(tap?"":" danger");
-
-    startTime=performance.now();
-
-    clearTimeout(timeout);
-    timeout=setTimeout(()=>{
-      if(tap){
-        document.getElementById("reactionMessage").textContent="Too slow!";
-      }else{
-        score++;
-        document.getElementById("reactionMessage").textContent="Perfect restraint! 😌";
-      }
-      setTimeout(next,450);
-    },1200);
-  }
-
-  document.getElementById("reactionTarget").onclick=()=>{
-    clearTimeout(timeout);
-
-    const fast=performance.now()-startTime<800;
-
-    if(command==="TAP NOW!"&&fast){
-      score++;
-      document.getElementById("reactionMessage").textContent="FAST! ⚡";
-    }else if(command==="DON'T TAP!"){
-      document.getElementById("reactionMessage").textContent="Oops! You tapped!";
-    }else{
-      document.getElementById("reactionMessage").textContent="Too slow!";
-    }
-
-    setTimeout(next,400);
-  };
-
-  next();
-
-  cleanupGame=()=>clearTimeout(timeout);
-}
-
-/* =========================================================
-   GAME 14 — HEART HUNT
-   ========================================================= */
-
-function game14(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Find 10 hidden hearts before time runs out. Some are easy to see,
-      others are tucked around the scene.
-    </p>
-
-    <div class="gameBox">
-      <div class="gameStat">
-        Found <span id="huntFound">0</span>/10
-        &nbsp; • &nbsp;
-        <span id="huntTime">35</span>s
-      </div>
-      <div id="huntArea" class="huntArea"></div>
-    </div>
-  `;
-
-  const area=document.getElementById("huntArea");
-  let found=0;
-  let time=35;
-  let interval;
-
-  for(let i=0;i<10;i++){
-    const h=document.createElement("button");
-    h.className="huntHeart";
-    h.textContent=Math.random()>.15?"💗":"💖";
-    h.style.left=(4+Math.random()*88)+"%";
-    h.style.top=(5+Math.random()*86)+"%";
-    h.style.animationDelay=(Math.random()*2)+"s";
-
-    h.onclick=()=>{
-      if(h.dataset.found)return;
-      h.dataset.found="1";
-      h.style.transform="scale(1.7)";
-      h.style.opacity=".3";
-      found++;
-      document.getElementById("huntFound").textContent=found;
-
-      if(found>=10){
-        clearInterval(interval);
-        passGame(130,2,"You found every hidden heart! 💗🔎");
-      }
-    };
-
-    area.appendChild(h);
-  }
-
-  interval=setInterval(()=>{
-    time--;
-    document.getElementById("huntTime").textContent=time;
-
-    if(time<=0){
-      clearInterval(interval);
-      if(found>=8){
-        passGame(115,2,`You found ${found} hearts before time ran out! 💗`);
-      }else{
-        failGame(`You found ${found}/10 hearts. Try looking around more carefully!`);
-      }
-    }
-  },1000);
-
-  cleanupGame=()=>clearInterval(interval);
-}
-
-/* =========================================================
-   GAME 15 — LOVE LOCK
-   ========================================================= */
-
-function game15(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Crack the Love Lock. The clue is:
-      <strong>July 22 + 6 years of best friendship.</strong>
-      Enter the six-digit code.
-    </p>
-
-    <div class="gameBox">
-      <div id="lockDisplay" class="lockDisplay">_ _ _ _ _ _</div>
-      <div id="keypad" class="keypad"></div>
-      <div class="gameActions">
-        <button class="backBtn" id="clearLock">Clear</button>
-        <button class="bigBtn" id="enterLock">Unlock 🔐</button>
-      </div>
-      <div id="lockMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  let code="";
-
-  for(let n=1;n<=9;n++)makeKey(n);
-  makeKey(0);
-
-  function makeKey(n){
-    const b=document.createElement("button");
-    b.className="key";
-    b.textContent=n;
-    b.onclick=()=>{
-      if(code.length<6){
-        code+=n;
-        update();
-      }
-    };
-    document.getElementById("keypad").appendChild(b);
-  }
-
-  function update(){
-    document.getElementById("lockDisplay").textContent=
-      code.padEnd(6,"_").split("").join(" ");
-  }
-
-  document.getElementById("clearLock").onclick=()=>{
-    code="";
-    update();
-  };
-
-  document.getElementById("enterLock").onclick=()=>{
-    if(code==="060722"){
-      passGame(130,3,"The Love Lock opened! You remembered the special code. 🔐💗");
-    }else{
-      document.getElementById("lockMessage").textContent=
-        "That code didn't work. Remember the clue!";
-    }
-  };
-}
-
-/* =========================================================
-   GAME 16 — CUPID SHOOTOUT
-   ========================================================= */
-
-function game16(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Tap the moving hearts before they disappear.
-      Golden hearts are worth extra points. Reach 80 points.
-    </p>
-
-    <div class="gameBox">
-      <div class="gameStat">
-        Score: <span id="shootScore">0</span>/80
-        &nbsp; • &nbsp;
-        Arrows: <span id="arrows">15</span>
-      </div>
-      <div id="shootArea" class="shootArea"></div>
-    </div>
-  `;
-
-  const area=document.getElementById("shootArea");
-  let score=0;
-  let arrows=15;
-  let timer;
-
-  function spawn(){
-    if(arrows<=0)return;
-
-    const t=document.createElement("button");
-    t.className="shootTarget";
-    const golden=Math.random()<.18;
-    t.textContent=golden?"💛":"💗";
-    t.dataset.value=golden?20:10;
-
-    t.style.left=(5+Math.random()*85)+"%";
-    t.style.top=(5+Math.random()*82)+"%";
-
-    const lifetime=setTimeout(()=>{
-      if(t.parentNode)t.remove();
-    },1300);
-
-    t.onclick=()=>{
-      clearTimeout(lifetime);
-      score+=Number(t.dataset.value);
-      arrows--;
-      document.getElementById("shootScore").textContent=score;
-      document.getElementById("arrows").textContent=arrows;
-      t.remove();
-
-      if(score>=80){
-        clearInterval(timer);
-        passGame(135,2,"Cupid's arrows were on target! 🏹💗");
-      }else if(arrows<=0){
-        clearInterval(timer);
-        failGame(`You scored ${score}/80. Try again!`);
-      }
-    };
-
-    area.appendChild(t);
-  }
-
-  timer=setInterval(spawn,600);
-  for(let i=0;i<3;i++)spawn();
-
-  cleanupGame=()=>{
-    clearInterval(timer);
-  };
-}
-
-/* =========================================================
-   GAME 17 — THE COUNTDOWN
-   Six mini-games, no trivia.
-   ========================================================= */
-
-function game17(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Six tiny challenges. Complete at least four to beat
-      The Countdown. No trivia, just quick little games.
-    </p>
-
-    <div class="gameBox">
-      <div class="gameStat">
-        Challenge <span id="countChallenge">1</span>/6
-        &nbsp; • &nbsp;
-        Wins <span id="countWins">0</span>
-      </div>
-      <div id="miniGame" class="miniGame"></div>
-    </div>
-  `;
-
-  let challenge=0;
-  let wins=0;
-  let timer;
-
-  function next(){
-    challenge++;
-
-    if(challenge>6){
-      wins>=4
-        ?passGame(135,2,`You beat ${wins}/6 Countdown challenges! ⏳💗`)
-        :failGame(`You completed ${wins}/6. You need 4.`);
-      return;
-    }
-
-    document.getElementById("countChallenge").textContent=challenge;
-
-    const box=document.getElementById("miniGame");
-    box.innerHTML="";
-
-    if(challenge===1)stopBar(box);
-    if(challenge===2)tapOrder(box);
-    if(challenge===3)greenOrRed(box);
-    if(challenge===4)smallest(box);
-    if(challenge===5)holdMeter(box);
-    if(challenge===6)miniMemory(box);
-  }
-
-  function result(ok){
-    clearTimeout(timer);
-    if(ok)wins++;
-    document.getElementById("countWins").textContent=wins;
-    setTimeout(next,450);
-  }
-
-  function stopBar(box){
-    box.innerHTML=`
-      <h3>Stop the marker in the green zone!</h3>
-      <div class="stopBar">
-        <div class="stopZone"></div>
-        <div id="stopMarker" class="stopMarker"></div>
-      </div>
-      <button class="bigBtn" id="stopBtn">STOP</button>
-    `;
-
-    let pos=0;
-    let dir=1;
-    const loop=setInterval(()=>{
-      pos+=dir*2.5;
-      if(pos>=97){pos=97;dir=-1}
-      if(pos<=0){pos=0;dir=1}
-      document.getElementById("stopMarker").style.left=pos+"%";
-    },30);
-
-    document.getElementById("stopBtn").onclick=()=>{
-      clearInterval(loop);
-      result(pos>=42&&pos<=60);
-    };
-
-    timer=setTimeout(()=>{
-      clearInterval(loop);
-      result(false);
-    },3000);
-  }
-
-  function tapOrder(box){
-    box.innerHTML=`
-      <h3>Tap 1, 2, 3 in order!</h3>
-      <div class="circleRow">
-        <button class="countCircle" data-n="1">1</button>
-        <button class="countCircle" data-n="2">2</button>
-        <button class="countCircle" data-n="3">3</button>
-      </div>
-    `;
-
-    let nextNum=1;
-    box.querySelectorAll("button").forEach(b=>{
-      b.onclick=()=>{
-        if(Number(b.dataset.n)===nextNum){
-          b.style.background="#377451";
-          nextNum++;
-          if(nextNum===4)result(true);
-        }else result(false);
-      };
-    });
-
-    timer=setTimeout(()=>result(false),3500);
-  }
-
-  function greenOrRed(box){
-    const good=Math.random()>.45;
-    box.innerHTML=`
-      <h3>${good?"TAP THE HEART":"DON'T TAP!"}</h3>
-      <button class="countCircle" id="greenTap">${good?"💗":"🔴"}</button>
-    `;
-
-    document.getElementById("greenTap").onclick=()=>{
-      result(good);
-    };
-
-    timer=setTimeout(()=>result(!good),1800);
-  }
-
-  function smallest(box){
-    const nums=shuffle([3,8,1,6]);
-    box.innerHTML=`
-      <h3>Tap the smallest number</h3>
-      <div class="circleRow">
-        ${nums.map(n=>`<button class="countCircle" data-n="${n}">${n}</button>`).join("")}
-      </div>
-    `;
-
-    box.querySelectorAll("button").forEach(b=>{
-      b.onclick=()=>result(Number(b.dataset.n)===1);
-    });
-
-    timer=setTimeout(()=>result(false),3000);
-  }
-
-  function holdMeter(box){
-    box.innerHTML=`
-      <h3>Hold the button, then release in the green zone!</h3>
-      <div class="stopBar">
-        <div class="stopZone"></div>
-        <div id="holdMarker" class="stopMarker"></div>
-      </div>
-      <button class="bigBtn" id="holdBtn">HOLD</button>
-    `;
-
-    let held=false;
-    let pos=0;
-    let dir=1;
-
-    const loop=setInterval(()=>{
-      if(held){
-        pos+=dir*2.5;
-        if(pos>=97){pos=97;dir=-1}
-        if(pos<=0){pos=0;dir=1}
-        document.getElementById("holdMarker").style.left=pos+"%";
-      }
-    },30);
-
-    const b=document.getElementById("holdBtn");
-
-    const release=()=>{
-      if(!held)return;
-      held=false;
-      clearInterval(loop);
-      result(pos>=42&&pos<=60);
-    };
-
-    b.onpointerdown=()=>{
-      held=true;
-      b.textContent="RELEASE";
-    };
-    b.onpointerup=release;
-    b.onpointercancel=release;
-
-    timer=setTimeout(()=>{
-      clearInterval(loop);
-      result(false);
-    },3500);
-  }
-
-  function miniMemory(box){
-    const seq=[1,3,2];
-    box.innerHTML=`
-      <h3>Remember this: 1 → 3 → 2</h3>
-      <button class="bigBtn" id="readyMini">I'M READY</button>
-    `;
-
-    document.getElementById("readyMini").onclick=()=>{
-      box.innerHTML=`
-        <h3>Tap the sequence!</h3>
-        <div class="circleRow">
-          <button class="countCircle" data-n="1">1</button>
-          <button class="countCircle" data-n="2">2</button>
-          <button class="countCircle" data-n="3">3</button>
-        </div>
-      `;
-
-      let pos=0;
-
-      box.querySelectorAll("button").forEach(b=>{
-        b.onclick=()=>{
-          if(Number(b.dataset.n)===seq[pos]){
-            pos++;
-            if(pos===seq.length)result(true);
-          }else result(false);
-        };
-      });
-
-      timer=setTimeout(()=>result(false),4000);
-    };
-  }
-
-  next();
-
-  cleanupGame=()=>clearTimeout(timer);
-}
-
-/* =========================================================
-   GAME 18 — ULTIMATE GAMBLE
-   ========================================================= */
-
-function game18(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Start with 100. Choose your risks carefully.
-      Reach 300 or cash out with more than 100 to win.
-    </p>
-
-    <div class="gameBox">
-      <div class="pot">$<span id="gamblePot">100</span></div>
-      <div class="gameStat">Turns: <span id="gambleTurns">0</span></div>
-
-      <div class="gambleActions">
-        <button class="bigBtn" id="safeBtn">Safe Gamble<br>50/50</button>
-        <button class="bigBtn" id="riskBtn">Big Risk<br>25% chance</button>
-        <button class="bigBtn" id="cashBtn">Cash Out 💰</button>
-        <button class="backBtn" id="resetPot">Reset Pot</button>
-      </div>
-
-      <div id="gambleMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  let pot=100;
-  let turns=0;
-  let done=false;
-
-  function update(){
-    document.getElementById("gamblePot").textContent=pot;
-    document.getElementById("gambleTurns").textContent=turns;
-  }
-
-  function win(){
-    done=true;
-    passGame(140,3,`You finished the gamble with $${pot}! 🎲💗`);
-  }
-
-  document.getElementById("safeBtn").onclick=()=>{
-    if(done)return;
-    turns++;
-
-    if(Math.random()<.52){
-      pot*=2;
-      document.getElementById("gambleMessage").textContent="Safe gamble WON! 🎉";
-    }else{
-      pot=Math.floor(pot/2);
-      document.getElementById("gambleMessage").textContent="You lost half.";
-    }
-
-    update();
-    if(pot>=300)win();
-    else if(pot<=10){
-      document.getElementById("gambleMessage").textContent=
-        "The pot is getting low. Reset or cash out!";
-    }
-  };
-
-  document.getElementById("riskBtn").onclick=()=>{
-    if(done)return;
-    turns++;
-
-    if(Math.random()<.25){
-      pot*=4;
-      document.getElementById("gambleMessage").textContent="BIG WIN! 🎰";
-    }else{
-      pot=0;
-      document.getElementById("gambleMessage").textContent="The big risk failed.";
-    }
-
-    update();
-
-    if(pot>=300)win();
-    else if(pot===0){
-      setTimeout(()=>failGame("The big gamble didn't pay off!"),500);
-    }
-  };
-
-  document.getElementById("cashBtn").onclick=()=>{
-    if(done)return;
-
-    if(pot>100){
-      win();
-    }else{
-      document.getElementById("gambleMessage").textContent=
-        "You need more than $100 to cash out and pass.";
-    }
-  };
-
-  document.getElementById("resetPot").onclick=()=>{
-    pot=100;
-    turns=0;
-    update();
-    document.getElementById("gambleMessage").textContent="Back to $100.";
-  };
-}
-
-/* =========================================================
-   GAME 19 — ADMIRER'S LAST STAND
-   ========================================================= */
-
-function game19(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Defeat the admirer through three phases. Guard reduces incoming
-      damage. Special attacks are powerful but have a cooldown.
-    </p>
-
-    <div class="gameBox">
-      <div id="boss" class="boss">👑</div>
-      <div class="bossPhase" id="bossPhase">PHASE 1</div>
-
-      <div class="health" style="width:100%;margin:15px auto">
-        <div id="bossHP" style="width:100%;background:#d55b79"></div>
-      </div>
-
-      <div class="gameStat">
-        Boss HP: <span id="bossValue">120</span>
-        &nbsp; • &nbsp;
-        Your HP: <span id="bossPlayerValue">100</span>
-      </div>
-
-      <div id="bossMessage" class="gameStat muted">The admirer approaches...</div>
-
-      <div class="bossActions">
-        <button class="combatBtn" onclick="bossAction('attack')">⚔️ Attack</button>
-        <button class="combatBtn" onclick="bossAction('guard')">🛡️ Guard</button>
-        <button class="combatBtn" onclick="bossAction('special')">✨ Special</button>
-      </div>
-    </div>
-  `;
-
-  let hp=100;
-  let bossHP=120;
-  let specialReady=true;
-  let done=false;
-
-  window.bossAction=function(action){
-    if(done)return;
-
-    let damage=0;
-
-    if(action==="attack")damage=12+Math.floor(Math.random()*5);
-
-    if(action==="special"){
-      if(!specialReady){
-        document.getElementById("bossMessage").textContent=
-          "Special is still charging!";
-        return;
-      }
-      damage=28;
-      specialReady=false;
-      setTimeout(()=>specialReady=true,1800);
-    }
-
-    if(action==="guard")damage=0;
-
-    bossHP=Math.max(0,bossHP-damage);
-
-    document.getElementById("bossHP").style.width=(bossHP/120*100)+"%";
-    document.getElementById("bossValue").textContent=bossHP;
-
-    if(bossHP<=80&&bossHP>40){
-      document.getElementById("bossPhase").textContent="PHASE 2";
-      document.getElementById("boss").textContent="😤";
-    }
-
-    if(bossHP<=40){
-      document.getElementById("bossPhase").textContent="FINAL PHASE";
-      document.getElementById("boss").textContent="🔥";
-    }
-
-    if(bossHP<=0){
-      done=true;
-      passGame(155,3,"You defeated the admirer in the Last Stand! 👑💗");
-      return;
-    }
-
-    let incoming=10+Math.floor(Math.random()*9);
-
-    if(action==="guard")incoming=Math.floor(incoming*.3);
-    if(action==="special")incoming+=3;
-
-    hp=Math.max(0,hp-incoming);
-
-    document.getElementById("bossPlayerValue").textContent=hp;
-    document.getElementById("bossMessage").textContent=
-      `You dealt ${damage} damage. The boss hit back for ${incoming}.`;
-
-    if(hp<=0){
-      done=true;
-      failGame("The admirer got the better of you this time!");
-    }
-  };
-
-  cleanupGame=()=>{
-    done=true;
-    delete window.bossAction;
-  };
-}
-
-/* =========================================================
-   GAME 20 — WORD FIND
-   ========================================================= */
-
-const wordBank=[
- "LILIANA","LULU","FRIENDS","PINK","DOLPHIN",
- "SUNFLOWER","ROSE","SUSHI","POETRY","MUSIC",
- "PSYCHOLOGY","LEO","JULY","LOVE","FAMILY",
- "HEART","DREAM","AAYLA","ARLO","OCEAN",
- "FOREVER","THREE","SIXYEARS","CHARM","EMPATHY"
-];
-
-function game20(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Find all 25 hidden words. Words can go horizontally, vertically,
-      diagonally and backwards. Drag across the letters on the grid.
-    </p>
-
-    <div class="gameBox wordFindWrap">
-      <div id="wordList" class="wordList"></div>
-      <div id="wordGrid" class="wordGrid"></div>
-      <div id="wordMessage" class="gameStat muted">
-        25 words remaining
-      </div>
-    </div>
-  `;
-
-  const size=14;
-  const grid=Array.from({length:size},()=>Array(size).fill(""));
-
-  const dirs=[
-    [1,0],[-1,0],[0,1],[0,-1],
-    [1,1],[-1,-1],[1,-1],[-1,1]
-  ];
-
-  const placements=[];
-
-  function canPlace(word,r,c,dr,dc){
-    for(let i=0;i<word.length;i++){
-      const rr=r+dr*i;
-      const cc=c+dc*i;
-      if(rr<0||rr>=size||cc<0||cc>=size)return false;
-      if(grid[rr][cc]&&grid[rr][cc]!==word[i])return false;
-    }
-    return true;
-  }
-
-  function place(word){
-    for(let attempt=0;attempt<700;attempt++){
-      const [dr,dc]=dirs[Math.floor(Math.random()*dirs.length)];
-      const r=Math.floor(Math.random()*size);
-      const c=Math.floor(Math.random()*size);
-
-      if(canPlace(word,r,c,dr,dc)){
-        const cells=[];
-        for(let i=0;i<word.length;i++){
-          const rr=r+dr*i;
-          const cc=c+dc*i;
-          grid[rr][cc]=word[i];
-          cells.push(rr+"-"+cc);
-        }
-        placements.push({word,cells});
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /* Place longer words first for a reliable puzzle. */
-  [...wordBank].sort((a,b)=>b.length-a.length).forEach(place);
-
-  const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  for(let r=0;r<size;r++){
-    for(let c=0;c<size;c++){
-      if(!grid[r][c])
-        grid[r][c]=letters[Math.floor(Math.random()*letters.length)];
-    }
-  }
-
-  const wordList=document.getElementById("wordList");
-  wordBank.forEach(word=>{
-    const tag=document.createElement("span");
-    tag.className="wordTag";
-    tag.id="word-"+word;
-    tag.textContent=word;
-    wordList.appendChild(tag);
-  });
-
-  const gridEl=document.getElementById("wordGrid");
-
-  for(let r=0;r<size;r++){
-    for(let c=0;c<size;c++){
-      const b=document.createElement("button");
-      b.className="letter";
-      b.textContent=grid[r][c];
-      b.dataset.r=r;
-      b.dataset.c=c;
-      gridEl.appendChild(b);
-    }
-  }
-
-  let start=null;
-  let selecting=false;
-  let found=new Set();
-
-  function getCell(e){
-    const el=document.elementFromPoint(e.clientX,e.clientY);
-    if(!el||!el.classList.contains("letter"))return null;
-    return el;
-  }
-
-  function highlightPath(a,b){
-    const r1=Number(a.dataset.r);
-    const c1=Number(a.dataset.c);
-    const r2=Number(b.dataset.r);
-    const c2=Number(b.dataset.c);
-
-    const dr=Math.sign(r2-r1);
-    const dc=Math.sign(c2-c1);
-
-    const distance=Math.max(Math.abs(r2-r1),Math.abs(c2-c1))+1;
-
-    if(
-      !(r1===r2||c1===c2||Math.abs(r2-r1)===Math.abs(c2-c1))
-    )return [];
-
-    const cells=[];
-
-    for(let i=0;i<distance;i++){
-      const r=r1+dr*i;
-      const c=c1+dc*i;
-      const cell=gridEl.querySelector(
-        `.letter[data-r="${r}"][data-c="${c}"]`
-      );
-      if(cell)cells.push(cell);
-    }
-
-    return cells;
-  }
-
-  function finish(end){
-    if(!start||!end)return;
-
-    const cells=highlightPath(start,end);
-    const word=cells.map(x=>x.textContent).join("");
-
-    const reverse=word.split("").reverse().join("");
-
-    let matched=null;
-
-    placements.forEach(p=>{
-      if(
-        !found.has(p.word)&&
-        (p.word===word||p.word===reverse)
-      ){
-        matched=p.word;
-      }
-    });
-
-    document.querySelectorAll(".letter.selecting")
-      .forEach(x=>x.classList.remove("selecting"));
-
-    if(matched){
-      found.add(matched);
-      cells.forEach(x=>x.classList.add("found"));
-
-      document.getElementById("word-"+matched)
-        .classList.add("found");
-
-      document.getElementById("wordMessage").textContent=
-        `${found.size}/25 words found`;
-
-      if(found.size===placements.length){
-        passGame(170,4,"You found all 25 hidden words! 🔎💗");
-      }
-    }
-
-    start=null;
-    selecting=false;
-  }
-
-  gridEl.addEventListener("pointerdown",e=>{
-    const cell=getCell(e);
-    if(!cell)return;
-
-    selecting=true;
-    start=cell;
-    gridEl.setPointerCapture(e.pointerId);
-    cell.classList.add("selecting");
-  });
-
-  gridEl.addEventListener("pointermove",e=>{
-    if(!selecting||!start)return;
-
-    const cell=getCell(e);
-    if(!cell)return;
-
-    document.querySelectorAll(".letter.selecting")
-      .forEach(x=>x.classList.remove("selecting"));
-
-    highlightPath(start,cell)
-      .forEach(x=>x.classList.add("selecting"));
-  });
-
-  gridEl.addEventListener("pointerup",e=>{
-    if(!selecting)return;
-    finish(getCell(e));
-  });
-
-  gridEl.addEventListener("pointercancel",()=>{
-    selecting=false;
-    start=null;
-    document.querySelectorAll(".letter.selecting")
-      .forEach(x=>x.classList.remove("selecting"));
-  });
-}
-
-/* =========================================================
-   GAME 21 — DRAW A SUNFLOWER
-   ========================================================= */
-
-function game21(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Draw a sunflower 🌻. Add a stem, leaves, petals and a centre.
-      Make it your own, then press Finish Flower.
-    </p>
-
-    <div class="gameBox">
-      <canvas id="drawCanvas" width="650" height="420"></canvas>
-
-      <div class="drawTools">
-        <button data-col="#5d3b22" title="Brown"></button>
-        <button data-col="#4b8a4b" title="Green"></button>
-        <button data-col="#e0aa35" title="Yellow"></button>
-        <button data-col="#d64f7d" title="Pink"></button>
-        <button data-col="#9d3b52" title="Red"></button>
-        <button data-col="#24121b" title="Dark"></button>
-      </div>
-
-      <div class="gameActions">
-        <button class="backBtn" id="undoDraw">Undo</button>
-        <button class="backBtn" id="clearDraw">Clear</button>
-        <button class="bigBtn" id="finishDraw">Finish Flower 🌻</button>
-      </div>
-
-      <div id="drawMessage" class="gameStat muted"></div>
-    </div>
-  `;
-
-  const canvas=document.getElementById("drawCanvas");
-  const ctx=canvas.getContext("2d");
-
-  let drawing=false;
-  let colour="#d64f7d";
-  let size=7;
-  let strokes=[];
-  let current=[];
-
-  ctx.lineCap="round";
-  ctx.lineJoin="round";
-
-  function position(e){
-    const rect=canvas.getBoundingClientRect();
-    return {
-      x:(e.clientX-rect.left)*(canvas.width/rect.width),
-      y:(e.clientY-rect.top)*(canvas.height/rect.height)
-    };
-  }
-
-  canvas.addEventListener("pointerdown",e=>{
-    drawing=true;
-    current=[];
-    const p=position(e);
-    current.push(p);
-    ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-  });
-
-  canvas.addEventListener("pointermove",e=>{
-    if(!drawing)return;
-    const p=position(e);
-    current.push(p);
-
-    ctx.strokeStyle=colour;
-    ctx.lineWidth=size;
-    ctx.lineTo(p.x,p.y);
-    ctx.stroke();
-  });
-
-  function endStroke(){
-    if(!drawing)return;
-    drawing=false;
-    if(current.length)strokes.push({colour,size,points:current});
-  }
-
-  canvas.addEventListener("pointerup",endStroke);
-  canvas.addEventListener("pointercancel",endStroke);
-
-  document.querySelectorAll(".drawTools button").forEach(b=>{
-    b.style.background=b.dataset.col;
-    b.onclick=()=>{
-      colour=b.dataset.col;
-      document.querySelectorAll(".drawTools button")
-        .forEach(x=>x.classList.remove("active"));
-      b.classList.add("active");
-    };
-  });
-
-  function redraw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    strokes.forEach(s=>{
-      if(!s.points.length)return;
-
-      ctx.strokeStyle=s.colour;
-      ctx.lineWidth=s.size;
-      ctx.beginPath();
-      ctx.moveTo(s.points[0].x,s.points[0].y);
-
-      s.points.slice(1).forEach(p=>ctx.lineTo(p.x,p.y));
-
-      ctx.stroke();
-    });
-  }
-
-  document.getElementById("undoDraw").onclick=()=>{
-    strokes.pop();
-    redraw();
-  };
-
-  document.getElementById("clearDraw").onclick=()=>{
-    strokes=[];
-    redraw();
-  };
-
-  document.getElementById("finishDraw").onclick=()=>{
-    if(strokes.length<5){
-      document.getElementById("drawMessage").textContent=
-        "Add a few more strokes first 🌻";
-      return;
-    }
-
-    passGame(140,3,
-      `Beautiful! Your sunflower is now part of the Lulu Express journey. 🌻💗`);
-  };
-}
-
-/* =========================================================
-   DERBY 100 QUESTIONS
-   ========================================================= */
-
-const derbyQuestions=[
-["What is the capital of Canada?",["Ottawa","Toronto","Vancouver","Montreal"],0],
-["What is the largest mammal?",["Blue whale","Elephant","Giraffe","Orca"],0],
-["How many months are in a year?",["12","10","11","13"],0],
-["What is the currency of the United Kingdom?",["Pound sterling","Euro","Dollar","Franc"],0],
-["Which planet is closest to the Sun?",["Mercury","Venus","Earth","Mars"],0],
-["How many chess pieces does each player start with?",["16","12","18","20"],0],
-["Who wrote the Harry Potter books?",["J.K. Rowling","Suzanne Collins","C.S. Lewis","Roald Dahl"],0],
-["Which is the largest continent?",["Asia","Africa","Europe","North America"],0],
-["Which instrument usually has 88 keys?",["Piano","Violin","Trumpet","Flute"],0],
-["What is the chemical symbol for oxygen?",["O","Ox","O2","Og"],0],
-["What is the square root of 81?",["9","8","7","6"],0],
-["In which year did humans first land on the Moon?",["1969","1959","1975","1981"],0],
-["Where is the Great Pyramid of Giza?",["Egypt","Greece","Mexico","Jordan"],0],
-["What language is primarily spoken in Brazil?",["Portuguese","Spanish","French","Italian"],0],
-["What is the world's largest desert?",["Antarctica","Sahara","Gobi","Arabian"],0],
-["What is the highest score in a single frame of ten-pin bowling?",["30","20","25","50"],0],
-["Which vitamin is commonly produced through sunlight exposure?",["Vitamin D","Vitamin C","Vitamin A","Vitamin B12"],0],
-["About how many bones does an adult human have?",["206","186","216","306"],0],
-["On which continent is most of the Amazon rainforest?",["South America","Africa","Asia","Europe"],0],
-["Where is Big Ben?",["London","Paris","Rome","Dublin"],0],
-["Which ocean is the largest?",["Pacific","Atlantic","Indian","Arctic"],0],
-["How many moons does Mars have?",["2","1","3","4"],0],
-["Which planet is the hottest on average?",["Venus","Mercury","Mars","Jupiter"],0],
-["Approximately how fast does light travel in a vacuum?",["300,000 km/s","30,000 km/s","3,000 km/s","3 million km/s"],0],
-["Who wrote Romeo and Juliet?",["William Shakespeare","Charles Dickens","Oscar Wilde","Mark Twain"],0],
-["Where do penguins naturally live?",["Southern Hemisphere","Northern Europe","Central Asia","Greenland only"],0],
-["What is the currency of India?",["Rupee","Yen","Peso","Dinar"],0],
-["Where is the Taj Mahal?",["India","Pakistan","Nepal","Bangladesh"],0],
-["Who was the Greek god of the sea?",["Poseidon","Apollo","Ares","Hermes"],0],
-["What does Roman numeral X mean?",["10","5","50","100"],0],
-["How many rings are on the Olympic symbol?",["5","4","6","7"],0],
-["How many suits are in a standard deck of cards?",["4","3","5","6"],0],
-["How many cards are in a standard deck?",["52","48","54","50"],0],
-["How many sides does a square have?",["4","3","5","6"],0],
-["The Nile is primarily associated with which continent?",["Africa","Asia","Europe","South America"],0],
-["The Alps are mainly found in which region?",["Europe","Africa","Asia","Oceania"],0],
-["At what temperature does water freeze in Celsius?",["0°C","10°C","32°C","-10°C"],0],
-["How many metres are in a kilometre?",["1,000","100","10,000","500"],0],
-["How many seconds are in a minute?",["60","100","30","90"],0],
-["How many hours are in a day?",["24","12","36","48"],0],
-["How many days are in a normal week?",["7","5","6","8"],0],
-["How many days are in a normal non-leap year?",["365","360","364","366"],0],
-["Which is the farthest planet from the Sun among the eight planets?",["Neptune","Uranus","Saturn","Jupiter"],0],
-["What is Pluto classified as?",["Dwarf planet","Gas giant","Moon","Comet"],0],
-["What shape is DNA commonly described as?",["Double helix","Single ring","Triangle","Cube"],0],
-["What process allows plants to use sunlight to make food?",["Photosynthesis","Respiration","Fermentation","Digestion"],0],
-["Which cells carry oxygen around the body?",["Red blood cells","Platelets","Skin cells","Bone cells"],0],
-["What is the largest organ of the human body?",["Skin","Liver","Heart","Lung"],0],
-["Which part of the eye controls how much light enters?",["Iris","Retina","Lens","Cornea"],0],
-["Which part of the brain is the largest region?",["Cerebrum","Cerebellum","Medulla","Brainstem"],0],
-["What is the chemical symbol for iron?",["Fe","Ir","In","I"],0],
-["What is the chemical symbol for sodium?",["Na","So","Sd","S"],0],
-["What is the chemical symbol for potassium?",["K","P","Po","Pt"],0],
-["What is the chemical symbol for silver?",["Ag","Si","Sl","Sv"],0],
-["What is the chemical symbol for copper?",["Cu","Co","Cp","Cr"],0],
-["What gas is represented by CO₂?",["Carbon dioxide","Carbon monoxide","Oxygen","Methane"],0],
-["What pH is considered neutral?",["7","1","5","14"],0],
-["What force pulls objects toward Earth?",["Gravity","Friction","Magnetism","Pressure"],0],
-["What is the SI unit of energy?",["Joule","Watt","Newton","Volt"],0],
-["What is the SI unit of electric current?",["Ampere","Volt","Ohm","Watt"],0],
-["Sound level is commonly measured in what?",["Decibels","Metres","Watts","Litres"],0],
-["What instrument detects and records earthquakes?",["Seismograph","Barometer","Thermometer","Hygrometer"],0],
-["Molten rock beneath Earth's surface is called what?",["Magma","Lava","Ash","Granite"],0],
-["What are clouds mostly made of?",["Tiny water droplets and ice","Smoke","Sand","Salt"],0],
-["How many traditional colours are commonly listed in a rainbow?",["7","5","6","8"],0],
-["What shape symmetry is associated with most snowflakes?",["Six-fold","Four-fold","Three-fold","Eight-fold"],0],
-["How do honeybees famously communicate the location of food?",["Dance movements","Colour changes","Whistling","Footprints"],0],
-["Where are butterflies' taste receptors famously found?",["Feet","Wings","Eyes","Antennae only"],0],
-["How many hearts does an octopus have?",["3","2","4","1"],0],
-["How many neck vertebrae does a giraffe usually have?",["7","5","10","12"],0],
-["Which animal is the fastest land animal?",["Cheetah","Horse","Leopard","Ostrich"],0],
-["What is the largest living bird?",["Ostrich","Emu","Eagle","Albatross"],0],
-["Which animal is known for carrying young in a pouch?",["Kangaroo","Elephant","Zebra","Tiger"],0],
-["Which bird is strongly associated with New Zealand?",["Kiwi","Flamingo","Peacock","Pelican"],0],
-["Koalas are native to which country?",["Australia","Canada","India","Brazil"],0],
-["Mount Kilimanjaro is in which country?",["Tanzania","Kenya","Ethiopia","Uganda"],0],
-["The Gobi Desert is mainly in which part of the world?",["Asia","Africa","Europe","South America"],0],
-["The Amazon River is in which continent?",["South America","Africa","Asia","Europe"],0],
-["The Mediterranean Sea lies between Europe and which other regions?",["Africa and Asia","Australia and Asia","North America and Asia","South America and Africa"],0],
-["The Panama Canal connects which two oceans?",["Atlantic and Pacific","Pacific and Indian","Atlantic and Arctic","Indian and Arctic"],0],
-["The Suez Canal connects the Mediterranean Sea with which sea?",["Red Sea","Black Sea","Caribbean Sea","North Sea"],0],
-["The Equator represents which latitude?",["0°","23.5°N","90°","66.5°S"],0],
-["The Prime Meridian passes through which longitude?",["0°","90°","180°","45°"],0],
-["Which continent is the coldest?",["Antarctica","Europe","Asia","North America"],0],
-["Which is the smallest continent by land area?",["Australia","Europe","Antarctica","South America"],0],
-["Which country is the world's largest by land area?",["Russia","Canada","China","United States"],0],
-["Which country contains Vatican City?",["Italy","France","Spain","Austria"],0],
-["Wimbledon is associated with which sport?",["Tennis","Golf","Cricket","Rugby"],0],
-["The Tour de France is primarily what type of event?",["Cycling race","Horse race","Car race","Running race"],0],
-["The FIFA World Cup is associated with which sport?",["Football","Tennis","Basketball","Rugby"],0],
-["The Super Bowl is associated with which sport?",["American football","Baseball","Ice hockey","Basketball"],0],
-["How many players are on a standard football team on the field?",["11","9","10","12"],0],
-["How many points is a touchdown worth before any extra attempt?",["6","3","7","5"],0],
-["How many players are on a basketball team on court at one time?",["5","6","7","4"],0],
-["How many points is a free throw worth in basketball?",["1","2","3","4"],0],
-["What colour is traditionally associated with the centre of a dartboard?",["Red","Blue","Green","Yellow"],0],
-["How many squares are on a chessboard?",["64","72","81","48"],0],
-["What piece moves in an L-shape in chess?",["Knight","Bishop","Rook","Queen"],0],
-["What is the only even prime number?",["2","4","6","8"],0],
-["How many degrees are in a full circle?",["360","180","90","720"],0],
-["What is 12 × 12?",["144","124","132","154"],0],
-["What is the opposite of north?",["South","East","West","Up"],0],
-["What colour do you get by mixing blue and yellow?",["Green","Purple","Orange","Pink"],0],
-["Which sense uses the ears?",["Hearing","Sight","Taste","Smell"],0],
-["Which animal is known for producing silk?",["Silkworm","Bee","Spider crab","Butterfly"],0],
-["Which metal is liquid at room temperature?",["Mercury","Iron","Copper","Gold"],0],
-["What is the hardest natural mineral?",["Diamond","Quartz","Granite","Iron"],0],
-["Which country is famous for the city of Kyoto?",["Japan","China","Thailand","Vietnam"],0]
-];
-
-/* =========================================================
-   GAME 22 — LULU DERBY
-   ========================================================= */
-
-function game22(){
-  const root=document.getElementById("gameContent");
-
-  root.innerHTML=`
-    <p class="instruction">
-      Choose your horse. Then answer 100 random trivia questions.
-      Correct answers push your horse forward. The questions are mixed
-      throughout the race.
-    </p>
-
-    <div class="gameBox" id="derbyBox">
-      <div id="derbyChoose">
-        <h3 style="text-align:center">Choose your horse 🏇</h3>
-        <div class="derbyHorses">
-          <button class="derbyHorse" data-horse="0">🌸<br>Lulu</button>
-          <button class="derbyHorse" data-horse="1">💗<br>Rosie</button>
-          <button class="derbyHorse" data-horse="2">⭐<br>Starlight</button>
-          <button class="derbyHorse" data-horse="3">🌻<br>Sunny</button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  let selected=-1;
-  let questions=[];
-  let index=0;
-  let positions=[0,0,0,0];
-  let answered=false;
-
-  document.querySelectorAll(".derbyHorse").forEach(b=>{
-    b.onclick=()=>{
-      selected=Number(b.dataset.horse);
-      document.querySelectorAll(".derbyHorse")
-        .forEach(x=>x.classList.remove("selected"));
-      b.classList.add("selected");
-
-      setTimeout(start,350);
-    };
-  });
-
-  function start(){
-    questions=shuffle(derbyQuestions).slice(0,100);
-
-    document.getElementById("derbyBox").innerHTML=`
-      <div class="triviaCounter">
-        Derby Question <span id="derbyQuestion">1</span>/100
-      </div>
-
-      <div class="derbyTrack">
-        <div class="derbyLane"><div class="derbyRunner" id="derby0">🌸</div></div>
-        <div class="derbyLane"><div class="derbyRunner" id="derby1">💗</div></div>
-        <div class="derbyLane"><div class="derbyRunner" id="derby2">⭐</div></div>
-        <div class="derbyLane"><div class="derbyRunner" id="derby3">🌻</div></div>
-      </div>
-
-      <div id="derbyQuestionText" class="quizQuestion"></div>
-      <div id="derbyAnswers" class="answerGrid"></div>
-      <div id="derbyMessage" class="gameStat muted"></div>
-    `;
-
-    loadDerby();
-  }
-
-  function loadDerby(){
-    answered=false;
-
-    const q=questions[index];
-    const answers=randomisedQuestion(q);
-
-    document.getElementById("derbyQuestion").textContent=index+1;
-    document.getElementById("derbyQuestionText").textContent=q[0];
-
-    const area=document.getElementById("derbyAnswers");
-    area.innerHTML="";
-
-    answers.forEach(a=>{
-      const b=document.createElement("button");
-      b.className="answer";
-      b.textContent=a.text;
-      b.onclick=()=>answerDerby(a.correct,b);
-      area.appendChild(b);
-    });
-  }
-
-  function answerDerby(correct,button){
-    if(answered)return;
-    answered=true;
-
-    [...document.querySelectorAll("#derbyAnswers button")]
-      .forEach(b=>b.disabled=true);
-
-    if(correct){
-      button.classList.add("correct");
-
-      /* Selected horse receives a generous boost. */
-      positions[selected]+=2+Math.floor(Math.random()*3);
-
-      /* Occasional bonus sprint. */
-      if(Math.random()<.15)positions[selected]+=2;
-
-      document.getElementById("derbyMessage").textContent=
-        "Correct! Your horse charges forward! 🏇💨";
-    }else{
-      button.classList.add("wrong");
-
-      /* A rival advances slightly. */
-      const rivals=[0,1,2,3].filter(x=>x!==selected);
-      const rival=rivals[Math.floor(Math.random()*rivals.length)];
-      positions[rival]+=1;
-
-      document.getElementById("derbyMessage").textContent=
-        "Wrong! One of the rivals moves ahead.";
-    }
-
-    updateDerby();
-
-    index++;
-
-    if(index>=100){
-      setTimeout(finishDerby,450);
-    }else{
-      setTimeout(loadDerby,300);
-    }
-  }
-
-  function updateDerby(){
-    positions.forEach((p,i)=>{
-      const lane=document.querySelector(".derbyLane").clientWidth;
-      const px=Math.min(lane-38,p/lane*lane*0.9);
-      document.getElementById("derby"+i).style.left=
-        Math.min(90,p*0.9)+"%";
-    });
-  }
-
-  function finishDerby(){
-    /* Make selected horse slightly favoured if the race is very close. */
-    const winner=positions.indexOf(Math.max(...positions));
-
-    if(winner===selected){
-      passGame(
-        200,
-        5,
-        `YOU WON THE LULU DERBY after all 100 questions! 🏆🏇`
-      );
-    }else{
-      failGame(
-        "The derby has finished, but your horse didn't win this time."
-      );
-    }
-  }
-}
-
-/* =========================================================
-   GAME 23 — FINAL CHALLENGE
-   50 UNIQUE LILIANA QUESTIONS
-   ========================================================= */
-
-const finalQuestions=[
- ["Which colour would Liliana most likely choose for a birthday theme?",["Baby pink","Neon orange","Bright green","Navy blue"],0],
- ["Which number has special significance for Liliana?",["3","9","14","20"],0],
- ["Which food is one of Liliana's favourites?",["Sushi","Cereal","Steak","Pancakes"],0],
- ["Which sea animal does Liliana like?",["Dolphin","Seal","Shark","Walrus"],0],
- ["Which flower is associated with Liliana?",["Sunflower","Carnation","Orchid","Iris"],0],
- ["Which second flower does she like?",["Rose","Peony","Violet","Daffodil"],0],
- ["What month is Liliana's birthday in?",["July","January","October","March"],0],
- ["What day of the month is her birthday?",["22","12","27","7"],0],
- ["What is the colour of her eyes?",["Green","Blue","Grey","Brown"],0],
- ["Which zodiac sign is Liliana?",["Leo","Aries","Libra","Pisces"],0],
- ["Which fear belongs to Liliana?",["Drowning","Thunder","Knives","Dark rooms"],0],
- ["Which film is her favourite?",["Me Before You","Barbie","Mamma Mia!","The Holiday"],0],
- ["What kind of music does Liliana enjoy?",["Sad songs","Only metal","Only classical","Only country"],0],
- ["Which form of writing does she like?",["Poetry","Essays only","Comics only","News reports"],0],
- ["Which card game does she enjoy?",["Poker","Solitaire","Bridge","Snap"],0],
- ["What type of games does she enjoy?",["Gambling games","Only puzzles","Only platform games","Only racing games"],0],
- ["What subject did Liliana study at university?",["Psychology","Medicine","Law","Art"],0],
- ["How many nieces does she have?",["1","2","4","5"],0],
- ["How many nephews does she have?",["4","1","3","6"],0],
- ["How many siblings does she have?",["5","2","4","7"],0],
- ["How many piercings does she have?",["4","1","2","6"],0],
- ["Which dog is Liliana's?",["Aayla","Lola","Mochi","Nala"],0],
- ["What is the name of her other dog?",["Arlo","Archi","Milo","Teddy"],0],
- ["How long have Bree and Liliana been best friends?",["6 years","2 years","4 years","10 years"],0],
- ["Which personality trait fits Liliana?",["Sweet","Mean","Distant","Careless"],0],
- ["Which other personality trait fits her?",["Caring","Selfish","Cold","Impatient"],0],
- ["Which word best describes her charm?",["Charismatic","Hostile","Shy","Unkind"],0],
- ["Which quality is strongly associated with her?",["Empathy","Apathy","Stubbornness","Cruelty"],0],
- ["What does Liliana want to be someday?",["A mum","A pilot","A lawyer","A dancer"],0],
- ["What kind of child does she dream of having?",["A baby girl","Twin boys","A baby boy","Three boys"],0],
- ["What does Liliana want to see someday?",["The ocean","The Sahara","The Alps","The Arctic Circle"],0],
- ["Which pairing contains two of her favourite things?",["Dolphins and sushi","Horses and curry","Cats and pizza","Wolves and pasta"],0],
- ["Which flower pairing is correct?",["Sunflowers and roses","Tulips and lilies","Orchids and daisies","Violets and lavender"],0],
- ["Which date correctly identifies Liliana's birthday?",["22 July","7 February","12 July","27 June"],0],
- ["Which academic subject is connected to Liliana?",["Psychology","Geography","Physics","Engineering"],0],
- ["How many nieces and nephews does she have altogether?",["5","4","6","8"],0],
- ["Which pair contains both of her dogs?",["Aayla and Arlo","Aayla and Milo","Arlo and Coco","Bella and Arlo"],0],
- ["Which colour best represents the birthday aesthetic she would enjoy?",["Baby pink","Bright yellow","Forest green","Silver"],0],
- ["Which activity is most aligned with one of her hobbies?",["Playing poker","Rock climbing","Fishing","Running marathons"],0],
- ["Which statement about Liliana is true?",["She likes children","She dislikes children","She avoids all children","She is afraid of children"],0],
- ["Which combination describes several of her interests?",["Poetry, sad songs and gambling games","Cooking, skiing and opera","Golf, painting and chess","Cycling, fishing and astronomy"],0],
- ["Which animal and flower combination matches her interests?",["Dolphins and sunflowers","Tigers and tulips","Rabbits and orchids","Horses and lilies"],0],
- ["Which food and colour combination matches Liliana?",["Sushi and baby pink","Pizza and orange","Pasta and green","Curry and purple"],0],
- ["Which university subject and hobby pairing is correct?",["Psychology and poker","Physics and rugby","Law and golf","Biology and skiing"],0],
- ["Which statement combines two true facts about Liliana?",["She has green eyes and is a Leo","She has blue eyes and is a Taurus","She has brown eyes and is a Virgo","She has grey eyes and is a Pisces"],0],
- ["Which statement combines her family facts correctly?",["She has 1 niece and 4 nephews","She has 4 nieces and 1 nephew","She has 2 nieces and 3 nephews","She has 5 nieces and no nephews"],0],
- ["Which statement combines her pet facts correctly?",["Aayla and Arlo are her dogs","Aayla is her cat and Arlo is her rabbit","Arlo is her cat and Aayla is her bird","Both are horses"],0],
- ["Which statement combines her dream and favourite animal?",["She wants to be a mum and likes dolphins","She wants to be a pilot and likes sharks","She wants to be a singer and likes wolves","She wants to be a chef and likes bears"],0],
- ["Which statement best describes Liliana overall?",["Sweet, caring, charismatic and empathetic","Cold, distant, impatient and careless","Quiet, rude, selfish and harsh","Competitive, angry, distant and unfriendly"],0]
-];
-
-function game23(){
-  quizGame(
-    finalQuestions,
-    50,
-    40,
-    "The Final Challenge has 50 unique questions about Liliana. You need 40 correct answers to pass.",
-    "The Final Challenge",
-    15
-  );
-}
-
-/* =========================================================
-   GAME LAUNCHERS
-   ========================================================= */
-
-const gameLaunchers={
-  1:game1,
-  2:game2,
-  3:game3,
-  4:game4,
-  5:game5,
-  6:game6,
-  7:game7,
-  8:game8,
-  9:game9,
-  10:game10,
-  11:game11,
-  12:game12,
-  13:game13,
-  14:game14,
-  15:game15,
-  16:game16,
-  17:game17,
-  18:game18,
-  19:game19,
-  20:game20,
-  21:game21,
-  22:game22,
-  23:game23
-};
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-function resetGame(){
+function resetJourney(){
   if(!confirm(
-    "Reset Lulu Express?\n\nThis will erase your name, score, tokens and level progress."
-  ))return;
+    "Reset the entire Lulu Express journey?\n\nThis will erase your progress, points and tokens."
+  )) return;
 
-  clearGame();
+  stopMusic();
 
   state={
     name:"",
@@ -4133,42 +1520,3534 @@ function resetGame(){
 
   localStorage.removeItem("luluExpressState");
 
-  stopMusic();
+  clearGameTimers();
 
-  document.getElementById("journey").classList.remove("hidden");
-  document.getElementById("gameScreen").classList.add("hidden");
-  document.getElementById("completion").classList.add("hidden");
-  document.getElementById("journeyHeader").classList.remove("hidden");
-  document.getElementById("musicPanel").classList.remove("hidden");
-
-  document.getElementById("nameEntry").classList.remove("hidden");
-  document.getElementById("welcomeText").classList.add("hidden");
   document.getElementById("playerName").value="";
 
-  updateHeader();
-  renderMap();
+  showScreen("startScreen");
 }
 
 /* =========================================================
-   START
-   ========================================================= */
+   SHUFFLE HELPERS
+========================================================= */
 
-loadState();
+function shuffle(arr){
+  const a=[...arr];
 
-if(state.name){
-  document.getElementById("nameEntry").classList.add("hidden");
-  document.getElementById("welcomeText").classList.remove("hidden");
-  document.getElementById("welcomeName").textContent=state.name;
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+
+  return a;
 }
 
-updateHeader();
-renderMap();
-updateMusicButton();
+function shuffledQuestion(q){
+  const options=q.options.map((text,index)=>({
+    text,
+    correct:index===q.answer
+  }));
 
-/* Enter key starts the journey. */
-document.getElementById("playerName").addEventListener("keydown",e=>{
-  if(e.key==="Enter")startJourney();
-});
+  return shuffle(options);
+}
+
+/* =========================================================
+   1. BROKEN HEARTS
+   EASY LANE CONTROL
+========================================================= */
+
+function gameBrokenHearts(){
+
+  let lane=2;
+  let lives=3;
+  let caught=0;
+  let combo=0;
+  let running=true;
+  let spawnTimer;
+
+  const content=document.getElementById("gameContent");
+
+  content.innerHTML=`
+    ${gameHeader("💔 Broken Hearts","Catch 15 whole hearts")}
+
+    <div class="heart-info">
+      <span id="bhCaught">💗 0 / 15</span>
+      <span id="bhLives">❤️❤️❤️</span>
+      <span id="bhCombo">Combo x1</span>
+    </div>
+
+    <div class="heart-game" id="heartGame">
+      <div class="heart-lanes">
+        <div class="heart-lane"></div>
+        <div class="heart-lane"></div>
+        <div class="heart-lane"></div>
+        <div class="heart-lane"></div>
+        <div class="heart-lane"></div>
+      </div>
+
+      <div class="catcher" id="catcher">🧺</div>
+    </div>
+
+    <div class="move-controls">
+      <button class="move-button" id="leftButton">
+        <span>⬅️</span>
+        LEFT
+      </button>
+
+      <button class="move-button" id="rightButton">
+        <span>➡️</span>
+        RIGHT
+      </button>
+    </div>
+  `;
+
+  const area=document.getElementById("heartGame");
+  const catcher=document.getElementById("catcher");
+
+  function updateCatcher(){
+    const left=lane*20+0.5;
+    catcher.style.left=`${left}%`;
+  }
+
+  function moveLeft(){
+    if(!running)return;
+    lane=Math.max(0,lane-1);
+    updateCatcher();
+  }
+
+  function moveRight(){
+    if(!running)return;
+    lane=Math.min(4,lane+1);
+    updateCatcher();
+  }
+
+  /*
+    Hold controls are supported, but a normal tap is enough.
+    There is NO dragging.
+  */
+
+  const left=document.getElementById("leftButton");
+  const right=document.getElementById("rightButton");
+
+  let holdTimer=null;
+
+  function hold(fn){
+    fn();
+
+    clearInterval(holdTimer);
+
+    holdTimer=setInterval(fn,130);
+  }
+
+  function release(){
+    clearInterval(holdTimer);
+    holdTimer=null;
+  }
+
+  left.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    hold(moveLeft);
+  });
+
+  right.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    hold(moveRight);
+  });
+
+  ["pointerup","pointercancel","pointerleave"].forEach(type=>{
+    left.addEventListener(type,release);
+    right.addEventListener(type,release);
+  });
+
+  function key(e){
+    if(e.key==="ArrowLeft"){
+      e.preventDefault();
+      moveLeft();
+    }
+
+    if(e.key==="ArrowRight"){
+      e.preventDefault();
+      moveRight();
+    }
+  }
+
+  window.addEventListener("keydown",key);
+  cleanupFunctions.push(()=>{
+    window.removeEventListener("keydown",key);
+    release();
+  });
+
+  updateCatcher();
+
+  function spawn(){
+
+    if(!running)return;
+
+    const el=document.createElement("div");
+    const type=Math.random();
+
+    let emoji="💗";
+    let value=10;
+
+    if(type<.12){
+      emoji="💔";
+      value=-1;
+    }else if(type<.20){
+      emoji="💛";
+      value=30;
+    }
+
+    el.className="falling-heart";
+    el.textContent=emoji;
+
+    const heartLane=Math.floor(Math.random()*5);
+    const x=heartLane*20+10;
+
+    el.style.left=x+"%";
+    el.style.top="-45px";
+
+    area.appendChild(el);
+
+    const duration=
+      4300+
+      Math.random()*1300+
+      Math.max(0,(15-caught)*35);
+
+    const start=performance.now();
+
+    function fall(now){
+
+      if(!running){
+        el.remove();
+        return;
+      }
+
+      const progress=Math.min(1,(now-start)/duration);
+      el.style.top=(progress*(area.clientHeight-60)-20)+"px";
+
+      if(progress>=1){
+
+        const catcherLane=lane;
+
+        if(heartLane===catcherLane){
+
+          if(emoji==="💔"){
+            lives--;
+            combo=0;
+          }else{
+            caught++;
+            combo++;
+
+            const multiplier=Math.min(3,1+Math.floor(combo/5));
+            addPoints(value*multiplier);
+          }
+
+          update();
+
+          if(lives<=0){
+            running=false;
+            finishGame(
+              1,
+              false,
+              "The broken hearts got through too many times. 💔",
+              0
+            );
+            return;
+          }
+
+          if(caught>=15){
+            running=false;
+            finishGame(
+              1,
+              true,
+              `You caught all 15 hearts, ${state.name}! 💗`,
+              180
+            );
+            return;
+          }
+        }
+
+        el.remove();
+        return;
+      }
+
+      raf(fall);
+    }
+
+    raf(fall);
+  }
+
+  function update(){
+    document.getElementById("bhCaught").textContent=
+      `💗 ${caught} / 15`;
+
+    document.getElementById("bhLives").textContent=
+      "❤️".repeat(lives)+"🖤".repeat(3-lives);
+
+    document.getElementById("bhCombo").textContent=
+      `Combo x${Math.min(3,1+Math.floor(combo/5))}`;
+  }
+
+  update();
+
+  spawnTimer=every(spawn,900);
+  spawn();
+}
+
+/* =========================================================
+   2. MEMORY VAULT
+========================================================= */
+
+function gameMemory(){
+
+  let round=0;
+  let sequence=[];
+  let input=[];
+  let accepting=false;
+  const symbols=["💗","🌸","🐬","🌻","🌹","⭐","☀️","🌙",
+                  "🦋","🎀","🍓","✨","💎","🌊","🩷","🍀"];
+
+  const content=document.getElementById("gameContent");
+
+  content.innerHTML=`
+    ${gameHeader("🧠 Memory Vault","Repeat the glowing pattern")}
+
+    <div class="score-display" id="memoryStatus">
+      Round 1 of 7
+    </div>
+
+    <div id="memoryGrid" class="memory-grid"></div>
+
+    <button
+      class="primary"
+      id="memoryStart"
+      onclick="window.memoryBegin()"
+    >
+      Show Pattern
+    </button>
+  `;
+
+  const grid=document.getElementById("memoryGrid");
+
+  grid.innerHTML=Array.from(
+    {length:16},
+    (_,i)=>`
+      <button
+        class="memory-tile"
+        data-index="${i}"
+      >
+        ${symbols[i]}
+      </button>
+    `
+  ).join("");
+
+  const tiles=[...grid.querySelectorAll(".memory-tile")];
+
+  tiles.forEach((tile,i)=>{
+    tile.onclick=()=>{
+      if(!accepting)return;
+
+      tile.classList.add("selected");
+
+      later(()=>{
+        tile.classList.remove("selected");
+      },180);
+
+      if(i!==sequence[input.length]){
+        accepting=false;
+        input=[];
+
+        document.getElementById("memoryStatus").textContent=
+          "Not quite! Watch the pattern again.";
+
+        later(showPattern,700);
+        return;
+      }
+
+      input++;
+
+      if(input.length===sequence.length){
+
+        accepting=false;
+        round++;
+
+        addPoints(20);
+
+        if(round>=7){
+          finishGame(
+            2,
+            true,
+            "Your memory made it through the vault! 🧠💗",
+            160
+          );
+          return;
+        }
+
+        document.getElementById("memoryStatus").textContent=
+          `Round ${round+1} of 7`;
+
+        later(nextRound,700);
+      }
+    };
+  });
+
+  function nextRound(){
+    sequence.push(
+      Math.floor(Math.random()*16)
+    );
+
+    showPattern();
+  }
+
+  function showPattern(){
+
+    accepting=false;
+    input=[];
+
+    tiles.forEach(t=>t.classList.remove("flash"));
+
+    let i=0;
+
+    function flash(){
+
+      if(i>=sequence.length){
+        accepting=true;
+        return;
+      }
+
+      const tile=tiles[sequence[i]];
+
+      tile.classList.add("flash");
+
+      later(()=>{
+        tile.classList.remove("flash");
+        later(()=>{
+          i++;
+          flash();
+        },110);
+      },420);
+    }
+
+    flash();
+  }
+
+  window.memoryBegin=function(){
+    document.getElementById("memoryStart").style.display="none";
+
+    sequence=[
+      Math.floor(Math.random()*16),
+      Math.floor(Math.random()*16)
+    ];
+
+    showPattern();
+  };
+}
+
+/* =========================================================
+   3. PRESSURE QUIZ
+========================================================= */
+
+const pressureQuestions=[
+  ["What is the capital of Australia?",["Canberra","Sydney","Melbourne","Perth"],0],
+  ["Which planet is the largest?",["Jupiter","Saturn","Neptune","Earth"],0],
+  ["Which planet is known as the Red Planet?",["Mars","Venus","Mercury","Jupiter"],0],
+  ["What is the chemical symbol for gold?",["Au","Ag","Gd","Go"],0],
+  ["How many continents are there?",["7","5","6","8"],0],
+  ["Where is the Great Barrier Reef?",["Australia","Brazil","India","Mexico"],0],
+  ["Who wrote Pride and Prejudice?",["Jane Austen","Emily Brontë","Virginia Woolf","Mary Shelley"],0],
+  ["What is Japan's currency?",["Yen","Won","Yuan","Ringgit"],0],
+  ["What is the fastest land animal?",["Cheetah","Lion","Horse","Leopard"],0],
+  ["What is the largest ocean?",["Pacific","Atlantic","Indian","Arctic"],0],
+  ["Water boils at what temperature at sea level?",["100°C","90°C","110°C","80°C"],0],
+  ["How many chambers does the human heart have?",["4","2","3","5"],0],
+  ["Which gas makes up most of Earth's atmosphere?",["Nitrogen","Oxygen","Carbon dioxide","Hydrogen"],0],
+  ["What is the tallest mountain above sea level?",["Mount Everest","K2","Kilimanjaro","Denali"],0],
+  ["What is the smallest prime number?",["2","1","3","0"],0],
+  ["Who wrote Hamlet?",["William Shakespeare","Charles Dickens","Mark Twain","Oscar Wilde"],0],
+  ["Who painted the Mona Lisa?",["Leonardo da Vinci","Michelangelo","Raphael","Van Gogh"],0],
+  ["What does DNA stand for?",["Deoxyribonucleic acid","Dynamic Nuclear Acid","Double Nitrogen Acid","Deoxygenated Nucleic Acid"],0],
+  ["How long does Earth take to orbit the Sun?",["About 365 days","About 30 days","About 180 days","About 700 days"],0],
+  ["How many sides does an octagon have?",["8","6","7","10"],0],
+  ["Which animal produces honey?",["Bees","Ants","Wasps","Butterflies"],0],
+  ["Which planet is famous for its rings?",["Saturn","Mars","Venus","Mercury"],0],
+  ["A whale is what type of animal?",["Mammal","Fish","Reptile","Amphibian"],0],
+  ["What is H2O?",["Water","Oxygen","Hydrogen","Salt"],0],
+  ["Which travels faster?",["Light","Sound","Wind","Water"],0],
+  ["The Sahara is on which continent?",["Africa","Asia","Europe","Australia"],0],
+  ["Where is the Eiffel Tower?",["Paris","Rome","Madrid","Berlin"],0],
+  ["Mount Fuji is in which country?",["Japan","China","South Korea","Thailand"],0],
+  ["The Great Wall is in which country?",["China","India","Mongolia","Japan"],0],
+  ["What is New Zealand's currency?",["New Zealand dollar","Australian dollar","Pound","Yen"],0]
+].map(q=>({question:q[0],options:q[1],answer:q[2]}));
+
+function gamePressureQuiz(){
+
+  let questions=shuffle(pressureQuestions).slice(0,10);
+  let index=0;
+  let score=0;
+  let answered=false;
+  let timer=null;
+
+  const content=document.getElementById("gameContent");
+
+  function show(){
+
+    clearTimeout(timer);
+    answered=false;
+
+    const q=questions[index];
+    const answers=shuffledQuestion(q);
+
+    content.innerHTML=`
+      ${gameHeader("⏱️ Pressure Quiz",`${index+1}/10`)}
+
+      <div class="game-card">
+        <div class="score-display" id="quizTimer">7</div>
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            style="width:${index/10*100}%"
+          ></div>
+        </div>
+
+        <h2 style="margin-top:16px">${q.question}</h2>
+
+        <div class="game-buttons four">
+          ${answers.map((a,i)=>`
+            <button
+              class="answer-button"
+              onclick="window.pressureAnswer(${a.correct?1:0},this)"
+            >
+              ${String.fromCharCode(65+i)}. ${a.text}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+
+    let seconds=7;
+
+    timer=setInterval(()=>{
+
+      seconds--;
+
+      const el=document.getElementById("quizTimer");
+      if(el)el.textContent=seconds;
+
+      if(seconds<=0){
+        clearInterval(timer);
+
+        if(!answered){
+          answered=true;
+          index++;
+
+          if(index>=10){
+            end();
+          }else{
+            show();
+          }
+        }
+      }
+    },1000);
+
+    timers.push(timer);
+  }
+
+  window.pressureAnswer=function(correct,button){
+
+    if(answered)return;
+
+    answered=true;
+    clearInterval(timer);
+
+    if(correct){
+      score++;
+      addPoints(25);
+      button.classList.add("correct");
+    }else{
+      button.classList.add("wrong");
+    }
+
+    [...document.querySelectorAll(".answer-button")]
+      .forEach(b=>b.disabled=true);
+
+    later(()=>{
+      index++;
+
+      if(index>=10){
+        end();
+      }else{
+        show();
+      }
+    },500);
+  };
+
+  function end(){
+
+    const passed=score>=6;
+
+    finishGame(
+      3,
+      passed,
+      `You scored ${score}/10. ${
+        passed
+        ?"Fast thinking! ⏱️💗"
+        :"You needed 6 correct answers."
+      }`,
+      score*10
+    );
+  }
+
+  show();
+}
+
+/* =========================================================
+   4. HIGH ROLLER
+========================================================= */
+
+function gameSlots(){
+
+  const symbols=["🍒","💎","⭐","7️⃣","🌸","💗"];
+
+  let reels=["❔","❔","❔"];
+  let stopped=[false,false,false];
+  let spinning=false;
+  let spinInterval;
+
+  const content=document.getElementById("gameContent");
+
+  content.innerHTML=`
+    ${gameHeader("🎰 High Roller","Stop all three reels")}
+
+    <div class="game-card">
+      <div class="reels">
+        <div class="reel" id="reel0">❔</div>
+        <div class="reel" id="reel1">❔</div>
+        <div class="reel" id="reel2">❔</div>
+      </div>
+
+      <div class="slot-result" id="slotResult">
+        Pull the lever!
+      </div>
+
+      <button class="primary" onclick="window.startSlots()">
+        🎰 SPIN
+      </button>
+
+      <div class="game-buttons three">
+        <button class="secondary" onclick="window.stopReel(0)">Stop 1</button>
+        <button class="secondary" onclick="window.stopReel(1)">Stop 2</button>
+        <button class="secondary" onclick="window.stopReel(2)">Stop 3</button>
+      </div>
+    </div>
+  `;
+
+  window.startSlots=function(){
+
+    if(spinning)return;
+
+    spinning=true;
+    stopped=[false,false,false];
+
+    document.getElementById("slotResult").textContent=
+      "Stop each reel!";
+
+    spinInterval=setInterval(()=>{
+
+      for(let i=0;i<3;i++){
+
+        if(!stopped[i]){
+          reels[i]=symbols[
+            Math.floor(Math.random()*symbols.length)
+          ];
+
+          document.getElementById("reel"+i).textContent=
+            reels[i];
+        }
+      }
+
+    },90);
+
+    timers.push(spinInterval);
+  };
+
+  window.stopReel=function(i){
+
+    if(!spinning || stopped[i])return;
+
+    stopped[i]=true;
+
+    reels[i]=symbols[
+      Math.floor(Math.random()*symbols.length)
+    ];
+
+    document.getElementById("reel"+i).textContent=reels[i];
+
+    if(stopped.every(Boolean)){
+      clearInterval(spinInterval);
+      spinning=false;
+
+      const counts={};
+
+      reels.forEach(x=>{
+        counts[x]=(counts[x]||0)+1;
+      });
+
+      const values=Object.values(counts);
+      const max=Math.max(...values);
+
+      let reward=0;
+      let message="No match this time!";
+
+      if(max===3){
+        reward=250;
+        message="🎉 JACKPOT! Three matching symbols!";
+      }else if(max===2){
+        reward=80;
+        message="✨ Two matched! Nice win!";
+      }else{
+        reward=20;
+        message="💗 Lucky try! You still get a little reward.";
+      }
+
+      addPoints(reward);
+
+      document.getElementById("slotResult").textContent=
+        message;
+
+      later(()=>{
+        finishGame(
+          4,
+          true,
+          message,
+          reward
+        );
+      },1000);
+    }
+  };
+}
+
+/* =========================================================
+   5. MIND GAMES
+========================================================= */
+
+function gameMindGames(){
+
+  const puzzles=[
+    {
+      q:"Which symbol comes next? 2, 4, 6, 8, ?",
+      o:["10","11","12","14"],a:0
+    },
+    {
+      q:"Which one does NOT belong?",
+      o:["Apple","Pear","Carrot","Peach"],a:2
+    },
+    {
+      q:"Complete the pattern: 🔴 🔵 🔴 🔵 ?",
+      o:["🔴","🟢","🟡","⚫"],a:0
+    },
+    {
+      q:"Which number is smallest?",
+      o:["0.2","0.02","0.22","0.202"],a:1
+    },
+    {
+      q:"If CAT becomes DBU, what does DOG become?",
+      o:["EPH","EOH","DPG","FQI"],a:0
+    },
+    {
+      q:"Which shape has no corners?",
+      o:["Circle","Triangle","Square","Pentagon"],a:0
+    },
+    {
+      q:"What comes next? A, C, E, G, ?",
+      o:["I","H","J","K"],a:0
+    },
+    {
+      q:"Which is the odd one out?",
+      o:["Monday","Tuesday","January","Friday"],a:2
+    }
+  ];
+
+  let index=0;
+  let correct=0;
+
+  function show(){
+
+    const q=puzzles[index];
+    const answers=shuffle(
+      q.o.map((text,i)=>({text,correct:i===q.a}))
+    );
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("🧩 Mind Games",`${index+1}/8`)}
+
+      <div class="game-card">
+        <div class="score-display">
+          Correct: ${correct}
+        </div>
+
+        <h2>${q.q}</h2>
+
+        <div class="game-buttons four">
+          ${answers.map(a=>`
+            <button
+              class="answer-button"
+              onclick="window.mindAnswer(${a.correct?1:0})"
+            >
+              ${a.text}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  window.mindAnswer=function(ok){
+
+    if(ok){
+      correct++;
+      addPoints(20);
+    }
+
+    index++;
+
+    if(index>=8){
+
+      finishGame(
+        5,
+        correct>=5,
+        `You solved ${correct}/8 puzzles.`,
+        correct*10
+      );
+
+    }else{
+      show();
+    }
+  };
+
+  show();
+}
+
+/* =========================================================
+   6. THE BLUFF
+========================================================= */
+
+function gameBluff(){
+
+  let round=1;
+  let pot=100;
+  let selected=null;
+
+  const content=document.getElementById("gameContent");
+
+  function show(){
+
+    selected=null;
+
+    const cards=Array.from(
+      {length:4},
+      ()=>Math.floor(Math.random()*20)+1
+    );
+
+    content.innerHTML=`
+      ${gameHeader("🃏 The Bluff",`Round ${round}/5`)}
+
+      <div class="game-card">
+        <div class="gamble-pot">$${pot}</div>
+
+        <p>Choose one hidden card.</p>
+
+        <div class="game-buttons four">
+          ${cards.map((_,i)=>`
+            <button
+              class="answer-button"
+              onclick="window.pickBluff(${i},${cards[i]})"
+            >
+              🂠<br>Card ${i+1}
+            </button>
+          `).join("")}
+        </div>
+
+        <div id="bluffChoice"></div>
+      </div>
+    `;
+  }
+
+  window.pickBluff=function(i,value){
+
+    if(selected!==null)return;
+
+    selected=value;
+
+    const box=document.getElementById("bluffChoice");
+
+    box.innerHTML=`
+      <div class="mini-display" style="margin-top:12px">
+        You drew <strong>${value}</strong>!
+      </div>
+
+      <div class="game-buttons">
+        <button
+          class="primary"
+          onclick="window.bluffBank(${value})"
+        >
+          💰 Bank
+        </button>
+
+        <button
+          class="secondary"
+          onclick="window.bluffDouble(${value})"
+        >
+          🎲 Double
+        </button>
+      </div>
+    `;
+  };
+
+  window.bluffBank=function(value){
+
+    pot+=value*3;
+    addPoints(value*4);
+
+    next();
+  };
+
+  window.bluffDouble=function(value){
+
+    if(value>=10){
+      pot+=value*6;
+      addPoints(value*8);
+    }else{
+      pot=Math.max(0,pot-value*3);
+    }
+
+    next();
+  };
+
+  function next(){
+
+    round++;
+
+    if(round>5){
+
+      finishGame(
+        6,
+        pot>=100,
+        `You finished The Bluff with $${pot}.`,
+        Math.max(50,pot)
+      );
+
+    }else{
+      show();
+    }
+  }
+
+  show();
+}
+
+/* =========================================================
+   7. SURVIVAL ROUND
+========================================================= */
+
+function gameSurvival(){
+
+  const waves=[
+    ["🔥 Fire!","🪣 Water","🪨 Rock","🌬️ Wind","Water"],
+    ["🌊 Wave!","🏄 Jump","🧱 Hide","🧊 Freeze","Jump"],
+    ["⚡ Lightning!","🏃 Move","🛌 Sleep","🪑 Sit","Move"],
+    ["🐝 Swarm!","🧥 Cover","🍯 Feed","📣 Shout","Cover"],
+    ["❄️ Ice!","🔥 Warm up","💧 Pour water","🧊 Touch it","Warm up"],
+    ["🌪️ Wind!","⚓ Hold on","🎈 Fly","🚪 Open door","Hold on"],
+    ["🌋 Lava!","⬆️ Climb","⬇️ Dig","🏊 Swim","Climb"],
+    ["🌧️ Storm!","🏠 Shelter","🌳 Stand outside","🌊 Swim","Shelter"]
+  ];
+
+  let index=0;
+  let correct=0;
+  let answered=false;
+
+  function show(){
+
+    answered=false;
+
+    const w=waves[index];
+
+    const choices=shuffle(
+      w.slice(1,4)
+    );
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("🛡️ Survival Round",`Wave ${index+1}/8`)}
+
+      <div class="game-card">
+        <div class="mini-display">
+          ${w[0]}
+        </div>
+
+        <p>Choose the safest action.</p>
+
+        <div class="game-buttons">
+          ${choices.map(x=>`
+            <button
+              class="answer-button"
+              onclick="window.survivalAnswer('${x}','${w[4]}')"
+            >
+              ${x}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  window.survivalAnswer=function(choice,correctAnswer){
+
+    if(answered)return;
+    answered=true;
+
+    if(choice===correctAnswer){
+      correct++;
+      addPoints(25);
+    }
+
+    later(()=>{
+      index++;
+
+      if(index>=8){
+
+        finishGame(
+          7,
+          correct>=5,
+          `You survived ${correct}/8 waves! 🛡️`,
+          correct*12
+        );
+
+      }else{
+        show();
+      }
+    },350);
+  };
+
+  show();
+}
+
+/* =========================================================
+   8. ADMIRER RACE
+   NO OBSTACLES
+   TIMING ONLY
+========================================================= */
+
+function gameRace(){
+
+  let round=0;
+  let player=0;
+  let ai=0;
+  let marker=0;
+  let direction=1;
+  let running=true;
+
+  const content=document.getElementById("gameContent");
+
+  content.innerHTML=`
+    ${gameHeader("🏇 The Admirer Race","Time your gallop")}
+
+    <div class="game-card">
+
+      <div class="race-track">
+
+        <div class="horse-row">
+          <span
+            id="playerHorse"
+            class="horse"
+          >🐎</span>
+        </div>
+
+        <div class="horse-row">
+          <span
+            id="aiHorse"
+            class="horse"
+          >🐴</span>
+        </div>
+
+      </div>
+
+      <div class="score-display" id="raceScore">
+        Round 1 / 10
+      </div>
+
+      <div class="timing-meter" id="timingMeter">
+        <div class="timing-good"></div>
+        <div class="timing-perfect"></div>
+        <div
+          id="timingMarker"
+          class="timing-marker"
+        ></div>
+      </div>
+
+      <button
+        class="primary"
+        onclick="window.gallop()"
+      >
+        🏇 GALLop!
+      </button>
+
+      <p>
+        Hit the green area for a PERFECT boost.
+        There are no obstacles to dodge.
+      </p>
+
+    </div>
+  `;
+
+  const markerEl=document.getElementById("timingMarker");
+
+  function moveMarker(){
+
+    if(!running)return;
+
+    marker+=direction*1.4;
+
+    if(marker>=97){
+      marker=97;
+      direction=-1;
+    }
+
+    if(marker<=1){
+      marker=1;
+      direction=1;
+    }
+
+    markerEl.style.left=marker+"%";
+
+    raf(moveMarker);
+  }
+
+  raf(moveMarker);
+
+  window.gallop=function(){
+
+    if(!running)return;
+
+    let points=2;
+
+    if(marker>=42 && marker<=58){
+      points=8;
+    }else if(marker>=27 && marker<=73){
+      points=5;
+    }
+
+    player+=points;
+
+    ai+=6;
+
+    round++;
+
+    document.getElementById("playerHorse").style.left=
+      Math.min(88,player*1.8)+"%";
+
+    document.getElementById("aiHorse").style.left=
+      Math.min(88,ai*1.8)+"%";
+
+    document.getElementById("raceScore").textContent=
+      `Round ${Math.min(round,10)} / 10 • You ${player} • AI ${ai}`;
+
+    if(round>=10){
+
+      running=false;
+
+      const passed=player>ai;
+
+      finishGame(
+        8,
+        passed,
+        passed
+        ?`You beat the admirer! 🏇💗`
+        :`The admirer reached the finish first.`,
+        passed?180:0
+      );
+    }
+  };
+}
+
+/* =========================================================
+   9. HEARTBREAK CHAMBER
+========================================================= */
+
+function gameChamber(){
+
+  const clues={
+    desk:"A note says: the first digit is 0.",
+    drawer:"A little card says: the second digit is 6.",
+    flower:"A birthday clue points to July: 07.",
+    frame:"The final clue says: the birthday day is 22."
+  };
+
+  let found=[];
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🔎 Heartbreak Chamber","Find four clues")}
+
+    <div class="game-card">
+      <p>Search the room and collect every clue.</p>
+
+      <div class="game-buttons">
+        <button class="answer-button" onclick="window.findClue('desk')">
+          🗄️ Desk
+        </button>
+
+        <button class="answer-button" onclick="window.findClue('drawer')">
+          📦 Drawer
+        </button>
+
+        <button class="answer-button" onclick="window.findClue('flower')">
+          🌸 Flower Pot
+        </button>
+
+        <button class="answer-button" onclick="window.findClue('frame')">
+          🖼️ Photo Frame
+        </button>
+      </div>
+
+      <div id="clueBox" class="mini-display" style="margin-top:12px">
+        🔐 The door is locked.
+      </div>
+    </div>
+  `;
+
+  window.findClue=function(name){
+
+    if(found.includes(name))return;
+
+    found.push(name);
+
+    document.getElementById("clueBox").innerHTML=
+      found.map(x=>clues[x]).join("<br><br>");
+
+    if(found.length===4){
+
+      later(()=>{
+        finishGame(
+          9,
+          true,
+          "You found every clue and escaped the chamber! 🔓💗",
+          170
+        );
+      },800);
+    }
+  };
+}
+
+/* =========================================================
+   10. BOXING
+========================================================= */
+
+function gameBoxing(){
+
+  let playerHP=100;
+  let enemyHP=80;
+  let busy=false;
+  let guarding=false;
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🥊 Heartbreak Boxing Match","Knock out the opponent")}
+
+    <div class="game-card">
+
+      <div class="fighter">🥊</div>
+
+      <div>Opponent</div>
+      <div class="health">
+        <div
+          id="enemyHealth"
+          class="health-fill"
+          style="width:100%"
+        ></div>
+      </div>
+
+      <div class="fighter">💗</div>
+
+      <div>You</div>
+      <div class="health">
+        <div
+          id="playerHealth"
+          class="health-fill"
+          style="width:100%"
+        ></div>
+      </div>
+
+      <div
+        id="boxingMessage"
+        class="score-display"
+      >
+        Choose your move!
+      </div>
+
+      <div class="game-buttons four">
+        <button class="answer-button" onclick="window.boxMove('punch')">
+          👊 Punch
+        </button>
+
+        <button class="answer-button" onclick="window.boxMove('heavy')">
+          💥 Heavy
+        </button>
+
+        <button class="answer-button" onclick="window.boxMove('block')">
+          🛡️ Block
+        </button>
+
+        <button class="answer-button" onclick="window.boxMove('dodge')">
+          💨 Dodge
+        </button>
+      </div>
+    </div>
+  `;
+
+  function update(){
+
+    document.getElementById("enemyHealth").style.width=
+      Math.max(0,enemyHP)/80*100+"%";
+
+    document.getElementById("playerHealth").style.width=
+      Math.max(0,playerHP)+"%";
+  }
+
+  window.boxMove=function(move){
+
+    if(busy)return;
+    busy=true;
+
+    let damage=0;
+
+    if(move==="punch")damage=10;
+    if(move==="heavy")damage=18;
+
+    if(move==="block"){
+      guarding=true;
+    }else{
+      guarding=false;
+    }
+
+    if(move==="dodge"){
+      document.getElementById("boxingMessage").textContent=
+        "You dodged!";
+    }else{
+
+      enemyHP-=damage;
+
+      document.getElementById("boxingMessage").textContent=
+        damage
+        ?`You dealt ${damage} damage!`
+        :"You guarded!";
+    }
+
+    update();
+
+    if(enemyHP<=0){
+      finishGame(
+        10,
+        true,
+        "You won the heartbreak boxing match! 🥊💗",
+        190
+      );
+      return;
+    }
+
+    later(()=>{
+
+      const enemyDamage=
+        Math.floor(Math.random()*11)+7;
+
+      if(!guarding){
+        playerHP-=enemyDamage;
+
+        document.getElementById("boxingMessage").textContent=
+          `The opponent hit you for ${enemyDamage}!`;
+      }else{
+        document.getElementById("boxingMessage").textContent=
+          "Your guard blocked the attack!";
+      }
+
+      update();
+
+      if(playerHP<=0){
+
+        finishGame(
+          10,
+          false,
+          "You were knocked out!",
+          0
+        );
+
+      }else{
+        busy=false;
+      }
+
+    },600);
+  };
+}
+
+/* =========================================================
+   11. PERFECT MATCH
+========================================================= */
+
+function gamePerfectMatch(){
+
+  const objects=[
+    ["🌸","target0"],
+    ["🐬","target1"],
+    ["🌻","target2"],
+    ["🌹","target3"],
+    ["💗","target4"]
+  ];
+
+  let matched=0;
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🧲 Perfect Match","Match each object")}
+
+    <div class="game-card">
+      <p>Drag each item onto its matching outline.</p>
+
+      <div class="match-board" id="matchBoard">
+
+        ${objects.map((o,i)=>`
+          <div
+            class="match-target"
+            id="target${i}"
+            data-value="${o[0]}"
+            style="
+              right:${10+i%2*45}%;
+              top:${20+Math.floor(i/2)*90}px;
+            "
+          >
+            ${o[0]}
+          </div>
+
+          <div
+            class="match-item"
+            id="match${i}"
+            data-value="${o[0]}"
+            style="
+              left:${5+(i%3)*31}%;
+              top:${10+Math.floor(i/3)*150}px;
+            "
+          >
+            ${o[0]}
+          </div>
+        `).join("")}
+
+      </div>
+    </div>
+  `;
+
+  const board=document.getElementById("matchBoard");
+
+  objects.forEach((o,i)=>{
+
+    const item=document.getElementById("match"+i);
+
+    let dragging=false;
+
+    function move(e){
+
+      if(!dragging)return;
+
+      const rect=board.getBoundingClientRect();
+
+      let x=e.clientX-rect.left-30;
+      let y=e.clientY-rect.top-30;
+
+      x=Math.max(0,Math.min(rect.width-60,x));
+      y=Math.max(0,Math.min(rect.height-60,y));
+
+      item.style.left=x+"px";
+      item.style.top=y+"px";
+    }
+
+    item.addEventListener("pointerdown",e=>{
+      e.preventDefault();
+      dragging=true;
+      item.setPointerCapture(e.pointerId);
+    });
+
+    item.addEventListener("pointermove",move);
+
+    item.addEventListener("pointerup",e=>{
+
+      dragging=false;
+
+      const target=document.getElementById("target"+i);
+
+      const a=item.getBoundingClientRect();
+      const b=target.getBoundingClientRect();
+
+      const overlap=
+        a.left<b.right &&
+        a.right>b.left &&
+        a.top<b.bottom &&
+        a.bottom>b.top;
+
+      if(overlap){
+
+        item.style.left=
+          target.offsetLeft+
+          (target.offsetWidth-60)/2+
+          "px";
+
+        item.style.top=
+          target.offsetTop+
+          (target.offsetHeight-60)/2+
+          "px";
+
+        item.style.opacity=".3";
+        item.style.pointerEvents="none";
+
+        matched++;
+        addPoints(25);
+
+        if(matched===objects.length){
+
+          finishGame(
+            11,
+            true,
+            "Every object found its perfect match! 🧲💗",
+            160
+          );
+        }
+      }
+    });
+  });
+}
+
+/* =========================================================
+   12. WHO KNOWS LILIANA BEST
+========================================================= */
+
+const lilianaQuiz=[
+  ["What is Liliana's favourite colour?",["Baby pink","Burgundy","Sky blue","Purple"],0],
+  ["What is Liliana's favourite number?",["3","7","6","22"],0],
+  ["Which food does Liliana like?",["Sushi","Pizza","Tacos","Curry"],0],
+  ["Which animal does Liliana like?",["Dolphins","Lions","Foxes","Penguins"],0],
+  ["Which flowers does Liliana like?",["Sunflowers and roses","Lilies and tulips","Orchids and daisies","Lavender and violets"],0],
+  ["When is Liliana's birthday?",["22 July","7 February","22 June","12 July"],0],
+  ["What colour are Liliana's eyes?",["Green","Blue","Brown","Hazel"],0],
+  ["What is Liliana's star sign?",["Leo","Cancer","Virgo","Libra"],0],
+  ["What is Liliana afraid of?",["Drowning","Flying","Heights","Spiders"],0],
+  ["What is Liliana's favourite movie?",["Me Before You","Titanic","Frozen","The Notebook"],0],
+  ["What does Liliana enjoy reading or writing?",["Poetry","History","Crime novels","Comics"],0],
+  ["What subject did Liliana study at university?",["Psychology","Law","Biology","Art"],0],
+  ["How many nieces does Liliana have?",["1","2","3","4"],0],
+  ["How many nephews does Liliana have?",["4","1","2","5"],0],
+  ["How many siblings does Liliana have?",["5","3","4","6"],0],
+  ["How many piercings does Liliana have?",["4","2","3","5"],0],
+  ["What are the names of Liliana's dogs?",["Aayla and Arlo","Luna and Milo","Bella and Max","Ayla and Leo"],0],
+  ["How long have Bree and Liliana been best friends?",["6 years","3 years","5 years","7 years"],0]
+].map(q=>({question:q[0],options:q[1],answer:q[2]}));
+
+function gameLilianaQuiz(){
+
+  let qs=shuffle(lilianaQuiz).slice(0,12);
+  let i=0;
+  let correct=0;
+
+  function show(){
+
+    const q=qs[i];
+    const answers=shuffledQuestion(q);
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("💗 Who Knows Liliana Best?",`${i+1}/12`)}
+
+      <div class="game-card">
+        <h2>${q.question}</h2>
+
+        <div class="game-buttons four">
+          ${answers.map(a=>`
+            <button
+              class="answer-button"
+              onclick="window.luluQuizAnswer(${a.correct?1:0})"
+            >
+              ${a.text}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  window.luluQuizAnswer=function(ok){
+
+    if(ok){
+      correct++;
+      addPoints(30);
+    }
+
+    i++;
+
+    if(i>=12){
+
+      finishGame(
+        12,
+        correct>=8,
+        `You knew ${correct}/12 answers about Liliana!`,
+        correct*12
+      );
+
+    }else{
+      show();
+    }
+  };
+
+  show();
+}
+
+/* =========================================================
+   13. REACTION GAUNTLET
+========================================================= */
+
+function gameReaction(){
+
+  const commands=[
+    "TAP NOW",
+    "DON'T TAP",
+    "LEFT",
+    "RIGHT"
+  ];
+
+  let round=0;
+  let score=0;
+  let active=false;
+  let expected="";
+  let timer=null;
+
+  function show(){
+
+    active=false;
+
+    expected=
+      commands[Math.floor(Math.random()*commands.length)];
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("⚡ Reaction Gauntlet",`${round+1}/10`)}
+
+      <div class="game-card">
+
+        <div
+          id="reactionDisplay"
+          class="mini-display"
+        >
+          ${expected}
+        </div>
+
+        <button
+          class="primary"
+          onclick="window.reactionPress()"
+        >
+          TAP
+        </button>
+
+        <div class="game-buttons">
+          <button class="secondary" onclick="window.reactionSide('LEFT')">
+            ⬅️ LEFT
+          </button>
+
+          <button class="secondary" onclick="window.reactionSide('RIGHT')">
+            RIGHT ➡️
+          </button>
+        </div>
+      </div>
+    `;
+
+    active=true;
+
+    timer=setTimeout(()=>{
+
+      if(active){
+        active=false;
+
+        if(expected==="DON'T TAP"){
+          score++;
+          addPoints(20);
+        }
+
+        next();
+      }
+
+    },1200);
+
+    timers.push(timer);
+  }
+
+  window.reactionPress=function(){
+
+    if(!active)return;
+
+    active=false;
+    clearTimeout(timer);
+
+    if(expected==="TAP NOW"){
+      score++;
+      addPoints(20);
+    }
+
+    next();
+  };
+
+  window.reactionSide=function(side){
+
+    if(!active)return;
+
+    active=false;
+    clearTimeout(timer);
+
+    if(expected===side){
+      score++;
+      addPoints(20);
+    }
+
+    next();
+  };
+
+  function next(){
+
+    round++;
+
+    if(round>=10){
+
+      finishGame(
+        13,
+        score>=7,
+        `You got ${score}/10 reactions right!`,
+        score*10
+      );
+
+    }else{
+      later(show,300);
+    }
+  }
+
+  show();
+}
+
+/* =========================================================
+   14. HEART HUNT
+========================================================= */
+
+function gameHeartHunt(){
+
+  let found=0;
+  let running=true;
+  let hearts=[];
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🕵️ Heart Hunt","Find 10 hidden hearts")}
+
+    <div class="score-display" id="huntScore">
+      💗 0 / 10
+    </div>
+
+    <div class="hunt-area" id="huntArea"></div>
+  `;
+
+  const area=document.getElementById("huntArea");
+
+  for(let i=0;i<12;i++){
+
+    const h=document.createElement("button");
+
+    h.className="hunt-heart";
+    h.textContent=i<10?"💗":"🌸";
+
+    h.style.left=(5+Math.random()*85)+"%";
+    h.style.top=(5+Math.random()*85)+"%";
+
+    h.onclick=()=>{
+
+      if(!running)return;
+
+      if(h.textContent==="💗"){
+
+        found++;
+        addPoints(12);
+
+        h.remove();
+
+        document.getElementById("huntScore").textContent=
+          `💗 ${found} / 10`;
+
+        if(found>=10){
+
+          running=false;
+
+          finishGame(
+            14,
+            true,
+            "You found all the hidden hearts! 💗",
+            150
+          );
+        }
+      }
+    };
+
+    area.appendChild(h);
+    hearts.push(h);
+  }
+
+  every(()=>{
+
+    if(!running)return;
+
+    hearts.forEach(h=>{
+
+      if(!h.isConnected)return;
+
+      h.style.left=
+        Math.max(3,Math.min(88,
+          parseFloat(h.style.left)+(Math.random()*10-5)
+        ))+"%";
+
+      h.style.top=
+        Math.max(3,Math.min(88,
+          parseFloat(h.style.top)+(Math.random()*10-5)
+        ))+"%";
+    });
+
+  },900);
+}
+
+/* =========================================================
+   15. LOVE LOCK
+========================================================= */
+
+function gameLoveLock(){
+
+  let code="";
+  const answer="060722";
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🔐 Love Lock","Crack the combination")}
+
+    <div class="game-card">
+
+      <p>
+        The clue is hidden in the friendship:
+        <br><br>
+        🎂 Liliana's birthday is <strong>22 July</strong>.
+        <br>
+        💗 You've been best friends for <strong>6 years</strong>.
+      </p>
+
+      <div class="lock-display" id="lockDisplay">••••••</div>
+
+      <div class="keypad">
+        ${[1,2,3,4,5,6,7,8,9,0].map(n=>`
+          <button onclick="window.lockKey('${n}')">
+            ${n}
+          </button>
+        `).join("")}
+        <button onclick="window.lockClear()">C</button>
+        <button onclick="window.lockEnter()">🔓</button>
+      </div>
+    </div>
+  `;
+
+  window.lockKey=function(n){
+
+    if(code.length>=6)return;
+
+    code+=n;
+
+    document.getElementById("lockDisplay").textContent=
+      code.padEnd(6,"•");
+  };
+
+  window.lockClear=function(){
+    code="";
+    document.getElementById("lockDisplay").textContent="••••••";
+  };
+
+  window.lockEnter=function(){
+
+    if(code===answer){
+
+      addPoints(250);
+
+      finishGame(
+        15,
+        true,
+        "🔓 The Love Lock opened! The code was 060722.",
+        250
+      );
+
+    }else{
+
+      document.getElementById("lockDisplay").textContent=
+        "❌";
+
+      later(()=>{
+        code="";
+        document.getElementById("lockDisplay").textContent="••••••";
+      },700);
+    }
+  };
+}
+
+/* =========================================================
+   16. CUPID SHOOTOUT
+========================================================= */
+
+function gameCupid(){
+
+  let score=0;
+  let shots=0;
+  let running=true;
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🏹 Cupid Shootout","Hit 8 hearts")}
+
+    <div class="score-display" id="cupidScore">
+      Score: 0 • Shots: 0/15
+    </div>
+
+    <div class="shoot-area" id="shootArea"></div>
+  `;
+
+  const area=document.getElementById("shootArea");
+
+  function spawn(){
+
+    if(!running)return;
+
+    const h=document.createElement("button");
+
+    h.className="shoot-heart";
+
+    const gold=Math.random()<.18;
+
+    h.textContent=gold?"💛":"💗";
+    h.dataset.value=gold?"30":"10";
+
+    h.style.left=(5+Math.random()*80)+"%";
+    h.style.top=(5+Math.random()*80)+"%";
+
+    h.onclick=()=>{
+
+      if(!running)return;
+
+      score+=Number(h.dataset.value);
+      shots++;
+
+      addPoints(Number(h.dataset.value));
+
+      h.remove();
+
+      update();
+
+      if(score>=80 || shots>=15){
+
+        running=false;
+
+        finishGame(
+          16,
+          score>=80,
+          `Cupid scored ${score} points in ${shots} shots!`,
+          score
+        );
+      }else{
+        spawn();
+      }
+    };
+
+    area.appendChild(h);
+
+    later(()=>{
+      if(h.isConnected){
+
+        h.remove();
+        shots++;
+
+        update();
+
+        if(shots>=15){
+
+          running=false;
+
+          finishGame(
+            16,
+            score>=80,
+            `Cupid scored ${score} points.`,
+            score
+          );
+
+        }else{
+          spawn();
+        }
+      }
+    },1700);
+  }
+
+  function update(){
+
+    document.getElementById("cupidScore").textContent=
+      `Score: ${score} • Shots: ${shots}/15`;
+  }
+
+  spawn();
+}
+
+/* =========================================================
+   17. COUNTDOWN
+========================================================= */
+
+function gameCountdown(){
+
+  let challenge=0;
+  let successes=0;
+
+  const types=[
+    "bar",
+    "sequence",
+    "green",
+    "smallest",
+    "hold",
+    "miniMemory"
+  ];
+
+  function next(){
+
+    if(challenge>=6){
+
+      finishGame(
+        17,
+        successes>=4,
+        `You passed ${successes}/6 Countdown challenges!`,
+        successes*30
+      );
+
+      return;
+    }
+
+    const type=types[challenge];
+
+    if(type==="bar")barChallenge();
+    if(type==="sequence")sequenceChallenge();
+    if(type==="green")greenChallenge();
+    if(type==="smallest")smallestChallenge();
+    if(type==="hold")holdChallenge();
+    if(type==="miniMemory")miniMemoryChallenge();
+  }
+
+  function heading(name){
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("⏳ The Countdown",`${challenge+1}/6`)}
+      <div class="game-card">
+        <h2>${name}</h2>
+        <div id="countdownChallenge"></div>
+      </div>
+    `;
+  }
+
+  function result(ok){
+    if(ok){
+      successes++;
+      addPoints(30);
+    }
+
+    challenge++;
+    later(next,500);
+  }
+
+  function barChallenge(){
+
+    heading("Stop the marker in the green zone!");
+
+    const box=document.getElementById("countdownChallenge");
+
+    box.innerHTML=`
+      <div class="countdown-bar">
+        <div class="countdown-zone"></div>
+        <div
+          id="cdMarker"
+          class="countdown-marker"
+          style="left:0%"
+        ></div>
+      </div>
+
+      <button class="primary" onclick="window.stopCountdownBar()">
+        STOP
+      </button>
+    `;
+
+    let pos=0;
+    let dir=1;
+
+    function move(){
+
+      pos+=dir*1.7;
+
+      if(pos>=97){
+        pos=97;
+        dir=-1;
+      }
+
+      if(pos<=0){
+        pos=0;
+        dir=1;
+      }
+
+      const marker=document.getElementById("cdMarker");
+
+      if(marker)marker.style.left=pos+"%";
+
+      raf(move);
+    }
+
+    raf(move);
+
+    window.stopCountdownBar=function(){
+      result(pos>=40 && pos<=60);
+    };
+  }
+
+  function sequenceChallenge(){
+
+    heading("Tap the numbers in order: 1 → 2 → 3");
+
+    document.getElementById("countdownChallenge").innerHTML=`
+      <div class="game-buttons three">
+        ${shuffle([1,2,3]).map(n=>`
+          <button
+            class="answer-button"
+            onclick="window.sequenceTap(${n},this)"
+          >
+            ${n}
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+    let expected=1;
+
+    window.sequenceTap=function(n){
+
+      if(n===expected){
+
+        expected++;
+
+        if(expected===4){
+          result(true);
+        }
+
+      }else{
+        result(false);
+      }
+    };
+  }
+
+  function greenChallenge(){
+
+    heading("Tap only the hearts!");
+
+    let taps=0;
+    let good=0;
+
+    const box=document.getElementById("countdownChallenge");
+
+    box.innerHTML=`
+      <div class="game-buttons">
+        ${Array.from({length:6},(_,i)=>`
+          <button
+            class="answer-button"
+            onclick="window.greenTap(${i})"
+          >
+            ${i%2===0?"💗":"🔴"}
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+    window.greenTap=function(i){
+
+      taps++;
+
+      if(i%2===0)good++;
+
+      if(taps>=3){
+        result(good>=2);
+      }
+    };
+  }
+
+  function smallestChallenge(){
+
+    heading("Choose the smallest number");
+
+    const nums=shuffle([17,4,9,12]);
+
+    document.getElementById("countdownChallenge").innerHTML=`
+      <div class="game-buttons four">
+        ${nums.map(n=>`
+          <button
+            class="answer-button"
+            onclick="window.smallestTap(${n})"
+          >
+            ${n}
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+    window.smallestTap=function(n){
+      result(n===4);
+    };
+  }
+
+  function holdChallenge(){
+
+    heading("Hold the button until the meter is full!");
+
+    document.getElementById("countdownChallenge").innerHTML=`
+      <div class="progress-bar">
+        <div
+          id="holdProgress"
+          class="progress-fill"
+        ></div>
+      </div>
+
+      <button
+        id="holdButton"
+        class="primary"
+      >
+        HOLD
+      </button>
+    `;
+
+    let value=0;
+    let holding=false;
+
+    const button=document.getElementById("holdButton");
+
+    button.addEventListener("pointerdown",()=>{
+      holding=true;
+    });
+
+    ["pointerup","pointercancel","pointerleave"].forEach(type=>{
+      button.addEventListener(type,()=>{
+        holding=false;
+      });
+    });
+
+    const id=setInterval(()=>{
+
+      if(holding)value+=5;
+      else value-=2;
+
+      value=Math.max(0,Math.min(100,value));
+
+      const p=document.getElementById("holdProgress");
+
+      if(p)p.style.width=value+"%";
+
+      if(value>=100){
+        clearInterval(id);
+        result(true);
+      }
+
+    },100);
+
+    timers.push(id);
+  }
+
+  function miniMemoryChallenge(){
+
+    heading("Remember the three symbols!");
+
+    const symbols=["🌸","💗","🐬","🌻"];
+
+    const sequence=Array.from(
+      {length:3},
+      ()=>symbols[Math.floor(Math.random()*symbols.length)]
+    );
+
+    const box=document.getElementById("countdownChallenge");
+
+    box.innerHTML=`
+      <div class="mini-display" id="miniMemoryDisplay">
+        ${sequence.join(" ")}
+      </div>
+    `;
+
+    later(()=>{
+
+      box.innerHTML=`
+        <p>Which symbol was FIRST?</p>
+
+        <div class="game-buttons four">
+          ${shuffle(symbols).map(s=>`
+            <button
+              class="answer-button"
+              onclick="window.memoryMini('${s}')"
+            >
+              ${s}
+            </button>
+          `).join("")}
+        </div>
+      `;
+
+    },1200);
+
+    window.memoryMini=function(s){
+      result(s===sequence[0]);
+    };
+  }
+
+  next();
+}
+
+/* =========================================================
+   18. ULTIMATE GAMBLE
+========================================================= */
+
+function gameGamble(){
+
+  let pot=100;
+  let turns=0;
+  let finished=false;
+
+  function show(){
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("🎲 Ultimate Gamble","Risk it or bank it")}
+
+      <div class="game-card">
+
+        <div class="gamble-pot">
+          $${pot}
+        </div>
+
+        <div class="coin">
+          ${pot>=300?"💰":"🪙"}
+        </div>
+
+        <p>
+          Turn ${turns}/6
+        </p>
+
+        <div class="game-buttons">
+          <button class="answer-button" onclick="window.gamble50()">
+            🎲 Gamble 50%
+            <br>
+            Win ×2 / Lose half
+          </button>
+
+          <button class="answer-button" onclick="window.gamble25()">
+            🔥 Risk 25%
+            <br>
+            Win ×4 / Lose all
+          </button>
+
+          <button class="primary" onclick="window.gambleBank()">
+            💰 Safe Bank
+          </button>
+
+          <button class="secondary" onclick="window.gambleCash()">
+            💗 Cash Out
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  window.gamble50=function(){
+
+    if(finished)return;
+
+    turns++;
+
+    if(Math.random()<.5){
+      pot*=2;
+    }else{
+      pot=Math.floor(pot/2);
+    }
+
+    addPoints(Math.max(5,pot));
+
+    check();
+  };
+
+  window.gamble25=function(){
+
+    if(finished)return;
+
+    turns++;
+
+    if(Math.random()<.25){
+      pot*=4;
+    }else{
+      pot=0;
+    }
+
+    check();
+  };
+
+  window.gambleBank=function(){
+
+    if(finished)return;
+
+    finished=true;
+
+    finishGame(
+      18,
+      pot>100,
+      `You banked $${pot}.`,
+      Math.max(50,pot)
+    );
+  };
+
+  window.gambleCash=function(){
+
+    if(finished)return;
+
+    finished=true;
+
+    finishGame(
+      18,
+      pot>100,
+      `You cashed out with $${pot}.`,
+      Math.max(50,pot)
+    );
+  };
+
+  function check(){
+
+    if(pot>=300){
+
+      finished=true;
+
+      finishGame(
+        18,
+        true,
+        `You reached the $300 target with $${pot}! 🎲`,
+        pot
+      );
+
+    }else if(turns>=6){
+
+      finished=true;
+
+      finishGame(
+        18,
+        pot>100,
+        `Your final pot was $${pot}.`,
+        pot
+      );
+
+    }else{
+      show();
+    }
+  }
+
+  show();
+}
+
+/* =========================================================
+   19. ADMIRER'S LAST STAND
+========================================================= */
+
+function gameLastStand(){
+
+  let bossHP=120;
+  let playerHP=100;
+  let turn=0;
+  let busy=false;
+
+  function phase(){
+    if(bossHP>80)return "PHASE 1";
+    if(bossHP>40)return "PHASE 2";
+    return "FINAL PHASE";
+  }
+
+  function show(){
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("👑 Admirer's Last Stand",phase())}
+
+      <div class="game-card">
+
+        <div class="boss">👑</div>
+
+        <div>Admirer</div>
+        <div class="health">
+          <div
+            id="bossHealth"
+            class="health-fill"
+            style="width:${bossHP/120*100}%"
+          ></div>
+        </div>
+
+        <div>You</div>
+        <div class="health">
+          <div
+            id="standHealth"
+            class="health-fill"
+            style="width:${playerHP}%"
+          ></div>
+        </div>
+
+        <div class="score-display" id="standMessage">
+          Choose your move.
+        </div>
+
+        <div class="game-buttons three">
+          <button class="answer-button" onclick="window.standMove('attack')">
+            ⚔️ Attack
+          </button>
+
+          <button class="answer-button" onclick="window.standMove('guard')">
+            🛡️ Guard
+          </button>
+
+          <button class="answer-button" onclick="window.standMove('special')">
+            💗 Special
+          </button>
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.standMove=function(move){
+
+    if(busy)return;
+
+    busy=true;
+
+    let damage=0;
+
+    if(move==="attack")damage=13;
+    if(move==="special")damage=25;
+
+    if(move==="guard")damage=0;
+
+    bossHP-=damage;
+
+    if(bossHP<=0){
+
+      finishGame(
+        19,
+        true,
+        "You defeated the Admirer's Last Stand! 👑💗",
+        260
+      );
+
+      return;
+    }
+
+    const phaseNow=phase();
+
+    let bossDamage=
+      phaseNow==="PHASE 1"
+      ?10
+      :phaseNow==="PHASE 2"
+      ?14
+      :18;
+
+    if(move==="guard"){
+      bossDamage=Math.floor(bossDamage/2);
+    }
+
+    playerHP-=bossDamage;
+
+    if(playerHP<=0){
+
+      finishGame(
+        19,
+        false,
+        "The Admirer won the final stand.",
+        0
+      );
+
+      return;
+    }
+
+    turn++;
+
+    addPoints(damage);
+
+    later(()=>{
+      busy=false;
+      show();
+    },450);
+  };
+
+  show();
+}
+
+/* =========================================================
+   20. LILIANA'S WORD FIND
+========================================================= */
+
+const wordList=[
+  "LILIANA","LULU","FRIENDS","PINK","DOLPHIN",
+  "SUNFLOWER","ROSE","SUSHI","POETRY","MUSIC",
+  "PSYCHOLOGY","LEO","JULY","LOVE","FAMILY",
+  "HEART","DREAM","AAYLA","ARLO","OCEAN",
+  "FOREVER","THREE","SIXYEARS","CHARM","EMPATHY"
+];
+
+function gameWordFind(){
+
+  const size=12;
+  const grid=Array.from(
+    {length:size},
+    ()=>Array(size).fill("")
+  );
+
+  const placed=[];
+
+  const directions=[
+    [0,1],[0,-1],
+    [1,0],[-1,0],
+    [1,1],[1,-1],
+    [-1,1],[-1,-1]
+  ];
+
+  function canPlace(word,r,c,dr,dc){
+
+    for(let i=0;i<word.length;i++){
+
+      const rr=r+dr*i;
+      const cc=c+dc*i;
+
+      if(
+        rr<0 || rr>=size ||
+        cc<0 || cc>=size
+      )return false;
+
+      if(
+        grid[rr][cc] &&
+        grid[rr][cc]!==word[i]
+      )return false;
+    }
+
+    return true;
+  }
+
+  const sorted=shuffle(wordList)
+    .sort((a,b)=>b.length-a.length);
+
+  sorted.forEach(word=>{
+
+    let done=false;
+
+    for(let tries=0;tries<300 && !done;tries++){
+
+      const [dr,dc]=
+        directions[
+          Math.floor(Math.random()*directions.length)
+        ];
+
+      const r=Math.floor(Math.random()*size);
+      const c=Math.floor(Math.random()*size);
+
+      if(canPlace(word,r,c,dr,dc)){
+
+        const cells=[];
+
+        for(let i=0;i<word.length;i++){
+
+          const rr=r+dr*i;
+          const cc=c+dc*i;
+
+          grid[rr][cc]=word[i];
+
+          cells.push(rr+","+cc);
+        }
+
+        placed.push({word,cells});
+        done=true;
+      }
+    }
+  });
+
+  const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  for(let r=0;r<size;r++){
+    for(let c=0;c<size;c++){
+
+      if(!grid[r][c]){
+        grid[r][c]=
+          alphabet[
+            Math.floor(Math.random()*alphabet.length)
+          ];
+      }
+    }
+  }
+
+  let found=new Set();
+  let selecting=false;
+  let selectedCells=[];
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🔎 Liliana's Word Find","Find all 25 words")}
+
+    <div class="game-card">
+
+      <div class="word-grid" id="wordGrid"></div>
+
+      <div class="word-list" id="wordList"></div>
+
+    </div>
+  `;
+
+  const wordGrid=document.getElementById("wordGrid");
+  const list=document.getElementById("wordList");
+
+  list.innerHTML=wordList.map(w=>`
+    <span
+      class="word-chip"
+      id="wordChip-${w}"
+    >
+      ${w}
+    </span>
+  `).join("");
+
+  grid.forEach((row,r)=>{
+    row.forEach((letter,c)=>{
+
+      const button=document.createElement("button");
+
+      button.className="word-letter";
+      button.textContent=letter;
+      button.dataset.r=r;
+      button.dataset.c=c;
+
+      wordGrid.appendChild(button);
+    });
+  });
+
+  function cellFromPoint(x,y){
+
+    const el=document.elementFromPoint(x,y);
+
+    if(
+      el &&
+      el.classList.contains("word-letter")
+    ){
+      return el;
+    }
+
+    return null;
+  }
+
+  function addCell(el){
+
+    if(!el)return;
+
+    const key=
+      el.dataset.r+","+el.dataset.c;
+
+    if(!selectedCells.includes(key)){
+
+      selectedCells.push(key);
+      el.classList.add("selected");
+    }
+  }
+
+  function checkSelection(){
+
+    const forward=selectedCells.join("|");
+    const reverse=[...selectedCells].reverse().join("|");
+
+    placed.forEach(item=>{
+
+      const target=item.cells.join("|");
+      const reverseTarget=[...item.cells].reverse().join("|");
+
+      if(
+        (forward===target || forward===reverseTarget) &&
+        !found.has(item.word)
+      ){
+
+        found.add(item.word);
+
+        item.cells.forEach(key=>{
+
+          const [r,c]=key.split(",").map(Number);
+
+          const el=wordGrid.querySelector(
+            `[data-r="${r}"][data-c="${c}"]`
+          );
+
+          if(el){
+            el.classList.remove("selected");
+            el.classList.add("found");
+          }
+        });
+
+        document.getElementById(
+          "wordChip-"+item.word
+        ).classList.add("done");
+
+        addPoints(20);
+      }
+    });
+
+    document.querySelectorAll(".word-letter.selected")
+      .forEach(el=>el.classList.remove("selected"));
+
+    selectedCells=[];
+
+    if(found.size>=placed.length){
+
+      finishGame(
+        20,
+        true,
+        "You found every word in Liliana's Word Find! 🔎💗",
+        300
+      );
+    }
+  }
+
+  wordGrid.addEventListener("pointerdown",e=>{
+
+    e.preventDefault();
+
+    selecting=true;
+    selectedCells=[];
+
+    const el=cellFromPoint(e.clientX,e.clientY);
+    addCell(el);
+
+    wordGrid.setPointerCapture(e.pointerId);
+  });
+
+  wordGrid.addEventListener("pointermove",e=>{
+
+    if(!selecting)return;
+
+    e.preventDefault();
+
+    addCell(
+      cellFromPoint(e.clientX,e.clientY)
+    );
+  });
+
+  wordGrid.addEventListener("pointerup",e=>{
+
+    if(!selecting)return;
+
+    selecting=false;
+
+    checkSelection();
+  });
+}
+
+/* =========================================================
+   21. DRAW A SUNFLOWER
+========================================================= */
+
+function gameSunflower(){
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🌻 Draw a Sunflower","Make your own")}
+
+    <div class="game-card">
+
+      <div class="canvas-wrap">
+        <canvas id="drawingCanvas"></canvas>
+      </div>
+
+      <div class="brush-row">
+        <button onclick="window.setBrush('#5b351c')">🤎</button>
+        <button onclick="window.setBrush('#39734c')">💚</button>
+        <button onclick="window.setBrush('#d99b2b')">💛</button>
+        <button onclick="window.setBrush('#e65b86')">🩷</button>
+        <button onclick="window.setBrush('#5b4c91')">💜</button>
+      </div>
+
+      <div class="brush-row">
+        <button onclick="window.brushSize(4)">Small</button>
+        <button onclick="window.brushSize(9)">Medium</button>
+        <button onclick="window.brushSize(16)">Large</button>
+        <button onclick="window.undoDrawing()">Undo</button>
+        <button onclick="window.clearDrawing()">Clear</button>
+      </div>
+
+      <button class="primary" onclick="window.finishDrawing()">
+        🌻 Finish Sunflower
+      </button>
+    </div>
+  `;
+
+  const canvas=document.getElementById("drawingCanvas");
+  const ctx=canvas.getContext("2d");
+
+  let drawing=false;
+  let colour="#d99b2b";
+  let size=9;
+  let strokes=[];
+  let current=[];
+
+  function resize(){
+
+    const rect=canvas.getBoundingClientRect();
+
+    const old=document.createElement("canvas");
+
+    old.width=canvas.width;
+    old.height=canvas.height;
+
+    if(canvas.width){
+      old.getContext("2d").drawImage(canvas,0,0);
+    }
+
+    canvas.width=rect.width*devicePixelRatio;
+    canvas.height=rect.height*devicePixelRatio;
+
+    canvas.style.width=rect.width+"px";
+    canvas.style.height=rect.height+"px";
+
+    ctx.scale(devicePixelRatio,devicePixelRatio);
+
+    if(old.width){
+      ctx.drawImage(
+        old,
+        0,
+        0,
+        old.width,
+        old.height,
+        0,
+        0,
+        rect.width,
+        rect.height
+      );
+    }
+  }
+
+  resize();
+
+  function point(e){
+
+    const rect=canvas.getBoundingClientRect();
+
+    return {
+      x:e.clientX-rect.left,
+      y:e.clientY-rect.top
+    };
+  }
+
+  canvas.addEventListener("pointerdown",e=>{
+
+    e.preventDefault();
+
+    drawing=true;
+    current=[point(e)];
+
+    canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove",e=>{
+
+    if(!drawing)return;
+
+    e.preventDefault();
+
+    const p=point(e);
+
+    current.push(p);
+
+    ctx.strokeStyle=colour;
+    ctx.lineWidth=size;
+    ctx.lineCap="round";
+    ctx.lineJoin="round";
+
+    const last=current[current.length-2];
+
+    ctx.beginPath();
+    ctx.moveTo(last.x,last.y);
+    ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+  });
+
+  canvas.addEventListener("pointerup",()=>{
+    if(drawing){
+      drawing=false;
+      strokes.push(current);
+    }
+  });
+
+  window.setBrush=function(c){
+    colour=c;
+  };
+
+  window.brushSize=function(s){
+    size=s;
+  };
+
+  window.undoDrawing=function(){
+
+    if(!strokes.length){
+      window.clearDrawing();
+      return;
+    }
+
+    strokes.pop();
+
+    window.clearDrawing();
+
+    strokes.forEach(stroke=>{
+
+      for(let i=1;i<stroke.length;i++){
+
+        ctx.strokeStyle=colour;
+        ctx.lineWidth=size;
+        ctx.lineCap="round";
+
+        ctx.beginPath();
+        ctx.moveTo(
+          stroke[i-1].x,
+          stroke[i-1].y
+        );
+        ctx.lineTo(
+          stroke[i].x,
+          stroke[i].y
+        );
+        ctx.stroke();
+      }
+    });
+  };
+
+  window.clearDrawing=function(){
+
+    ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    strokes=[];
+  };
+
+  window.finishDrawing=function(){
+
+    const points=strokes.reduce(
+      (total,s)=>total+s.length,
+      0
+    );
+
+    const score=
+      points>300
+      ?180
+      :points>100
+      ?120
+      :70;
+
+    finishGame(
+      21,
+      true,
+      "Your sunflower is officially part of the Lulu Express garden. 🌻💗",
+      score
+    );
+  };
+}
+
+/* =========================================================
+   22. LULU DERBY
+   EXACTLY 100 RANDOM TRIVIA QUESTIONS
+========================================================= */
+
+const derbyQuestions=[
+  ["What is the capital of Canada?",["Ottawa","Toronto","Vancouver","Montreal"],0],
+  ["What is the largest mammal?",["Blue whale","Elephant","Giraffe","Orca"],0],
+  ["How many months are in a year?",["12","10","11","13"],0],
+  ["What is the currency of the United Kingdom?",["Pound","Euro","Dollar","Franc"],0],
+  ["Which planet is closest to the Sun?",["Mercury","Venus","Mars","Earth"],0],
+  ["How many chess pieces does each player start with?",["16","12","18","20"],0],
+  ["Who wrote the Harry Potter books?",["J.K. Rowling","Suzanne Collins","Stephen King","C.S. Lewis"],0],
+  ["What is the largest continent?",["Asia","Africa","Europe","North America"],0],
+  ["Which instrument usually has 88 keys?",["Piano","Violin","Flute","Trumpet"],0],
+  ["What is the chemical symbol for oxygen?",["O","Ox","Og","C"],0],
+  ["What is the square root of 81?",["9","8","7","10"],0],
+  ["In which year did Apollo 11 land on the Moon?",["1969","1965","1972","1959"],0],
+  ["Where is the Great Pyramid of Giza?",["Egypt","Greece","Mexico","Jordan"],0],
+  ["What is the main language of Brazil?",["Portuguese","Spanish","French","Italian"],0],
+  ["What is the world's largest desert?",["Antarctica","Sahara","Gobi","Arabian"],0],
+  ["What is the highest score called in tennis before game point?",["40","30","45","50"],0],
+  ["Which vitamin is commonly produced by the body through sunlight exposure?",["Vitamin D","Vitamin C","Vitamin B12","Vitamin K"],0],
+  ["About how many bones are in an adult human body?",["206","186","216","256"],0],
+  ["The Amazon rainforest is mainly in which continent?",["South America","Africa","Asia","Europe"],0],
+  ["Big Ben is associated with which city?",["London","Paris","Rome","Dublin"],0],
+  ["Which ocean is the largest?",["Pacific","Atlantic","Indian","Arctic"],0],
+  ["How many moons does Mars have?",["2","1","3","4"],0],
+  ["Which planet is the hottest on average?",["Venus","Mercury","Mars","Jupiter"],0],
+  ["Approximately how fast does light travel?",["300,000 km/s","30,000 km/s","3,000 km/s","3 million km/s"],0],
+  ["Who wrote Romeo and Juliet?",["William Shakespeare","Charles Dickens","Homer","George Orwell"],0],
+  ["Which continent is home to most wild penguins?",["Antarctica","Europe","Africa","Asia"],0],
+  ["What is India's currency?",["Rupee","Yen","Won","Peso"],0],
+  ["The Taj Mahal is in which country?",["India","Pakistan","Nepal","Bangladesh"],0],
+  ["Who was the Greek god of the sea?",["Poseidon","Zeus","Apollo","Ares"],0],
+  ["What does the Roman numeral X represent?",["10","5","50","100"],0],
+  ["How many Olympic rings are there?",["5","4","6","7"],0],
+  ["How many suits are in a standard deck of cards?",["4","3","5","6"],0],
+  ["How many cards are in a standard deck?",["52","48","54","50"],0],
+  ["How many sides does a square have?",["4","3","5","6"],0],
+  ["The Nile River is mainly associated with which continent?",["Africa","Asia","Europe","South America"],0],
+  ["The Alps are a mountain range in which continent?",["Europe","Africa","Asia","Australia"],0],
+  ["Approximately how many strings does a concert piano have?",["About 230","About 50","About 500","About 100"],0],
+  ["At what temperature does water freeze in Celsius?",["0°C","10°C","-10°C","5°C"],0],
+  ["How many metres are in one kilometre?",["1000","100","500","10,000"],0],
+  ["How many seconds are in one minute?",["60","30","100","90"],0],
+  ["How many hours are in a day?",["24","12","36","48"],0],
+  ["How many days are normally in a week?",["7","5","6","8"],0],
+  ["How many days are in a common year?",["365","360","364","366"],0],
+  ["Which planet is the eighth from the Sun?",["Neptune","Uranus","Saturn","Jupiter"],0],
+  ["What is Pluto classified as?",["Dwarf planet","Gas giant","Moon","Star"],0],
+  ["What shape is DNA commonly described as?",["Double helix","Single ring","Triangle","Cube"],0],
+  ["What process allows plants to make food using sunlight?",["Photosynthesis","Respiration","Fermentation","Digestion"],0],
+  ["Which organs are mainly used for breathing?",["Lungs","Kidneys","Liver","Stomach"],0],
+  ["What do red blood cells mainly carry?",["Oxygen","Calcium","Food","Bile"],0],
+  ["What is the largest organ of the human body?",["Skin","Liver","Heart","Lung"],0],
+  ["Which part of the eye controls how much light enters?",["Iris","Retina","Lens","Cornea"],0],
+  ["Which part of the brain is especially associated with higher thinking?",["Cerebrum","Cerebellum","Brain stem","Spinal cord"],0],
+  ["What element has the symbol Fe?",["Iron","Fluorine","Francium","Fermium"],0],
+  ["What element has the symbol Na?",["Sodium","Nitrogen","Neon","Nickel"],0],
+  ["What element has the symbol K?",["Potassium","Krypton","Calcium","Copper"],0],
+  ["What element has the symbol Ag?",["Silver","Gold","Argon","Aluminium"],0],
+  ["What element has the symbol Cu?",["Copper","Carbon","Calcium","Cobalt"],0],
+  ["What is CO₂?",["Carbon dioxide","Carbon monoxide","Oxygen","Methane"],0],
+  ["A pH of 7 is generally considered what?",["Neutral","Strongly acidic","Strongly alkaline","Salty"],0],
+  ["What force pulls objects toward Earth?",["Gravity","Friction","Magnetism","Pressure"],0],
+  ["What is the SI unit of energy?",["Joule","Watt","Volt","Newton"],0],
+  ["What is the SI unit of electric current?",["Ampere","Volt","Ohm","Watt"],0],
+  ["Sound level is commonly measured in what?",["Decibels","Watts","Metres","Litres"],0],
+  ["What instrument detects and records earthquakes?",["Seismometer","Barometer","Thermometer","Altimeter"],0],
+  ["Molten rock beneath Earth's surface is called what?",["Magma","Lava","Granite","Basalt"],0],
+  ["Clouds are mainly made from what?",["Water droplets and ice","Smoke","Dust only","Salt crystals"],0],
+  ["How many colours are traditionally listed in a rainbow?",["7","5","6","8"],0],
+  ["What shape is commonly associated with snowflake symmetry?",["Six-fold","Four-fold","Five-fold","Eight-fold"],0],
+  ["How can honeybees communicate directions to food?",["Dance movements","Singing","Changing colour","Digging"],0],
+  ["Where are butterfly taste receptors found?",["Feet","Wings","Antennae only","Eyes"],0],
+  ["How many hearts does an octopus have?",["3","1","2","4"],0],
+  ["How many neck vertebrae does a giraffe normally have?",["7","5","9","12"],0],
+  ["Which bird is the largest living bird?",["Ostrich","Eagle","Emu","Swan"],0],
+  ["Which animal is native to Australia?",["Kangaroo","Panda","Tiger","Moose"],0],
+  ["Which bird is strongly associated with New Zealand?",["Kiwi","Toucan","Flamingo","Pelican"],0],
+  ["Which animal is strongly associated with Australia and eucalyptus?",["Koala","Panda","Lemur","Sloth"],0],
+  ["Mount Kilimanjaro is in which country?",["Tanzania","Kenya","Uganda","Ethiopia"],0],
+  ["The Gobi Desert is mainly in which part of the world?",["Asia","Africa","Europe","South America"],0],
+  ["The Amazon River is in which continent?",["South America","North America","Africa","Asia"],0],
+  ["The Mediterranean Sea lies between which major regions?",["Europe and Africa","Asia and Australia","North and South America","Africa and Antarctica"],0],
+  ["The Panama Canal connects which two major oceans?",["Atlantic and Pacific","Pacific and Indian","Atlantic and Arctic","Indian and Arctic"],0],
+  ["The Suez Canal connects the Mediterranean Sea with which sea?",["Red Sea","Black Sea","Arabian Sea","Baltic Sea"],0],
+  ["The Greenwich Meridian represents what longitude?",["0°","90°","180°","45°"],0],
+  ["The Equator represents what latitude?",["0°","23.5°","45°","90°"],0],
+  ["Which tropic lies in the Northern Hemisphere?",["Tropic of Cancer","Tropic of Capricorn","Arctic Circle","Equator"],0],
+  ["Which continent is the coldest?",["Antarctica","Europe","Asia","North America"],0],
+  ["Which is the smallest continent by land area?",["Australia","Europe","Antarctica","South America"],0],
+  ["Which country contains Vatican City?",["Italy","France","Spain","Austria"],0],
+  ["Which is the largest country by land area?",["Russia","Canada","China","Brazil"],0],
+  ["Which sport is associated with Wimbledon?",["Tennis","Football","Golf","Cricket"],0],
+  ["Which sport is played in the FIFA World Cup?",["Football","Basketball","Tennis","Rugby"],0],
+  ["The Tour de France is mainly what type of event?",["Cycling race","Horse race","Car race","Running race"],0],
+  ["The Super Bowl is associated with which sport?",["American football","Baseball","Ice hockey","Basketball"],0],
+  ["How many players are on a basketball team on court for one side?",["5","6","7","11"],0],
+  ["How many bases are there in baseball?",["4","3","5","6"],0],
+  ["How many players are on a football/soccer team on the field?",["11","9","10","12"],0],
+  ["How many points is a touchdown worth before any extra play?",["6","5","7","3"],0],
+  ["Which chess piece moves in an L shape?",["Knight","Bishop","Rook","Queen"],0],
+  ["Which chess piece can move diagonally any distance?",["Bishop","Knight","Rook","King"],0],
+  ["Which chess piece is usually the most powerful?",["Queen","King","Bishop","Knight"],0],
+  ["How many squares are on a chessboard?",["64","54","72","81"],0],
+  ["What colour are bananas commonly when ripe?",["Yellow","Blue","Purple","Black"],0],
+  ["Which fruit is traditionally associated with keeping doctors away?",["Apple","Orange","Pear","Banana"],0],
+  ["Which drink is made from roasted coffee beans?",["Coffee","Tea","Lemonade","Cocoa"],0],
+  ["What is sushi traditionally associated with?",["Japan","Italy","Brazil","Egypt"],0],
+  ["Which instrument has black and white keys?",["Piano","Drum","Violin","Harp"],0],
+  ["How many strings does a standard violin have?",["4","5","6","3"],0],
+  ["Which material is made by bees and used in candles?",["Beeswax","Silk","Cotton","Latex"],0],
+  ["What do caterpillars become?",["Butterflies or moths","Bees","Spiders","Beetles only"],0],
+  ["What is a baby frog called?",["Tadpole","Calf","Pup","Cub"],0],
+  ["Which planet is famous for the Great Red Spot?",["Jupiter","Mars","Saturn","Neptune"],0],
+  ["What is Earth's natural satellite?",["Moon","Sun","Mars","Venus"],0],
+  ["Which star is at the centre of our solar system?",["Sun","Sirius","Polaris","Vega"],0],
+  ["What is the closest star to Earth?",["Sun","Sirius","Proxima Centauri","Polaris"],0],
+  ["What is a group of stars forming a recognisable pattern called?",["Constellation","Galaxy","Planet","Nebula"],0]
+];
+
+function gameDerby(){
+
+  let questions=shuffle(derbyQuestions).slice(0,100);
+  let qIndex=0;
+  let selectedHorse=null;
+
+  const horses=[
+    {name:"Lulu",emoji:"🐎",distance:0},
+    {name:"Rosie",emoji:"🐴",distance:0},
+    {name:"Daisy",emoji:"🦄",distance:0},
+    {name:"Lucky",emoji:"🏇",distance:0}
+  ];
+
+  document.getElementById("gameContent").innerHTML=`
+    ${gameHeader("🏇 THE LULU DERBY","100 trivia races")}
+
+    <div class="game-card">
+
+      <h2>Choose your horse</h2>
+
+      <div class="derby-horses">
+        ${horses.map((h,i)=>`
+          <button
+            class="horse-choice"
+            onclick="window.chooseDerbyHorse(${i})"
+            id="horseChoice${i}"
+          >
+            ${h.emoji}
+            <br>
+            <small>${h.name}</small>
+          </button>
+        `).join("")}
+      </div>
+
+      <div id="derbyQuestion"></div>
+
+      <div class="derby-track">
+        ${horses.map((h,i)=>`
+          <div class="derby-line">
+            <span class="derby-name">${h.emoji} ${h.name}</span>
+            <div class="derby-bar">
+              <div
+                id="derbyProgress${i}"
+                class="derby-progress"
+              ></div>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+
+    </div>
+  `;
+
+  window.chooseDerbyHorse=function(i){
+
+    selectedHorse=i;
+
+    horses.forEach((_,n)=>{
+      document.getElementById("horseChoice"+n)
+        .classList.toggle("selected",n===i);
+    });
+
+    showQuestion();
+  };
+
+  function showQuestion(){
+
+    if(selectedHorse===null)return;
+
+    const q=questions[qIndex];
+    const answers=shuffledQuestion(q);
+
+    document.getElementById("derbyQuestion").innerHTML=`
+      <div style="margin:15px 0">
+
+        <div class="score-display">
+          Question ${qIndex+1}/100
+        </div>
+
+        <h3 style="text-align:center">
+          ${q.question}
+        </h3>
+
+        <div class="game-buttons">
+          ${answers.map(a=>`
+            <button
+              class="answer-button"
+              onclick="window.derbyAnswer(${a.correct?1:0})"
+            >
+              ${a.text}
+            </button>
+          `).join("")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.derbyAnswer=function(ok){
+
+    if(selectedHorse===null)return;
+
+    if(ok){
+
+      horses[selectedHorse].distance+=
+        2+Math.floor(Math.random()*3);
+
+      addPoints(15);
+
+    }else{
+
+      horses[selectedHorse].distance+=
+        Math.floor(Math.random()*2);
+
+      const rivalIndexes=
+        horses
+          .map((_,i)=>i)
+          .filter(i=>i!==selectedHorse);
+
+      const rival=
+        rivalIndexes[
+          Math.floor(Math.random()*rivalIndexes.length)
+        ];
+
+      horses[rival].distance+=
+        1+Math.floor(Math.random()*3);
+    }
+
+    qIndex++;
+
+    updateTrack();
+
+    if(qIndex>=100){
+
+      const winnerIndex=
+        horses.reduce(
+          (best,h,i)=>
+            h.distance>horses[best].distance?i:best,
+          0
+        );
+
+      const passed=
+        winnerIndex===selectedHorse;
+
+      finishGame(
+        22,
+        passed,
+        passed
+        ?`🏆 ${horses[selectedHorse].name} won The Lulu Derby after 100 trivia questions!`
+        :`${horses[winnerIndex].name} won the Derby. Your horse came second this time!`,
+        passed?350:50
+      );
+
+    }else{
+      showQuestion();
+    }
+  };
+
+  function updateTrack(){
+
+    const max=Math.max(
+      1,
+      ...horses.map(h=>h.distance)
+    );
+
+    horses.forEach((h,i)=>{
+
+      document.getElementById(
+        "derbyProgress"+i
+      ).style.width=
+        Math.min(100,h.distance/max*100)+"%";
+    });
+  }
+
+  document.getElementById("derbyQuestion").innerHTML=`
+    <div class="mini-display">
+      Pick a horse to begin! 🏇
+    </div>
+  `;
+}
+
+/* =========================================================
+   23. FINAL CHALLENGE
+   50 UNIQUE LILIANA QUESTIONS
+========================================================= */
+
+const finalQuestions=[
+  ["Which colour would Liliana most likely choose for a birthday theme?",["Baby pink","Navy blue","Bright orange","Forest green"],0],
+  ["Which number has special significance for Liliana?",["3","8","11","27"],0],
+  ["Which Japanese food does Liliana like?",["Sushi","Ramen","Tempura","Udon"],0],
+  ["Which sea animal is one of Liliana's favourites?",["Dolphin","Shark","Seal","Walrus"],0],
+  ["Which flower is one of Liliana's favourites?",["Sunflower","Daffodil","Orchid","Iris"],0],
+  ["Which other flower does Liliana like?",["Rose","Lily","Carnation","Hydrangea"],0],
+  ["Which month is Liliana's birthday in?",["July","June","August","May"],0],
+  ["What day of the month is Liliana's birthday?",["22","12","27","7"],0],
+  ["Which eye colour does Liliana have?",["Green","Hazel","Blue","Brown"],0],
+  ["Which zodiac sign is Liliana?",["Leo","Cancer","Aries","Libra"],0],
+  ["What is Liliana's biggest listed fear?",["Drowning","Flying","Thunder","Darkness"],0],
+  ["Which movie is a favourite of Liliana's?",["Me Before You","The Notebook","Mamma Mia","Frozen"],0],
+  ["What kind of songs does Liliana like?",["Sad songs","Only rock songs","Only classical songs","Only country songs"],0],
+  ["Which form of writing does Liliana enjoy?",["Poetry","Biographies","News reports","Textbooks"],0],
+  ["Which card game is associated with Liliana's interests?",["Poker","Bridge","Solitaire","Go Fish"],0],
+  ["Liliana enjoys which type of games involving chance?",["Gambling games","Trivia only","Puzzle books","Racing simulators"],0],
+  ["What does Liliana hope to become one day?",["A mum","A pilot","A chef","A singer"],0],
+  ["What kind of baby does Liliana dream of having?",["A baby girl","Twin boys","A baby boy","Triplets"],0],
+  ["What did Liliana study at university?",["Psychology","Medicine","Engineering","History"],0],
+  ["How many nieces does Liliana have?",["1","2","3","4"],0],
+  ["How many nephews does Liliana have?",["4","2","3","5"],0],
+  ["How many siblings does Liliana have?",["5","4","6","3"],0],
+  ["How many piercings does Liliana have?",["4","3","5","2"],0],
+  ["Which dog is one of Liliana's pets?",["Aayla","Lola","Mika","Yuna"],0],
+  ["What is the name of Liliana's other dog?",["Arlo","Kai","Rene","Doris"],0],
+  ["How long have Bree and Liliana been best friends?",["6 years","4 years","7 years","5 years"],0],
+  ["Which description best fits Liliana?",["Sweet and caring","Cold and distant","Quiet and unfriendly","Serious and stern"],0],
+  ["Which quality is associated with Liliana?",["Charismatic","Impatient","Unkind","Careless"],0],
+  ["Which quality describes Liliana's ability to understand others?",["Empathetic","Forgetful","Competitive","Reserved"],0],
+  ["Which word fits Liliana's personality in the friendship?",["Caring","Hostile","Strict","Uninterested"],0],
+  ["What does Liliana like when it comes to children?",["She likes children","She dislikes children","She avoids children","She has no opinion"],0],
+  ["Which playful personality description has been associated with Liliana?",["Flirtatious","Shy","Serious","Stoic"],0],
+  ["What place does Liliana want to see someday?",["The ocean","The desert","The Arctic","The Moon"],0],
+  ["Which colour pairs naturally with Liliana's favourite colour for her theme?",["Pink and soft white","Black and neon green","Orange and purple","Brown and grey"],0],
+  ["Which combination contains two of Liliana's favourite flowers?",["Sunflower and rose","Tulip and orchid","Daisy and lily","Violet and iris"],0],
+  ["Which combination contains one food and one animal Liliana likes?",["Sushi and dolphins","Pizza and wolves","Tacos and bears","Pasta and horses"],0],
+  ["What is the complete birthday date?",["22 July","7 July","22 August","12 July"],0],
+  ["What number is formed by the day of Liliana's birthday?",["22","7","6","3"],0],
+  ["What number represents the years of friendship?",["6","5","7","10"],0],
+  ["How many nieces and nephews does Liliana have altogether?",["5","4","6","7"],0],
+  ["Which pair correctly names Liliana's dogs?",["Aayla and Arlo","Aayla and Aria","Arlo and Luna","Bella and Arlo"],0],
+  ["Which pair combines Liliana's university subject and favourite movie?",["Psychology and Me Before You","Law and Titanic","Art and Frozen","Biology and Mamma Mia"],0],
+  ["Which pair combines Liliana's favourite number and birthday day?",["3 and 22","6 and 7","4 and 22","3 and 12"],0],
+  ["Which pair combines Liliana's favourite colour and favourite animal?",["Baby pink and dolphins","Blue and lions","Purple and cats","Green and wolves"],0],
+  ["Which statement about Liliana's flowers is correct?",["She likes sunflowers and roses","She only likes orchids","She only likes lilies","She dislikes flowers"],0],
+  ["Which statement about Liliana's interests is correct?",["She likes poetry and sad songs","She only likes documentaries","She dislikes music","She only reads textbooks"],0],
+  ["Which statement about Liliana's education is correct?",["She studied Psychology","She studied Engineering","She studied Architecture","She studied Chemistry"],0],
+  ["Which statement about Liliana's future dream is correct?",["She wants to be a mum to a baby girl","She wants to become an astronaut","She wants to avoid having children","She wants to become a professional racer"],0],
+  ["Which collection contains only known Liliana facts?",["Baby pink, dolphins, sushi","Blue, sharks, pizza","Purple, horses, curry","Orange, pandas, burgers"],0]
+].map(q=>({question:q[0],options:q[1],answer:q[2]}));
+
+function gameFinalChallenge(){
+
+  let questions=shuffle(finalQuestions);
+  let index=0;
+  let correct=0;
+
+  function show(){
+
+    const q=questions[index];
+    const answers=shuffledQuestion(q);
+
+    document.getElementById("gameContent").innerHTML=`
+      ${gameHeader("💕 THE FINAL CHALLENGE",`${index+1}/50`)}
+
+      <div class="game-card">
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            style="width:${index/50*100}%"
+          ></div>
+        </div>
+
+        <div class="score-display">
+          Correct: ${correct}
+        </div>
+
+        <h2>${q.question}</h2>
+
+        <div class="game-buttons four">
+          ${answers.map(a=>`
+            <button
+              class="answer-button"
+              onclick="window.finalAnswer(${a.correct?1:0})"
+            >
+              ${a.text}
+            </button>
+          `).join("")}
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.finalAnswer=function(ok){
+
+    if(ok){
+      correct++;
+      addPoints(40);
+    }
+
+    index++;
+
+    if(index>=50){
+
+      const passed=correct>=40;
+
+      finishGame(
+        23,
+        passed,
+        passed
+        ?`You got ${correct}/50 and conquered the Final Challenge! 💕`
+        :`You got ${correct}/50. You needed 40 correct answers to pass.`,
+        correct*15
+      );
+
+    }else{
+      show();
+    }
+  };
+
+  show();
+}
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+renderJourney();
+updateMusicButtons();
+
+/*
+  Prevent accidental browser gestures that make the game
+  zoom or scroll while the user is interacting with it.
+*/
+
+document.addEventListener("gesturestart",e=>{
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener("gesturechange",e=>{
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener("gestureend",e=>{
+  e.preventDefault();
+},{passive:false});
+
+/*
+  Prevent double-tap zoom on the game area.
+*/
+
+let lastTouchEnd=0;
+
+document.addEventListener("touchend",e=>{
+
+  const now=Date.now();
+
+  if(now-lastTouchEnd<=300){
+    e.preventDefault();
+  }
+
+  lastTouchEnd=now;
+
+},{passive:false});
+
+/*
+  Do not allow accidental page scrolling while a game
+  screen is active.
+*/
+
+document.addEventListener("touchmove",e=>{
+
+  const game=document.getElementById("gameScreen");
+
+  if(
+    game.classList.contains("active") &&
+    !e.target.closest("input,textarea")
+  ){
+    e.preventDefault();
+  }
+
+},{passive:false});
+
 </script>
 
 </body>

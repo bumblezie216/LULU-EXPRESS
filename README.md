@@ -119,6 +119,10 @@ p {
   line-height: 1.55;
 }
 
+button {
+  touch-action: manipulation;
+}
+
 .btn {
   width: 100%;
   border: 0;
@@ -365,20 +369,24 @@ textarea {
   border-radius: 7px;
   background: #ffffff09;
   font-size: 24px;
+  transition: .15s;
 }
 
 .maze-cell.wall {
   background: #080508;
+  border: 1px solid #ffffff08;
 }
 
 .maze-cell.player {
   background: var(--pink);
   color: #32101f;
+  box-shadow: 0 0 18px #f39ac455;
 }
 
 .maze-cell.goal {
   background: #f3ce6b33;
   border: 1px solid var(--gold);
+  box-shadow: 0 0 18px #f3ce6b33;
 }
 
 .grid {
@@ -426,6 +434,7 @@ textarea {
 }
 
 @media (max-width: 430px) {
+
   #app {
     padding: 10px;
   }
@@ -440,6 +449,15 @@ textarea {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .maze {
+    max-width: 300px;
+    gap: 4px;
+  }
+
+  .maze-cell {
+    font-size: 20px;
   }
 }
 </style>
@@ -2497,10 +2515,9 @@ function event7() {
     let flashIndex = 0;
 
     /*
-      IMPORTANT:
-      The previous version left the entire sequence
-      visible. This version shows ONE symbol at a time,
-      then removes it completely before showing the next.
+      ONE SYMBOL APPEARS AT A TIME.
+      IT IS THEN COMPLETELY REMOVED
+      BEFORE THE NEXT SYMBOL APPEARS.
     */
 
     const flashTimer =
@@ -3558,30 +3575,46 @@ function event13() {
 
 /* =========================================================
    EVENT 14
-   HEART HUNT
+   THE HEART HUNT
    ========================================================= */
 
 function event14() {
 
   /*
-    GUARANTEED PATH:
+    IMPROVED MAZE
 
-    0 → 5 → 10 → 11 → 16 → 21
-    → 20 → 15 → 14 → 13 → 18
-    → 23 → 24
+    Start:
+    0
 
-    The previous wall layout blocked the goal completely.
+    Goal:
+    24 ❤️
+
+    Guaranteed main route:
+
+    0
+    ↓
+    5 → 10 → 11 → 12 → 13 → 18 → 23 → 24 ❤️
+
+    There are also branching paths and loops:
+
+    10 → 15 → 16 → 17 → 12
+
+    13 → 8 → 3 → 4 → 9 → 14 → 19 → 18
+
+    This means the maze is no longer just
+    one straight corridor, but the heart
+    is still guaranteed to be reachable.
   */
 
-  const walls =
-    new Set([
-      1, 2, 3, 4,
-      6, 7, 8, 9,
-      12,
-      17,
-      19,
-      22
-    ]);
+  const walls = new Set([
+    1,
+    2,
+    6,
+    7,
+    20,
+    21,
+    22
+  ]);
 
   let player = 0;
 
@@ -3589,7 +3622,9 @@ function event14() {
 
   let finished = false;
 
-  function draw() {
+  let moves = 0;
+
+  function draw(message = "🚂 Find Liliana's heart.") {
 
     if (finished) return;
 
@@ -3607,8 +3642,18 @@ function event14() {
         </h2>
 
         <p>
-          Navigate the maze and reach ❤️.
+          The Lulu Express has entered the maze.
+          Find your way through the maze and reach
+          <strong>❤️ Liliana's heart</strong>.
         </p>
+
+        <div class="notice">
+          🧭 Explore the maze carefully.
+          <br>
+          Some paths loop back around.
+          <br>
+          Find the route to the heart.
+        </div>
 
         <div
           id="maze"
@@ -3651,7 +3696,26 @@ function event14() {
           id="mazeMessage"
           class="notice"
         >
-          🚂 Find the heart.
+          ${message}
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>${moves}</strong>
+            <small>Moves</small>
+          </div>
+
+          <div class="stat">
+            <strong>${player + 1}</strong>
+            <small>Carriage</small>
+          </div>
+
+          <div class="stat">
+            <strong>❤️</strong>
+            <small>Goal</small>
+          </div>
+
         </div>
 
       </div>
@@ -3677,9 +3741,13 @@ function event14() {
         "maze-cell";
 
       if (walls.has(i)) {
+
         cell.classList.add(
           "wall"
         );
+
+        cell.textContent =
+          "🧱";
       }
 
       if (i === player) {
@@ -3702,7 +3770,9 @@ function event14() {
           "❤️";
       }
 
-      maze.appendChild(cell);
+      maze.appendChild(
+        cell
+      );
     }
   }
 
@@ -3752,26 +3822,27 @@ function event14() {
         }
       }
 
-      if (walls.has(next)) {
+      if (next === player) {
 
-        const message =
-          document.getElementById(
-            "mazeMessage"
-          );
-
-        if (message) {
-          message.textContent =
-            "🧱 Blocked! Try another direction.";
-        }
+        draw(
+          "🚧 You cannot go outside the maze!"
+        );
 
         return;
       }
 
-      if (next === player) {
+      if (walls.has(next)) {
+
+        draw(
+          "🧱 Blocked! You'll need to find another route."
+        );
+
         return;
       }
 
       player = next;
+
+      moves++;
 
       addPoints(2);
 
@@ -3779,21 +3850,27 @@ function event14() {
 
         finished = true;
 
+        draw(
+          "❤️ YOU FOUND LILIANA'S HEART!"
+        );
+
         setTimeout(() => {
 
           finishEvent(
             40,
             true,
             "❤️ HEART FOUND",
-            "You navigated the Lulu Express through the maze and found Liliana's heart."
+            `You successfully navigated the maze in ${moves} moves and found Liliana's heart!`
           );
 
-        }, 300);
+        }, 700);
 
         return;
       }
 
-      draw();
+      draw(
+        "🚂 Keep going... you're getting closer."
+      );
     };
 
   draw();

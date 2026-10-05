@@ -1634,16 +1634,17 @@ function event5() {
     }
   ];
 
-  let index = 0;
+  /* FIX: separate question counter from answer index */
+  let questionIndex = 0;
 
   function show() {
 
-    if (index >= questions.length) {
+    if (questionIndex >= questions.length) {
       finishEvent(30);
       return;
     }
 
-    const item = questions[index];
+    const item = questions[questionIndex];
 
     document.getElementById("app").innerHTML = `
       ${topBar()}
@@ -1678,15 +1679,17 @@ function event5() {
     `;
   }
 
-  window.mindChoice = function(index) {
+  window.mindChoice = function(answerIndex) {
 
-    if (index === 0) {
+    if (answerIndex === 0) {
       addPoints(15);
     } else {
       addPoints(3);
     }
 
-    index++;
+    /* FIX: advance the question, not the answer index */
+    questionIndex++;
+
     show();
   };
 

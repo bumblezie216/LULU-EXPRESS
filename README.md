@@ -429,8 +429,187 @@ textarea {
   color: var(--gold);
 }
 
-.hidden {
-  display: none !important;
+/* =========================================================
+   LULU DERBY
+   ========================================================= */
+
+.derby-track {
+  position: relative;
+  margin: 20px 0;
+  padding: 16px 12px 22px;
+  border-radius: 20px;
+  background:
+    linear-gradient(
+      to bottom,
+      #34182a,
+      #21101a
+    );
+  border: 1px solid #ffffff18;
+  overflow: hidden;
+}
+
+.derby-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 38px,
+      #ffffff0a 39px,
+      #ffffff0a 40px
+    );
+  pointer-events: none;
+}
+
+.race-lane {
+  position: relative;
+  height: 76px;
+  margin: 8px 0;
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff07,
+      #ffffff03
+    );
+  border: 1px solid #ffffff0d;
+  overflow: hidden;
+}
+
+.lane-name {
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  z-index: 5;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--light);
+  text-shadow: 0 2px 4px #000;
+}
+
+.race-road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.finish-line {
+  position: absolute;
+  right: 7px;
+  top: 0;
+  bottom: 0;
+  width: 15px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      white 0,
+      white 8px,
+      #111 8px,
+      #111 16px
+    );
+  z-index: 3;
+}
+
+.racer {
+  position: absolute;
+  left: 0;
+  top: 25px;
+  width: 48px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-size: 31px;
+  z-index: 4;
+  transition:
+    left 1.05s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 4px 6px #0008);
+}
+
+.racer-name {
+  position: absolute;
+  left: 7px;
+  bottom: 5px;
+  font-size: 9px;
+  color: #ffffffaa;
+  z-index: 2;
+}
+
+.derby-question {
+  border: 1px solid #f39ac444;
+  background: #f39ac40b;
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 15px;
+}
+
+.derby-question h3 {
+  margin-top: 5px;
+  font-size: 23px;
+}
+
+.derby-answer {
+  font-size: 17px;
+  text-align: center;
+}
+
+.derby-distance {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.derby-distance span {
+  height: 7px;
+  border-radius: 99px;
+  background: #ffffff12;
+  transition: .3s;
+}
+
+.derby-distance span.you {
+  background: var(--pink);
+}
+
+.derby-distance span.bot {
+  background: var(--gold);
+}
+
+.derby-status {
+  min-height: 25px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.derby-countdown {
+  font-size: 48px;
+  font-weight: 1000;
+  color: var(--gold);
+  text-align: center;
+  margin: 15px 0;
+  animation: derbyPulse .8s infinite alternate;
+}
+
+@keyframes derbyPulse {
+  from {
+    transform: scale(.95);
+    opacity: .75;
+  }
+  to {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.derby-result {
+  padding: 20px;
+  border-radius: 18px;
+  background: #f39ac40c;
+  border: 1px solid #f39ac433;
+  margin-top: 18px;
 }
 
 @media (max-width: 430px) {
@@ -459,6 +638,14 @@ textarea {
   .maze-cell {
     font-size: 20px;
   }
+
+  .racer {
+    font-size: 27px;
+  }
+
+  .derby-question h3 {
+    font-size: 20px;
+  }
 }
 </style>
 </head>
@@ -472,7 +659,7 @@ textarea {
 
 /* =========================================================
    LULU EXPRESS
-   20 EVENTS
+   21 EVENTS
    SECRET SKIP CODE: 3333
    NO EXTERNAL MUSIC FILE
    ========================================================= */
@@ -497,6 +684,7 @@ const EVENTS = [
   "🧨 The Countdown",
   "🎰 The Ultimate Gamble",
   "💀 The Admirer's Last Stand",
+  "🏇 THE LULU DERBY",
   "👑 THE FINAL CHALLENGE"
 ];
 
@@ -548,7 +736,7 @@ const PRESSURE_QUIZ = [
 ];
 
 /* =========================================================
-   EVENT 20
+   EVENT 21
    EXACT LILIANA QUIZ
    ========================================================= */
 
@@ -1070,7 +1258,7 @@ function stats() {
       </div>
 
       <div class="stat">
-        <strong>20</strong>
+        <strong>21</strong>
         <small>Total Events</small>
       </div>
 
@@ -1141,7 +1329,7 @@ function showEventResult(
     state.currentEvent + 1;
 
   const remaining =
-    20 - eventNumber;
+    21 - eventNumber;
 
   document.getElementById(
     "app"
@@ -1212,7 +1400,7 @@ function showEventResult(
       </div>
 
       ${
-        eventNumber < 20
+        eventNumber < 21
           ? `
             <button
               class="btn gold"
@@ -1239,7 +1427,7 @@ function showEventResult(
 function continueToNextEvent() {
 
   if (
-    state.currentEvent < 19
+    state.currentEvent < 20
   ) {
 
     state.currentEvent++;
@@ -1252,7 +1440,7 @@ function continueToNextEvent() {
 
 function continueToFinalChallenge() {
 
-  state.currentEvent = 19;
+  state.currentEvent = 20;
 
   saveGame();
 
@@ -1285,7 +1473,7 @@ function home() {
       </h1>
 
       <p>
-        Twenty challenges.<br>
+        Twenty one challenges.<br>
         One final destination.<br>
         One winner.
       </p>
@@ -1558,7 +1746,7 @@ function checkCode() {
     code === "3333"
   ) {
 
-    state.currentEvent = 19;
+    state.currentEvent = 20;
 
     saveGame();
 
@@ -1679,6 +1867,10 @@ function render() {
       event20();
       break;
 
+    case 20:
+      event21();
+      break;
+
     default:
       home();
   }
@@ -1704,7 +1896,7 @@ function event1() {
     <div class="panel">
 
       <div class="badge">
-        Event 1 of 20
+        Event 1 of 21
       </div>
 
       <h2>
@@ -1931,7 +2123,7 @@ function event2() {
       <div class="panel center">
 
         <div class="badge">
-          Event 2 of 20
+          Event 2 of 21
         </div>
 
         <h2>
@@ -2189,7 +2381,7 @@ function event3() {
       <div class="panel">
 
         <div class="badge">
-          Event 3 of 20
+          Event 3 of 21
         </div>
 
         <h2>
@@ -2322,7 +2514,7 @@ function event4() {
     <div class="panel center">
 
       <div class="badge">
-        Event 4 of 20
+        Event 4 of 21
       </div>
 
       <h2>
@@ -2521,7 +2713,7 @@ function event5() {
       <div class="panel">
 
         <div class="badge">
-          Event 5 of 20
+          Event 5 of 21
         </div>
 
         <h2>
@@ -2608,7 +2800,7 @@ function event6() {
       <div class="panel center">
 
         <div class="badge">
-          Event 6 of 20
+          Event 6 of 21
         </div>
 
         <h2>
@@ -2815,7 +3007,7 @@ function event7() {
       <div class="panel center">
 
         <div class="badge">
-          Event 7 of 20
+          Event 7 of 21
         </div>
 
         <h2>
@@ -3159,7 +3351,7 @@ function event8() {
       <div class="panel center">
 
         <div class="badge">
-          Event 8 of 20
+          Event 8 of 21
         </div>
 
         <h2>
@@ -3293,7 +3485,7 @@ function event9() {
       <div class="panel center">
 
         <div class="badge">
-          Event 9 of 20
+          Event 9 of 21
         </div>
 
         <h2>
@@ -3402,7 +3594,7 @@ function event10() {
       <div class="panel center">
 
         <div class="badge">
-          Event 10 of 20
+          Event 10 of 21
         </div>
 
         <h2>
@@ -3577,7 +3769,7 @@ function event11() {
     <div class="panel center">
 
       <div class="badge">
-        Event 11 of 20
+        Event 11 of 21
       </div>
 
       <h2>
@@ -3777,7 +3969,7 @@ function event12() {
       <div class="panel center">
 
         <div class="badge">
-          Event 12 of 20
+          Event 12 of 21
         </div>
 
         <h2>
@@ -3878,7 +4070,7 @@ function event13() {
       <div class="panel center">
 
         <div class="badge">
-          Event 13 of 20
+          Event 13 of 21
         </div>
 
         <h2>
@@ -4073,7 +4265,7 @@ function event14() {
       <div class="panel center">
 
         <div class="badge">
-          Event 14 of 20
+          Event 14 of 21
         </div>
 
         <h2>
@@ -4159,7 +4351,7 @@ function event14() {
 
       </div>
     `;
-    
+
     const maze =
       document.getElementById(
         "maze"
@@ -4366,7 +4558,7 @@ function event15() {
       <div class="panel center">
 
         <div class="badge">
-          Event 15 of 20
+          Event 15 of 21
         </div>
 
         <h2>
@@ -4491,7 +4683,7 @@ function event16() {
     <div class="panel">
 
       <div class="badge">
-        Event 16 of 20
+        Event 16 of 21
       </div>
 
       <h2>
@@ -4773,7 +4965,7 @@ function event17() {
       <div class="panel center">
 
         <div class="badge">
-          Event 17 of 20
+          Event 17 of 21
         </div>
 
         <h2>
@@ -4854,7 +5046,7 @@ function event18() {
     <div class="panel center">
 
       <div class="badge">
-        Event 18 of 20
+        Event 18 of 21
       </div>
 
       <h2>
@@ -5038,7 +5230,7 @@ function event19() {
         60,
         true,
         "💀 LAST STAND SURVIVED",
-        "You survived every trial and reached the final carriage."
+        "You survived every trial and reached the Lulu Derby."
       );
 
       return;
@@ -5056,7 +5248,7 @@ function event19() {
       <div class="panel center">
 
         <div class="badge">
-          Event 19 of 20
+          Event 19 of 21
         </div>
 
         <h2>
@@ -5154,7 +5346,7 @@ function event19() {
           10,
           false,
           "💔 LAST STAND FAILED",
-          "You lost all three lives before reaching the end."
+          "You lost all three lives before reaching the Lulu Derby."
         );
 
         return;
@@ -5168,6 +5360,1007 @@ function event19() {
 
 /* =========================================================
    EVENT 20
+   THE LULU DERBY
+   ========================================================= */
+
+/*
+   This version uses a computer opponent when another
+   participant is not available.
+
+   The race is intentionally long and gradual.
+
+   There are 24 track spaces.
+
+   The player answers questions to move forward.
+   The computer moves independently every few seconds.
+
+   A future realtime backend can replace the computer
+   participant with actual online participants.
+*/
+
+const DERBY_QUESTIONS = [
+
+  {
+    q: "What is 2 × 6?",
+    a: ["12", "10", "14", "16"],
+    correct: 0
+  },
+
+  {
+    q: "What is the capital of France?",
+    a: ["Paris", "London", "Rome", "Madrid"],
+    correct: 0
+  },
+
+  {
+    q: "What is 7 × 8?",
+    a: ["56", "48", "64", "54"],
+    correct: 0
+  },
+
+  {
+    q: "How many days are in a week?",
+    a: ["7", "5", "6", "8"],
+    correct: 0
+  },
+
+  {
+    q: "What is 9 × 6?",
+    a: ["54", "45", "56", "63"],
+    correct: 0
+  },
+
+  {
+    q: "Which planet do we live on?",
+    a: ["Earth", "Mars", "Venus", "Jupiter"],
+    correct: 0
+  },
+
+  {
+    q: "What is 12 × 4?",
+    a: ["48", "44", "52", "36"],
+    correct: 0
+  },
+
+  {
+    q: "How many months are in a year?",
+    a: ["12", "10", "11", "13"],
+    correct: 0
+  },
+
+  {
+    q: "What is 11 × 7?",
+    a: ["77", "72", "88", "66"],
+    correct: 0
+  },
+
+  {
+    q: "Which animal is known as man's best friend?",
+    a: ["Dog", "Cat", "Horse", "Dolphin"],
+    correct: 0
+  },
+
+  {
+    q: "What is 8 × 9?",
+    a: ["72", "64", "81", "69"],
+    correct: 0
+  },
+
+  {
+    q: "How many sides does a square have?",
+    a: ["4", "3", "5", "6"],
+    correct: 0
+  },
+
+  {
+    q: "What is 12 × 12?",
+    a: ["144", "124", "132", "156"],
+    correct: 0
+  },
+
+  {
+    q: "Which ocean is the largest?",
+    a: ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+    correct: 0
+  },
+
+  {
+    q: "What is 6 × 7?",
+    a: ["42", "36", "48", "49"],
+    correct: 0
+  },
+
+  {
+    q: "How many letters are in the English alphabet?",
+    a: ["26", "24", "28", "25"],
+    correct: 0
+  },
+
+  {
+    q: "What is 10 × 11?",
+    a: ["110", "100", "120", "101"],
+    correct: 0
+  },
+
+  {
+    q: "Which star is at the centre of our solar system?",
+    a: ["The Sun", "Sirius", "Polaris", "The Moon"],
+    correct: 0
+  },
+
+  {
+    q: "What is 3 × 12?",
+    a: ["36", "32", "42", "30"],
+    correct: 0
+  },
+
+  {
+    q: "How many hours are in one day?",
+    a: ["24", "12", "36", "48"],
+    correct: 0
+  },
+
+  {
+    q: "What is 8 × 7?",
+    a: ["56", "48", "64", "54"],
+    correct: 0
+  },
+
+  {
+    q: "Which shape has three sides?",
+    a: ["Triangle", "Square", "Circle", "Rectangle"],
+    correct: 0
+  },
+
+  {
+    q: "What is 11 × 11?",
+    a: ["121", "111", "132", "144"],
+    correct: 0
+  },
+
+  {
+    q: "How many continents are there?",
+    a: ["7", "5", "6", "8"],
+    correct: 0
+  },
+
+  {
+    q: "What is 9 × 12?",
+    a: ["108", "96", "118", "99"],
+    correct: 0
+  },
+
+  {
+    q: "Which direction is opposite to north?",
+    a: ["South", "East", "West", "Up"],
+    correct: 0
+  },
+
+  {
+    q: "What is 5 × 12?",
+    a: ["60", "50", "55", "65"],
+    correct: 0
+  },
+
+  {
+    q: "How many minutes are in one hour?",
+    a: ["60", "30", "90", "100"],
+    correct: 0
+  },
+
+  {
+    q: "What is 7 × 12?",
+    a: ["84", "72", "96", "78"],
+    correct: 0
+  },
+
+  {
+    q: "Which animal is the largest land animal?",
+    a: ["Elephant", "Giraffe", "Hippo", "Rhino"],
+    correct: 0
+  }
+];
+
+let derbyQuestion = 0;
+let derbyPlayerPosition = 0;
+let derbyComputerPosition = 0;
+let derbyComputerTimer = null;
+let derbyRaceFinished = false;
+let derbyQuestionLocked = false;
+
+const DERBY_LENGTH = 24;
+
+function event20() {
+
+  derbyQuestion = 0;
+  derbyPlayerPosition = 0;
+  derbyComputerPosition = 0;
+  derbyRaceFinished = false;
+  derbyQuestionLocked = true;
+
+  if (derbyComputerTimer) {
+
+    clearInterval(
+      derbyComputerTimer
+    );
+
+    derbyComputerTimer = null;
+  }
+
+  document.getElementById(
+    "app"
+  ).innerHTML = `
+
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">
+        Event 20 of 21
+      </div>
+
+      <h2>
+        🏇 The Lulu Derby
+      </h2>
+
+      <p>
+        Welcome to the final race before the Final Challenge.
+      </p>
+
+      <div class="notice">
+
+        👥 <strong>Active Participants</strong>
+
+        <br><br>
+
+        🏇
+        ${escapeHTML(state.playerName)}
+        <br>
+
+        🤖 Lulu Computer
+
+        <br><br>
+
+        No other online participants detected.
+        You have been matched against the computer.
+
+      </div>
+
+      <div
+        id="derbyCountdown"
+        class="derby-countdown"
+      >
+        3
+      </div>
+
+      <div
+        id="derbyArea"
+        class="hidden"
+      ></div>
+
+    </div>
+  `;
+
+  let count = 3;
+
+  const countdown =
+    setInterval(
+      () => {
+
+        count--;
+
+        const display =
+          document.getElementById(
+            "derbyCountdown"
+          );
+
+        if (!display) {
+
+          clearInterval(
+            countdown
+          );
+
+          return;
+        }
+
+        if (
+          count > 0
+        ) {
+
+          display.textContent =
+            count;
+
+        } else {
+
+          clearInterval(
+            countdown
+          );
+
+          display.textContent =
+            "🏁 GO!";
+
+          setTimeout(
+            startDerby,
+            650
+          );
+        }
+
+      },
+      1000
+    );
+}
+
+function startDerby() {
+
+  derbyQuestionLocked =
+    false;
+
+  const area =
+    document.getElementById(
+      "derbyArea"
+    );
+
+  if (!area)
+    return;
+
+  area.classList.remove(
+    "hidden"
+  );
+
+  renderDerby();
+
+  /*
+     The computer does not race instantly.
+     It moves gradually every 2.4 seconds.
+  */
+
+  derbyComputerTimer =
+    setInterval(
+      computerDerbyMove,
+      2400
+    );
+}
+
+function derbyTrackHTML() {
+
+  const playerPercent =
+    Math.min(
+      94,
+      (
+        derbyPlayerPosition /
+        DERBY_LENGTH
+      ) * 94
+    );
+
+  const computerPercent =
+    Math.min(
+      94,
+      (
+        derbyComputerPosition /
+        DERBY_LENGTH
+      ) * 94
+    );
+
+  return `
+
+    <div class="derby-track">
+
+      <div class="race-lane">
+
+        <div class="lane-name">
+          🏇 ${escapeHTML(state.playerName)}
+        </div>
+
+        <div class="finish-line"></div>
+
+        <div
+          class="racer"
+          style="left:${playerPercent}%"
+        >
+          🏇
+        </div>
+
+        <div class="racer-name">
+          YOU
+        </div>
+
+      </div>
+
+      <div class="race-lane">
+
+        <div class="lane-name">
+          🤖 Lulu Computer
+        </div>
+
+        <div class="finish-line"></div>
+
+        <div
+          class="racer"
+          style="left:${computerPercent}%"
+        >
+          🐎
+        </div>
+
+        <div class="racer-name">
+          COMPUTER
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="derby-distance">
+
+      ${Array.from(
+        {
+          length: 24
+        }
+      ).map(
+        (
+          _,
+          i
+        ) => {
+
+          const you =
+            i <
+            derbyPlayerPosition
+              ? "you"
+              : "";
+
+          const bot =
+            i <
+            derbyComputerPosition
+              ? "bot"
+              : "";
+
+          return `
+            <span
+              class="${you} ${bot}"
+            ></span>
+          `;
+        }
+      ).join("")}
+
+    </div>
+  `;
+}
+
+function renderDerby(
+  message =
+    "Answer correctly to move your horse forward!"
+) {
+
+  if (
+    derbyRaceFinished
+  )
+    return;
+
+  const area =
+    document.getElementById(
+      "derbyArea"
+    );
+
+  if (!area)
+    return;
+
+  const question =
+    DERBY_QUESTIONS[
+      derbyQuestion
+    ];
+
+  area.innerHTML = `
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>
+          ${derbyPlayerPosition}/${DERBY_LENGTH}
+        </strong>
+        <small>
+          ${escapeHTML(state.playerName)}
+        </small>
+      </div>
+
+      <div class="stat">
+        <strong>
+          ${derbyComputerPosition}/${DERBY_LENGTH}
+        </strong>
+        <small>
+          Computer
+        </small>
+      </div>
+
+      <div class="stat">
+        <strong>
+          ${derbyQuestion + 1}/30
+        </strong>
+        <small>
+          Question
+        </small>
+      </div>
+
+    </div>
+
+    ${derbyTrackHTML()}
+
+    <div class="derby-status">
+      ${message}
+    </div>
+
+    <div class="derby-question">
+
+      <div class="badge">
+        Question ${derbyQuestion + 1}
+      </div>
+
+      <h3>
+        ${question.q}
+      </h3>
+
+      <div class="choices">
+
+        ${question.a.map(
+          (
+            answer,
+            index
+          ) => `
+
+            <button
+              class="choice derby-answer"
+              onclick="derbyAnswer(${index})"
+            >
+              ${answer}
+            </button>
+
+          `
+        ).join("")}
+
+      </div>
+
+    </div>
+
+    <div class="notice center">
+
+      🏁 First to ${DERBY_LENGTH} spaces wins.
+
+      <br>
+
+      💗 Correct answers move you forward.
+
+      <br>
+
+      🐎 The computer keeps racing while you think.
+
+    </div>
+  `;
+}
+
+function derbyAnswer(index) {
+
+  if (
+    derbyRaceFinished ||
+    derbyQuestionLocked
+  ) {
+    return;
+  }
+
+  derbyQuestionLocked =
+    true;
+
+  const question =
+    DERBY_QUESTIONS[
+      derbyQuestion
+    ];
+
+  const buttons =
+    document.querySelectorAll(
+      ".derby-answer"
+    );
+
+  buttons.forEach(
+    button => {
+      button.disabled =
+        true;
+    }
+  );
+
+  if (
+    index === question.correct
+  ) {
+
+    buttons[index]
+      .classList.add(
+        "correct"
+      );
+
+    /*
+       Correct answers move between
+       1 and 2 spaces, keeping the
+       race long instead of instantly
+       finishing.
+    */
+
+    const movement =
+      Math.random() > 0.55
+        ? 2
+        : 1;
+
+    derbyPlayerPosition =
+      Math.min(
+        DERBY_LENGTH,
+        derbyPlayerPosition +
+        movement
+      );
+
+    addPoints(10);
+
+  } else {
+
+    buttons[index]
+      .classList.add(
+        "wrong"
+      );
+
+    buttons[
+      question.correct
+    ].classList.add(
+      "correct"
+    );
+  }
+
+  if (
+    derbyPlayerPosition >=
+    DERBY_LENGTH
+  ) {
+
+    finishDerby(
+      true
+    );
+
+    return;
+  }
+
+  derbyQuestion++;
+
+  /*
+     There are 30 questions, so if both
+     racers are still going after the
+     question set, the final distance
+     determines the winner.
+  */
+
+  if (
+    derbyQuestion >=
+    DERBY_QUESTIONS.length
+  ) {
+
+    setTimeout(
+      () => {
+
+        if (
+          derbyPlayerPosition >
+          derbyComputerPosition
+        ) {
+
+          finishDerby(
+            true
+          );
+
+        } else if (
+          derbyComputerPosition >
+          derbyPlayerPosition
+        ) {
+
+          finishDerby(
+            false
+          );
+
+        } else {
+
+          finishDerby(
+            derbyPlayerPosition >=
+            derbyComputerPosition
+          );
+        }
+
+      },
+      900
+    );
+
+    return;
+  }
+
+  setTimeout(
+    () => {
+
+      derbyQuestionLocked =
+        false;
+
+      renderDerby(
+        index === question.correct
+          ? "💗 Correct! Your horse charges forward!"
+          : "💔 Wrong answer! The computer is gaining ground!"
+      );
+
+    },
+    950
+  );
+}
+
+function computerDerbyMove() {
+
+  if (
+    derbyRaceFinished
+  )
+    return;
+
+  /*
+     The computer moves at a controlled,
+     variable speed so the race stays
+     exciting and reasonably long.
+  */
+
+  const roll =
+    Math.random();
+
+  let movement;
+
+  if (
+    roll > 0.82
+  ) {
+
+    movement = 2;
+
+  } else {
+
+    movement = 1;
+  }
+
+  derbyComputerPosition =
+    Math.min(
+      DERBY_LENGTH,
+      derbyComputerPosition +
+      movement
+    );
+
+  if (
+    derbyComputerPosition >=
+    DERBY_LENGTH
+  ) {
+
+    finishDerby(
+      false
+    );
+
+    return;
+  }
+
+  const area =
+    document.getElementById(
+      "derbyArea"
+    );
+
+  if (area) {
+
+    /*
+       Update only the race area while
+       keeping the current question.
+    */
+
+    const track =
+      area.querySelector(
+        ".derby-track"
+      );
+
+    const distance =
+      area.querySelector(
+        ".derby-distance"
+      );
+
+    const statsElements =
+      area.querySelectorAll(
+        ".stat strong"
+      );
+
+    if (track) {
+
+      const computerPercent =
+        Math.min(
+          94,
+          (
+            derbyComputerPosition /
+            DERBY_LENGTH
+          ) * 94
+        );
+
+      const racers =
+        track.querySelectorAll(
+          ".racer"
+        );
+
+      if (
+        racers[1]
+      ) {
+
+        racers[1].style.left =
+          `${computerPercent}%`;
+      }
+    }
+
+    if (distance) {
+
+      distance.innerHTML =
+        Array.from(
+          {
+            length: 24
+          }
+        ).map(
+          (
+            _,
+            i
+          ) => {
+
+            const you =
+              i <
+              derbyPlayerPosition
+                ? "you"
+                : "";
+
+            const bot =
+              i <
+              derbyComputerPosition
+                ? "bot"
+                : "";
+
+            return `
+              <span
+                class="${you} ${bot}"
+              ></span>
+            `;
+          }
+        ).join("");
+    }
+
+    if (
+      statsElements[1]
+    ) {
+
+      statsElements[1].textContent =
+        `${derbyComputerPosition}/${DERBY_LENGTH}`;
+    }
+  }
+}
+
+function finishDerby(
+  playerWon
+) {
+
+  if (
+    derbyRaceFinished
+  )
+    return;
+
+  derbyRaceFinished =
+    true;
+
+  if (derbyComputerTimer) {
+
+    clearInterval(
+      derbyComputerTimer
+    );
+
+    derbyComputerTimer =
+      null;
+  }
+
+  if (
+    playerWon
+  ) {
+
+    addPoints(75);
+
+  } else {
+
+    addPoints(20);
+  }
+
+  const area =
+    document.getElementById(
+      "derbyArea"
+    );
+
+  if (!area)
+    return;
+
+  area.innerHTML = `
+
+    <div class="derby-result">
+
+      <div class="result-icon">
+        ${
+          playerWon
+            ? "🏆"
+            : "🐎"
+        }
+      </div>
+
+      <h2>
+        ${
+          playerWon
+            ? "🏆 LULU DERBY CHAMPION!"
+            : "🐎 THE COMPUTER WINS!"
+        }
+      </h2>
+
+      <p>
+
+        ${
+          playerWon
+            ? `
+              ${escapeHTML(state.playerName)}
+              crossed the finish line first!
+              You conquered the Lulu Derby!
+            `
+            : `
+              The computer reached the finish line first.
+              You still fought all the way to the end!
+            `
+        }
+
+      </p>
+
+      ${derbyTrackHTML()}
+
+      <div class="notice">
+
+        🏁 Your position:
+        <strong>
+          ${derbyPlayerPosition}
+        </strong>
+        / ${DERBY_LENGTH}
+
+        <br><br>
+
+        🤖 Computer position:
+        <strong>
+          ${derbyComputerPosition}
+        </strong>
+        / ${DERBY_LENGTH}
+
+        <br><br>
+
+        ${
+          playerWon
+            ? "💗 +75 Heart Points"
+            : "💗 +20 Heart Points"
+        }
+
+      </div>
+
+      <button
+        class="btn gold"
+        onclick="finishDerbyAndContinue()"
+      >
+        👑 Continue to the Final Challenge
+      </button>
+
+    </div>
+  `;
+}
+
+window.finishDerbyAndContinue =
+  function() {
+
+    state.currentEvent =
+      20;
+
+    saveGame();
+
+    render();
+  };
+
+/* =========================================================
+   EVENT 21
    FINAL CHALLENGE
    ========================================================= */
 
@@ -5175,7 +6368,7 @@ let finalQuestion = 0;
 let finalCorrect = 0;
 let currentFinalAnswers = [];
 
-function event20() {
+function event21() {
 
   finalQuestion = 0;
   finalCorrect = 0;
@@ -5202,19 +6395,15 @@ function showFinalQuestion() {
     ];
 
   /*
-    RANDOMISE THE ANSWERS
-    EVERY SINGLE QUESTION.
+     Answers stay in their original order.
 
-    The correct answer is stored
-    separately in item.a[0], so
-    randomising the displayed answers
-    does not change which answer is correct.
+     The correct answer is ALWAYS
+     the first answer and therefore
+     ALWAYS appears at the top.
   */
 
   currentFinalAnswers =
-    [...item.a].sort(
-      () => Math.random() - 0.5
-    );
+    [...item.a];
 
   const progress =
     (
@@ -5231,7 +6420,7 @@ function showFinalQuestion() {
     <div class="panel">
 
       <div class="badge">
-        Event 20 of 20 • FINAL CHALLENGE
+        Event 21 of 21 • FINAL CHALLENGE
       </div>
 
       <h2>
@@ -5338,21 +6527,10 @@ window.finalAnswer =
           "wrong"
         );
 
-      const correctIndex =
-        currentFinalAnswers.indexOf(
-          correct
+      buttons[0]
+        .classList.add(
+          "correct"
         );
-
-      if (
-        correctIndex >= 0 &&
-        buttons[correctIndex]
-      ) {
-
-        buttons[correctIndex]
-          .classList.add(
-            "correct"
-          );
-      }
     }
 
     finalQuestion++;
@@ -5386,7 +6564,7 @@ function finalWrittenChallenge() {
       </h2>
 
       <p>
-        You've survived nineteen events and answered
+        You've survived twenty events and answered
         fifty questions.
       </p>
 

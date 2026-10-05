@@ -2,446 +2,418 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#180b14">
+<meta name="theme-color" content="#170b13">
 <title>Lulu Express 🚂💗</title>
 
 <style>
-:root{
-  --bg:#120810;
-  --panel:#281321;
-  --panel2:#35182a;
-  --pink:#f49bc5;
-  --pink-dark:#b84d86;
-  --light:#ffe0ed;
-  --gold:#f5cf70;
-  --green:#8fe0ae;
-  --red:#ff718d;
-  --text:#fff8fc;
-  --muted:#d7b9c9;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-*{box-sizing:border-box}
+:root {
+  --bg: #12080e;
+  --panel: #26121e;
+  --panel2: #35182a;
+  --pink: #f39ac4;
+  --pink2: #c9578d;
+  --light: #ffe5f0;
+  --gold: #f3ce6b;
+  --green: #8fe0ac;
+  --red: #ff718c;
+  --muted: #d7b8c8;
+}
 
-body{
-  margin:0;
-  min-height:100vh;
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at top,#642848 0%,#2b1323 35%,#120810 75%);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+    radial-gradient(circle at 50% -10%, #733653 0%, #321624 38%, #12080e 78%);
 }
 
-button,input,textarea{
-  font:inherit;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
-button{
-  cursor:pointer;
+button {
+  cursor: pointer;
 }
 
-#app{
-  max-width:760px;
-  margin:auto;
-  padding:16px 14px 45px;
+#app {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  padding: 14px;
 }
 
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:15px;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
-.logo{
-  font-size:21px;
-  font-weight:900;
+.logo {
+  font-weight: 900;
+  font-size: 20px;
 }
 
-.logo span{
-  color:var(--pink);
+.logo span {
+  color: var(--pink);
 }
 
-.icon-btn{
-  background:#ffffff12;
-  color:white;
-  border:1px solid #ffffff22;
-  border-radius:13px;
-  padding:9px 12px;
+.music-btn {
+  border: 1px solid #ffffff22;
+  background: #ffffff10;
+  color: white;
+  border-radius: 12px;
+  padding: 9px 12px;
 }
 
-.panel{
-  background:linear-gradient(145deg,#301627,#1d0e18);
-  border:1px solid #ffffff18;
-  border-radius:24px;
-  padding:20px;
-  box-shadow:0 16px 45px #0009;
+.panel {
+  background: linear-gradient(145deg, #321827, #1d0d16);
+  border: 1px solid #ffffff18;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 18px 50px #0009;
 }
 
-.center{text-align:center}
-
-.badge{
-  display:inline-block;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#f49bc51b;
-  border:1px solid #f49bc544;
-  color:var(--light);
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
+.center {
+  text-align: center;
 }
 
-h1{
-  font-size:42px;
-  line-height:1;
-  margin:10px 0;
+.badge {
+  display: inline-block;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: #f39ac418;
+  border: 1px solid #f39ac444;
+  color: var(--light);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-h2{
-  font-size:28px;
-  margin:8px 0;
+h1 {
+  font-size: 42px;
+  line-height: 1;
+  margin: 12px 0;
 }
 
-h3{
-  margin:5px 0 9px;
+h2 {
+  font-size: 28px;
+  margin: 9px 0;
 }
 
-p{
-  color:var(--muted);
-  line-height:1.5;
+h3 {
+  line-height: 1.4;
 }
 
-.btn{
-  width:100%;
-  padding:14px 16px;
-  border:0;
-  border-radius:16px;
-  margin-top:9px;
-  background:linear-gradient(135deg,#f7a8ca,#bc4d87);
-  color:#270d1c;
-  font-weight:900;
+p {
+  color: var(--muted);
+  line-height: 1.55;
 }
 
-.btn.gold{
-  background:linear-gradient(135deg,#ffe79d,#d8ac40);
+.btn {
+  width: 100%;
+  border: 0;
+  border-radius: 15px;
+  padding: 14px;
+  margin-top: 9px;
+  font-weight: 900;
+  color: #32101f;
+  background: linear-gradient(135deg, #f8acd0, #bd4f87);
 }
 
-.btn.alt{
-  background:#ffffff0d;
-  color:white;
-  border:1px solid #ffffff20;
+.btn.gold {
+  background: linear-gradient(135deg, #ffe9a4, #d8ad3f);
 }
 
-.btn.red{
-  background:linear-gradient(135deg,#ff9bad,#d44e70);
+.btn.red {
+  background: linear-gradient(135deg, #ff9cad, #d34f70);
 }
 
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
+.btn.dark {
+  color: white;
+  background: #ffffff0c;
+  border: 1px solid #ffffff20;
 }
 
-input,textarea{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #ffffff20;
-  background:#ffffff0b;
-  color:white;
-  outline:none;
+input,
+textarea {
+  width: 100%;
+  background: #ffffff0b;
+  color: white;
+  border: 1px solid #ffffff20;
+  border-radius: 14px;
+  padding: 14px;
+  outline: none;
 }
 
-textarea{
-  min-height:130px;
-  resize:vertical;
+textarea {
+  min-height: 140px;
+  resize: vertical;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin:13px 0;
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 15px 0;
 }
 
-.stat{
-  background:#ffffff08;
-  border:1px solid #ffffff12;
-  border-radius:15px;
-  padding:10px;
-  text-align:center;
+.stat {
+  padding: 10px;
+  border-radius: 14px;
+  background: #ffffff08;
+  border: 1px solid #ffffff10;
 }
 
-.stat b{
-  display:block;
-  font-size:21px;
-  color:var(--light);
+.stat strong {
+  display: block;
+  font-size: 20px;
+  color: var(--light);
 }
 
-.stat small{
-  color:var(--muted);
+.stat small {
+  color: var(--muted);
 }
 
-.progress{
-  height:8px;
-  background:#ffffff10;
-  border-radius:999px;
-  overflow:hidden;
-  margin:12px 0;
+.notice {
+  padding: 12px;
+  border-radius: 14px;
+  background: #f39ac410;
+  border: 1px solid #f39ac426;
+  margin: 12px 0;
+  color: var(--muted);
 }
 
-.progress-fill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--pink),var(--gold));
-  transition:.3s;
+.round-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 15px;
 }
 
-.notice{
-  padding:12px;
-  border-radius:14px;
-  background:#f49bc510;
-  border:1px solid #f49bc530;
-  color:var(--muted);
-  margin:11px 0;
+.round {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 13px;
+  background: #ffffff07;
+  border: 1px solid #ffffff0d;
 }
 
-.choices{
-  display:grid;
-  gap:9px;
+.round.current {
+  border-color: #f39ac466;
+  background: #f39ac410;
 }
 
-.choice{
-  width:100%;
-  padding:14px;
-  border-radius:15px;
-  border:1px solid #ffffff18;
-  background:#ffffff09;
-  color:white;
-  text-align:left;
+.round.locked {
+  opacity: .35;
 }
 
-.choice.correct{
-  background:#8fe0ae20;
-  border-color:#8fe0ae88;
+.round-number {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff10;
+  font-weight: 900;
 }
 
-.choice.wrong{
-  background:#ff718d20;
-  border-color:#ff718d88;
+.round.current .round-number {
+  background: var(--pink);
+  color: #32101f;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
+.choices {
+  display: grid;
+  gap: 9px;
 }
 
-.big{
-  font-size:50px;
-  font-weight:1000;
-  color:var(--gold);
+.choice {
+  width: 100%;
+  padding: 14px;
+  border-radius: 15px;
+  border: 1px solid #ffffff18;
+  background: #ffffff09;
+  color: white;
+  text-align: left;
 }
 
-.timer{
-  font-size:35px;
-  font-weight:1000;
-  color:var(--gold);
-  text-align:center;
+.choice:hover {
+  background: #f39ac418;
 }
 
-.small{
-  color:var(--muted);
-  font-size:12px;
+.correct {
+  background: #8fe0ac25 !important;
+  border-color: #8fe0ac88 !important;
 }
 
-.round-list{
-  display:grid;
-  gap:7px;
-  margin-top:14px;
+.wrong {
+  background: #ff718c25 !important;
+  border-color: #ff718c88 !important;
 }
 
-.round{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:10px;
-  border-radius:14px;
-  background:#ffffff07;
-  border:1px solid #ffffff10;
+.big-number {
+  font-size: 48px;
+  font-weight: 1000;
+  color: var(--gold);
 }
 
-.round.locked{
-  opacity:.38;
+.timer {
+  font-size: 35px;
+  font-weight: 1000;
+  color: var(--gold);
+  text-align: center;
 }
 
-.round.current{
-  border-color:#f49bc566;
-  background:#f49bc510;
+.arena {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: radial-gradient(circle, #63284b, #160a12);
+  border: 1px solid #ffffff15;
 }
 
-.round-num{
-  width:33px;
-  height:33px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#ffffff10;
-  font-weight:900;
+.target {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  background: var(--pink);
+  box-shadow: 0 5px 25px #f39ac455;
 }
 
-.round.current .round-num{
-  background:var(--pink);
-  color:#32101f;
+.target.bad {
+  background: #4b4b4b;
 }
 
-.arena{
-  height:340px;
-  position:relative;
-  overflow:hidden;
-  border-radius:20px;
-  background:radial-gradient(circle,#61274a,#180b15);
-  border:1px solid #ffffff15;
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 18px 0;
 }
 
-.heart-target{
-  position:absolute;
-  width:60px;
-  height:60px;
-  display:grid;
-  place-items:center;
-  border:0;
-  border-radius:50%;
-  background:#f49bc5;
-  color:#49162f;
-  font-size:29px;
-  box-shadow:0 5px 25px #f49bc566;
+.memory-tile {
+  aspect-ratio: 1;
+  border-radius: 13px;
+  border: 1px solid #ffffff15;
+  background: #ffffff0a;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  color: white;
 }
 
-.broken-target{
-  background:#555;
-  color:#ddd;
+.memory-tile.active {
+  background: var(--pink);
+  color: #32101f;
 }
 
-.card-row{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
+.card-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 18px 0;
 }
 
-.playing-card{
-  width:58px;
-  height:78px;
-  background:white;
-  color:#29101e;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  font-weight:900;
+.card {
+  width: 58px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  background: white;
+  color: #27101d;
+  border-radius: 9px;
+  font-weight: 900;
+  font-size: 20px;
 }
 
-.memory-box{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:20px 0;
+.maze {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  max-width: 330px;
+  margin: 18px auto;
 }
 
-.memory-tile{
-  width:58px;
-  height:58px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:#ffffff10;
-  border:1px solid #ffffff18;
-  font-size:25px;
+.maze-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: #ffffff09;
 }
 
-.memory-tile.active{
-  background:var(--pink);
-  color:#32101f;
+.maze-cell.wall {
+  background: #080508;
 }
 
-.maze{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:5px;
-  max-width:330px;
-  margin:15px auto;
+.maze-cell.player {
+  background: var(--pink);
+  color: #32101f;
 }
 
-.maze-cell{
-  aspect-ratio:1;
-  border-radius:8px;
-  background:#ffffff0b;
-  display:grid;
-  place-items:center;
-  font-size:20px;
+.maze-cell.goal {
+  background: #f3ce6b33;
+  border: 1px solid var(--gold);
 }
 
-.maze-cell.wall{
-  background:#090509;
+.progress {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #ffffff10;
+  margin: 14px 0;
 }
 
-.maze-cell.player{
-  background:var(--pink);
-  color:#301020;
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--gold));
+  transition: width .25s;
 }
 
-.maze-cell.goal{
-  background:#f5cf7033;
-  border:1px solid var(--gold);
+.final-box {
+  border: 2px solid var(--gold);
+  background: radial-gradient(circle at top, #68294d, #25111c);
 }
 
-.wheel{
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  margin:15px auto;
-  background:conic-gradient(
-    #f49bc5 0 25%,
-    #f5cf70 25% 50%,
-    #8fd9e5 50% 75%,
-    #bd6b9a 75% 100%
-  );
-  border:8px solid #ffffff22;
-  display:grid;
-  place-items:center;
-  font-size:45px;
+.trophy {
+  font-size: 65px;
 }
 
-.hidden{
-  display:none!important;
+.hidden {
+  display: none !important;
 }
 
-.result{
-  margin-top:12px;
-  padding:12px;
-  border-radius:14px;
-  background:#ffffff08;
-}
+@media (max-width: 430px) {
+  #app {
+    padding: 10px;
+  }
 
-.final-prize{
-  border:2px solid var(--gold);
-  background:
-    radial-gradient(circle at top,#6e294f,#281321);
-  padding:25px 18px;
-  border-radius:25px;
-}
+  .panel {
+    padding: 16px;
+  }
 
-.trophy{
-  font-size:70px;
-}
-
-@media(max-width:420px){
-  h1{font-size:35px}
-  .panel{padding:16px}
-  .stats{grid-template-columns:1fr 1fr 1fr}
+  h1 {
+    font-size: 35px;
+  }
 }
 </style>
 </head>
@@ -451,1861 +423,3055 @@ textarea{
 <div id="app"></div>
 
 <script>
-/* ==========================================================
+"use strict";
+
+/* =========================================================
    LULU EXPRESS
-   20 interactive events
-   Secret skip code: 3333
-   Generated background music: Web Audio API
-   ========================================================== */
+   20 EVENTS
+   SECRET SKIP CODE: 3333
+   NO EXTERNAL MUSIC FILE
+   ========================================================= */
 
-const rounds = [
- "❤️ The Heart Rate",
- "🧠 The Memory Vault",
- "⚡ The Pressure Quiz",
- "🎰 The High Roller",
- "🧠 The Mind Games",
- "🃏 The Bluff",
- "⚡ The Survival Round",
- "🏎️ The Admirer Race",
- "💔 The Heartbreak Chamber",
- "🥊 The Heartbreak Boxing Match",
- "🧩 The Perfect Match",
- "🕵️ Who Knows Liliana Best?",
- "💨 The Reaction Gauntlet",
- "🗺️ The Heart Hunt",
- "🔐 The Love Lock",
- "🎯 The Cupid Shootout",
- "🧨 The Countdown",
- "🎰 The Ultimate Gamble",
- "💀 The Admirer's Last Stand",
- "👑 THE FINAL CHALLENGE"
+const EVENTS = [
+  "❤️ The Heart Rate",
+  "🧠 The Memory Vault",
+  "⚡ The Pressure Quiz",
+  "🎰 The High Roller",
+  "🧠 The Mind Games",
+  "🃏 The Bluff",
+  "⚡ The Survival Round",
+  "🏎️ The Admirer Race",
+  "💔 The Heartbreak Chamber",
+  "🥊 The Heartbreak Boxing Match",
+  "🧩 The Perfect Match",
+  "🕵️ Who Knows Liliana Best?",
+  "💨 The Reaction Gauntlet",
+  "🗺️ The Heart Hunt",
+  "🔐 The Love Lock",
+  "🎯 The Cupid Shootout",
+  "🧨 The Countdown",
+  "🎰 The Ultimate Gamble",
+  "💀 The Admirer's Last Stand",
+  "👑 THE FINAL CHALLENGE"
 ];
 
-/*
- IMPORTANT:
- Event 3 intentionally uses its own questions.
- The 50 final questions below do not repeat those Event 3 questions.
-*/
+/* =========================================================
+   EVENT 3 QUESTIONS
+   These are deliberately NOT used in Event 20.
+   ========================================================= */
 
-const pressureQuiz = [
- {
-  q:"What is the capital of New Zealand?",
-  a:["Wellington","Auckland","Christchurch","Hamilton"],
-  c:0
- },
- {
-  q:"How many sides does a triangle have?",
-  a:["3","4","5","6"],
-  c:0
- },
- {
-  q:"Which planet is known as the Red Planet?",
-  a:["Mars","Venus","Jupiter","Mercury"],
-  c:0
- },
- {
-  q:"How many minutes are in one hour?",
-  a:["60","30","90","100"],
-  c:0
- },
- {
-  q:"Which ocean is the largest?",
-  a:["Pacific","Atlantic","Indian","Arctic"],
-  c:0
- },
- {
-  q:"What is 9 × 9?",
-  a:["81","72","99","90"],
-  c:0
- },
- {
-  q:"Which colour is made by mixing blue and yellow?",
-  a:["Green","Purple","Orange","Pink"],
-  c:0
- },
- {
-  q:"How many days are in a leap year?",
-  a:["366","365","364","367"],
-  c:0
- }
+const PRESSURE_QUIZ = [
+  {
+    question: "What is 12 + 8?",
+    answers: ["20", "18", "22", "24"],
+    correct: 0
+  },
+  {
+    question: "Which shape has three sides?",
+    answers: ["Triangle", "Square", "Circle", "Hexagon"],
+    correct: 0
+  },
+  {
+    question: "How many hours are in a day?",
+    answers: ["24", "12", "36", "48"],
+    correct: 0
+  },
+  {
+    question: "Which planet is closest to the Sun?",
+    answers: ["Mercury", "Mars", "Earth", "Venus"],
+    correct: 0
+  },
+  {
+    question: "How many letters are in the English alphabet?",
+    answers: ["26", "24", "28", "30"],
+    correct: 0
+  },
+  {
+    question: "What is 7 × 8?",
+    answers: ["56", "48", "54", "64"],
+    correct: 0
+  },
+  {
+    question: "Which direction is opposite to north?",
+    answers: ["South", "East", "West", "Up"],
+    correct: 0
+  },
+  {
+    question: "How many months are in a year?",
+    answers: ["12", "10", "11", "13"],
+    correct: 0
+  }
 ];
 
-/* 50 FINAL QUESTIONS.
-   These are separate from the Event 3 questions above. */
+/* =========================================================
+   EVENT 20
+   50 UNIQUE LILIANA QUESTIONS.
+   None are copies of Event 3.
+   ========================================================= */
 
-const finalQuiz = [
- ["When is Liliana's birthday?",["July 22","July 12","June 22","August 2"],0],
- ["What is Liliana's favourite colour?",["Baby pink","Burgundy","Lavender","Red"],0],
- ["What is Liliana's favourite number?",["3","6","7","22"],0],
- ["What food does Liliana love?",["Sushi","Pizza","Pasta","Burgers"],0],
- ["Which animal is associated with Liliana's favourites?",["Dolphins","Penguins","Otters","Cats"],0],
- ["Name one of Liliana's favourite flowers.",["Sunflowers","Tulips","Orchids","Daisies"],0],
- ["What other flower does Liliana like?",["Roses","Lilies","Peonies","Lavender"],0],
- ["What is Liliana's favourite movie?",["Me Before You","The Notebook","Titanic","Mamma Mia"],0],
- ["What type of songs does Liliana like?",["Sad songs","Only country songs","Only metal","Only classical"],0],
- ["What does Liliana like besides music?",["Poetry","Cooking manuals","Science journals","Sports statistics"],0],
- ["What type of games does Liliana enjoy?",["Poker and gambling","Chess only","Football games","Crosswords"],0],
- ["How is Liliana often described?",["Sweet and caring","Cold and distant","Strict and serious","Very quiet"],0],
- ["Which word describes Liliana's personality?",["Charismatic","Unfriendly","Reserved","Impatient"],0],
- ["How has Liliana been described romantically?",["Flirtatious","Formal","Uninterested","Shy"],0],
- ["How long have Bree and Liliana been best friends?",["6 years","3 years","4 years","8 years"],0],
- ["What is Liliana's heritage?",["Mexican American","Canadian American","Australian American","British American"],0],
- ["How many tattoos does Liliana have?",["1","2","3","4"],0],
- ["What symbol is connected to Liliana's tattoo?",["A semicolon","A star","A heart","A dolphin"],0],
- ["What colour are Liliana's eyes?",["Green","Blue","Brown","Hazel"],0],
- ["How many piercings does Liliana have?",["4","2","3","5"],0],
- ["What is one of Liliana's dogs called?",["Aayla","Lola","Rene","Kai"],0],
- ["What is Liliana's other dog's name?",["Arlo","Mikael","Yuna","Bree"],0],
- ["How many siblings does Liliana have?",["5","3","4","6"],0],
- ["What is Liliana's star sign?",["Leo","Cancer","Virgo","Libra"],0],
- ["What is Liliana afraid of?",["Drowning","Flying","Thunder","Heights"],0],
- ["What did Liliana study at university?",["Psychology","Law","Nursing","Business"],0],
- ["What does Liliana want to be one day?",["A mum to a baby girl","A professional athlete","A pilot","A chef"],0],
- ["What does Liliana value strongly?",["Empathy","Dishonesty","Coldness","Indifference"],0],
- ["Which flower combination is associated with Liliana?",["Sunflowers and roses","Lilies and tulips","Daisies and orchids","Roses and lavender"],0],
- ["Which number is Liliana's favourite?",["3","13","30","33"],0],
- ["Which of these is one of Liliana's interests?",["Poetry","Only fishing","Only gardening","Only coding"],0],
- ["Which of these best describes Liliana?",["Empathetic","Uncaring","Unfriendly","Aloof"],0],
- ["Which food would be the safest bet when choosing Liliana's favourite?",["Sushi","Steak","Cereal","Toast"],0],
- ["Which animal would make the most sense for a Liliana-themed decoration?",["Dolphin","Tiger","Wolf","Eagle"],0],
- ["Which colour would fit Liliana's favourite palette?",["Baby pink","Neon green","Dark orange","Electric blue"],0],
- ["Which movie title belongs to Liliana's favourites?",["Me Before You","Frozen","Shrek","Avatar"],0],
- ["Which activity fits Liliana's gambling interest?",["Poker","Golf","Swimming","Baking"],0],
- ["Which flower would Liliana recognise as one of her favourites?",["Rose","Cactus","Fern","Bamboo"],0],
- ["What is Liliana's birthday month?",["July","June","August","May"],0],
- ["What is the day of Liliana's birthday?",["22nd","12th","20th","27th"],0],
- ["Which eye colour belongs to Liliana?",["Green","Grey","Hazel","Blue"],0],
- ["Which university subject belongs to Liliana?",["Psychology","Physics","Engineering","Accounting"],0],
- ["Which fear belongs to Liliana?",["Drowning","Dark rooms","Thunder","Needles"],0],
- ["Which of these is one of Liliana's dogs?",["Aayla","Arlo","Lola","Mikael"],0],
- ["Which of these is her other dog?",["Arlo","Aayla","Yuna","Kai"],0],
- ["How many siblings are in Liliana's known family facts?",["5","2","7","8"],0],
- ["Which tattoo count is correct?",["1","0","2","4"],0],
- ["Which piercing count is correct?",["4","1","5","6"],0],
- ["Which future family wish has Liliana shared?",["To be a mum to a baby girl","To have no children","To adopt ten dogs","To become a nun"],0],
- ["What kind of writing does Liliana enjoy?",["Poetry","Only biographies","Only textbooks","Only newspapers"],0]
+const FINAL_QUIZ = [
+
+  ["When is Liliana's birthday?",
+   ["July 22", "July 12", "June 22", "August 22"], 0],
+
+  ["What is Liliana's favourite colour?",
+   ["Baby pink", "Burgundy", "Purple", "Red"], 0],
+
+  ["What is Liliana's favourite number?",
+   ["3", "6", "7", "22"], 0],
+
+  ["What food does Liliana love?",
+   ["Sushi", "Pizza", "Pasta", "Burgers"], 0],
+
+  ["Which animal is one of Liliana's favourites?",
+   ["Dolphins", "Cats", "Wolves", "Horses"], 0],
+
+  ["Which flower is one of Liliana's favourites?",
+   ["Sunflowers", "Tulips", "Orchids", "Daisies"], 0],
+
+  ["Which other flower does Liliana love?",
+   ["Roses", "Lilies", "Peonies", "Lavender"], 0],
+
+  ["What is Liliana's favourite movie?",
+   ["Me Before You", "Titanic", "The Notebook", "Mamma Mia"], 0],
+
+  ["What kind of songs does Liliana like?",
+   ["Sad songs", "Only country songs", "Only metal", "Only classical"], 0],
+
+  ["What type of writing does Liliana enjoy?",
+   ["Poetry", "News articles", "Textbooks", "Manuals"], 0],
+
+  ["What kind of games does Liliana enjoy?",
+   ["Poker and gambling", "Football", "Chess only", "Golf"], 0],
+
+  ["Which word best describes Liliana?",
+   ["Sweet", "Cold", "Unfriendly", "Distant"], 0],
+
+  ["Which other word best describes Liliana?",
+   ["Caring", "Cruel", "Impatient", "Aloof"], 0],
+
+  ["Liliana has been described as being...",
+   ["Charismatic", "Unapproachable", "Silent", "Strict"], 0],
+
+  ["Liliana is known for being...",
+   ["Flirtatious", "Uninterested", "Extremely shy", "Serious"], 0],
+
+  ["How long have Bree and Liliana been best friends?",
+   ["6 years", "2 years", "4 years", "10 years"], 0],
+
+  ["What is Liliana's heritage?",
+   ["Mexican American", "Canadian American", "Australian American", "British American"], 0],
+
+  ["How many tattoos does Liliana have?",
+   ["1", "2", "3", "4"], 0],
+
+  ["What symbol is connected to Liliana's tattoo?",
+   ["A semicolon", "A star", "A rose", "A dolphin"], 0],
+
+  ["What colour are Liliana's eyes?",
+   ["Green", "Blue", "Brown", "Grey"], 0],
+
+  ["How many piercings does Liliana have?",
+   ["4", "2", "3", "5"], 0],
+
+  ["What is one of Liliana's dogs called?",
+   ["Aayla", "Lola", "Yuna", "Kai"], 0],
+
+  ["What is Liliana's other dog's name?",
+   ["Arlo", "Rene", "Mikael", "Bree"], 0],
+
+  ["How many siblings does Liliana have?",
+   ["5", "3", "4", "7"], 0],
+
+  ["What is Liliana's star sign?",
+   ["Leo", "Cancer", "Virgo", "Libra"], 0],
+
+  ["What is Liliana afraid of?",
+   ["Drowning", "Flying", "Thunder", "Heights"], 0],
+
+  ["What did Liliana study at university?",
+   ["Psychology", "Law", "Nursing", "Business"], 0],
+
+  ["What does Liliana want to be one day?",
+   ["A mum to a baby girl", "A pilot", "A professional athlete", "A chef"], 0],
+
+  ["Which quality is associated with Liliana?",
+   ["Empathy", "Indifference", "Dishonesty", "Coldness"], 0],
+
+  ["Which flower combination belongs to Liliana's favourites?",
+   ["Sunflowers and roses", "Tulips and lilies", "Orchids and daisies", "Lavender and tulips"], 0],
+
+  ["Which number would Liliana most likely pick as her favourite?",
+   ["3", "13", "30", "33"], 0],
+
+  ["Which hobby matches Liliana's interests?",
+   ["Gambling", "Fishing", "Gardening", "Knitting"], 0],
+
+  ["Which food would you expect Liliana to be excited about?",
+   ["Sushi", "Toast", "Cereal", "Soup"], 0],
+
+  ["Which animal fits Liliana's favourite animals?",
+   ["Dolphin", "Eagle", "Tiger", "Bear"], 0],
+
+  ["Which shade is closest to Liliana's favourite colour?",
+   ["Baby pink", "Navy blue", "Forest green", "Orange"], 0],
+
+  ["Which movie belongs on Liliana's favourites list?",
+   ["Me Before You", "Shrek", "Avatar", "Frozen"], 0],
+
+  ["Which card game fits Liliana's interests?",
+   ["Poker", "Go Fish", "Solitaire only", "Snap"], 0],
+
+  ["Which flower would be a safe choice for Liliana?",
+   ["Rose", "Cactus", "Fern", "Bamboo"], 0],
+
+  ["Which month contains Liliana's birthday?",
+   ["July", "June", "August", "May"], 0],
+
+  ["What day of July is Liliana's birthday?",
+   ["22nd", "12th", "20th", "27th"], 0],
+
+  ["Which eye colour belongs to Liliana?",
+   ["Green", "Hazel", "Blue", "Grey"], 0],
+
+  ["Which university subject belongs to Liliana?",
+   ["Psychology", "Physics", "Engineering", "Accounting"], 0],
+
+  ["Which fear belongs to Liliana?",
+   ["Drowning", "Dark rooms", "Needles", "Thunder"], 0],
+
+  ["Which of these is one of Liliana's dogs?",
+   ["Aayla", "Kai", "Lola", "Yuna"], 0],
+
+  ["Which of these is her other dog?",
+   ["Arlo", "Rene", "Bree", "Mikael"], 0],
+
+  ["Which tattoo count is correct?",
+   ["1", "0", "2", "5"], 0],
+
+  ["Which piercing count is correct?",
+   ["4", "1", "5", "6"], 0],
+
+  ["Which future family wish has Liliana shared?",
+   ["To be a mum to a baby girl", "To have no children", "To become a pilot", "To own a farm"], 0],
+
+  ["Which of these is something Liliana enjoys?",
+   ["Poetry", "Only textbooks", "Only documentaries", "Only sports"], 0],
+
+  ["Which combination describes Liliana best?",
+   ["Sweet, caring and charismatic", "Cold, quiet and distant", "Strict, serious and impatient", "Reserved, formal and aloof"], 0]
 ];
 
-/* ---------- STATE ---------- */
+/* =========================================================
+   STATE
+   ========================================================= */
 
 let state = {
- name:"",
- round:0,
- score:0,
- music:true,
- finished:false
+  playerName: "",
+  currentEvent: 0,
+  score: 0,
+  musicOn: true,
+  finished: false
 };
 
-function loadState(){
- try{
-   const saved=JSON.parse(localStorage.getItem("luluExpressState"));
-   if(saved) state={...state,...saved};
- }catch(e){}
+function loadGame() {
+  try {
+    const saved = localStorage.getItem("luluExpress");
+    if (saved) {
+      state = Object.assign(state, JSON.parse(saved));
+    }
+  } catch (error) {
+    console.log("Save data could not be loaded.");
+  }
 }
 
-function saveState(){
- try{
-   localStorage.setItem("luluExpressState",JSON.stringify(state));
- }catch(e){}
+function saveGame() {
+  try {
+    localStorage.setItem("luluExpress", JSON.stringify(state));
+  } catch (error) {
+    console.log("Save data could not be saved.");
+  }
 }
 
-loadState();
+loadGame();
 
-/* ---------- MUSIC ---------- */
+/* =========================================================
+   MUSIC
+   ========================================================= */
 
-let audioCtx=null;
-let master=null;
-let musicTimer=null;
-let musicStarted=false;
+let audioContext = null;
+let masterGain = null;
+let musicStarted = false;
+let musicInterval = null;
 
-function startMusic(){
- if(!state.music)return;
+function startMusic() {
+  if (!state.musicOn) return;
 
- if(!audioCtx){
-   audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-   master=audioCtx.createGain();
-   master.gain.value=.055;
-   master.connect(audioCtx.destination);
- }
+  if (!audioContext) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
 
- if(audioCtx.state==="suspended") audioCtx.resume();
+    if (!AudioCtx) return;
 
- if(musicStarted)return;
- musicStarted=true;
+    audioContext = new AudioCtx();
 
- const notes=[
-   261.63,329.63,392.00,523.25,
-   293.66,349.23,440.00,587.33,
-   261.63,329.63,392.00,493.88
- ];
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = 0.035;
+    masterGain.connect(audioContext.destination);
+  }
 
- let i=0;
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
 
- function note(){
-   if(!audioCtx)return;
-
-   const osc=audioCtx.createOscillator();
-   const gain=audioCtx.createGain();
-
-   osc.type="sine";
-   osc.frequency.value=notes[i%notes.length];
-
-   gain.gain.setValueAtTime(0,audioCtx.currentTime);
-   gain.gain.linearRampToValueAtTime(.7,audioCtx.currentTime+.04);
-   gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.75);
-
-   osc.connect(gain);
-   gain.connect(master);
-
-   osc.start();
-   osc.stop(audioCtx.currentTime+.8);
-
-   i++;
- }
-
- note();
- musicTimer=setInterval(note,650);
-}
-
-function toggleMusic(){
- state.music=!state.music;
- saveState();
-
- if(state.music){
-   startMusic();
- }else if(master){
-   master.gain.value=0;
- }
-}
-
-/* ---------- HELPERS ---------- */
-
-const app=document.getElementById("app");
-
-function escapeHTML(str){
- return String(str)
-   .replaceAll("&","&amp;")
-   .replaceAll("<","&lt;")
-   .replaceAll(">","&gt;")
-   .replaceAll('"',"&quot;")
-   .replaceAll("'","&#039;");
-}
-
-function renderTop(){
- return `
- <div class="topbar">
-   <div class="logo">🚂 <span>Lulu Express</span></div>
-   <button class="icon-btn" onclick="toggleMusic()">
-     ${state.music ? "🔊 Music" : "🔇 Music"}
-   </button>
- </div>
- `;
-}
-
-function renderStats(){
- return `
- <div class="stats">
-   <div class="stat"><b>${state.score}</b><small>Heart Points</small></div>
-   <div class="stat"><b>${state.round+1}</b><small>Round</small></div>
-   <div class="stat"><b>${rounds.length}</b><small>Total</small></div>
- </div>
- `;
-}
-
-function renderRounds(){
- return `
- <div class="round-list">
- ${rounds.map((r,i)=>{
-   let cls=i<state.round?"":"locked";
-   if(i===state.round)cls="current";
-   return `
-    <div class="round ${cls}">
-      <div class="round-num">${i<state.round?"✓":i+1}</div>
-      <div>
-        <strong>${r}</strong><br>
-        <span class="small">
-          ${i<state.round?"Completed":i===state.round?"Current challenge":"🔒 Locked"}
-        </span>
-      </div>
-    </div>
-   `;
- }).join("")}
- </div>
- `;
-}
-
-function addScore(points){
- state.score=Math.max(0,state.score+points);
- saveState();
-}
-
-function completeRound(points=0){
- addScore(points);
-
- if(state.round<19){
-   state.round++;
-   saveState();
-   renderRound();
- }else{
-   state.finished=true;
-   saveState();
-   renderFinalResult();
- }
-}
-
-function lockedMessage(){
- app.innerHTML=renderTop()+`
- <div class="panel center">
-   <div class="badge">🔒 Locked</div>
-   <h2>This carriage is locked.</h2>
-   <p>You need to complete the previous Lulu Express challenge first.</p>
-   <button class="btn" onclick="renderRound()">Return to your carriage</button>
-   <button class="btn alt" onclick="showSkip()">🔐 Access Code</button>
- </div>`;
-}
-
-function showSkip(){
- app.innerHTML=renderTop()+`
- <div class="panel center">
-   <div class="badge">🔐 Secret Access</div>
-   <h2>Express Override</h2>
-   <p>Enter the four-digit conductor code.</p>
-   <input id="skipCode" inputmode="numeric" maxlength="4" placeholder="••••">
-   <button class="btn gold" onclick="checkSkip()">Unlock</button>
-   <button class="btn alt" onclick="renderRound()">Cancel</button>
- </div>`;
-}
-
-function checkSkip(){
- const code=document.getElementById("skipCode").value.trim();
-
- if(code==="3333"){
-   state.round=19;
-   saveState();
-   renderRound();
- }else{
-   alert("Incorrect code.");
- }
-}
-
-/* ---------- HOME ---------- */
-
-function home(){
- app.innerHTML=renderTop()+`
- <div class="panel center">
-   <div class="badge">🚂 All aboard</div>
-   <h1>Lulu Express<br>💗</h1>
-   <p>
-     One train. Twenty challenges.<br>
-     One heart at the final destination.
-   </p>
-
-   ${state.name ? `
-   <div class="notice">
-     Welcome back, <strong>${escapeHTML(state.name)}</strong>.<br>
-     You are currently on Round ${state.round+1}.
-   </div>` : `
-   <input id="playerName" maxlength="30" placeholder="Enter your name, Admirer">
-   `}
-
-   <button class="btn gold" onclick="boardTrain()">
-     🚂 ${state.name?"Continue Journey":"Board the Lulu Express"}
-   </button>
-
-   <div class="notice small">
-     🔑 Secret skip code: only someone who knows <strong>3333</strong>
-     can unlock the final carriage for testing.
-   </div>
-
-   ${state.name ? renderStats()+renderRounds() : ""}
- </div>
- `;
-}
-
-function boardTrain(){
- startMusic();
-
- if(!state.name){
-   const input=document.getElementById("playerName");
-   const name=input.value.trim();
-
-   if(!name){
-     input.focus();
-     return;
-   }
-
-   state.name=name;
-   saveState();
- }
-
- renderRound();
-}
-
-/* ---------- ROUND ROUTER ---------- */
-
-function renderRound(){
- if(state.finished){
-   renderFinalResult();
-   return;
- }
-
- switch(state.round){
-   case 0:return event1();
-   case 1:return event2();
-   case 2:return event3();
-   case 3:return event4();
-   case 4:return event5();
-   case 5:return event6();
-   case 6:return event7();
-   case 7:return event8();
-   case 8:return event9();
-   case 9:return event10();
-   case 10:return event11();
-   case 11:return event12();
-   case 12:return event13();
-   case 13:return event14();
-   case 14:return event15();
-   case 15:return event16();
-   case 16:return event17();
-   case 17:return event18();
-   case 18:return event19();
-   case 19:return event20();
-   default:return home();
- }
-}
-
-/* ---------- EVENT 1 ---------- */
-
-function event1(){
- let hits=0;
- let misses=0;
- let time=20;
- let timer;
-
- app.innerHTML=renderTop()+`
- <div class="panel">
-   <div class="badge">Event 1 of 20</div>
-   <h2>❤️ The Heart Rate</h2>
-   <p>Tap the pink hearts. Avoid the broken hearts.</p>
-   <div class="stats">
-    <div class="stat"><b id="heartHits">0</b><small>Hearts</small></div>
-    <div class="stat"><b id="heartMiss">0</b><small>Broken</small></div>
-    <div class="stat"><b id="heartTime">20</b><small>Seconds</small></div>
-   </div>
-   <div id="heartArena" class="arena"></div>
- </div>`;
-
- const arena=document.getElementById("heartArena");
-
- function spawn(){
-   if(time<=0)return;
-
-   const el=document.createElement("button");
-   const good=Math.random()>.22;
-
-   el.className="heart-target"+(good?"":" broken-target");
-   el.textContent=good?"❤️":"💔";
-
-   el.style.left=(Math.random()*82+5)+"%";
-   el.style.top=(Math.random()*78+5)+"%";
-
-   el.onclick=()=>{
-     if(good){
-       hits++;
-       addScore(5);
-     }else{
-       misses++;
-       addScore(-5);
-     }
-
-     document.getElementById("heartHits").textContent=hits;
-     document.getElementById("heartMiss").textContent=misses;
-     el.remove();
-   };
-
-   arena.appendChild(el);
-
-   setTimeout(()=>{
-     if(el.parentNode)el.remove();
-   },900);
- }
-
- const spawner=setInterval(spawn,450);
-
- timer=setInterval(()=>{
-   time--;
-   document.getElementById("heartTime").textContent=time;
-
-   if(time<=0){
-     clearInterval(timer);
-     clearInterval(spawner);
-
-     setTimeout(()=>{
-       completeRound(hits*2);
-     },500);
-   }
- },1000);
-
- spawn();
-}
-
-/* ---------- EVENT 2 ---------- */
-
-function event2(){
- let sequence=[];
- let player=[];
- let level=3;
- let showing=false;
-
- app.innerHTML=renderTop()+`
- <div class="panel center">
-  <div class="badge">Event 2 of 20</div>
-  <h2>🧠 The Memory Vault</h2>
-  <p>Watch the sequence. Then reproduce it.</p>
-  <div class="notice">Level <strong id="memoryLevel">3</strong></div>
-  <div id="memoryBox" class="memory-box"></div>
-  <button id="memoryStart" class="btn gold" onclick="startMemory()">Show Sequence</button>
- </div>`;
-
- window.startMemory=function(){
-   if(showing)return;
-
-   showing=true;
-   player=[];
-   sequence=[];
-
-   const symbols=["💗","🌹","🦋","⭐","🎲","🐬","☀️","🌙"];
-   for(let i=0;i<level;i++){
-     sequence.push(symbols[Math.floor(Math.random()*symbols.length)]);
-   }
-
-   drawMemory(sequence,false);
-
-   let i=0;
-   const interval=setInterval(()=>{
-     const tiles=document.querySelectorAll(".memory-tile");
-
-     tiles.forEach(x=>x.classList.remove("active"));
-
-     if(i<sequence.length){
-       tiles[i].classList.add("active");
-       i++;
-     }else{
-       clearInterval(interval);
-       drawMemory(sequence,true);
-       showing=false;
-     }
-   },600);
- };
-
- function drawMemory(seq,clickable){
-   const box=document.getElementById("memoryBox");
-   box.innerHTML="";
-
-   seq.forEach((symbol,index)=>{
-     const tile=document.createElement("button");
-     tile.className="memory-tile";
-     tile.textContent=clickable?"?":symbol;
-
-     if(clickable){
-       tile.onclick=()=>{
-         const wanted=sequence[player.length];
-
-         if(symbol===wanted){
-           tile.textContent=symbol;
-           tile.classList.add("active");
-           player.push(symbol);
-
-           if(player.length===sequence.length){
-             addScore(level*10);
-
-             if(level>=6){
-               setTimeout(()=>completeRound(30),500);
-             }else{
-               level++;
-               document.getElementById("memoryLevel").textContent=level;
-               setTimeout(()=>{
-                 player=[];
-                 startMemory();
-               },700);
-             }
-           }
-         }else{
-           alert("The sequence broke! You lose this attempt.");
-           player=[];
-           startMemory();
-         }
-       };
-     }
-
-     box.appendChild(tile);
-   });
- }
-}
-
-/* ---------- EVENT 3 ---------- */
-
-function event3(){
- let index=0;
- let points=0;
- let time=5;
- let timer;
-
- function show(){
-   clearInterval(timer);
-   time=5;
-
-   if(index>=pressureQuiz.length){
-     completeRound(points+20);
-     return;
-   }
-
-   const q=pressureQuiz[index];
-
-   app.innerHTML=renderTop()+`
-   <div class="panel">
-    <div class="badge">Event 3 of 20</div>
-    <h2>⚡ The Pressure Quiz</h2>
-    <div class="timer" id="pressureTime">5</div>
-    <p><strong>Question ${index+1} of ${pressureQuiz.length}</strong></p>
-    <h3>${q.q}</h3>
-    <div class="choices">
-      ${q.a.map((a,i)=>`
-       <button class="choice" onclick="answerPressure(${i})">${a}</button>
-      `).join("")}
-    </div>
-   </div>`;
-
-   timer=setInterval(()=>{
-     time--;
-     const el=document.getElementById("pressureTime");
-     if(el)el.textContent=time;
-
-     if(time<=0){
-       clearInterval(timer);
-       index++;
-       setTimeout(show,250);
-     }
-   },1000);
- }
-
- window.answerPressure=function(choice){
-   clearInterval(timer);
-
-   if(choice===pressureQuiz[index].c){
-     points+=15;
-     addScore(15);
-   }
-
-   index++;
-   setTimeout(show,300);
- };
-
- show();
-}
-
-/* ---------- EVENT 4 ---------- */
-
-function event4(){
- let tokens=100;
- let roundsPlayed=0;
-
- app.innerHTML=renderTop()+`
- <div class="panel center">
-  <div class="badge">Event 4 of 20</div>
-  <h2>🎰 The High Roller</h2>
-  <p>Risk your Love Tokens for bigger rewards.</p>
-  <div class="big" id="tokens">100</div>
-  <div class="grid">
-   <button class="btn" onclick="bet(10)">Safe<br>10</button>
-   <button class="btn gold" onclick="bet(25)">Risky<br>25</button>
-  </div>
-  <button class="btn red" onclick="bet(50)">ALL IN<br>50</button>
-  <div id="gambleResult" class="result">Choose your bet.</div>
- </div>`;
-
- window.bet=function(amount){
-   roundsPlayed++;
-
-   const win=Math.random()>.42;
-
-   if(win){
-     tokens+=amount*2;
-     document.getElementById("gambleResult").textContent="💗 WIN! The Express smiles upon you.";
-   }else{
-     tokens-=amount;
-     document.getElementById("gambleResult").textContent="💔 LOSS! Your carriage shook.";
-   }
-
-   tokens=Math.max(0,tokens);
-   document.getElementById("tokens").textContent=tokens;
-
-   if(roundsPlayed>=5){
-     completeRound(Math.floor(tokens/5));
-   }
- };
-}
-
-/* ---------- EVENT 5 ---------- */
-
-function event5(){
- const scenarios=[
-  ["Liliana has had a terrible day. What do you do?","Listen without trying to take over.","Tell her to get over it.","Change the subject immediately.","Ignore her."],
-  ["You have one free evening together. What sounds best?","Let her choose what feels fun.","Make every decision yourself.","Cancel at the last second.","Turn it into an argument."],
-  ["Liliana tells you something personal. What matters most?","Respecting her trust.","Telling everyone.","Laughing about it.","Changing the topic."],
-  ["A disagreement happens. What is the strongest move?","Communicate honestly.","Refuse to speak.","Make it a competition.","Pretend it never happened."]
- ];
-
- let i=0;
- let score=0;
-
- function show(){
-  if(i>=scenarios.length){
-    completeRound(score+20);
+  if (musicStarted) {
+    masterGain.gain.value = 0.035;
     return;
   }
 
-  const s=scenarios[i];
+  musicStarted = true;
 
-  app.innerHTML=renderTop()+`
-   <div class="panel">
-    <div class="badge">Event 5 of 20</div>
-    <h2>🧠 The Mind Games</h2>
-    <p>Choose the response that shows the strongest compatibility.</p>
-    <h3>${s[0]}</h3>
-    <div class="choices">
-      ${s.slice(1).map((x,n)=>`
-       <button class="choice" onclick="mindAnswer(${n})">${x}</button>
-      `).join("")}
+  const melody = [
+    261.63, 329.63, 392.00, 329.63,
+    293.66, 349.23, 440.00, 349.23,
+    261.63, 329.63, 392.00, 493.88,
+    293.66, 349.23, 440.00, 523.25
+  ];
+
+  let index = 0;
+
+  function playNote() {
+    if (!audioContext || !masterGain || !state.musicOn) return;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = melody[index % melody.length];
+
+    gain.gain.setValueAtTime(0, audioContext.currentTime);
+    gain.gain.linearRampToValueAtTime(
+      0.8,
+      audioContext.currentTime + 0.04
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.65
+    );
+
+    oscillator.connect(gain);
+    gain.connect(masterGain);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.7);
+
+    index++;
+  }
+
+  playNote();
+  musicInterval = setInterval(playNote, 600);
+}
+
+function toggleMusic() {
+  state.musicOn = !state.musicOn;
+  saveGame();
+
+  if (state.musicOn) {
+    startMusic();
+  } else if (masterGain) {
+    masterGain.gain.value = 0;
+  }
+
+  render();
+}
+
+/* =========================================================
+   GENERAL UI
+   ========================================================= */
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function topBar() {
+  return `
+    <div class="topbar">
+      <div class="logo">🚂 <span>Lulu Express</span></div>
+      <button class="music-btn" onclick="toggleMusic()">
+        ${state.musicOn ? "🔊 Music" : "🔇 Music"}
+      </button>
     </div>
-   </div>`;
- }
-
- window.mindAnswer=function(n){
-   if(n===0){
-     score+=15;
-     addScore(15);
-   }else{
-     score+=3;
-     addScore(3);
-   }
-
-   i++;
-   show();
- };
-
- show();
+  `;
 }
 
-/* ---------- EVENT 6 ---------- */
-
-function event6(){
- let chips=100;
- let hand=[];
- const suits=["♥","♦","♣","♠"];
- const ranks=["A","K","Q","J","10","9"];
-
- function draw(){
-   hand=[
-     ranks[Math.floor(Math.random()*ranks.length)]+suits[Math.floor(Math.random()*4)],
-     ranks[Math.floor(Math.random()*ranks.length)]+suits[Math.floor(Math.random()*4)],
-     ranks[Math.floor(Math.random()*ranks.length)]+suits[Math.floor(Math.random()*4)]
-   ];
-
-   app.innerHTML=renderTop()+`
-    <div class="panel center">
-     <div class="badge">Event 6 of 20</div>
-     <h2>🃏 The Bluff</h2>
-     <p>Read your hand. Bet, fold or bluff your way through three rounds.</p>
-     <div class="big">${chips}</div>
-     <div class="card-row">
-      ${hand.map(c=>`<div class="playing-card">${c}</div>`).join("")}
-     </div>
-     <button class="btn gold" onclick="pokerAction('bet')">BET 25</button>
-     <button class="btn" onclick="pokerAction('bluff')">BLUFF 40</button>
-     <button class="btn alt" onclick="pokerAction('fold')">FOLD</button>
-     <div id="pokerResult" class="result">Make your move.</div>
-    </div>`;
- }
-
- let n=0;
-
- window.pokerAction=function(action){
-   n++;
-
-   let win=false;
-
-   if(action==="fold"){
-     chips=Math.max(0,chips-5);
-   }else{
-     win=Math.random()>.42;
-
-     if(win){
-       chips+=action==="bluff"?40:25;
-       addScore(action==="bluff"?20:12);
-     }else{
-       chips=Math.max(0,chips-(action==="bluff"?40:25));
-     }
-   }
-
-   document.getElementById("pokerResult").textContent=
-     action==="fold"?"You folded and lived to bluff another day.":
-     win?"🎉 The bluff worked!":"💔 Your opponent called it.";
-
-   if(n>=3){
-     setTimeout(()=>completeRound(Math.floor(chips/4)),600);
-   }
- };
-
- draw();
-}
-
-/* ---------- EVENT 7 ---------- */
-
-function event7(){
- let level=3;
- let sequence=[];
- let player=[];
- let locked=false;
-
- const symbols=["❤️","🌹","⭐","🐬","🎲","🌙","☀️","🦋"];
-
- function begin(){
-   if(locked)return;
-
-   locked=true;
-   sequence=[];
-
-   for(let i=0;i<level;i++){
-     sequence.push(symbols[Math.floor(Math.random()*symbols.length)]);
-   }
-
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 7 of 20</div>
-    <h2>⚡ The Survival Round</h2>
-    <p>Memorise the sequence. One mistake and the round ends.</p>
-    <div class="notice">Level ${level}</div>
-    <div class="memory-box" id="survivalBox"></div>
-   </div>`;
-
-   const box=document.getElementById("survivalBox");
-
-   sequence.forEach((x,i)=>{
-     const t=document.createElement("div");
-     t.className="memory-tile";
-     t.textContent=x;
-     box.appendChild(t);
-   });
-
-   let i=0;
-
-   const timer=setInterval(()=>{
-     const tiles=box.children;
-     [...tiles].forEach(t=>t.classList.remove("active"));
-
-     if(i<sequence.length){
-       tiles[i].classList.add("active");
-       i++;
-     }else{
-       clearInterval(timer);
-       createInput();
-     }
-   },500);
- }
-
- function createInput(){
-   const box=document.getElementById("survivalBox");
-   box.innerHTML="";
-
-   sequence.forEach((_,i)=>{
-     const t=document.createElement("button");
-     t.className="memory-tile";
-     t.textContent="?";
-
-     t.onclick=()=>{
-       const choices=[...symbols];
-       const answer=choices[Math.floor(Math.random()*choices.length)];
-
-       /* A safer accessible version: tapping cycles through symbols. */
-       let current=0;
-
-       function cycle(){
-         t.textContent=choices[current%choices.length];
-         current++;
-
-         if(current>=choices.length){
-           t.onclick=null;
-           const correct=t.textContent===sequence[i];
-
-           if(!correct){
-             alert("💔 Survival failed!");
-             completeRound(10);
-           }else{
-             player[i]=t.textContent;
-
-             if(player.filter(Boolean).length===sequence.length){
-               level++;
-
-               if(level>5){
-                 completeRound(35);
-               }else{
-                 locked=false;
-                 begin();
-               }
-             }
-           }
-         }
-       }
-
-       cycle();
-     };
-
-     box.appendChild(t);
-   });
- }
-
- /* Replace the cycle challenge with direct symbol selection beneath it. */
- function directBegin(){
-   locked=true;
-   sequence=[];
-
-   for(let i=0;i<level;i++){
-     sequence.push(symbols[Math.floor(Math.random()*symbols.length)]);
-   }
-
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 7 of 20</div>
-    <h2>⚡ The Survival Round</h2>
-    <p>Memorise the symbols. Then reproduce them in order.</p>
-    <div class="notice">Level ${level}</div>
-    <div id="showSequence" class="memory-box"></div>
-   </div>`;
-
-   const show=document.getElementById("showSequence");
-
-   sequence.forEach(x=>{
-     const t=document.createElement("div");
-     t.className="memory-tile";
-     t.textContent=x;
-     show.appendChild(t);
-   });
-
-   setTimeout(()=>{
-     app.querySelector(".panel").innerHTML+=`
-      <div class="notice">Now enter the sequence:</div>
-      <div id="survivalChoices" class="grid">
-       ${symbols.map((x,i)=>`<button class="choice" onclick="survivalPick('${x.replaceAll("'","")}')">${x}</button>`).join("")}
+function stats() {
+  return `
+    <div class="stats">
+      <div class="stat">
+        <strong>${state.score}</strong>
+        <small>Heart Points</small>
       </div>
-      <div id="survivalProgress" class="result">0 / ${sequence.length}</div>`;
-     player=[];
-   },1500);
- }
 
- window.survivalPick=function(symbol){
-   const expected=sequence[player.length];
+      <div class="stat">
+        <strong>${state.currentEvent + 1}</strong>
+        <small>Current Event</small>
+      </div>
 
-   if(symbol!==expected){
-     alert("💔 Wrong symbol. Survival failed.");
-     completeRound(8);
-     return;
-   }
-
-   player.push(symbol);
-   document.getElementById("survivalProgress").textContent=
-     `${player.length} / ${sequence.length}`;
-
-   if(player.length===sequence.length){
-     addScore(level*10);
-     level++;
-
-     if(level>5){
-       completeRound(35);
-     }else{
-       setTimeout(directBegin,600);
-     }
-   }
- };
-
- directBegin();
-}
-
-/* ---------- EVENT 8 ---------- */
-
-function event8(){
- let player=0;
- let rival=0;
- let q=0;
-
- const actions=["❤️","🌹","⭐","🐬"];
-
- function next(){
-   if(q>=8){
-     const bonus=player>=rival?50:15;
-     completeRound(bonus);
-     return;
-   }
-
-   const target=actions[Math.floor(Math.random()*actions.length)];
-
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 8 of 20</div>
-    <h2>🏎️ The Admirer Race</h2>
-    <p>Tap the matching symbol before your rival moves.</p>
-
-    <div class="stats">
-      <div class="stat"><b>${player}</b><small>You</small></div>
-      <div class="stat"><b>${rival}</b><small>Rival</small></div>
-      <div class="stat"><b>${q+1}/8</b><small>Lap</small></div>
+      <div class="stat">
+        <strong>20</strong>
+        <small>Total Events</small>
+      </div>
     </div>
+  `;
+}
 
-    <div class="notice big">${target}</div>
+function addPoints(points) {
+  state.score = Math.max(0, state.score + points);
+  saveGame();
+}
 
-    <div class="grid">
-      ${actions.map(x=>`
-       <button class="choice" onclick="racePick('${x}')">${x}</button>
-      `).join("")}
+function finishEvent(points = 0) {
+  addPoints(points);
+
+  if (state.currentEvent < 19) {
+    state.currentEvent++;
+    saveGame();
+    render();
+  } else {
+    state.finished = true;
+    saveGame();
+    finalResult();
+  }
+}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+function home() {
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">🚂 All aboard</div>
+
+      <h1>Lulu<br>Express 💗</h1>
+
+      <p>
+        Twenty challenges.<br>
+        One final destination.<br>
+        One winner.
+      </p>
+
+      ${
+        state.playerName
+          ? `
+            <div class="notice">
+              Welcome back,
+              <strong>${escapeHTML(state.playerName)}</strong>.
+              <br>
+              You are currently on Event
+              <strong>${state.currentEvent + 1}</strong>.
+            </div>
+          `
+          : `
+            <input
+              id="playerName"
+              maxlength="30"
+              placeholder="Enter your name, Admirer"
+            >
+          `
+      }
+
+      <button class="btn gold" onclick="boardTrain()">
+        🚂 ${state.playerName ? "Continue Journey" : "Board the Lulu Express"}
+      </button>
+
+      ${
+        state.playerName
+          ? `
+            ${stats()}
+            ${roundList()}
+          `
+          : ""
+      }
+
     </div>
-   </div>`;
- }
-
- window.racePick=function(x){
-   if(x===document.querySelector(".notice.big").textContent){
-     player++;
-     addScore(8);
-   }else{
-     rival++;
-   }
-
-   if(Math.random()>.45)rival++;
-
-   q++;
-   next();
- };
-
- next();
+  `;
 }
 
-/* ---------- EVENT 9 ---------- */
+function roundList() {
+  return `
+    <div class="round-list">
 
-function event9(){
- let doors=0;
- let score=0;
+      ${EVENTS.map((event, index) => {
 
- function show(){
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 9 of 20</div>
-    <h2>💔 The Heartbreak Chamber</h2>
-    <p>Choose a door. Every door carries a different consequence.</p>
-    <div class="big">${score}</div>
-    <div class="grid">
-     <button class="btn" onclick="door(1)">🚪 Door 1</button>
-     <button class="btn gold" onclick="door(2)">🚪 Door 2</button>
-     <button class="btn" onclick="door(3)">🚪 Door 3</button>
-     <button class="btn red" onclick="door(4)">🚪 Door 4</button>
+        let className = "round";
+
+        if (index === state.currentEvent) {
+          className += " current";
+        }
+
+        if (index > state.currentEvent) {
+          className += " locked";
+        }
+
+        const number =
+          index < state.currentEvent
+            ? "✓"
+            : index + 1;
+
+        return `
+          <div class="${className}">
+            <div class="round-number">${number}</div>
+
+            <div>
+              <strong>${event}</strong><br>
+
+              <small>
+                ${
+                  index < state.currentEvent
+                    ? "Completed"
+                    : index === state.currentEvent
+                    ? "Current"
+                    : "🔒 Locked"
+                }
+              </small>
+            </div>
+          </div>
+        `;
+
+      }).join("")}
+
     </div>
-    <div id="doorResult" class="result">Door ${doors+1} of 5</div>
-   </div>`;
- }
-
- window.door=function(n){
-   doors++;
-
-   const outcomes=[
-     {text:"💗 A heart was waiting inside. +30",points:30},
-     {text:"🌹 Roses! +15",points:15},
-     {text:"💔 Heartbreak! -10",points:-10},
-     {text:"🎰 JACKPOT! +50",points:50}
-   ];
-
-   const result=outcomes[Math.floor(Math.random()*outcomes.length)];
-   score+=result.points;
-   addScore(result.points);
-
-   if(doors>=5){
-     completeRound(Math.max(0,score)+15);
-   }else{
-     show();
-   }
- };
-
- show();
+  `;
 }
 
-/* ---------- EVENT 10 ---------- */
+function boardTrain() {
+  startMusic();
 
-function event10(){
- let enemy=100;
- let you=100;
- let turn=0;
+  if (!state.playerName) {
+    const input = document.getElementById("playerName");
+    const name = input.value.trim();
 
- function show(){
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 10 of 20</div>
-    <h2>🥊 The Heartbreak Boxing Match</h2>
-    <p>Attack, block, or take a risky heavy punch.</p>
+    if (!name) {
+      input.focus();
+      return;
+    }
 
-    <div class="stats">
-      <div class="stat"><b>${you}</b><small>Your HP</small></div>
-      <div class="stat"><b>${enemy}</b><small>Opponent HP</small></div>
-      <div class="stat"><b>${turn}</b><small>Turns</small></div>
+    state.playerName = name;
+    saveGame();
+  }
+
+  render();
+}
+
+/* =========================================================
+   LOCKED EVENT ACCESS
+   ========================================================= */
+
+function lockedScreen() {
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">🔒 Locked Carriage</div>
+
+      <h2>This carriage is locked.</h2>
+
+      <p>
+        You must complete the current event before
+        the next event becomes available.
+      </p>
+
+      <button class="btn" onclick="render()">
+        Return to Current Event
+      </button>
+
+      <button class="btn dark" onclick="accessCode()">
+        🔐 Secret Access
+      </button>
+
     </div>
-
-    <button class="btn" onclick="fight('punch')">🥊 Punch</button>
-    <button class="btn gold" onclick="fight('heavy')">💥 Heavy Punch</button>
-    <button class="btn alt" onclick="fight('block')">🛡️ Block</button>
-    <div id="fightResult" class="result">Choose your move.</div>
-   </div>`;
- }
-
- window.fight=function(move){
-   turn++;
-
-   let damage=0;
-
-   if(move==="punch")damage=Math.floor(Math.random()*15)+8;
-   if(move==="heavy")damage=Math.floor(Math.random()*28)+5;
-   if(move==="block")damage=0;
-
-   enemy=Math.max(0,enemy-damage);
-
-   if(enemy>0){
-     let hit=Math.floor(Math.random()*16)+5;
-
-     if(move==="block")hit=Math.floor(hit/4);
-
-     you=Math.max(0,you-hit);
-   }
-
-   addScore(damage);
-
-   if(enemy<=0){
-     completeRound(50);
-   }else if(you<=0){
-     completeRound(10);
-   }else{
-     show();
-   }
- };
-
- show();
+  `;
 }
 
-/* ---------- EVENT 11 ---------- */
+function accessCode() {
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
 
-function event11(){
- let pattern=[];
- let clicks=0;
+    <div class="panel center">
 
- function start(){
-   pattern=[];
-   clicks=0;
+      <div class="badge">🔐 Express Override</div>
 
-   for(let i=0;i<9;i++){
-     pattern.push(Math.random()>.5);
-   }
+      <h2>Enter Access Code</h2>
 
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 11 of 20</div>
-    <h2>🧩 The Perfect Match</h2>
-    <p>Memorise the glowing pattern, then recreate it.</p>
-    <div id="patternGrid" class="grid"></div>
-   </div>`;
+      <p>
+        Know the conductor's secret?
+      </p>
 
-   const grid=document.getElementById("patternGrid");
+      <input
+        id="secretCode"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="••••"
+      >
 
-   pattern.forEach(active=>{
-     const b=document.createElement("button");
-     b.className="choice";
-     b.style.height="70px";
+      <button class="btn gold" onclick="checkCode()">
+        Unlock
+      </button>
 
-     if(active){
-       b.style.background="#f49bc555";
-     }
+      <button class="btn dark" onclick="render()">
+        Cancel
+      </button>
 
-     grid.appendChild(b);
-   });
-
-   setTimeout(()=>{
-     [...grid.children].forEach((b,i)=>{
-       b.style.background="";
-       b.onclick=()=>{
-         if(pattern[i]){
-           b.classList.add("correct");
-           clicks++;
-
-           if(clicks===pattern.filter(Boolean).length){
-             completeRound(45);
-           }
-         }else{
-           b.classList.add("wrong");
-           completeRound(5);
-         }
-       };
-     });
-   },1500);
- }
-
- start();
-}
-
-/* ---------- EVENT 12 ---------- */
-
-function event12(){
- const facts=[
-  ["Liliana has green eyes.","TRUE"],
-  ["Liliana has seven siblings.","FALSE"],
-  ["Liliana studied Psychology.","TRUE"],
-  ["Liliana's birthday is July 22.","TRUE"],
-  ["Liliana has two tattoos.","FALSE"],
-  ["Liliana is afraid of drowning.","TRUE"],
-  ["Liliana has four piercings.","TRUE"],
-  ["Liliana's favourite number is 9.","FALSE"]
- ];
-
- let i=0;
-
- function show(){
-   if(i>=facts.length){
-     completeRound(40);
-     return;
-   }
-
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 12 of 20</div>
-    <h2>🕵️ Who Knows Liliana Best?</h2>
-    <p>Truth or lie?</p>
-    <h3>${facts[i][0]}</h3>
-    <div class="grid">
-      <button class="btn gold" onclick="truth(true)">TRUE</button>
-      <button class="btn" onclick="truth(false)">FALSE</button>
     </div>
-   </div>`;
- }
-
- window.truth=function(answer){
-   const correct=(facts[i][1]==="TRUE");
-
-   if(answer===correct)addScore(10);
-
-   i++;
-   show();
- };
-
- show();
+  `;
 }
 
-/* ---------- EVENT 13 ---------- */
+function checkCode() {
+  const code = document.getElementById("secretCode").value.trim();
 
-function event13(){
- const commands=["TAP","TAP","HOLD","SWIPE","DOUBLE TAP"];
- let i=0;
- let score=0;
- let timeout;
-
- function next(){
-   if(i>=12){
-     completeRound(score+20);
-     return;
-   }
-
-   const command=commands[Math.floor(Math.random()*commands.length)];
-
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 13 of 20</div>
-    <h2>💨 The Reaction Gauntlet</h2>
-    <p>Perform the command shown.</p>
-    <div class="big">${command}</div>
-    <button id="reactionButton" class="btn gold">DO IT!</button>
-    <div class="small">${i+1}/12</div>
-   </div>`;
-
-   const button=document.getElementById("reactionButton");
-
-   if(command==="TAP"){
-     button.onclick=success;
-   }else if(command==="HOLD"){
-     let down=false;
-     let start=0;
-
-     button.onpointerdown=()=>{
-       down=true;
-       start=Date.now();
-     };
-
-     button.onpointerup=()=>{
-       if(down && Date.now()-start>=500)success();
-       else fail();
-       down=false;
-     };
-   }else if(command==="DOUBLE TAP"){
-     let taps=0;
-     let last=0;
-
-     button.onclick=()=>{
-       const now=Date.now();
-
-       if(now-last<500)taps++;
-       else taps=1;
-
-       last=now;
-
-       if(taps>=2)success();
-     };
-   }else{
-     button.ontouchstart=success;
-     button.onclick=success;
-   }
-
-   timeout=setTimeout(fail,1800);
-
-   function success(){
-     clearTimeout(timeout);
-     score+=10;
-     addScore(10);
-     i++;
-     setTimeout(next,250);
-   }
-
-   function fail(){
-     clearTimeout(timeout);
-     i++;
-     setTimeout(next,250);
-   }
- }
-
- next();
+  if (code === "3333") {
+    state.currentEvent = 19;
+    saveGame();
+    render();
+  } else {
+    alert("❌ Incorrect code.");
+  }
 }
 
-/* ---------- EVENT 14 ---------- */
+/* =========================================================
+   EVENT ROUTER
+   ========================================================= */
 
-function event14(){
- const walls=[1,3,5,7,9,11,13,15,17,19];
- let player=0;
- const goal=24;
+function render() {
 
- function draw(){
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 14 of 20</div>
-    <h2>🗺️ The Heart Hunt</h2>
-    <p>Navigate the maze and reach ❤️.</p>
-    <div class="maze" id="maze"></div>
-    <div class="grid">
-      <button class="btn" onclick="move(-5)">⬆️</button>
-      <button class="btn" onclick="move(5)">⬇️</button>
-      <button class="btn" onclick="move(-1)">⬅️</button>
-      <button class="btn" onclick="move(1)">➡️</button>
+  if (state.finished) {
+    finalResult();
+    return;
+  }
+
+  if (!state.playerName) {
+    home();
+    return;
+  }
+
+  switch (state.currentEvent) {
+
+    case 0:
+      event1();
+      break;
+
+    case 1:
+      event2();
+      break;
+
+    case 2:
+      event3();
+      break;
+
+    case 3:
+      event4();
+      break;
+
+    case 4:
+      event5();
+      break;
+
+    case 5:
+      event6();
+      break;
+
+    case 6:
+      event7();
+      break;
+
+    case 7:
+      event8();
+      break;
+
+    case 8:
+      event9();
+      break;
+
+    case 9:
+      event10();
+      break;
+
+    case 10:
+      event11();
+      break;
+
+    case 11:
+      event12();
+      break;
+
+    case 12:
+      event13();
+      break;
+
+    case 13:
+      event14();
+      break;
+
+    case 14:
+      event15();
+      break;
+
+    case 15:
+      event16();
+      break;
+
+    case 16:
+      event17();
+      break;
+
+    case 17:
+      event18();
+      break;
+
+    case 18:
+      event19();
+      break;
+
+    case 19:
+      event20();
+      break;
+
+    default:
+      home();
+  }
+}
+
+/* =========================================================
+   EVENT 1
+   THE HEART RATE
+   ========================================================= */
+
+function event1() {
+
+  let hits = 0;
+  let misses = 0;
+  let time = 20;
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel">
+
+      <div class="badge">Event 1 of 20</div>
+
+      <h2>❤️ The Heart Rate</h2>
+
+      <p>
+        Tap the hearts. Avoid the broken hearts.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="hits">0</strong>
+          <small>Hearts</small>
+        </div>
+
+        <div class="stat">
+          <strong id="misses">0</strong>
+          <small>Broken</small>
+        </div>
+
+        <div class="stat">
+          <strong id="time">20</strong>
+          <small>Seconds</small>
+        </div>
+      </div>
+
+      <div id="arena" class="arena"></div>
+
     </div>
-   </div>`;
+  `;
 
-   const maze=document.getElementById("maze");
+  const arena = document.getElementById("arena");
 
-   for(let i=0;i<25;i++){
-     const c=document.createElement("div");
-     c.className="maze-cell";
+  function spawn() {
 
-     if(walls.includes(i))c.classList.add("wall");
-     if(i===player)c.classList.add("player");
-     if(i===goal){
-       c.classList.add("goal");
-       c.textContent="❤️";
-     }
+    if (time <= 0) return;
 
-     maze.appendChild(c);
-   }
- }
+    const target = document.createElement("button");
 
- window.move=function(amount){
-   const next=player+amount;
+    const good = Math.random() > 0.22;
 
-   if(next<0||next>24||walls.includes(next))return;
+    target.className = good ? "target" : "target bad";
+    target.textContent = good ? "❤️" : "💔";
 
-   if(amount===1 && Math.floor(player/5)!==Math.floor(next/5))return;
-   if(amount===-1 && Math.floor(player/5)!==Math.floor(next/5))return;
+    target.style.left = `${Math.random() * 80 + 5}%`;
+    target.style.top = `${Math.random() * 75 + 5}%`;
 
-   player=next;
-   addScore(2);
+    target.onclick = function() {
 
-   if(player===goal){
-     completeRound(40);
-   }else{
-     draw();
-   }
- };
+      if (good) {
+        hits++;
+        addPoints(5);
+      } else {
+        misses++;
+        addPoints(-4);
+      }
 
- draw();
+      document.getElementById("hits").textContent = hits;
+      document.getElementById("misses").textContent = misses;
+
+      target.remove();
+    };
+
+    arena.appendChild(target);
+
+    setTimeout(() => {
+      if (target.parentNode) target.remove();
+    }, 900);
+  }
+
+  const spawnTimer = setInterval(spawn, 450);
+
+  const countdown = setInterval(() => {
+
+    time--;
+
+    document.getElementById("time").textContent = time;
+
+    if (time <= 0) {
+
+      clearInterval(spawnTimer);
+      clearInterval(countdown);
+
+      setTimeout(() => {
+        finishEvent(hits * 2);
+      }, 400);
+    }
+
+  }, 1000);
+
+  spawn();
 }
 
-/* ---------- EVENT 15 ---------- */
+/* =========================================================
+   EVENT 2
+   MEMORY VAULT
+   ========================================================= */
 
-function event15(){
- const answer="3333";
- let entered="";
+function event2() {
 
- function draw(){
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 15 of 20</div>
-    <h2>🔐 The Love Lock</h2>
-    <p>
-      Solve the clue:
-      <br><br>
-      <strong>What number has already been hidden throughout
-      the Lulu Express as the secret override?</strong>
-    </p>
+  let level = 3;
 
-    <div class="big">${entered||"••••"}</div>
+  const symbols = [
+    "❤️",
+    "🌹",
+    "⭐",
+    "🐬",
+    "🎲",
+    "🌙",
+    "☀️",
+    "🦋"
+  ];
 
-    <div class="grid">
-      ${[1,2,3,4,5,6,7,8,9,0].map(n=>
-        `<button class="choice" onclick="digit(${n})">${n}</button>`
-      ).join("")}
+  function startLevel() {
+
+    const sequence = [];
+
+    for (let i = 0; i < level; i++) {
+      sequence.push(
+        symbols[Math.floor(Math.random() * symbols.length)]
+      );
+    }
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 2 of 20</div>
+
+        <h2>🧠 The Memory Vault</h2>
+
+        <p>
+          Memorise the sequence.
+        </p>
+
+        <div class="notice">
+          Level ${level}
+        </div>
+
+        <div id="memoryGrid" class="memory-grid"></div>
+
+      </div>
+    `;
+
+    const grid = document.getElementById("memoryGrid");
+
+    sequence.forEach(symbol => {
+
+      const tile = document.createElement("div");
+
+      tile.className = "memory-tile";
+      tile.textContent = symbol;
+
+      grid.appendChild(tile);
+    });
+
+    let current = 0;
+
+    const flash = setInterval(() => {
+
+      const tiles = grid.children;
+
+      [...tiles].forEach(tile =>
+        tile.classList.remove("active")
+      );
+
+      if (current < tiles.length) {
+        tiles[current].classList.add("active");
+        current++;
+      } else {
+
+        clearInterval(flash);
+
+        setTimeout(() => {
+          playSequence(sequence);
+        }, 300);
+      }
+
+    }, 600);
+  }
+
+  function playSequence(sequence) {
+
+    const playerSequence = [];
+
+    const grid = document.getElementById("memoryGrid");
+
+    grid.innerHTML = "";
+
+    symbols.forEach(symbol => {
+
+      const button = document.createElement("button");
+
+      button.className = "memory-tile";
+      button.textContent = symbol;
+
+      button.onclick = function() {
+
+        const expected =
+          sequence[playerSequence.length];
+
+        if (symbol !== expected) {
+
+          alert("💔 Wrong sequence. Try again.");
+
+          setTimeout(startLevel, 400);
+
+          return;
+        }
+
+        playerSequence.push(symbol);
+
+        button.classList.add("active");
+
+        if (
+          playerSequence.length ===
+          sequence.length
+        ) {
+
+          addPoints(level * 10);
+
+          if (level >= 6) {
+
+            setTimeout(() => {
+              finishEvent(30);
+            }, 500);
+
+          } else {
+
+            level++;
+
+            setTimeout(startLevel, 700);
+          }
+        }
+
+      };
+
+      grid.appendChild(button);
+    });
+  }
+
+  startLevel();
+}
+
+/* =========================================================
+   EVENT 3
+   PRESSURE QUIZ
+   ========================================================= */
+
+function event3() {
+
+  let question = 0;
+  let points = 0;
+  let timer = null;
+
+  function showQuestion() {
+
+    if (question >= PRESSURE_QUIZ.length) {
+      finishEvent(points + 20);
+      return;
+    }
+
+    const current = PRESSURE_QUIZ[question];
+
+    let seconds = 5;
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel">
+
+        <div class="badge">Event 3 of 20</div>
+
+        <h2>⚡ The Pressure Quiz</h2>
+
+        <div id="pressureTimer" class="timer">
+          5
+        </div>
+
+        <p>
+          Question ${question + 1}
+          of ${PRESSURE_QUIZ.length}
+        </p>
+
+        <h3>${current.question}</h3>
+
+        <div class="choices">
+
+          ${current.answers.map((answer, index) => `
+            <button
+              class="choice"
+              onclick="pressureAnswer(${index})"
+            >
+              ${answer}
+            </button>
+          `).join("")}
+
+        </div>
+
+      </div>
+    `;
+
+    timer = setInterval(() => {
+
+      seconds--;
+
+      const display =
+        document.getElementById("pressureTimer");
+
+      if (display) {
+        display.textContent = seconds;
+      }
+
+      if (seconds <= 0) {
+
+        clearInterval(timer);
+
+        question++;
+
+        setTimeout(showQuestion, 250);
+      }
+
+    }, 1000);
+  }
+
+  window.pressureAnswer = function(index) {
+
+    clearInterval(timer);
+
+    if (
+      index ===
+      PRESSURE_QUIZ[question].correct
+    ) {
+
+      points += 15;
+      addPoints(15);
+    }
+
+    question++;
+
+    setTimeout(showQuestion, 250);
+  };
+
+  showQuestion();
+}
+
+/* =========================================================
+   EVENT 4
+   HIGH ROLLER
+   ========================================================= */
+
+function event4() {
+
+  let tokens = 100;
+  let turns = 0;
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">Event 4 of 20</div>
+
+      <h2>🎰 The High Roller</h2>
+
+      <p>
+        Risk your Love Tokens for bigger rewards.
+      </p>
+
+      <div id="tokens" class="big-number">
+        100
+      </div>
+
+      <button class="btn" onclick="highRoll(10)">
+        SAFE — Bet 10
+      </button>
+
+      <button class="btn gold" onclick="highRoll(25)">
+        RISKY — Bet 25
+      </button>
+
+      <button class="btn red" onclick="highRoll(50)">
+        ALL IN — Bet 50
+      </button>
+
+      <div id="gambleMessage" class="notice">
+        Choose your bet.
+      </div>
+
     </div>
+  `;
 
-    <button class="btn alt" onclick="clearCode()">Clear</button>
-   </div>`;
- }
+  window.highRoll = function(amount) {
 
- window.digit=function(n){
-   if(entered.length<4)entered+=n;
+    turns++;
 
-   if(entered.length===4){
-     if(entered===answer){
-       completeRound(50);
-     }else{
-       alert("The lock rejected that code.");
-       entered="";
-       draw();
-     }
-   }else{
-     draw();
-   }
- };
+    const win = Math.random() > 0.42;
 
- window.clearCode=function(){
-   entered="";
-   draw();
- };
+    if (win) {
+      tokens += amount * 2;
+      addPoints(amount);
+      document.getElementById("gambleMessage").textContent =
+        "💗 WIN! The Lulu Express is smiling.";
+    } else {
+      tokens -= amount;
+      addPoints(-Math.floor(amount / 2));
+      document.getElementById("gambleMessage").textContent =
+        "💔 LOSS! The house takes the bet.";
+    }
 
- draw();
+    tokens = Math.max(0, tokens);
+
+    document.getElementById("tokens").textContent = tokens;
+
+    if (turns >= 5) {
+      finishEvent(Math.floor(tokens / 4));
+    }
+  };
 }
 
-/* ---------- EVENT 16 ---------- */
+/* =========================================================
+   EVENT 5
+   MIND GAMES
+   ========================================================= */
 
-function event16(){
- let hits=0;
- let misses=0;
- let time=20;
+function event5() {
 
- app.innerHTML=renderTop()+`
- <div class="panel">
-  <div class="badge">Event 16 of 20</div>
-  <h2>🎯 The Cupid Shootout</h2>
-  <p>Hit ❤️. Avoid 💔.</p>
-  <div class="stats">
-   <div class="stat"><b id="shotHits">0</b><small>Hits</small></div>
-   <div class="stat"><b id="shotMisses">0</b><small>Misses</small></div>
-   <div class="stat"><b id="shotTime">20</b><small>Seconds</small></div>
-  </div>
-  <div id="shootArena" class="arena"></div>
- </div>`;
+  const questions = [
+    {
+      q: "Liliana has had a terrible day. What do you do?",
+      a: [
+        "Listen without taking over.",
+        "Tell her to get over it.",
+        "Ignore her.",
+        "Change the subject."
+      ]
+    },
+    {
+      q: "Liliana tells you something personal. What matters most?",
+      a: [
+        "Respecting her trust.",
+        "Tell everyone.",
+        "Laugh about it.",
+        "Change the subject."
+      ]
+    },
+    {
+      q: "A disagreement happens. What is the strongest move?",
+      a: [
+        "Communicate honestly.",
+        "Refuse to talk.",
+        "Make it a competition.",
+        "Pretend it never happened."
+      ]
+    },
+    {
+      q: "You have one free evening together. What sounds best?",
+      a: [
+        "Let Liliana choose something fun.",
+        "Make every decision yourself.",
+        "Cancel.",
+        "Start an argument."
+      ]
+    }
+  ];
 
- const arena=document.getElementById("shootArena");
+  let index = 0;
 
- function spawn(){
-   if(time<=0)return;
+  function show() {
 
-   const b=document.createElement("button");
-   const good=Math.random()>.25;
+    if (index >= questions.length) {
+      finishEvent(30);
+      return;
+    }
 
-   b.className="heart-target"+(good?"":" broken-target");
-   b.textContent=good?"❤️":"💔";
-   b.style.left=(Math.random()*80+5)+"%";
-   b.style.top=(Math.random()*75+5)+"%";
+    const item = questions[index];
 
-   b.onclick=()=>{
-     if(good){
-       hits++;
-       addScore(6);
-     }else{
-       misses++;
-       addScore(-4);
-     }
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
 
-     document.getElementById("shotHits").textContent=hits;
-     document.getElementById("shotMisses").textContent=misses;
-     b.remove();
-   };
+      <div class="panel">
 
-   arena.appendChild(b);
+        <div class="badge">Event 5 of 20</div>
 
-   setTimeout(()=>b.remove(),800);
- }
+        <h2>🧠 The Mind Games</h2>
 
- const spawnTimer=setInterval(spawn,350);
+        <p>
+          Choose the response that shows the strongest
+          compatibility.
+        </p>
 
- const timeTimer=setInterval(()=>{
-   time--;
-   document.getElementById("shotTime").textContent=time;
+        <h3>${item.q}</h3>
 
-   if(time<=0){
-     clearInterval(spawnTimer);
-     clearInterval(timeTimer);
-     setTimeout(()=>completeRound(hits*2),300);
-   }
- },1000);
+        <div class="choices">
 
- spawn();
+          ${item.a.map((answer, i) => `
+            <button
+              class="choice"
+              onclick="mindChoice(${i})"
+            >
+              ${answer}
+            </button>
+          `).join("")}
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.mindChoice = function(index) {
+
+    if (index === 0) {
+      addPoints(15);
+    } else {
+      addPoints(3);
+    }
+
+    index++;
+    show();
+  };
+
+  show();
 }
 
-/* ---------- EVENT 17 ---------- */
+/* =========================================================
+   EVENT 6
+   BLUFF
+   ========================================================= */
 
-function event17(){
- let challenge=0;
- let points=0;
- let timer=60;
+function event6() {
 
- function next(){
-   if(challenge>=20){
-     completeRound(points+40);
-     return;
-   }
+  let chips = 100;
+  let turn = 0;
 
-   const tasks=[
-     "Tap the GOLD button.",
-     "Tap the PINK button.",
-     "Tap ❤️.",
-     "Tap ⭐.",
-     "Tap 🐬.",
-     "Tap 🌹."
-   ];
+  function draw() {
 
-   const task=tasks[Math.floor(Math.random()*tasks.length)];
+    const cards = [
+      "A♥",
+      "K♦",
+      "Q♣"
+    ];
 
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 17 of 20</div>
-    <h2>🧨 The Countdown</h2>
-    <div class="timer">${timer}</div>
-    <p>${task}</p>
-    <button id="countButton" class="btn gold">GOLD</button>
-    <button class="btn" onclick="miniSuccess('PINK')">PINK</button>
-    <button class="btn alt" onclick="miniSuccess('❤️')">❤️</button>
-    <button class="btn alt" onclick="miniSuccess('⭐')">⭐</button>
-    <button class="btn alt" onclick="miniSuccess('🐬')">🐬</button>
-    <button class="btn alt" onclick="miniSuccess('🌹')">🌹</button>
-    <div class="small">${challenge}/20 completed</div>
-   </div>`;
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
 
-   document.getElementById("countButton").onclick=()=>miniSuccess("GOLD");
- }
+      <div class="panel center">
 
- window.miniSuccess=function(value){
-   challenge++;
-   points+=Math.max(1, timer>0?5:1);
-   addScore(5);
-   next();
- };
+        <div class="badge">Event 6 of 20</div>
 
- const countdown=setInterval(()=>{
-   timer--;
+        <h2>🃏 The Bluff</h2>
 
-   const el=document.querySelector(".timer");
-   if(el)el.textContent=timer;
+        <p>
+          Bet, fold or bluff your way through three hands.
+        </p>
 
-   if(timer<=0){
-     clearInterval(countdown);
-     if(challenge<20)completeRound(points+10);
-   }
- },1000);
+        <div class="big-number">${chips}</div>
 
- next();
+        <div class="card-row">
+          ${cards.map(card => `
+            <div class="card">${card}</div>
+          `).join("")}
+        </div>
+
+        <button class="btn" onclick="bluffMove('bet')">
+          BET 25
+        </button>
+
+        <button class="btn gold" onclick="bluffMove('bluff')">
+          BLUFF 40
+        </button>
+
+        <button class="btn dark" onclick="bluffMove('fold')">
+          FOLD
+        </button>
+
+        <div id="bluffMessage" class="notice">
+          Make your move.
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.bluffMove = function(move) {
+
+    turn++;
+
+    const win = Math.random() > 0.45;
+
+    if (move === "fold") {
+      chips = Math.max(0, chips - 5);
+
+      document.getElementById("bluffMessage").textContent =
+        "You folded. Sometimes survival is the best strategy.";
+    } else if (win) {
+
+      const reward =
+        move === "bluff" ? 40 : 25;
+
+      chips += reward;
+      addPoints(15);
+
+      document.getElementById("bluffMessage").textContent =
+        "🎉 They believed you!";
+    } else {
+
+      const loss =
+        move === "bluff" ? 40 : 25;
+
+      chips = Math.max(0, chips - loss);
+
+      document.getElementById("bluffMessage").textContent =
+        "💔 Your opponent called the bluff.";
+    }
+
+    if (turn >= 3) {
+      setTimeout(() => {
+        finishEvent(Math.floor(chips / 4));
+      }, 500);
+    } else {
+      setTimeout(draw, 500);
+    }
+  };
+
+  draw();
 }
 
-/* ---------- EVENT 18 ---------- */
+/* =========================================================
+   EVENT 7
+   SURVIVAL ROUND
+   ========================================================= */
 
-function event18(){
- let points=100;
- let turns=0;
+function event7() {
 
- app.innerHTML=renderTop()+`
- <div class="panel center">
-  <div class="badge">Event 18 of 20</div>
-  <h2>🎰 The Ultimate Gamble</h2>
-  <p>Your accumulated Heart Points are on the table.</p>
-  <div class="big" id="gamblePoints">${points}</div>
-  <button class="btn" onclick="ultimate('safe')">SAFE — Keep 75%</button>
-  <button class="btn gold" onclick="ultimate('risk')">RISK — Double or Lose Half</button>
-  <button class="btn red" onclick="ultimate('all')">ALL IN — Triple or Zero</button>
-  <div id="ultimateResult" class="result">Choose wisely.</div>
- </div>`;
+  const symbols = [
+    "❤️",
+    "🌹",
+    "⭐",
+    "🐬",
+    "🎲",
+    "🌙",
+    "☀️",
+    "🦋"
+  ];
 
- window.ultimate=function(type){
-   turns++;
+  let level = 3;
+  let sequence = [];
+  let player = [];
 
-   const win=Math.random()>.5;
+  function start() {
 
-   if(type==="safe"){
-     points=Math.floor(points*.75);
-   }else if(type==="risk"){
-     points=win?points*2:Math.floor(points*.5);
-   }else{
-     points=win?points*3:0;
-   }
+    sequence = [];
+    player = [];
 
-   document.getElementById("gamblePoints").textContent=points;
-   document.getElementById("ultimateResult").textContent=
-     win||type==="safe"?"💗 The gamble paid off.":"💔 The Express took your bet.";
+    for (let i = 0; i < level; i++) {
+      sequence.push(
+        symbols[Math.floor(Math.random() * symbols.length)]
+      );
+    }
 
-   if(turns>=2){
-     completeRound(Math.floor(points/2));
-   }
- };
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 7 of 20</div>
+
+        <h2>⚡ The Survival Round</h2>
+
+        <p>
+          Memorise the sequence.
+          One mistake ends the challenge.
+        </p>
+
+        <div class="notice">
+          Level ${level}
+        </div>
+
+        <div id="sequence" class="memory-grid"></div>
+
+      </div>
+    `;
+
+    const display =
+      document.getElementById("sequence");
+
+    sequence.forEach(symbol => {
+
+      const tile = document.createElement("div");
+
+      tile.className = "memory-tile";
+      tile.textContent = symbol;
+
+      display.appendChild(tile);
+    });
+
+    setTimeout(() => {
+
+      document.querySelector(".panel").insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="notice">
+            Now enter the sequence.
+          </div>
+
+          <div class="choices" id="survivalChoices">
+            ${symbols.map(symbol => `
+              <button
+                class="choice"
+                onclick="survivalPick('${symbol}')"
+              >
+                ${symbol}
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="notice" id="survivalProgress">
+            0 / ${sequence.length}
+          </div>
+        `
+      );
+
+    }, 1600);
+  }
+
+  window.survivalPick = function(symbol) {
+
+    const expected =
+      sequence[player.length];
+
+    if (symbol !== expected) {
+
+      alert("💔 Wrong. Your survival ends here.");
+
+      finishEvent(10);
+
+      return;
+    }
+
+    player.push(symbol);
+
+    document.getElementById(
+      "survivalProgress"
+    ).textContent =
+      `${player.length} / ${sequence.length}`;
+
+    if (player.length === sequence.length) {
+
+      addPoints(level * 10);
+
+      if (level >= 5) {
+
+        setTimeout(() => {
+          finishEvent(35);
+        }, 500);
+
+      } else {
+
+        level++;
+
+        setTimeout(start, 700);
+      }
+    }
+  };
+
+  start();
 }
 
-/* ---------- EVENT 19 ---------- */
+/* =========================================================
+   EVENT 8
+   ADMIRER RACE
+   ========================================================= */
 
-function event19(){
- let life=3;
- let round=0;
+function event8() {
 
- function next(){
-   if(round>=6){
-     completeRound(60);
-     return;
-   }
+  const symbols = ["❤️", "🌹", "⭐", "🐬"];
 
-   const tasks=[
-     "Tap ❤️ before the timer reaches zero.",
-     "Choose the only safe door.",
-     "Remember the number 3.",
-     "Tap the pink train carriage.",
-     "Choose the dolphin.",
-     "Select the rose."
-   ];
+  let player = 0;
+  let rival = 0;
+  let lap = 0;
 
-   const task=tasks[round];
+  function draw() {
 
-   app.innerHTML=renderTop()+`
-   <div class="panel center">
-    <div class="badge">Event 19 of 20</div>
-    <h2>💀 The Admirer's Last Stand</h2>
-    <div class="stats">
-      <div class="stat"><b>${life}</b><small>Lives</small></div>
-      <div class="stat"><b>${round+1}/6</b><small>Trial</small></div>
-      <div class="stat"><b>${state.score}</b><small>Points</small></div>
+    if (lap >= 8) {
+
+      finishEvent(player >= rival ? 50 : 15);
+
+      return;
+    }
+
+    const target =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 8 of 20</div>
+
+        <h2>🏎️ The Admirer Race</h2>
+
+        <p>
+          Tap the matching symbol before your rival moves.
+        </p>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>${player}</strong>
+            <small>You</small>
+          </div>
+
+          <div class="stat">
+            <strong>${rival}</strong>
+            <small>Rival</small>
+          </div>
+
+          <div class="stat">
+            <strong>${lap + 1}/8</strong>
+            <small>Lap</small>
+          </div>
+
+        </div>
+
+        <div class="big-number">${target}</div>
+
+        <div class="choices">
+
+          ${symbols.map(symbol => `
+            <button
+              class="choice"
+              onclick="racePick('${symbol}')"
+            >
+              ${symbol}
+            </button>
+          `).join("")}
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.racePick = function(symbol) {
+
+    const target =
+      document.querySelector(".big-number").textContent;
+
+    if (symbol === target) {
+      player++;
+      addPoints(8);
+    } else {
+      rival++;
+    }
+
+    if (Math.random() > 0.5) {
+      rival++;
+    }
+
+    lap++;
+
+    draw();
+  };
+
+  draw();
+}
+
+/* =========================================================
+   EVENT 9
+   HEARTBREAK CHAMBER
+   ========================================================= */
+
+function event9() {
+
+  let doors = 0;
+  let points = 0;
+
+  function draw() {
+
+    if (doors >= 5) {
+
+      finishEvent(Math.max(0, points) + 15);
+
+      return;
+    }
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 9 of 20</div>
+
+        <h2>💔 The Heartbreak Chamber</h2>
+
+        <p>
+          Five doors. Five consequences.
+        </p>
+
+        <div class="big-number">${points}</div>
+
+        <div class="grid">
+
+          <button class="btn" onclick="chooseDoor()">
+            🚪 Door 1
+          </button>
+
+          <button class="btn gold" onclick="chooseDoor()">
+            🚪 Door 2
+          </button>
+
+          <button class="btn" onclick="chooseDoor()">
+            🚪 Door 3
+          </button>
+
+          <button class="btn red" onclick="chooseDoor()">
+            🚪 Door 4
+          </button>
+
+        </div>
+
+        <div class="notice">
+          Door ${doors + 1} of 5
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.chooseDoor = function() {
+
+    const outcomes = [
+      30,
+      15,
+      -10,
+      50
+    ];
+
+    const result =
+      outcomes[Math.floor(Math.random() * outcomes.length)];
+
+    points += result;
+
+    addPoints(result);
+
+    doors++;
+
+    draw();
+  };
+
+  draw();
+}
+
+/* =========================================================
+   EVENT 10
+   BOXING
+   ========================================================= */
+
+function event10() {
+
+  let playerHP = 100;
+  let enemyHP = 100;
+
+  function draw(message = "Choose your move.") {
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 10 of 20</div>
+
+        <h2>🥊 The Heartbreak Boxing Match</h2>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>${playerHP}</strong>
+            <small>Your HP</small>
+          </div>
+
+          <div class="stat">
+            <strong>${enemyHP}</strong>
+            <small>Opponent HP</small>
+          </div>
+
+        </div>
+
+        <button
+          class="btn"
+          onclick="fightMove('punch')"
+        >
+          🥊 Punch
+        </button>
+
+        <button
+          class="btn gold"
+          onclick="fightMove('heavy')"
+        >
+          💥 Heavy Punch
+        </button>
+
+        <button
+          class="btn dark"
+          onclick="fightMove('block')"
+        >
+          🛡️ Block
+        </button>
+
+        <div class="notice">
+          ${message}
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.fightMove = function(move) {
+
+    let damage = 0;
+
+    if (move === "punch") {
+      damage = Math.floor(Math.random() * 12) + 8;
+    }
+
+    if (move === "heavy") {
+      damage = Math.floor(Math.random() * 25) + 5;
+    }
+
+    enemyHP = Math.max(0, enemyHP - damage);
+
+    addPoints(damage);
+
+    if (enemyHP > 0) {
+
+      let enemyDamage =
+        Math.floor(Math.random() * 12) + 5;
+
+      if (move === "block") {
+        enemyDamage =
+          Math.floor(enemyDamage / 4);
+      }
+
+      playerHP =
+        Math.max(0, playerHP - enemyDamage);
+    }
+
+    if (enemyHP <= 0) {
+      finishEvent(50);
+    } else if (playerHP <= 0) {
+      finishEvent(10);
+    } else {
+      draw(
+        move === "block"
+          ? "🛡️ You blocked the attack."
+          : "💥 Keep fighting!"
+      );
+    }
+  };
+
+  draw();
+}
+
+/* =========================================================
+   EVENT 11
+   PERFECT MATCH
+   ========================================================= */
+
+function event11() {
+
+  const pattern = [];
+
+  for (let i = 0; i < 16; i++) {
+    pattern.push(Math.random() > 0.55);
+  }
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">Event 11 of 20</div>
+
+      <h2>🧩 The Perfect Match</h2>
+
+      <p>
+        Memorise the glowing pattern.
+        Then recreate it.
+      </p>
+
+      <div id="pattern" class="memory-grid"></div>
+
     </div>
-    <p>${task}</p>
+  `;
 
-    <div class="grid">
-      <button class="choice" onclick="stand('❤️')">❤️</button>
-      <button class="choice" onclick="stand('🌹')">🌹</button>
-      <button class="choice" onclick="stand('🐬')">🐬</button>
-      <button class="choice" onclick="stand('3')">3</button>
+  const grid =
+    document.getElementById("pattern");
+
+  pattern.forEach(active => {
+
+    const tile =
+      document.createElement("div");
+
+    tile.className = "memory-tile";
+
+    if (active) {
+      tile.classList.add("active");
+    }
+
+    grid.appendChild(tile);
+  });
+
+  setTimeout(() => {
+
+    [...grid.children].forEach((tile, index) => {
+
+      tile.classList.remove("active");
+
+      tile.onclick = function() {
+
+        if (pattern[index]) {
+
+          tile.classList.add("active");
+          addPoints(5);
+
+          if (
+            [...grid.children].filter(
+              element =>
+                element.classList.contains("active")
+            ).length === pattern.filter(Boolean).length
+          ) {
+            finishEvent(40);
+          }
+
+        } else {
+
+          tile.classList.add("wrong");
+
+          finishEvent(5);
+        }
+      };
+    });
+
+  }, 1700);
+}
+
+/* =========================================================
+   EVENT 12
+   WHO KNOWS LILIANA BEST
+   ========================================================= */
+
+function event12() {
+
+  const statements = [
+    ["Liliana has green eyes.", true],
+    ["Liliana has seven siblings.", false],
+    ["Liliana studied Psychology.", true],
+    ["Liliana's birthday is July 22.", true],
+    ["Liliana has two tattoos.", false],
+    ["Liliana is afraid of drowning.", true],
+    ["Liliana has four piercings.", true],
+    ["Liliana's favourite number is 9.", false]
+  ];
+
+  let index = 0;
+
+  function show() {
+
+    if (index >= statements.length) {
+      finishEvent(40);
+      return;
+    }
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 12 of 20</div>
+
+        <h2>🕵️ Who Knows Liliana Best?</h2>
+
+        <p>
+          Is this statement true or false?
+        </p>
+
+        <h3>${statements[index][0]}</h3>
+
+        <button
+          class="btn gold"
+          onclick="truthAnswer(true)"
+        >
+          TRUE
+        </button>
+
+        <button
+          class="btn"
+          onclick="truthAnswer(false)"
+        >
+          FALSE
+        </button>
+
+      </div>
+    `;
+  }
+
+  window.truthAnswer = function(answer) {
+
+    if (answer === statements[index][1]) {
+      addPoints(10);
+    }
+
+    index++;
+
+    show();
+  };
+
+  show();
+}
+
+/* =========================================================
+   EVENT 13
+   REACTION GAUNTLET
+   ========================================================= */
+
+function event13() {
+
+  const commands = [
+    "TAP",
+    "TAP",
+    "HOLD",
+    "DOUBLE TAP"
+  ];
+
+  let round = 0;
+
+  function show() {
+
+    if (round >= 10) {
+      finishEvent(40);
+      return;
+    }
+
+    const command =
+      commands[Math.floor(Math.random() * commands.length)];
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 13 of 20</div>
+
+        <h2>💨 The Reaction Gauntlet</h2>
+
+        <p>
+          Follow the command as quickly as possible.
+        </p>
+
+        <div class="big-number">${command}</div>
+
+        <button id="reaction" class="btn gold">
+          DO IT
+        </button>
+
+        <div class="notice">
+          Round ${round + 1} of 10
+        </div>
+
+      </div>
+    `;
+
+    const button =
+      document.getElementById("reaction");
+
+    let completed = false;
+    let holdStart = 0;
+    let taps = 0;
+    let lastTap = 0;
+
+    function success() {
+
+      if (completed) return;
+
+      completed = true;
+      addPoints(5);
+      round++;
+
+      setTimeout(show, 200);
+    }
+
+    const timeout =
+      setTimeout(() => {
+
+        if (!completed) {
+          completed = true;
+          round++;
+          setTimeout(show, 200);
+        }
+
+      }, 1800);
+
+    if (command === "TAP") {
+
+      button.onclick = success;
+
+    } else if (command === "HOLD") {
+
+      button.onpointerdown = () => {
+        holdStart = Date.now();
+      };
+
+      button.onpointerup = () => {
+
+        if (
+          Date.now() - holdStart >= 500
+        ) {
+          clearTimeout(timeout);
+          success();
+        }
+      };
+
+    } else {
+
+      button.onclick = () => {
+
+        const now = Date.now();
+
+        if (now - lastTap < 500) {
+          taps++;
+        } else {
+          taps = 1;
+        }
+
+        lastTap = now;
+
+        if (taps >= 2) {
+          clearTimeout(timeout);
+          success();
+        }
+      };
+    }
+  }
+
+  show();
+}
+
+/* =========================================================
+   EVENT 14
+   HEART HUNT
+   ========================================================= */
+
+function event14() {
+
+  const walls = [
+    1, 3, 5, 7, 9,
+    11, 13, 15, 17, 19
+  ];
+
+  let player = 0;
+  const goal = 24;
+
+  function draw() {
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 14 of 20</div>
+
+        <h2>🗺️ The Heart Hunt</h2>
+
+        <p>
+          Navigate the maze and reach ❤️.
+        </p>
+
+        <div id="maze" class="maze"></div>
+
+        <div class="grid">
+
+          <button class="btn" onclick="movePlayer(-5)">
+            ⬆️
+          </button>
+
+          <button class="btn" onclick="movePlayer(5)">
+            ⬇️
+          </button>
+
+          <button class="btn" onclick="movePlayer(-1)">
+            ⬅️
+          </button>
+
+          <button class="btn" onclick="movePlayer(1)">
+            ➡️
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    const maze =
+      document.getElementById("maze");
+
+    for (let i = 0; i < 25; i++) {
+
+      const cell =
+        document.createElement("div");
+
+      cell.className = "maze-cell";
+
+      if (walls.includes(i)) {
+        cell.classList.add("wall");
+      }
+
+      if (i === player) {
+        cell.classList.add("player");
+        cell.textContent = "🚂";
+      }
+
+      if (i === goal) {
+        cell.classList.add("goal");
+        cell.textContent = "❤️";
+      }
+
+      maze.appendChild(cell);
+    }
+  }
+
+  window.movePlayer = function(amount) {
+
+    const next = player + amount;
+
+    if (
+      next < 0 ||
+      next > 24 ||
+      walls.includes(next)
+    ) {
+      return;
+    }
+
+    if (
+      amount === 1 &&
+      Math.floor(player / 5) !==
+      Math.floor(next / 5)
+    ) {
+      return;
+    }
+
+    if (
+      amount === -1 &&
+      Math.floor(player / 5) !==
+      Math.floor(next / 5)
+    ) {
+      return;
+    }
+
+    player = next;
+
+    addPoints(2);
+
+    if (player === goal) {
+      finishEvent(40);
+    } else {
+      draw();
+    }
+  };
+
+  draw();
+}
+
+/* =========================================================
+   EVENT 15
+   LOVE LOCK
+   ========================================================= */
+
+function event15() {
+
+  let entered = "";
+
+  function draw() {
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 15 of 20</div>
+
+        <h2>🔐 The Love Lock</h2>
+
+        <p>
+          Solve the clue:
+        </p>
+
+        <div class="notice">
+          What four-digit number is the secret
+          Lulu Express override code?
+        </div>
+
+        <div class="big-number">
+          ${entered || "••••"}
+        </div>
+
+        <div class="grid">
+
+          ${[1,2,3,4,5,6,7,8,9,0].map(number => `
+            <button
+              class="choice"
+              onclick="enterDigit(${number})"
+            >
+              ${number}
+            </button>
+          `).join("")}
+
+        </div>
+
+        <button
+          class="btn dark"
+          onclick="clearDigits()"
+        >
+          Clear
+        </button>
+
+      </div>
+    `;
+  }
+
+  window.enterDigit = function(number) {
+
+    if (entered.length >= 4) return;
+
+    entered += number;
+
+    if (entered.length === 4) {
+
+      if (entered === "3333") {
+        finishEvent(50);
+      } else {
+
+        alert("🔒 The lock rejected the code.");
+
+        entered = "";
+
+        draw();
+      }
+
+    } else {
+      draw();
+    }
+  };
+
+  window.clearDigits = function() {
+    entered = "";
+    draw();
+  };
+
+  draw();
+}
+
+/* =========================================================
+   EVENT 16
+   CUPID SHOOTOUT
+   ========================================================= */
+
+function event16() {
+
+  let hits = 0;
+  let misses = 0;
+  let seconds = 20;
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel">
+
+      <div class="badge">Event 16 of 20</div>
+
+      <h2>🎯 The Cupid Shootout</h2>
+
+      <p>
+        Hit ❤️. Avoid 💔.
+      </p>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong id="shootHits">0</strong>
+          <small>Hits</small>
+        </div>
+
+        <div class="stat">
+          <strong id="shootMisses">0</strong>
+          <small>Misses</small>
+        </div>
+
+        <div class="stat">
+          <strong id="shootTime">20</strong>
+          <small>Seconds</small>
+        </div>
+
+      </div>
+
+      <div id="shootArena" class="arena"></div>
+
     </div>
-   </div>`;
- }
+  `;
 
- window.stand=function(value){
-   const correct=[
-     "❤️","3","3","❤️","🐬","🌹"
-   ][round];
+  const arena =
+    document.getElementById("shootArena");
 
-   if(value===correct){
-     addScore(12);
-   }else{
-     life--;
-   }
+  function spawn() {
 
-   round++;
+    if (seconds <= 0) return;
 
-   if(life<=0){
-     completeRound(15);
-   }else{
-     next();
-   }
- };
+    const target =
+      document.createElement("button");
 
- next();
+    const good = Math.random() > 0.25;
+
+    target.className =
+      good ? "target" : "target bad";
+
+    target.textContent =
+      good ? "❤️" : "💔";
+
+    target.style.left =
+      `${Math.random() * 80 + 5}%`;
+
+    target.style.top =
+      `${Math.random() * 75 + 5}%`;
+
+    target.onclick = () => {
+
+      if (good) {
+        hits++;
+        addPoints(6);
+      } else {
+        misses++;
+        addPoints(-4);
+      }
+
+      document.getElementById(
+        "shootHits"
+      ).textContent = hits;
+
+      document.getElementById(
+        "shootMisses"
+      ).textContent = misses;
+
+      target.remove();
+    };
+
+    arena.appendChild(target);
+
+    setTimeout(() => {
+      if (target.parentNode) target.remove();
+    }, 800);
+  }
+
+  const spawnTimer =
+    setInterval(spawn, 350);
+
+  const timer =
+    setInterval(() => {
+
+      seconds--;
+
+      document.getElementById(
+        "shootTime"
+      ).textContent = seconds;
+
+      if (seconds <= 0) {
+
+        clearInterval(spawnTimer);
+        clearInterval(timer);
+
+        setTimeout(() => {
+          finishEvent(hits * 2);
+        }, 300);
+      }
+
+    }, 1000);
+
+  spawn();
 }
 
-/* ---------- EVENT 20 ---------- */
+/* =========================================================
+   EVENT 17
+   COUNTDOWN
+   ========================================================= */
 
-let finalIndex=0;
-let finalScore=0;
+function event17() {
 
-function event20(){
- finalIndex=0;
- finalScore=0;
- showFinalQuestion();
+  let challenge = 0;
+  let seconds = 60;
+
+  const tasks = [
+    ["Tap ❤️", "❤️"],
+    ["Tap 🌹", "🌹"],
+    ["Tap ⭐", "⭐"],
+    ["Tap 🐬", "🐬"],
+    ["Tap GOLD", "GOLD"]
+  ];
+
+  const countdown =
+    setInterval(() => {
+
+      seconds--;
+
+      const timer =
+        document.getElementById("countdown");
+
+      if (timer) {
+        timer.textContent = seconds;
+      }
+
+      if (seconds <= 0) {
+
+        clearInterval(countdown);
+
+        if (challenge < 20) {
+          finishEvent(challenge * 3 + 10);
+        }
+      }
+
+    }, 1000);
+
+  function show() {
+
+    if (challenge >= 20) {
+
+      clearInterval(countdown);
+
+      finishEvent(60);
+
+      return;
+    }
+
+    const task =
+      tasks[Math.floor(Math.random() * tasks.length)];
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 17 of 20</div>
+
+        <h2>🧨 The Countdown</h2>
+
+        <div id="countdown" class="timer">
+          ${seconds}
+        </div>
+
+        <p>${task[0]}</p>
+
+        <div class="choices">
+
+          ${tasks.map(item => `
+            <button
+              class="choice"
+              onclick="countdownChoice('${item[1]}','${task[1]}')"
+            >
+              ${item[1]}
+            </button>
+          `).join("")}
+
+        </div>
+
+        <div class="notice">
+          ${challenge}/20 completed
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.countdownChoice =
+    function(answer, correct) {
+
+      challenge++;
+
+      if (answer === correct) {
+        addPoints(5);
+      }
+
+      show();
+    };
+
+  show();
 }
 
-function showFinalQuestion(){
- if(finalIndex>=finalQuiz.length){
-   showFinalWriting();
-   return;
- }
+/* =========================================================
+   EVENT 18
+   ULTIMATE GAMBLE
+   ========================================================= */
 
- const item=finalQuiz[finalIndex];
+function event18() {
 
- app.innerHTML=renderTop()+`
- <div class="panel">
-  <div class="badge">Event 20 of 20 • FINAL CHALLENGE</div>
-  <h2>👑 Know Liliana</h2>
-  <div class="progress">
-    <div class="progress-fill" style="width:${(finalIndex/finalQuiz.length)*100}%"></div>
-  </div>
+  let pot = 100;
+  let turns = 0;
 
-  <p>
-   Question <strong>${finalIndex+1}</strong> of
-   <strong>${finalQuiz.length}</strong>
-  </p>
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
 
-  <h3>${item[0]}</h3>
+    <div class="panel center">
 
-  <div class="choices">
-   ${item[1].map((answer,i)=>
-     `<button class="choice" onclick="answerFinal(${i})">${answer}</button>`
-   ).join("")}
-  </div>
+      <div class="badge">Event 18 of 20</div>
 
-  <div class="notice center">
-   💗 ${finalScore} / ${finalQuiz.length} correct
-  </div>
- </div>`;
+      <h2>🎰 The Ultimate Gamble</h2>
+
+      <p>
+        Your final gamble before the last stand.
+      </p>
+
+      <div id="pot" class="big-number">
+        ${pot}
+      </div>
+
+      <button
+        class="btn"
+        onclick="ultimateGamble('safe')"
+      >
+        SAFE — Keep 75%
+      </button>
+
+      <button
+        class="btn gold"
+        onclick="ultimateGamble('risk')"
+      >
+        RISK — Double or Lose Half
+      </button>
+
+      <button
+        class="btn red"
+        onclick="ultimateGamble('all')"
+      >
+        ALL IN — Triple or Zero
+      </button>
+
+      <div id="ultimateMessage" class="notice">
+        Choose carefully.
+      </div>
+
+    </div>
+  `;
+
+  window.ultimateGamble = function(type) {
+
+    turns++;
+
+    const win =
+      Math.random() > 0.5;
+
+    if (type === "safe") {
+      pot = Math.floor(pot * 0.75);
+    }
+
+    if (type === "risk") {
+      pot = win
+        ? pot * 2
+        : Math.floor(pot * 0.5);
+    }
+
+    if (type === "all") {
+      pot = win
+        ? pot * 3
+        : 0;
+    }
+
+    document.getElementById(
+      "pot"
+    ).textContent = pot;
+
+    document.getElementById(
+      "ultimateMessage"
+    ).textContent =
+      win || type === "safe"
+        ? "💗 The gamble paid off."
+        : "💔 The house wins.";
+
+    if (turns >= 2) {
+      setTimeout(() => {
+        finishEvent(Math.floor(pot / 2));
+      }, 500);
+    }
+  };
 }
 
-function answerFinal(choice){
- const q=finalQuiz[finalIndex];
+/* =========================================================
+   EVENT 19
+   LAST STAND
+   ========================================================= */
 
- const buttons=document.querySelectorAll(".choice");
+function event19() {
 
- buttons.forEach(b=>b.disabled=true);
+  const trials = [
+    ["Choose the heart.", "❤️"],
+    ["Choose the number three.", "3"],
+    ["Choose the dolphin.", "🐬"],
+    ["Choose the rose.", "🌹"],
+    ["Choose the star.", "⭐"],
+    ["Choose the heart.", "❤️"]
+  ];
 
- if(choice===q[2]){
-   finalScore++;
-   addScore(10);
-   buttons[choice].classList.add("correct");
- }else{
-   buttons[choice].classList.add("wrong");
-   buttons[q[2]].classList.add("correct");
- }
+  let index = 0;
+  let lives = 3;
 
- finalIndex++;
+  function show() {
 
- setTimeout(showFinalQuestion,450);
+    if (index >= trials.length) {
+      finishEvent(60);
+      return;
+    }
+
+    const trial = trials[index];
+
+    document.getElementById("app").innerHTML = `
+      ${topBar()}
+
+      <div class="panel center">
+
+        <div class="badge">Event 19 of 20</div>
+
+        <h2>💀 The Admirer's Last Stand</h2>
+
+        <div class="stats">
+
+          <div class="stat">
+            <strong>${lives}</strong>
+            <small>Lives</small>
+          </div>
+
+          <div class="stat">
+            <strong>${index + 1}/6</strong>
+            <small>Trial</small>
+          </div>
+
+          <div class="stat">
+            <strong>${state.score}</strong>
+            <small>Points</small>
+          </div>
+
+        </div>
+
+        <h3>${trial[0]}</h3>
+
+        <div class="choices">
+
+          <button
+            class="choice"
+            onclick="lastStand('❤️')"
+          >
+            ❤️
+          </button>
+
+          <button
+            class="choice"
+            onclick="lastStand('3')"
+          >
+            3
+          </button>
+
+          <button
+            class="choice"
+            onclick="lastStand('🐬')"
+          >
+            🐬
+          </button>
+
+          <button
+            class="choice"
+            onclick="lastStand('🌹')"
+          >
+            🌹
+          </button>
+
+          <button
+            class="choice"
+            onclick="lastStand('⭐')"
+          >
+            ⭐
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.lastStand = function(answer) {
+
+    if (answer === trials[index][1]) {
+      addPoints(12);
+    } else {
+      lives--;
+    }
+
+    index++;
+
+    if (lives <= 0) {
+      finishEvent(10);
+      return;
+    }
+
+    show();
+  };
+
+  show();
 }
 
-function showFinalWriting(){
- app.innerHTML=renderTop()+`
- <div class="panel center">
-  <div class="badge">Final Final Challenge</div>
-  <h2>💌 One Last Question</h2>
+/* =========================================================
+   EVENT 20
+   FINAL CHALLENGE
+   ========================================================= */
 
-  <p>
-   You've survived nineteen events and answered fifty questions.
-   Now there is only one thing left to prove.
-  </p>
+let finalQuestion = 0;
+let finalCorrect = 0;
 
-  <h3>Why should Liliana choose you?</h3>
+function event20() {
 
-  <textarea id="finalAnswer"
-   placeholder="Make your case to Liliana..."></textarea>
+  finalQuestion = 0;
+  finalCorrect = 0;
 
-  <button class="btn gold" onclick="submitFinalAnswer()">
-   👑 Submit My Answer
-  </button>
- </div>`;
+  showFinalQuestion();
 }
 
-function submitFinalAnswer(){
- const answer=document.getElementById("finalAnswer").value.trim();
+function showFinalQuestion() {
 
- if(answer.length<10){
-   alert("Give Liliana a little more than that. ❤️");
-   return;
- }
+  if (finalQuestion >= FINAL_QUIZ.length) {
+    finalWrittenChallenge();
+    return;
+  }
 
- addScore(50);
- renderFinalResult();
+  const item =
+    FINAL_QUIZ[finalQuestion];
+
+  const progress =
+    (finalQuestion / FINAL_QUIZ.length) * 100;
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel">
+
+      <div class="badge">
+        Event 20 of 20 • FINAL CHALLENGE
+      </div>
+
+      <h2>👑 Know Liliana</h2>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          style="width:${progress}%"
+        ></div>
+      </div>
+
+      <p>
+        Question
+        <strong>${finalQuestion + 1}</strong>
+        of
+        <strong>${FINAL_QUIZ.length}</strong>
+      </p>
+
+      <h3>${item[0]}</h3>
+
+      <div class="choices">
+
+        ${item[1].map((answer, index) => `
+          <button
+            class="choice"
+            onclick="finalAnswer(${index})"
+          >
+            ${answer}
+          </button>
+        `).join("")}
+
+      </div>
+
+      <div class="notice center">
+        💗 ${finalCorrect} correct so far
+      </div>
+
+    </div>
+  `;
 }
 
-/* ---------- FINAL RESULT ---------- */
+window.finalAnswer = function(index) {
 
-function renderFinalResult(){
- state.finished=true;
- saveState();
+  const item =
+    FINAL_QUIZ[finalQuestion];
 
- let title;
- let message;
+  const buttons =
+    document.querySelectorAll(".choice");
 
- if(state.score>=520){
-   title="🏆 LILU EXPRESS CHAMPION";
-   message="You didn't just reach the final carriage. You owned the entire journey.";
- }else if(state.score>=400){
-   title="🥇 SERIOUS CONTENDER";
-   message="You came dangerously close to stealing the show.";
- }else if(state.score>=280){
-   title="🥈 STRONG ADMIRER";
-   message="You made it all the way to the final destination.";
- }else{
-   title="💗 SURVIVOR";
-   message="You survived the Lulu Express. That deserves respect.";
- }
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
 
- app.innerHTML=renderTop()+`
- <div class="panel center final-prize">
-  <div class="trophy">👑</div>
-  <div class="badge">Journey Complete</div>
+  if (index === item[2]) {
 
-  <h1>${title}</h1>
+    finalCorrect++;
 
-  <p>
-   <strong>${escapeHTML(state.name)}</strong>,
-   ${message}
-  </p>
+    addPoints(10);
 
-  <div class="big">${state.score}</div>
-  <p>Final Heart Points</p>
+    buttons[index].classList.add("correct");
 
-  <hr style="border:0;border-top:1px solid #ffffff18;margin:20px 0">
+  } else {
 
-  <div class="trophy">📞</div>
+    buttons[index].classList.add("wrong");
 
-  <h2>Your Prize</h2>
+    buttons[item[2]].classList.add("correct");
+  }
 
-  <h2 class="gold">A PRIVATE CALL WITH LILIANA</h2>
+  finalQuestion++;
 
-  <p>
-   You made it through every challenge and reached
-   the final destination of the Lulu Express.
-  </p>
+  setTimeout(showFinalQuestion, 500);
+};
 
-  <div class="notice">
-   🚂💗 <strong>The Lulu Express has reached its final destination.</strong>
-   <br><br>
-   Congratulations, Admirer.
-  </div>
+/* =========================================================
+   FINAL WRITTEN CHALLENGE
+   ========================================================= */
 
-  <button class="btn alt" onclick="home()">
-   Return to the Lulu Express
-  </button>
- </div>`;
+function finalWrittenChallenge() {
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel center">
+
+      <div class="badge">
+        Final Question
+      </div>
+
+      <h2>💌 One Last Thing</h2>
+
+      <p>
+        You've survived nineteen events and answered
+        fifty questions.
+      </p>
+
+      <h3>
+        Why should Liliana choose you?
+      </h3>
+
+      <textarea
+        id="finalMessage"
+        placeholder="Make your case to Liliana..."
+      ></textarea>
+
+      <button
+        class="btn gold"
+        onclick="submitFinalMessage()"
+      >
+        👑 Submit My Answer
+      </button>
+
+    </div>
+  `;
 }
 
-/* ---------- INITIALISE ---------- */
+window.submitFinalMessage = function() {
+
+  const message =
+    document.getElementById("finalMessage").value.trim();
+
+  if (message.length < 10) {
+
+    alert(
+      "You need to give Liliana a little more than that. ❤️"
+    );
+
+    return;
+  }
+
+  addPoints(50);
+
+  state.finished = true;
+
+  saveGame();
+
+  finalResult();
+};
+
+/* =========================================================
+   FINAL RESULT
+   ========================================================= */
+
+function finalResult() {
+
+  let title;
+  let message;
+
+  if (state.score >= 500) {
+
+    title = "🏆 LULU EXPRESS CHAMPION";
+
+    message =
+      "You didn't just reach the final carriage. You owned the entire journey.";
+
+  } else if (state.score >= 350) {
+
+    title = "🥇 SERIOUS CONTENDER";
+
+    message =
+      "You made it dangerously close to the top.";
+
+  } else if (state.score >= 200) {
+
+    title = "🥈 STRONG ADMIRER";
+
+    message =
+      "You survived the journey and reached the final destination.";
+
+  } else {
+
+    title = "💗 LULU EXPRESS SURVIVOR";
+
+    message =
+      "You survived the Lulu Express. That deserves respect.";
+  }
+
+  document.getElementById("app").innerHTML = `
+    ${topBar()}
+
+    <div class="panel center final-box">
+
+      <div class="trophy">👑</div>
+
+      <div class="badge">
+        Journey Complete
+      </div>
+
+      <h1>${title}</h1>
+
+      <p>
+        <strong>
+          ${escapeHTML(state.playerName)}
+        </strong>
+      </p>
+
+      <p>${message}</p>
+
+      <div class="big-number">
+        ${state.score}
+      </div>
+
+      <p>
+        Final Heart Points
+      </p>
+
+      <hr
+        style="
+          border:0;
+          border-top:1px solid #ffffff18;
+          margin:22px 0;
+        "
+      >
+
+      <div class="trophy">📞</div>
+
+      <h2>Your Prize</h2>
+
+      <h2 style="color:#f3ce6b;">
+        A PRIVATE CALL WITH LILIANA
+      </h2>
+
+      <p>
+        You made it through every challenge
+        and reached the final destination.
+      </p>
+
+      <div class="notice">
+        🚂💗
+        <strong>
+          The Lulu Express has reached its final destination.
+        </strong>
+        <br><br>
+        Congratulations, Admirer.
+      </div>
+
+      <button
+        class="btn dark"
+        onclick="home()"
+      >
+        Return to Lulu Express
+      </button>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   START
+   ========================================================= */
 
 home();
 
-})();
 </script>
+
 </body>
 </html>

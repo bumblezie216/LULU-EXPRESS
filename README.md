@@ -1,8 +1,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <title>Lulu Express 💗</title>
 
@@ -18,17 +18,14 @@ html,body{
   width:100%;
   min-height:100%;
   font-family:Arial,Helvetica,sans-serif;
-  background:#160912;
-  color:#fff;
+  background:#f7bfd6;
+  color:#571b38;
   overflow-x:hidden;
-}
-
-body{
-  touch-action:manipulation;
 }
 
 button{
   font-family:inherit;
+  border:0;
   cursor:pointer;
   touch-action:manipulation;
 }
@@ -37,51 +34,44 @@ button{
   display:none!important;
 }
 
-#app{
-  min-height:100vh;
-  width:100%;
-}
-
 .screen{
   min-height:100vh;
+  min-height:100dvh;
   width:100%;
+  padding:20px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:20px;
-}
-
-.startScreen{
-  background:
-    radial-gradient(circle at 20% 20%,#8d315f 0,#42162f 25%,transparent 45%),
-    radial-gradient(circle at 80% 70%,#70234b 0,#260e1c 35%,transparent 60%),
-    #160912;
-}
-
-.logo{
-  font-size:clamp(42px,12vw,80px);
-  margin:0;
   text-align:center;
 }
 
-.subtitle{
-  color:#ffd6e8;
-  font-size:18px;
-  text-align:center;
+.card{
+  width:100%;
   max-width:600px;
+  background:rgba(255,255,255,.96);
+  border-radius:28px;
+  padding:25px;
+  box-shadow:0 12px 40px rgba(80,0,40,.18);
+}
+
+h1{
+  font-size:clamp(30px,8vw,52px);
+  margin:5px 0 12px;
+}
+
+h2{
+  font-size:clamp(24px,6vw,36px);
+  margin:5px 0 15px;
+}
+
+p{
+  font-size:18px;
   line-height:1.5;
 }
 
-.startCard{
-  width:min(94%,560px);
-  background:rgba(255,255,255,.09);
-  border:1px solid rgba(255,255,255,.18);
-  border-radius:28px;
-  padding:30px 22px;
-  text-align:center;
-  box-shadow:0 20px 70px rgba(0,0,0,.35);
-  backdrop-filter:blur(10px);
+.small{
+  font-size:14px;
 }
 
 input{
@@ -89,432 +79,240 @@ input{
   max-width:420px;
   padding:17px;
   border-radius:15px;
-  border:2px solid #f6a7c9;
-  background:#fff;
-  color:#32101f;
+  border:2px solid #e58db0;
   font-size:18px;
   text-align:center;
   outline:none;
+  margin:10px 0;
 }
 
-.primary{
-  border:0;
-  border-radius:16px;
-  padding:16px 25px;
-  background:#f18ab6;
-  color:#3b0d22;
-  font-weight:bold;
+.mainBtn{
+  width:100%;
+  max-width:420px;
+  padding:17px 20px;
+  border-radius:18px;
+  background:#8d2458;
+  color:white;
   font-size:18px;
-  margin-top:15px;
-  min-height:54px;
-  box-shadow:0 7px 0 #a94776;
+  font-weight:bold;
+  margin:8px 0;
 }
 
-.primary:active{
-  transform:translateY(4px);
-  box-shadow:0 3px 0 #a94776;
+.mainBtn:active{
+  transform:scale(.97);
 }
 
 .secondary{
-  border:1px solid #f5a7c7;
-  border-radius:14px;
-  padding:12px 18px;
-  background:#371322;
-  color:#fff;
-  font-weight:bold;
-  min-height:48px;
+  background:#e99abd;
+  color:#571b38;
 }
 
-#gameScreen{
-  display:none;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at top,#64203f 0,#24101b 38%,#12070c 100%);
-  padding:0;
+.danger{
+  background:#7c193f;
+  color:white;
 }
 
 .topbar{
+  position:fixed;
+  top:0;
+  left:0;
   width:100%;
-  min-height:72px;
+  z-index:100;
+  padding:10px 12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  background:rgba(0,0,0,.35);
-  border-bottom:1px solid rgba(255,255,255,.1);
-  position:relative;
-  z-index:20;
-}
-
-.topInfo{
+  background:rgba(87,27,56,.96);
+  color:white;
   font-size:14px;
-  line-height:1.3;
 }
 
-.topButtons{
-  display:flex;
-  gap:7px;
-}
-
-.smallBtn{
-  border:1px solid #e98ab1;
-  background:#32111f;
-  color:#fff;
-  border-radius:11px;
-  padding:9px 10px;
+.topbar button{
+  padding:9px 12px;
+  border-radius:12px;
+  background:#f3aac8;
+  color:#571b38;
   font-weight:bold;
-  font-size:12px;
+}
+
+.gameScreen{
+  padding-top:70px;
+  padding-bottom:30px;
+}
+
+.gameNumber{
+  font-size:14px;
+  font-weight:bold;
+  opacity:.75;
+  margin-bottom:5px;
+}
+
+.choiceGrid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin-top:18px;
+}
+
+.choice{
+  width:100%;
+  padding:17px 14px;
+  background:#f6d1df;
+  color:#571b38;
+  border:2px solid #e8a3bf;
+  border-radius:17px;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.choice:active{
+  transform:scale(.97);
+}
+
+.choice.correct{
+  background:#b8e7c4;
+  border-color:#5baf70;
+}
+
+.choice.wrong{
+  background:#f2b4b4;
+  border-color:#c65d5d;
+}
+
+.message{
+  min-height:30px;
+  margin-top:15px;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.progress{
+  width:100%;
+  height:12px;
+  background:#f0d8e2;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.progressBar{
+  height:100%;
+  width:0%;
+  background:#8d2458;
+  transition:.25s;
+}
+
+.bigHeart{
+  font-size:70px;
+  margin:10px;
+}
+
+.tileGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.tile{
+  aspect-ratio:1;
+  border-radius:18px;
+  background:#f4d2df;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  font-weight:bold;
+  border:2px solid #e7a4be;
+}
+
+.tile.selected{
+  background:#ef9fbd;
+}
+
+.tile.found{
+  background:#b8e7c4;
+}
+
+.numberBox{
+  font-size:60px;
+  font-weight:bold;
+  margin:20px;
+}
+
+.lock{
+  font-size:85px;
+  margin:10px;
+}
+
+.stat{
+  display:inline-block;
+  padding:8px 12px;
+  background:#f6d1df;
+  border-radius:15px;
+  margin:3px;
+  font-weight:bold;
+}
+
+.reward{
+  background:#fff0a8;
+  border:2px solid #e5c83c;
+  padding:20px;
+  border-radius:20px;
+  margin-top:20px;
+}
+
+.questionCount{
+  font-size:15px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.timer{
+  font-size:28px;
+  font-weight:bold;
+  margin:10px;
+}
+
+.letters{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:15px;
+}
+
+.letter{
+  padding:15px 5px;
+  border-radius:13px;
+  background:#f4d2df;
+  font-weight:bold;
+  font-size:17px;
+}
+
+.wordList{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:15px 0;
+}
+
+.word{
+  padding:10px 13px;
+  background:#f5d5e1;
+  border-radius:13px;
+  font-weight:bold;
 }
 
 #gameArea{
   width:100%;
-  min-height:calc(100vh - 72px);
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:15px;
 }
 
-.card{
-  width:min(100%,650px);
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:25px;
-  padding:22px;
-  text-align:center;
-  box-shadow:0 15px 50px rgba(0,0,0,.3);
-}
-
-.card h2{
-  margin-top:0;
-  font-size:clamp(27px,7vw,40px);
-}
-
-.gameDescription{
-  color:#ffd9e9;
-  line-height:1.5;
-}
-
-.gameButton{
-  width:100%;
-  max-width:430px;
-  min-height:58px;
-  margin:7px auto;
-  display:block;
-  border:2px solid #e993b8;
-  background:#45152b;
-  color:white;
-  border-radius:15px;
-  font-size:17px;
-  font-weight:bold;
-  padding:13px;
-}
-
-.gameButton:active{
-  transform:scale(.98);
-}
-
-.grid{
-  display:grid;
-  gap:10px;
-  width:100%;
-}
-
-.grid2{
-  grid-template-columns:repeat(2,1fr);
-}
-
-.grid3{
-  grid-template-columns:repeat(3,1fr);
-}
-
-.bigNumber{
-  font-size:48px;
-  font-weight:bold;
-  margin:15px;
-  color:#ffd0e4;
-}
-
-.status{
-  min-height:28px;
-  margin:12px 0;
-  font-weight:bold;
-}
-
-.progress{
-  height:12px;
-  background:#3a1626;
-  border-radius:20px;
-  overflow:hidden;
-  margin:15px 0;
-}
-
-.progressFill{
-  height:100%;
-  width:0;
-  background:#f394bd;
-  transition:width .2s;
-}
-
-/* Hearts */
-
-.heartArena{
-  position:relative;
-  width:100%;
-  max-width:600px;
-  height:55vh;
-  min-height:360px;
-  max-height:600px;
-  background:
-    radial-gradient(circle at 50% 20%,rgba(255,180,210,.16),transparent 35%),
-    #180914;
-  border:2px solid #79334f;
-  border-radius:22px;
-  overflow:hidden;
-  touch-action:none;
-}
-
-.heart{
-  position:absolute;
-  font-size:35px;
-  user-select:none;
-  pointer-events:none;
-}
-
-.basket{
-  position:absolute;
-  bottom:10px;
-  width:90px;
-  height:48px;
-  border-radius:15px 15px 25px 25px;
-  background:#f0a0c3;
-  color:#4a1029;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  font-weight:bold;
-}
-
-/* Memory */
-
-.memoryGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:9px;
-  max-width:500px;
-  margin:auto;
-}
-
-.memoryCard{
-  aspect-ratio:1;
-  border-radius:13px;
-  border:2px solid #e997bb;
-  background:#3a1225;
-  color:transparent;
-  font-size:28px;
-}
-
-.memoryCard.flipped,
-.memoryCard.matched{
-  background:#f5bfd7;
-  color:#4a122d;
-}
-
-/* Timer */
-
-.timer{
-  font-size:44px;
-  font-weight:bold;
-  color:#ffd2e5;
-}
-
-/* Race */
-
-.raceTrack{
-  position:relative;
-  height:220px;
-  border:2px solid #71304c;
-  background:#180a12;
-  border-radius:18px;
-  overflow:hidden;
-  margin:15px 0;
-}
-
-.racer{
-  position:absolute;
-  left:0;
-  font-size:38px;
-  transition:left .15s linear;
-}
-
-.finish{
-  position:absolute;
-  right:5px;
-  top:0;
-  height:100%;
-  border-left:4px dashed white;
-}
-
-/* Wheel */
-
-.wheel{
-  width:min(75vw,280px);
-  aspect-ratio:1;
-  border-radius:50%;
-  margin:20px auto;
-  border:8px solid #f2a0c2;
-  background:
-    conic-gradient(
-      #f6a5c5 0deg 45deg,
-      #682342 45deg 90deg,
-      #f6a5c5 90deg 135deg,
-      #682342 135deg 180deg,
-      #f6a5c5 180deg 225deg,
-      #682342 225deg 270deg,
-      #f6a5c5 270deg 315deg,
-      #682342 315deg 360deg
-    );
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  font-weight:bold;
-  transition:transform 2s cubic-bezier(.15,.8,.25,1);
-}
-
-/* Word Find */
-
-.wordGrid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:4px;
-  max-width:500px;
-  margin:15px auto;
-}
-
-.letter{
-  aspect-ratio:1;
-  border:1px solid #b85d86;
-  background:#311121;
-  color:#fff;
-  border-radius:7px;
-  font-weight:bold;
-  font-size:17px;
-  padding:0;
-}
-
-.letter.selected{
-  background:#f29bc0;
-  color:#3b1023;
-}
-
-/* Flower */
-
-.flowerCanvas{
-  width:100%;
-  max-width:550px;
-  height:360px;
-  background:#fff4f8;
-  border-radius:20px;
-  touch-action:none;
-  display:block;
-}
-
-/* Derby */
-
-.derby{
-  position:relative;
-  width:100%;
-  height:270px;
-  border-radius:20px;
-  overflow:hidden;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      #402217 0 40px,
-      #4e2b1d 40px 80px
-    );
-  border:3px solid #a9673d;
-}
-
-.horse{
-  position:absolute;
-  left:5px;
-  font-size:38px;
-  transition:left .2s;
-}
-
-.derbyFinish{
-  position:absolute;
-  right:8px;
-  top:0;
-  height:100%;
-  border-left:5px dashed #fff;
-}
-
-/* Results */
-
-.resultBox{
-  margin-top:18px;
-  padding:18px;
-  border-radius:18px;
-  background:rgba(255,255,255,.08);
-}
-
-.success{
-  color:#a9ffd3;
-}
-
-.fail{
-  color:#ff9ab9;
-}
-
-.stars{
-  font-size:25px;
-  letter-spacing:5px;
-}
-
-/* Mobile */
-
-@media(max-width:600px){
-  .screen{
-    padding:14px;
-  }
-
-  .card{
-    padding:17px 13px;
-    border-radius:20px;
-  }
-
-  .topbar{
-    min-height:68px;
-  }
-
-  #gameArea{
-    min-height:calc(100vh - 68px);
-    padding:9px;
-  }
-
-  .memoryGrid{
-    gap:6px;
-  }
-
-  .memoryCard{
-    font-size:21px;
-  }
-
-  .gameButton{
-    min-height:56px;
-  }
-
-  .wordGrid{
-    gap:3px;
-  }
-
-  .letter{
-    font-size:14px;
+@media(min-width:600px){
+  .choiceGrid.two{
+    grid-template-columns:1fr 1fr;
   }
 }
 </style>
@@ -522,721 +320,297 @@ input{
 
 <body>
 
-<div id="app">
-
-<!-- START -->
-<section id="startScreen" class="screen startScreen">
-
-  <div class="startCard">
-
-    <div class="logo">💗</div>
-
-    <h1>LULU EXPRESS</h1>
-
-    <p class="subtitle">
-      A 23-level adventure made especially for Liliana.
-      Six years of friendship. One very big journey.
-    </p>
-
+<div id="startScreen" class="screen">
+  <div class="card">
+    <div style="font-size:80px">💗</div>
+    <h1>Lulu Express</h1>
     <p>
-      Enter your name to begin.
+      Welcome to the ultimate journey for Lulu.
+      <br><br>
+      23 levels stand between you and the final challenge.
     </p>
 
-    <input
-      id="playerName"
-      type="text"
-      maxlength="25"
-      placeholder="Your name..."
-      autocomplete="off"
-    >
+    <input id="playerName" type="text" maxlength="30" placeholder="Enter your name">
 
-    <br>
-
-    <button class="primary" onclick="startGame()">
-      🚂 START THE JOURNEY
+    <button class="mainBtn" id="startBtn">
+      🚂 Start the Journey
     </button>
 
-    <p style="font-size:13px;color:#eab4ca;margin-top:20px;">
-      Every level must be completed to continue.
-    </p>
-
+    <button class="mainBtn secondary" id="musicBtnStart">
+      🎵 Music: OFF
+    </button>
   </div>
-</section>
+</div>
 
-
-<!-- GAME -->
-<section id="gameScreen">
+<div id="gameScreen" class="screen gameScreen hidden">
 
   <div class="topbar">
-
-    <div class="topInfo">
-      <b id="levelText">Level 1 / 23</b><br>
-      <span id="playerDisplay"></span>
+    <div>
+      <span id="topName">Player</span>
+      ·
+      <span id="topScore">0</span> pts
+      ·
+      <span id="topTokens">0</span> tokens
     </div>
 
-    <div class="topInfo">
-      💗 <span id="scoreText">0</span><br>
-      🪙 <span id="tokenText">0</span>
+    <div>
+      <button id="musicBtn">🎵</button>
+      <button id="resetBtn">↻</button>
     </div>
-
-    <div class="topButtons">
-      <button class="smallBtn" onclick="toggleMusic()">🎵</button>
-      <button class="smallBtn" onclick="resetGame()">↻</button>
-    </div>
-
   </div>
 
   <div id="gameArea"></div>
 
-</section>
-
 </div>
 
-
 <script>
+
 /* =========================================================
-   LULU EXPRESS
-   COMPLETE 23 LEVEL GAME
+   BASIC GAME STATE
 ========================================================= */
 
-let playerName = "";
-let level = 1;
-let score = 0;
-let tokens = 0;
-let musicOn = false;
+const state = {
+  name:"",
+  level:1,
+  score:0,
+  tokens:0,
+  music:false
+};
 
-let gameTimer = null;
-let gameInterval = null;
+let gameData = {};
 let audioContext = null;
 
 
 /* =========================================================
-   LILiana DATA
-========================================================= */
-
-const facts = [
-  {
-    q:"What is Liliana's favourite number?",
-    options:["3","7","9","12"],
-    answer:"3"
-  },
-  {
-    q:"What colour does Liliana love?",
-    options:["Baby pink","Black","Green","Orange"],
-    answer:"Baby pink"
-  },
-  {
-    q:"What animal does Liliana love?",
-    options:["Dolphins","Tigers","Penguins","Foxes"],
-    answer:"Dolphins"
-  },
-  {
-    q:"What flower does Liliana like?",
-    options:["Sunflowers","Tulips","Lilies","Orchids"],
-    answer:"Sunflowers"
-  },
-  {
-    q:"What other flower does Liliana like?",
-    options:["Roses","Daisies","Lavender","Carnations"],
-    answer:"Roses"
-  },
-  {
-    q:"What food does Liliana love?",
-    options:["Sushi","Pizza","Tacos","Pasta"],
-    answer:"Sushi"
-  },
-  {
-    q:"What is Liliana's star sign?",
-    options:["Leo","Gemini","Scorpio","Pisces"],
-    answer:"Leo"
-  },
-  {
-    q:"What colour are Liliana's eyes?",
-    options:["Green","Blue","Brown","Hazel"],
-    answer:"Green"
-  },
-  {
-    q:"How many siblings does Liliana have?",
-    options:["5","2","4","7"],
-    answer:"5"
-  },
-  {
-    q:"How many nephews does Liliana have?",
-    options:["4","1","2","6"],
-    answer:"4"
-  },
-  {
-    q:"How many nieces does Liliana have?",
-    options:["1","3","5","2"],
-    answer:"1"
-  },
-  {
-    q:"What does Liliana want to be someday?",
-    options:[
-      "A mum",
-      "A pilot",
-      "A singer",
-      "A professional athlete"
-    ],
-    answer:"A mum"
-  },
-  {
-    q:"What would Liliana especially love to have?",
-    options:[
-      "A baby girl",
-      "A pet snake",
-      "A boat",
-      "A motorbike"
-    ],
-    answer:"A baby girl"
-  },
-  {
-    q:"What did Liliana study at university?",
-    options:[
-      "Psychology",
-      "Law",
-      "Engineering",
-      "Medicine"
-    ],
-    answer:"Psychology"
-  },
-  {
-    q:"What is Liliana's favourite movie?",
-    options:[
-      "Me Before You",
-      "Titanic",
-      "Frozen",
-      "The Notebook"
-    ],
-    answer:"Me Before You"
-  },
-  {
-    q:"Which activity does Liliana enjoy?",
-    options:[
-      "Poker",
-      "Surfing",
-      "Mountain climbing",
-      "Fishing"
-    ],
-    answer:"Poker"
-  },
-  {
-    q:"What kind of music does Liliana enjoy?",
-    options:[
-      "Sad songs",
-      "Only classical music",
-      "Only heavy metal",
-      "Only country music"
-    ],
-    answer:"Sad songs"
-  },
-  {
-    q:"What does Liliana enjoy reading or creating?",
-    options:[
-      "Poetry",
-      "Cookbooks",
-      "Textbooks only",
-      "Travel guides"
-    ],
-    answer:"Poetry"
-  },
-  {
-    q:"What is one thing Liliana is afraid of?",
-    options:[
-      "Drowning",
-      "Dogs",
-      "Butterflies",
-      "Heights"
-    ],
-    answer:"Drowning"
-  },
-  {
-    q:"How many years have Bree and Liliana been best friends?",
-    options:["6","2","4","10"],
-    answer:"6"
-  }
-];
-
-
-/* 50 FINAL QUESTIONS
-   No tattoo question included.
-========================================================= */
-
-const finalQuestions = [
- ...facts,
-
- {
-  q:"What is Liliana's birthday?",
-  options:["July 22","June 12","August 7","May 22"],
-  answer:"July 22"
- },
- {
-  q:"What nationality/cultural background is associated with Liliana?",
-  options:["Mexican American","Australian","Canadian","Brazilian"],
-  answer:"Mexican American"
- },
- {
-  q:"How many piercings does Liliana have?",
-  options:["4","2","6","8"],
-  answer:"4"
- },
- {
-  q:"What are Liliana's dogs called?",
-  options:[
-   "Aayla & Arlo",
-   "Bella & Luna",
-   "Milo & Max",
-   "Coco & Daisy"
-  ],
-  answer:"Aayla & Arlo"
- },
- {
-  q:"Which number has special meaning to Liliana?",
-  options:["3","11","8","13"],
-  answer:"3"
- },
- {
-  q:"Which colour is associated with Liliana?",
-  options:["Baby pink","Purple","Navy","Yellow"],
-  answer:"Baby pink"
- },
- {
-  q:"Which animal appears in the Lulu Express theme?",
-  options:["Dolphin","Lion","Bear","Wolf"],
-  answer:"Dolphin"
- },
- {
-  q:"Which of these is one of Liliana's favourite flowers?",
-  options:["Sunflower","Cactus","Fern","Bamboo"],
-  answer:"Sunflower"
- },
- {
-  q:"Which of these is another flower Liliana likes?",
-  options:["Rose","Pine tree","Moss","Ivy"],
-  answer:"Rose"
- },
- {
-  q:"What food would Liliana be more likely to choose?",
-  options:["Sushi","Plain toast","Cereal","Soup"],
-  answer:"Sushi"
- },
- {
-  q:"Which subject did Liliana study?",
-  options:["Psychology","Physics","Accounting","Architecture"],
-  answer:"Psychology"
- },
- {
-  q:"Which film is a favourite?",
-  options:["Me Before You","Shrek","Cars","Matilda"],
-  answer:"Me Before You"
- },
- {
-  q:"What kind of songs does Liliana like?",
-  options:["Sad songs","Only nursery songs","Only opera","Only instrumental music"],
-  answer:"Sad songs"
- },
- {
-  q:"What does Liliana like to write or enjoy?",
-  options:["Poetry","Recipes only","News articles","Manuals"],
-  answer:"Poetry"
- },
- {
-  q:"Which casino-style game does Liliana like?",
-  options:["Poker","Chess","Sudoku","Monopoly"],
-  answer:"Poker"
- },
- {
-  q:"How many nieces does Liliana have?",
-  options:["1","2","3","4"],
-  answer:"1"
- },
- {
-  q:"How many nephews does Liliana have?",
-  options:["4","2","5","7"],
-  answer:"4"
- },
- {
-  q:"How many siblings does Liliana have?",
-  options:["5","3","6","8"],
-  answer:"5"
- },
- {
-  q:"What is Liliana's star sign?",
-  options:["Leo","Virgo","Aries","Libra"],
-  answer:"Leo"
- },
- {
-  q:"What colour are Liliana's eyes?",
-  options:["Green","Brown","Blue","Grey"],
-  answer:"Green"
- },
- {
-  q:"How many piercings does Liliana have?",
-  options:["4","1","3","7"],
-  answer:"4"
- },
- {
-  q:"What are Liliana's dogs called?",
-  options:["Aayla & Arlo","Ruby & Rose","Loki & Luna","Max & Milo"],
-  answer:"Aayla & Arlo"
- },
- {
-  q:"What does Liliana want in her future?",
-  options:["To be a mum","To become a race car driver","To live on a boat","To climb Everest"],
-  answer:"To be a mum"
- },
- {
-  q:"What would Liliana especially love?",
-  options:["A baby girl","A spaceship","A private island","A castle"],
-  answer:"A baby girl"
- },
- {
-  q:"How long have Bree and Liliana been best friends?",
-  options:["6 years","1 year","3 years","12 years"],
-  answer:"6 years"
- },
- {
-  q:"When is Liliana's birthday month?",
-  options:["July","January","March","December"],
-  answer:"July"
- },
- {
-  q:"What day of the month is Liliana's birthday?",
-  options:["22","7","16","30"],
-  answer:"22"
- },
- {
-  q:"Which animal is most connected to Liliana's birthday website?",
-  options:["Dolphin","Horse","Cat","Rabbit"],
-  answer:"Dolphin"
- },
- {
-  q:"Which colour best matches the Lulu Express casino?",
-  options:["Baby pink","Neon green","Orange","Purple"],
-  answer:"Baby pink"
- },
- {
-  q:"What is Liliana known for being?",
-  options:["Sweet and caring","Quiet and cold","Mean and serious","Shy and distant"],
-  answer:"Sweet and caring"
- },
- {
-  q:"Which description fits Liliana?",
-  options:["Charismatic","Unfriendly","Boring","Uninterested"],
-  answer:"Charismatic"
- },
- {
-  q:"What kind of personality is part of Liliana's canon?",
-  options:["Flirtatious","Grumpy","Strict","Timid"],
-  answer:"Flirtatious"
- },
- {
-  q:"Which animal is connected to Liliana's interests?",
-  options:["Dolphin","Crocodile","Eagle","Snake"],
-  answer:"Dolphin"
- },
- {
-  q:"What type of number is 3 for Liliana?",
-  options:["Favourite number","Lucky shoe size","House number","Bus route"],
-  answer:"Favourite number"
- },
- {
-  q:"Which flower is bright and cheerful?",
-  options:["Sunflower","Fern","Moss","Bamboo"],
-  answer:"Sunflower"
- },
- {
-  q:"Which food is specifically part of Liliana's favourites?",
-  options:["Sushi","Fish and chips","Pie","Burgers"],
-  answer:"Sushi"
- },
- {
-  q:"Which film is associated with Liliana?",
-  options:["Me Before You","Avatar","Moana","Up"],
-  answer:"Me Before You"
- },
- {
-  q:"Which of these is NOT Liliana's favourite number?",
-  options:["8","3","3 is her favourite","The number 3"],
-  answer:"8"
- },
- {
-  q:"Which subject is connected to her university studies?",
-  options:["Psychology","Dentistry","Chemistry","Music"],
-  answer:"Psychology"
- },
- {
-  q:"Which of these is one of her fears?",
-  options:["Drowning","Rainbows","Flowers","Music"],
-  answer:"Drowning"
- },
- {
-  q:"Which pair are Liliana's dogs?",
-  options:[
-   "Aayla & Arlo",
-   "Aayla & Luna",
-   "Arlo & Bella",
-   "Luna & Arlo"
-  ],
-  answer:"Aayla & Arlo"
- },
- {
-  q:"What colour should the Lulu casino background lean towards?",
-  options:["Darker baby pink","Purple","Bright blue","Green"],
-  answer:"Darker baby pink"
- },
- {
-  q:"Which game style belongs in the Lulu Express casino?",
-  options:["Gin rummy","Football manager","Golf","Crossword only"],
-  answer:"Gin rummy"
- },
- {
-  q:"Which big prize belongs on the big slot?",
-  options:["1,000,000 tokens","100 tokens","3 tokens","50 tokens"],
-  answer:"1,000,000 tokens"
- },
- {
-  q:"What kind of race is Lulu Derby?",
-  options:["A horse race","A swimming race","A bicycle race","A car race"],
-  answer:"A horse race"
- },
- {
-  q:"What should happen after passing a Lulu Express level?",
-  options:[
-   "The next level unlocks",
-   "The whole game resets",
-   "The player loses all points",
-   "The website closes"
-  ],
-  answer:"The next level unlocks"
- },
- {
-  q:"What is the final challenge?",
-  options:[
-   "50 questions about Liliana",
-   "A typing test",
-   "A drawing exam",
-   "A maths exam"
-  ],
-  answer:"50 questions about Liliana"
- },
- {
-  q:"What is the purpose of the Lulu Express journey?",
-  options:[
-   "Celebrate Liliana",
-   "Train for a job",
-   "Learn coding",
-   "Practise driving"
-  ],
-  answer:"Celebrate Liliana"
- }
-];
-
-
-/* =========================================================
-   BASIC SYSTEM
-========================================================= */
-
-function startGame(){
-
-  const input=document.getElementById("playerName");
-  playerName=input.value.trim();
-
-  if(!playerName){
-    input.focus();
-    input.style.borderColor="#ff5f8f";
-    return;
-  }
-
-  level=1;
-  score=0;
-  tokens=0;
-
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("gameScreen").style.display="block";
-
-  document.getElementById("playerDisplay").textContent=playerName;
-
-  updateTop();
-  loadLevel();
-}
-
-
-function updateTop(){
-
-  document.getElementById("levelText").textContent=
-    "Level "+level+" / 23";
-
-  document.getElementById("scoreText").textContent=score;
-
-  document.getElementById("tokenText").textContent=tokens;
-}
-
-
-function clearTimers(){
-
-  if(gameTimer){
-    clearTimeout(gameTimer);
-    gameTimer=null;
-  }
-
-  if(gameInterval){
-    clearInterval(gameInterval);
-    gameInterval=null;
-  }
-}
-
-
-function loadLevel(){
-
-  clearTimers();
-
-  updateTop();
-
-  const games={
-    1:game1,
-    2:game2,
-    3:game3,
-    4:game4,
-    5:game5,
-    6:game6,
-    7:game7,
-    8:game8,
-    9:game9,
-    10:game10,
-    11:game11,
-    12:game12,
-    13:game13,
-    14:game14,
-    15:game15,
-    16:game16,
-    17:game17,
-    18:game18,
-    19:game19,
-    20:game20,
-    21:game21,
-    22:game22,
-    23:game23
-  };
-
-  if(games[level]){
-    games[level]();
-  }
-}
-
-
-function finishGame(points=100,reward=20,message="Level complete! 💗"){
-
-  clearTimers();
-
-  score+=points;
-  tokens+=reward;
-
-  updateTop();
-
-  document.getElementById("gameArea").innerHTML=`
-
-    <div class="card">
-
-      <div class="stars">★★★★★</div>
-
-      <h2 class="success">LEVEL COMPLETE! 💗</h2>
-
-      <p>${message}</p>
-
-      <div class="resultBox">
-        <p>🏆 +${points} points</p>
-        <p>🪙 +${reward} tokens</p>
-        <p>Total score: <b>${score}</b></p>
-      </div>
-
-      ${
-        level<23
-        ?
-        `<button class="primary" onclick="nextLevel()">
-          🚂 NEXT LEVEL
-        </button>`
-        :
-        `<button class="primary" onclick="showFinalResults()">
-          💗 FINISH JOURNEY
-        </button>`
-      }
-
-    </div>
-  `;
-}
-
-
-function nextLevel(){
-
-  if(level<23){
-    level++;
-    loadLevel();
-  }
-}
-
-
-function resetGame(){
-
-  if(confirm("Restart the entire Lulu Express journey?")){
-
-    clearTimers();
-
-    playerName="";
-    level=1;
-    score=0;
-    tokens=0;
-
-    document.getElementById("gameScreen").style.display="none";
-    document.getElementById("startScreen").style.display="flex";
-
-    document.getElementById("playerName").value="";
-  }
-}
-
-
-/* =========================================================
-   SIMPLE MUSIC
+   MUSIC
 ========================================================= */
 
 function toggleMusic(){
 
-  if(!audioContext){
-    audioContext=
-      new (window.AudioContext||window.webkitAudioContext)();
-  }
+  state.music = !state.music;
 
-  musicOn=!musicOn;
+  updateMusicButtons();
 
-  if(musicOn){
-    playTone(523,.15);
-    setTimeout(()=>playTone(659,.15),170);
-    setTimeout(()=>playTone(784,.2),340);
+  if(state.music){
+    startSimpleMusic();
   }
 }
 
+function updateMusicButtons(){
 
-function playTone(freq,duration){
+  document.getElementById("musicBtnStart").textContent =
+    state.music ? "🎵 Music: ON" : "🎵 Music: OFF";
 
-  if(!audioContext) return;
+  document.getElementById("musicBtn").textContent =
+    state.music ? "🎵 ON" : "🎵";
+}
 
-  const osc=audioContext.createOscillator();
-  const gain=audioContext.createGain();
+function startSimpleMusic(){
 
-  osc.frequency.value=freq;
-  osc.type="sine";
+  try{
 
-  gain.gain.setValueAtTime(.04,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    .001,
-    audioContext.currentTime+duration
-  );
+    if(!audioContext){
+      audioContext =
+        new (window.AudioContext || window.webkitAudioContext)();
+    }
 
-  osc.connect(gain);
-  gain.connect(audioContext.destination);
+    if(audioContext.state === "suspended"){
+      audioContext.resume();
+    }
 
-  osc.start();
-  osc.stop(audioContext.currentTime+duration);
+    playNote(392,0);
+    setTimeout(()=>playNote(523,0),180);
+    setTimeout(()=>playNote(659,0),360);
+
+  }catch(e){}
+}
+
+function playNote(freq,delay){
+
+  setTimeout(()=>{
+
+    try{
+
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      osc.frequency.value = freq;
+      osc.type = "sine";
+
+      gain.gain.setValueAtTime(.06,audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(
+        .001,
+        audioContext.currentTime+.45
+      );
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      osc.start();
+      osc.stop(audioContext.currentTime+.45);
+
+    }catch(e){}
+
+  },delay);
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+function updateTop(){
+
+  document.getElementById("topName").textContent = state.name;
+  document.getElementById("topScore").textContent = state.score;
+  document.getElementById("topTokens").textContent = state.tokens;
+
+}
+
+
+/* =========================================================
+   REWARDS
+========================================================= */
+
+function reward(points,tokens){
+
+  state.score += points;
+  state.tokens += tokens;
+
+  updateTop();
+}
+
+
+/* =========================================================
+   START / RESET
+========================================================= */
+
+document.getElementById("startBtn").addEventListener("click",()=>{
+
+  const name =
+    document.getElementById("playerName").value.trim();
+
+  if(!name){
+    alert("Please enter your name first 💗");
+    return;
+  }
+
+  state.name = name;
+  state.level = 1;
+  state.score = 0;
+  state.tokens = 0;
+
+  document.getElementById("startScreen")
+    .classList.add("hidden");
+
+  document.getElementById("gameScreen")
+    .classList.remove("hidden");
+
+  updateTop();
+  showGame();
+
+});
+
+
+document.getElementById("musicBtnStart")
+  .addEventListener("click",toggleMusic);
+
+document.getElementById("musicBtn")
+  .addEventListener("click",toggleMusic);
+
+document.getElementById("resetBtn")
+  .addEventListener("click",()=>{
+
+    if(confirm("Restart the whole Lulu Express journey?")){
+      location.reload();
+    }
+
+  });
+
+
+/* =========================================================
+   GAME FINISH
+========================================================= */
+
+function finishGame(points,tokens,message){
+
+  reward(points,tokens);
+
+  const area = document.getElementById("gameArea");
+
+  area.innerHTML += `
+    <div class="card" style="margin-top:18px">
+      <div style="font-size:50px">🎉</div>
+      <h2>Level Complete!</h2>
+      <p>${message}</p>
+      <p>
+        <span class="stat">+${points} points</span>
+        <span class="stat">+${tokens} tokens</span>
+      </p>
+      <button class="mainBtn" id="nextBtn">
+        Continue to Level ${state.level + 1} →
+      </button>
+    </div>
+  `;
+
+  document.getElementById("nextBtn")
+    .addEventListener("click",()=>{
+
+      state.level++;
+
+      if(state.level > 23){
+        showFinalResult();
+      }else{
+        showGame();
+      }
+
+    });
+
+}
+
+
+/* =========================================================
+   SHOW GAME
+========================================================= */
+
+function showGame(){
+
+  const area = document.getElementById("gameArea");
+
+  area.innerHTML = "";
+
+  updateTop();
+
+  const games = [
+
+    game1,
+    game2,
+    game3,
+    game4,
+    game5,
+    game6,
+    game7,
+    game8,
+    game9,
+    game10,
+    game11,
+    game12,
+    game13,
+    game14,
+    game15,
+    game16,
+    game17,
+    game18,
+    game19,
+    game20,
+    game21,
+    game22,
+    game23
+
+  ];
+
+  games[state.level-1]();
+
 }
 
 
@@ -1247,274 +621,167 @@ function playTone(freq,duration){
 
 function game1(){
 
-  document.getElementById("gameArea").innerHTML=`
+  let found = 0;
 
+  document.getElementById("gameArea").innerHTML = `
     <div class="card">
-
+      <div class="gameNumber">LEVEL 1 OF 23</div>
       <h2>💔 Broken Hearts</h2>
+      <p>Tap all 8 hearts to repair Lulu's broken heart!</p>
 
-      <p class="gameDescription">
-        Catch the falling hearts before they reach the bottom!
-        This version is deliberately slower and easier on phones.
-      </p>
+      <div class="tileGrid" id="heartGrid"></div>
 
-      <div>
-        Hearts caught:
-        <b id="heartScore">0</b> / 8
+      <div class="message" id="g1msg">
+        Hearts found: 0 / 8
       </div>
-
-      <div class="heartArena" id="heartArena">
-
-        <div id="basket" class="basket">💗</div>
-
-      </div>
-
-      <div class="status" id="heartStatus">
-        Move the basket underneath the hearts.
-      </div>
-
     </div>
   `;
 
-  const arena=document.getElementById("heartArena");
-  const basket=document.getElementById("basket");
+  const grid = document.getElementById("heartGrid");
 
-  let basketX=50;
-  let caught=0;
-  let hearts=[];
-  let running=true;
+  for(let i=0;i<12;i++){
 
-  function moveBasket(x){
+    const tile = document.createElement("button");
 
-    const rect=arena.getBoundingClientRect();
+    tile.className="tile";
 
-    basketX=
-      Math.max(
-        8,
-        Math.min(
-          92,
-          ((x-rect.left)/rect.width)*100
-        )
-      );
+    const heart = i < 8;
 
-    basket.style.left="calc("+basketX+"% - 45px)";
-  }
+    tile.textContent =
+      heart ? "💗" : "🌸";
 
-  arena.addEventListener("pointermove",e=>{
-    moveBasket(e.clientX);
-  });
+    tile.addEventListener("click",()=>{
 
-  arena.addEventListener("pointerdown",e=>{
-    moveBasket(e.clientX);
-  });
+      if(tile.classList.contains("found")) return;
 
-  function spawnHeart(){
+      if(heart){
 
-    if(!running)return;
+        tile.classList.add("found");
+        found++;
 
-    const h=document.createElement("div");
-    h.className="heart";
-    h.textContent=Math.random()<.5?"💗":"💖";
+        document.getElementById("g1msg").textContent =
+          `Hearts found: ${found} / 8`;
 
-    const x=8+Math.random()*84;
+        if(found===8){
 
-    h.style.left=x+"%";
-    h.style.top="-45px";
+          setTimeout(()=>{
+            finishGame(
+              150,
+              25,
+              "You repaired Lulu's heart! 💗"
+            );
+          },300);
 
-    arena.appendChild(h);
-
-    hearts.push({
-      el:h,
-      x:x,
-      y:-45
-    });
-  }
-
-  gameInterval=setInterval(()=>{
-
-    if(!running)return;
-
-    if(Math.random()<.75){
-      spawnHeart();
-    }
-
-    hearts.forEach((h,index)=>{
-
-      h.y+=1.7;
-      h.el.style.top=h.y+"px";
-
-      const arenaHeight=arena.clientHeight;
-
-      const basketLeft=basketX-8;
-      const basketRight=basketX+8;
-
-      if(
-        h.y>arenaHeight-85 &&
-        h.x>basketLeft &&
-        h.x<basketRight
-      ){
-
-        caught++;
-
-        document.getElementById("heartScore").textContent=caught;
-
-        h.el.remove();
-        hearts.splice(index,1);
-
-        if(caught>=8){
-
-          running=false;
-
-          finishGame(
-            250,
-            30,
-            "You caught all the hearts! 💗"
-          );
         }
-      }
-
-      else if(h.y>arenaHeight){
-
-        h.el.remove();
-        hearts.splice(index,1);
-      }
-
-    });
-
-  },45);
-
-  gameTimer=setTimeout(()=>{
-
-    if(running){
-
-      running=false;
-
-      if(caught>=6){
-
-        finishGame(
-          200,
-          25,
-          "You saved enough hearts! 💗"
-        );
 
       }else{
 
-        document.getElementById("heartStatus").innerHTML=
-          "Almost! You need 6 hearts. Try again.";
+        tile.classList.add("selected");
 
-        clearTimers();
-
-        setTimeout(game1,1000);
       }
-    }
 
-  },30000);
+    });
+
+    grid.appendChild(tile);
+  }
+
 }
 
 
 /* =========================================================
    GAME 2
-   MEMORY VAULT
+   MEMORY
 ========================================================= */
 
 function game2(){
 
-  const symbols=[
-    "🌸","🌸",
-    "🐬","🐬",
-    "🌻","🌻",
-    "💗","💗",
-    "🎲","🎲",
-    "🌹","🌹"
-  ].sort(()=>Math.random()-.5);
+  const symbols = ["🌹","🌹","🐬","🐬","🌻","🌻","💗","💗"];
 
-  document.getElementById("gameArea").innerHTML=`
+  symbols.sort(()=>Math.random()-.5);
 
+  let open = [];
+  let matched = 0;
+
+  document.getElementById("gameArea").innerHTML = `
     <div class="card">
-
-      <h2>🗝️ Memory Vault</h2>
-
-      <p>Match all six pairs.</p>
-
-      <div class="memoryGrid" id="memoryGrid"></div>
-
-      <div class="status" id="memoryStatus">
-        Find the matching pairs.
-      </div>
-
+      <div class="gameNumber">LEVEL 2 OF 23</div>
+      <h2>🧠 Memory Match</h2>
+      <p>Find all 4 matching pairs.</p>
+      <div class="tileGrid" id="memoryGrid"></div>
+      <div class="message" id="g2msg">Pairs: 0 / 4</div>
     </div>
   `;
 
   const grid=document.getElementById("memoryGrid");
 
-  let first=null;
-  let second=null;
-  let locked=false;
-  let matches=0;
+  symbols.forEach(symbol=>{
 
-  symbols.forEach((symbol,i)=>{
+    const tile=document.createElement("button");
 
-    const card=document.createElement("button");
+    tile.className="tile";
+    tile.textContent="❓";
 
-    card.className="memoryCard";
-    card.textContent=symbol;
-    card.dataset.symbol=symbol;
+    tile.addEventListener("click",()=>{
 
-    card.onclick=()=>{
+      if(tile.dataset.done==="yes") return;
+      if(open.includes(tile)) return;
+      if(open.length>=2) return;
 
-      if(
-        locked ||
-        card.classList.contains("flipped") ||
-        card.classList.contains("matched")
-      )return;
+      tile.textContent=symbol;
+      tile.dataset.symbol=symbol;
+      open.push(tile);
 
-      card.classList.add("flipped");
+      if(open.length===2){
 
-      if(!first){
-        first=card;
-        return;
-      }
+        if(open[0].dataset.symbol===open[1].dataset.symbol){
 
-      second=card;
-      locked=true;
+          open.forEach(x=>{
+            x.dataset.done="yes";
+            x.classList.add("found");
+          });
 
-      if(first.dataset.symbol===second.dataset.symbol){
+          matched++;
 
-        first.classList.add("matched");
-        second.classList.add("matched");
+          document.getElementById("g2msg").textContent =
+            `Pairs: ${matched} / 4`;
 
-        matches++;
+          open=[];
 
-        first=null;
-        second=null;
-        locked=false;
+          if(matched===4){
 
-        if(matches===6){
+            setTimeout(()=>{
+              finishGame(
+                150,
+                25,
+                "Perfect memory! 🧠💗"
+              );
+            },300);
 
-          finishGame(
-            300,
-            35,
-            "The Memory Vault has been opened! 🗝️"
-          );
+          }
+
+        }else{
+
+          const pair=open;
+          open=[];
+
+          setTimeout(()=>{
+
+            pair.forEach(x=>{
+              x.textContent="❓";
+            });
+
+          },600);
+
         }
 
-      }else{
-
-        setTimeout(()=>{
-
-          first.classList.remove("flipped");
-          second.classList.remove("flipped");
-
-          first=null;
-          second=null;
-          locked=false;
-
-        },650);
       }
-    };
 
-    grid.appendChild(card);
+    });
+
+    grid.appendChild(tile);
+
   });
+
 }
 
 
@@ -1523,157 +790,97 @@ function game2(){
    PRESSURE QUIZ
 ========================================================= */
 
+const pressureQuestions = [
+
+  ["What is Liliana's favourite number?",["3","5","7","9"],0],
+  ["What colour does Liliana love?",["Baby pink","Green","Orange","Purple"],0],
+  ["What animal does Liliana love?",["Dolphins","Lions","Penguins","Tigers"],0],
+  ["What is Liliana's star sign?",["Leo","Gemini","Taurus","Pisces"],0],
+  ["What food does Liliana love?",["Sushi","Pizza","Pasta","Tacos"],0]
+
+];
+
 function game3(){
 
-  const questions=[
-    facts[0],
-    facts[5],
-    facts[7],
-    facts[14],
-    facts[8]
-  ];
+  let q=0;
+  let correct=0;
 
-  let current=0;
-  let time=8;
-  let answered=false;
+  document.getElementById("gameArea").innerHTML = `
+    <div class="card">
+      <div class="gameNumber">LEVEL 3 OF 23</div>
+      <h2>⏱️ Pressure Quiz</h2>
 
-  function render(){
-
-    clearTimers();
-
-    answered=false;
-    time=8;
-
-    const q=questions[current];
-
-    const options=[...q.options].sort(()=>Math.random()-.5);
-
-    document.getElementById("gameArea").innerHTML=`
-
-      <div class="card">
-
-        <h2>⏱️ Pressure Quiz</h2>
-
-        <p>
-          Question ${current+1} / ${questions.length}
-        </p>
-
-        <div class="timer" id="pressureTimer">8</div>
-
-        <div class="progress">
-          <div
-            class="progressFill"
-            style="width:${current/questions.length*100}%">
-          </div>
-        </div>
-
-        <h3>${q.q}</h3>
-
-        <div id="pressureOptions"></div>
-
-        <div class="status" id="pressureStatus"></div>
-
+      <div class="questionCount" id="g3count"></div>
+      <div class="progress">
+        <div class="progressBar" id="g3bar"></div>
       </div>
-    `;
 
-    const box=document.getElementById("pressureOptions");
+      <h3 id="g3question"></h3>
+      <div class="choiceGrid" id="g3choices"></div>
+      <div class="message" id="g3msg"></div>
+    </div>
+  `;
 
-    options.forEach(option=>{
+  function load(){
 
-      const b=document.createElement("button");
-      b.className="gameButton";
-      b.textContent=option;
+    if(q>=pressureQuestions.length){
 
-      b.onclick=()=>answerPressure(option,q.answer);
+      finishGame(
+        correct*50,
+        correct*5,
+        `You got ${correct}/${pressureQuestions.length} correct!`
+      );
 
-      box.appendChild(b);
-    });
-
-    gameInterval=setInterval(()=>{
-
-      time--;
-
-      const timer=document.getElementById("pressureTimer");
-
-      if(timer)timer.textContent=time;
-
-      if(time<=0){
-
-        clearInterval(gameInterval);
-
-        if(!answered){
-
-          answered=true;
-
-          document.getElementById("pressureStatus").innerHTML=
-            `<span class="fail">⏰ Time's up!</span>`;
-
-          setTimeout(()=>{
-
-            current++;
-
-            if(current>=questions.length){
-
-              finishGame(
-                250,
-                30,
-                "You survived the pressure quiz! ⏱️"
-              );
-
-            }else{
-              render();
-            }
-
-          },700);
-        }
-      }
-
-    },1000);
-  }
-
-  function answerPressure(selected,correct){
-
-    if(answered)return;
-
-    answered=true;
-    clearTimers();
-
-    if(selected===correct){
-
-      score+=50;
-      tokens+=5;
-
-      document.getElementById("pressureStatus").innerHTML=
-        `<span class="success">✓ Correct!</span>`;
-
-      updateTop();
-
-    }else{
-
-      document.getElementById("pressureStatus").innerHTML=
-        `<span class="fail">✗ Correct answer: ${correct}</span>`;
+      return;
     }
 
-    setTimeout(()=>{
+    const item=pressureQuestions[q];
 
-      current++;
+    document.getElementById("g3count").textContent =
+      `Question ${q+1} of ${pressureQuestions.length}`;
 
-      if(current>=questions.length){
+    document.getElementById("g3bar").style.width =
+      `${(q/pressureQuestions.length)*100}%`;
 
-        finishGame(
-          250,
-          30,
-          "You survived the pressure quiz! ⏱️"
-        );
+    document.getElementById("g3question").textContent=item[0];
 
-      }else{
-        render();
-      }
+    const choices=document.getElementById("g3choices");
 
-    },700);
+    choices.innerHTML="";
+
+    item[1].forEach((answer,index)=>{
+
+      const btn=document.createElement("button");
+      btn.className="choice";
+      btn.textContent=answer;
+
+      btn.addEventListener("click",()=>{
+
+        if(index===item[2]){
+
+          btn.classList.add("correct");
+          correct++;
+
+        }else{
+
+          btn.classList.add("wrong");
+
+        }
+
+        q++;
+
+        setTimeout(load,400);
+
+      });
+
+      choices.appendChild(btn);
+
+    });
+
   }
 
-  render();
+  load();
+
 }
 
 
@@ -1684,143 +891,105 @@ function game3(){
 
 function game4(){
 
-  let number=1+Math.floor(Math.random()*6);
+  let tries=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 4 OF 23</div>
       <h2>🎲 High Roller</h2>
-
-      <p>
-        Pick a lucky number. Roll the dice and beat it!
-      </p>
-
-      <div class="bigNumber" id="dice">?</div>
-
-      <button class="primary" id="rollBtn">
-        🎲 ROLL
-      </button>
-
-      <div class="status" id="rollStatus"></div>
-
+      <p>Roll the dice. You need a 4, 5 or 6.</p>
+      <div class="numberBox" id="dice">?</div>
+      <button class="mainBtn" id="rollBtn">ROLL 🎲</button>
+      <div class="message" id="g4msg"></div>
     </div>
   `;
 
-  document.getElementById("rollBtn").onclick=()=>{
+  document.getElementById("rollBtn")
+    .addEventListener("click",()=>{
 
-    const roll=1+Math.floor(Math.random()*6);
+      tries++;
 
-    document.getElementById("dice").textContent=roll;
+      const number=Math.floor(Math.random()*6)+1;
 
-    if(roll>=number){
+      document.getElementById("dice").textContent=number;
 
-      finishGame(
-        250,
-        30,
-        "Lucky roll! The house couldn't stop you. 🎲"
-      );
+      if(number>=4){
 
-    }else{
+        document.getElementById("g4msg").textContent=
+          "🎉 Lucky roll!";
 
-      document.getElementById("rollStatus").innerHTML=
-        `Your target was ${number}. Try again!`;
+        setTimeout(()=>{
+          finishGame(150,25,"The house lost this time! 🎲");
+        },500);
 
-      number=1+Math.floor(Math.random()*6);
-    }
-  };
+      }else{
+
+        document.getElementById("g4msg").textContent=
+          "Not high enough. Roll again!";
+
+      }
+
+    });
+
 }
 
 
 /* =========================================================
    GAME 5
-   MIND GAMES
+   ODD ONE OUT
 ========================================================= */
 
 function game5(){
 
-  const rounds=[
-    ["🐬","🐬","🌸","🐬"],
-    ["🌻","🌹","🌻","🌻"],
-    ["💗","💗","💔","💗"],
-    ["🎲","🎲","🎲","🎯"],
-    ["🌸","🌸","🌸","🌹"]
-  ];
+  const symbols=["🌸","🌸","🌸","🌹"];
 
-  let round=0;
+  const oddIndex=Math.floor(Math.random()*4);
 
-  function render(){
+  symbols[oddIndex]="🌹";
 
-    if(round>=rounds.length){
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div class="gameNumber">LEVEL 5 OF 23</div>
+      <h2>🔎 Odd One Out</h2>
+      <p>Tap the different flower.</p>
+      <div class="choiceGrid two" id="g5grid"></div>
+      <div class="message" id="g5msg"></div>
+    </div>
+  `;
 
-      finishGame(
-        250,
-        30,
-        "Your eyes caught every odd one out! 👀"
-      );
+  const grid=document.getElementById("g5grid");
 
-      return;
-    }
+  for(let i=0;i<4;i++){
 
-    const arr=rounds[round];
+    const btn=document.createElement("button");
+    btn.className="choice";
+    btn.textContent=symbols[i];
 
-    document.getElementById("gameArea").innerHTML=`
+    btn.addEventListener("click",()=>{
 
-      <div class="card">
+      if(i===oddIndex){
 
-        <h2>🧠 Mind Games</h2>
+        btn.classList.add("correct");
 
-        <p>
-          Tap the symbol that doesn't belong.
-        </p>
-
-        <h3>Round ${round+1} / ${rounds.length}</h3>
-
-        <div class="grid grid2">
-
-          ${arr.map((x,i)=>
-            `<button
-              class="gameButton"
-              onclick="mindPick(${i})">
-              ${x}
-            </button>`
-          ).join("")}
-
-        </div>
-
-        <div class="status" id="mindStatus"></div>
-
-      </div>
-    `;
-
-    window.mindPick=function(i){
-
-      const correct=rounds[round];
-
-      let odd=0;
-
-      for(let j=1;j<correct.length;j++){
-
-        if(correct[j]!==correct[0]){
-          odd=j;
-          break;
-        }
-      }
-
-      if(i===odd){
-
-        round++;
-        render();
+        setTimeout(()=>{
+          finishGame(150,25,"Sharp eyes! 🔎");
+        },400);
 
       }else{
 
-        document.getElementById("mindStatus").innerHTML=
-          `<span class="fail">Not that one! Try again.</span>`;
+        btn.classList.add("wrong");
+
+        document.getElementById("g5msg").textContent=
+          "Try another one!";
+
       }
-    };
+
+    });
+
+    grid.appendChild(btn);
+
   }
 
-  render();
 }
 
 
@@ -1831,309 +1000,209 @@ function game5(){
 
 function game6(){
 
-  let cards=["🂡","🂢","🂣","🂤","🂥","🂦"];
+  const winner=Math.floor(Math.random()*3);
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 6 OF 23</div>
       <h2>🃏 Bluff</h2>
-
-      <p>
-        Find the hidden winning card.
-      </p>
-
-      <div class="grid grid3" id="bluffCards"></div>
-
-      <div class="status" id="bluffStatus"></div>
-
+      <p>One card wins. Choose wisely.</p>
+      <div class="choiceGrid">
+        <button class="choice" data-card="0">🂠 CARD 1</button>
+        <button class="choice" data-card="1">🂠 CARD 2</button>
+        <button class="choice" data-card="2">🂠 CARD 3</button>
+      </div>
+      <div class="message" id="g6msg"></div>
     </div>
   `;
 
-  const winning=Math.floor(Math.random()*cards.length);
-  const box=document.getElementById("bluffCards");
+  document.querySelectorAll("[data-card]").forEach(btn=>{
 
-  cards.forEach((c,i)=>{
+    btn.addEventListener("click",()=>{
 
-    const b=document.createElement("button");
+      const chosen=Number(btn.dataset.card);
 
-    b.className="gameButton";
-    b.textContent="🂠";
+      if(chosen===winner){
 
-    b.onclick=()=>{
+        btn.classList.add("correct");
 
-      if(i===winning){
-
-        b.textContent=c;
-
-        finishGame(
-          250,
-          30,
-          "You called the bluff! 🃏"
-        );
+        setTimeout(()=>{
+          finishGame(150,25,"You beat the bluff! 🃏");
+        },400);
 
       }else{
 
-        b.textContent="❌";
+        btn.classList.add("wrong");
 
-        document.getElementById("bluffStatus").textContent=
-          "Not this card. Keep looking!";
+        document.getElementById("g6msg").textContent=
+          "That wasn't the winning card. Try again.";
+
       }
-    };
 
-    box.appendChild(b);
+    });
+
   });
+
 }
 
 
 /* =========================================================
    GAME 7
-   SURVIVAL
+   SAFE CHOICE
 ========================================================= */
 
 function game7(){
 
-  let lives=3;
-  let danger=0;
+  let round=0;
+  let safe=Math.floor(Math.random()*3);
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
-      <h2>❤️ Survival</h2>
-
-      <p>
-        Keep your heart alive. Tap SAFE whenever danger appears.
-      </p>
-
-      <div class="bigNumber" id="survivalHeart">
-        ❤️
+      <div class="gameNumber">LEVEL 7 OF 23</div>
+      <h2>🛡️ Safe Choice</h2>
+      <p>Choose the safe door.</p>
+      <div class="questionCount" id="g7round">
+        Round 1 of 3
       </div>
-
-      <p>
-        Lives: <span id="lives">❤️❤️❤️</span>
-      </p>
-
-      <button class="primary" onclick="survivalSafe()">
-        🛡️ SAFE
-      </button>
-
-      <div class="status" id="survivalStatus"></div>
-
+      <div class="choiceGrid">
+        <button class="choice" data-door="0">🚪 Door 1</button>
+        <button class="choice" data-door="1">🚪 Door 2</button>
+        <button class="choice" data-door="2">🚪 Door 3</button>
+      </div>
+      <div class="message" id="g7msg"></div>
     </div>
   `;
 
-  function dangerEvent(){
+  document.querySelectorAll("[data-door]").forEach(btn=>{
 
-    danger=1;
+    btn.addEventListener("click",()=>{
 
-    document.getElementById("survivalHeart").textContent="⚠️";
+      const chosen=Number(btn.dataset.door);
 
-    document.getElementById("survivalStatus").textContent=
-      "DANGER!";
+      if(chosen!==safe){
 
-    gameTimer=setTimeout(()=>{
+        document.getElementById("g7msg").textContent=
+          "💥 Danger! Choose again.";
 
-      if(danger===1){
-
-        lives--;
-
-        document.getElementById("lives").textContent=
-          "❤️".repeat(lives)+"🖤".repeat(3-lives);
-
-        danger=0;
-
-        if(lives<=0){
-
-          document.getElementById("survivalStatus").textContent=
-            "The heart broke. Restarting...";
-
-          setTimeout(game7,900);
-
-        }else{
-
-          document.getElementById("survivalHeart").textContent="❤️";
-
-          setTimeout(dangerEvent,700);
-        }
+        return;
 
       }
 
-    },1200);
-  }
+      round++;
 
-  window.survivalSafe=function(){
+      if(round>=3){
 
-    if(danger===1){
+        finishGame(150,25,"You survived all three rounds! 🛡️");
 
-      danger=0;
-      clearTimeout(gameTimer);
+        return;
 
-      document.getElementById("survivalHeart").textContent="❤️";
-
-      document.getElementById("survivalStatus").textContent=
-        "Saved! 💗";
-
-      setTimeout(dangerEvent,650);
-
-      if(lives===3){
-
-        score+=50;
-        tokens+=5;
-        updateTop();
       }
 
-    }else{
+      safe=Math.floor(Math.random()*3);
 
-      document.getElementById("survivalStatus").textContent=
-        "Wait for danger!";
-    }
-  };
+      document.getElementById("g7round").textContent=
+        `Round ${round+1} of 3`;
 
-  setTimeout(dangerEvent,900);
+      document.getElementById("g7msg").textContent=
+        "Safe! Next round.";
+
+    });
+
+  });
+
 }
 
 
 /* =========================================================
    GAME 8
-   ADMIRER RACE
+   LULU RACE
 ========================================================= */
 
 function game8(){
 
+  let taps=0;
+
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
+      <div class="gameNumber">LEVEL 8 OF 23</div>
+      <h2>🏁 Lulu Race</h2>
+      <p>Tap the button 10 times to win the race!</p>
 
-      <h2>🏃 Admirer Race</h2>
-
-      <p>
-        Tap the button to make your character run.
-        Reach the finish first!
-      </p>
-
-      <div class="raceTrack">
-
-        <div id="playerRacer"
-             class="racer"
-             style="top:35px;">
-          💗
-        </div>
-
-        <div id="enemyRacer"
-             class="racer"
-             style="top:135px;">
-          😈
-        </div>
-
-        <div class="finish"></div>
-
+      <div class="progress">
+        <div class="progressBar" id="g8bar"></div>
       </div>
 
-      <button class="primary" id="runBtn">
-        TAP TO RUN 🏃
+      <div class="numberBox" id="g8count">0 / 10</div>
+
+      <button class="mainBtn" id="raceBtn">
+        TAP! 🏁
       </button>
-
-      <div class="status" id="raceStatus"></div>
-
     </div>
   `;
 
-  let player=0;
-  let enemy=0;
-  let active=true;
+  document.getElementById("raceBtn")
+    .addEventListener("click",()=>{
 
-  document.getElementById("runBtn").onclick=()=>{
+      taps++;
 
-    if(!active)return;
+      document.getElementById("g8count").textContent=
+        `${taps} / 10`;
 
-    player+=8;
+      document.getElementById("g8bar").style.width=
+        `${taps*10}%`;
 
-    document.getElementById("playerRacer").style.left=
-      player+"%";
+      if(taps>=10){
 
-    if(player>=88){
+        finishGame(150,25,"You crossed the finish line! 🏁");
 
-      active=false;
+      }
 
-      finishGame(
-        300,
-        35,
-        "You won the race! 🏆"
-      );
+    });
 
-      return;
-    }
-
-    enemy+=3+Math.random()*4;
-
-    document.getElementById("enemyRacer").style.left=
-      Math.min(enemy,88)+"%";
-
-    if(enemy>=88){
-
-      active=false;
-
-      document.getElementById("raceStatus").innerHTML=
-        `<span class="fail">You were caught! Try again.</span>`;
-
-      setTimeout(game8,900);
-    }
-  };
 }
 
 
 /* =========================================================
    GAME 9
-   HEARTBREAK CHAMBER
+   HEARTBREAK
 ========================================================= */
 
 function game9(){
 
-  let hearts=10;
+  let hits=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 9 OF 23</div>
       <h2>💔 Heartbreak Chamber</h2>
+      <p>Tap the broken heart 10 times.</p>
 
-      <p>
-        Break the heartbreak by tapping the broken heart.
-      </p>
+      <div class="bigHeart" id="g9heart">💔</div>
 
-      <div class="bigNumber" id="breakHeart">
-        💔
-      </div>
+      <div class="numberBox" id="g9count">0 / 10</div>
 
-      <p>
-        Hits remaining: <b id="hits">10</b>
-      </p>
-
-      <button class="primary" id="hitButton">
-        💥 HEAL HEART
+      <button class="mainBtn" id="g9btn">
+        SMASH 💔
       </button>
-
     </div>
   `;
 
-  document.getElementById("hitButton").onclick=()=>{
+  document.getElementById("g9btn")
+    .addEventListener("click",()=>{
 
-    hearts--;
+      hits++;
 
-    document.getElementById("hits").textContent=hearts;
+      document.getElementById("g9count").textContent=
+        `${hits} / 10`;
 
-    if(hearts<=0){
+      if(hits>=10){
 
-      document.getElementById("breakHeart").textContent="💗";
+        finishGame(150,25,"Heartbreak defeated! ❤️‍🩹");
 
-      finishGame(
-        250,
-        30,
-        "The broken heart has been healed! 💗"
-      );
-    }
-  };
+      }
+
+    });
+
 }
 
 
@@ -2147,80 +1216,39 @@ function game10(){
   let punches=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
+      <div class="gameNumber">LEVEL 10 OF 23</div>
+      <h2>🥊 Heart Boxing</h2>
+      <p>Punch the target 12 times.</p>
 
-      <h2>🥊 Love Boxing</h2>
+      <div style="font-size:80px;margin:20px">🥊</div>
 
-      <p>
-        Land 12 punches before the timer runs out.
-      </p>
-
-      <div class="bigNumber" id="boxingTarget">
-        🥊
+      <div class="numberBox" id="g10count">
+        0 / 12
       </div>
 
-      <p>
-        Punches: <b id="punchCount">0</b> / 12
-      </p>
-
-      <div class="timer" id="boxingTimer">15</div>
-
-      <button class="primary" id="punch">
-        🥊 PUNCH
+      <button class="mainBtn" id="punchBtn">
+        PUNCH! 🥊
       </button>
-
-      <div class="status" id="boxingStatus"></div>
-
     </div>
   `;
 
-  let time=15;
+  document.getElementById("punchBtn")
+    .addEventListener("click",()=>{
 
-  document.getElementById("punch").onclick=()=>{
+      punches++;
 
-    punches++;
+      document.getElementById("g10count").textContent=
+        `${punches} / 12`;
 
-    document.getElementById("punchCount").textContent=punches;
+      if(punches>=12){
 
-    if(punches>=12){
+        finishGame(150,25,"You knocked out the challenge! 🥊");
 
-      finishGame(
-        250,
-        30,
-        "Knockout! 🥊💗"
-      );
-    }
-  };
-
-  gameInterval=setInterval(()=>{
-
-    time--;
-
-    document.getElementById("boxingTimer").textContent=time;
-
-    if(time<=0){
-
-      clearTimers();
-
-      if(punches>=8){
-
-        finishGame(
-          200,
-          25,
-          "You survived the boxing round! 🥊"
-        );
-
-      }else{
-
-        document.getElementById("boxingStatus").innerHTML=
-          "You need 8 punches. Try again.";
-
-        setTimeout(game10,800);
       }
-    }
 
-  },1000);
+    });
+
 }
 
 
@@ -2231,263 +1259,264 @@ function game10(){
 
 function game11(){
 
-  const pairs=[
-    ["💗","💖"],
-    ["🌸","🌻"],
-    ["🐬","🌊"],
-    ["🌹","💐"]
+  const answers=[
+    ["Liliana's favourite colour?","Baby pink"],
+    ["Liliana's favourite number?","3"],
+    ["Liliana's star sign?","Leo"],
+    ["Liliana's favourite animal?","Dolphins"],
+    ["Liliana's favourite food?","Sushi"]
   ];
 
-  let index=0;
+  let q=0;
+  let correct=0;
 
-  function render(){
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div class="gameNumber">LEVEL 11 OF 23</div>
+      <h2>💞 Perfect Match</h2>
+      <div id="g11area"></div>
+    </div>
+  `;
 
-    if(index>=pairs.length){
+  function load(){
+
+    if(q>=answers.length){
 
       finishGame(
-        250,
-        30,
-        "Every match was perfect! 💗"
+        correct*30,
+        correct*4,
+        `You matched ${correct}/${answers.length}! 💞`
       );
 
       return;
     }
 
-    const p=pairs[index];
+    const item=answers[q];
 
-    document.getElementById("gameArea").innerHTML=`
+    const options=[
+      item[1],
+      "Purple",
+      "9",
+      "Tiger"
+    ];
 
-      <div class="card">
+    const unique=[...new Set(options)];
 
-        <h2>💞 Perfect Match</h2>
+    unique.sort(()=>Math.random()-.5);
 
-        <p>
-          Which symbol belongs with:
-        </p>
-
-        <div class="bigNumber">${p[0]}</div>
-
-        <button
-          class="gameButton"
-          onclick="matchChoice(0)">
-          ${p[1]}
-        </button>
-
-        <button
-          class="gameButton"
-          onclick="matchChoice(1)">
-          ${
-            ["🎲","🍕","⚽","🌙"][index]
-          }
-        </button>
-
-        <div class="status" id="matchStatus"></div>
-
-      </div>
+    document.getElementById("g11area").innerHTML=`
+      <p>Question ${q+1} of ${answers.length}</p>
+      <h3>${item[0]}</h3>
+      <div class="choiceGrid" id="g11choices"></div>
     `;
 
-    window.matchChoice=function(choice){
+    unique.forEach(option=>{
 
-      if(choice===0){
+      const btn=document.createElement("button");
+      btn.className="choice";
+      btn.textContent=option;
 
-        index++;
-        render();
+      btn.addEventListener("click",()=>{
 
-      }else{
+        if(option===item[1]){
+          correct++;
+          btn.classList.add("correct");
+        }else{
+          btn.classList.add("wrong");
+        }
 
-        document.getElementById("matchStatus").textContent=
-          "Not quite! Try again.";
-      }
-    };
+        q++;
+
+        setTimeout(load,350);
+
+      });
+
+      document.getElementById("g11choices")
+        .appendChild(btn);
+
+    });
+
   }
 
-  render();
+  load();
+
 }
 
 
 /* =========================================================
    GAME 12
-   LILIANA QUIZ
+   LILiana QUIZ
 ========================================================= */
+
+const quiz12=[
+
+ ["What is Liliana's favourite number?",["3","8","11","4"],"3"],
+ ["What colour does Liliana love?",["Baby pink","Black","Yellow","Orange"],"Baby pink"],
+ ["What food does Liliana love?",["Sushi","Fish and chips","Pasta","Burgers"],"Sushi"],
+ ["What animal does Liliana love?",["Dolphins","Cats","Horses","Rabbits"],"Dolphins"],
+ ["What is Liliana's star sign?",["Leo","Cancer","Virgo","Aries"],"Leo"],
+ ["What does Liliana want someday?",["To be a mum","To become a pilot","To live on Mars","To climb Everest"],"To be a mum"],
+ ["What subject did Liliana study?",["Psychology","Physics","Law","Engineering"],"Psychology"],
+ ["What movie is a favourite?",["Me Before You","Titanic","Frozen","Avatar"],"Me Before You"],
+ ["How many siblings does Liliana have?",["5","2","7","3"],"5"],
+ ["How many dogs does Liliana have?",["2","1","3","4"],"2"]
+
+];
 
 function game12(){
 
-  let qs=[...facts.slice(0,10)]
-    .sort(()=>Math.random()-.5);
-
-  let current=0;
+  let q=0;
   let correct=0;
 
-  function render(){
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div class="gameNumber">LEVEL 12 OF 23</div>
+      <h2>💗 How Well Do You Know Lulu?</h2>
+      <div id="g12area"></div>
+    </div>
+  `;
 
-    if(current>=qs.length){
+  function load(){
+
+    if(q>=quiz12.length){
 
       finishGame(
-        300,
-        40,
-        "You really know Lulu! 💗"
+        correct*35,
+        correct*5,
+        `You scored ${correct}/${quiz12.length}!`
       );
 
       return;
     }
 
-    const q=qs[current];
-    const options=[...q.options].sort(()=>Math.random()-.5);
+    const item=quiz12[q];
 
-    document.getElementById("gameArea").innerHTML=`
-
-      <div class="card">
-
-        <h2>🌸 Liliana Quiz</h2>
-
-        <p>
-          ${current+1} / ${qs.length}
-        </p>
-
-        <h3>${q.q}</h3>
-
-        ${options.map(o=>
-          `<button
-             class="gameButton"
-             onclick="quiz12Answer('${escapeJS(o)}','${escapeJS(q.answer)}')">
-             ${o}
-           </button>`
-        ).join("")}
-
-        <div class="status" id="quiz12Status"></div>
-
+    document.getElementById("g12area").innerHTML=`
+      <div class="questionCount">
+        Question ${q+1} of ${quiz12.length}
       </div>
+
+      <h3>${item[0]}</h3>
+
+      <div class="choiceGrid" id="g12choices"></div>
+
+      <div class="message" id="g12msg"></div>
     `;
 
-    window.quiz12Answer=function(selected,answer){
+    const answers=[...item[1]]
+      .sort(()=>Math.random()-.5);
 
-      if(selected===answer){
+    answers.forEach(answer=>{
 
-        correct++;
-        score+=30;
-        tokens+=3;
-        updateTop();
+      const btn=document.createElement("button");
+      btn.className="choice";
+      btn.textContent=answer;
 
-        current++;
-        render();
+      btn.addEventListener("click",()=>{
 
-      }else{
+        if(answer===item[2]){
 
-        document.getElementById("quiz12Status").innerHTML=
-          `<span class="fail">Try again! 💗</span>`;
-      }
-    };
+          correct++;
+          btn.classList.add("correct");
+
+        }else{
+
+          btn.classList.add("wrong");
+
+        }
+
+        q++;
+
+        setTimeout(load,400);
+
+      });
+
+      document.getElementById("g12choices")
+        .appendChild(btn);
+
+    });
+
   }
 
-  render();
+  load();
+
 }
 
 
 /* =========================================================
    GAME 13
-   REACTION GAUNTLET
+   REACTION
 ========================================================= */
 
 function game13(){
 
-  let round=0;
-  let good=0;
+  let rounds=0;
+  let target=Math.floor(Math.random()*4);
 
-  function next(){
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div class="gameNumber">LEVEL 13 OF 23</div>
+      <h2>⚡ Quick Choice</h2>
+      <p>Tap the pink heart.</p>
+      <p id="g13round">Round 1 of 5</p>
+      <div class="choiceGrid two" id="g13grid"></div>
+      <div class="message" id="g13msg"></div>
+    </div>
+  `;
 
-    if(round>=7){
+  function load(){
 
-      if(good>=5){
+    target=Math.floor(Math.random()*4);
 
-        finishGame(
-          300,
-          35,
-          "Your reactions were lightning fast! ⚡"
-        );
+    const grid=document.getElementById("g13grid");
 
-      }else{
+    grid.innerHTML="";
 
-        document.getElementById("gameArea").innerHTML=`
+    for(let i=0;i<4;i++){
 
-          <div class="card">
+      const btn=document.createElement("button");
 
-            <h2>⚡ Reaction Gauntlet</h2>
+      btn.className="choice";
 
-            <p>
-              You need 5 successful reactions.
-            </p>
+      btn.textContent =
+        i===target ? "💗" : "🌸";
 
-            <p>
-              You got ${good}.
-            </p>
+      btn.addEventListener("click",()=>{
 
-            <button class="primary" onclick="game13()">
-              TRY AGAIN
-            </button>
+        if(i===target){
 
-          </div>
-        `;
-      }
+          rounds++;
 
-      return;
-    }
+          if(rounds>=5){
 
-    document.getElementById("gameArea").innerHTML=`
+            finishGame(150,25,"Lightning fast! ⚡");
 
-      <div class="card">
+            return;
 
-        <h2>⚡ Reaction Gauntlet</h2>
+          }
 
-        <p>
-          Round ${round+1} / 7
-        </p>
+          document.getElementById("g13round").textContent=
+            `Round ${rounds+1} of 5`;
 
-        <div class="bigNumber" id="reactionSymbol">
-          ⏳
-        </div>
+          load();
 
-        <button
-          class="primary"
-          id="reactionButton"
-          disabled>
-          WAIT...
-        </button>
+        }else{
 
-      </div>
-    `;
+          document.getElementById("g13msg").textContent=
+            "Wrong flower! Try again.";
 
-    const delay=700+Math.random()*1800;
-
-    gameTimer=setTimeout(()=>{
-
-      const button=document.getElementById("reactionButton");
-      const symbol=document.getElementById("reactionSymbol");
-
-      if(!button)return;
-
-      symbol.textContent="💗";
-      button.disabled=false;
-      button.textContent="TAP NOW!";
-
-      const start=Date.now();
-
-      button.onclick=()=>{
-
-        const reaction=Date.now()-start;
-
-        if(reaction<1000){
-          good++;
         }
 
-        round++;
+      });
 
-        next();
-      };
+      grid.appendChild(btn);
 
-    },delay);
+    }
+
   }
 
-  next();
+  load();
+
 }
 
 
@@ -2498,77 +1527,66 @@ function game13(){
 
 function game14(){
 
+  const hearts=new Set();
+
+  while(hearts.size<5){
+    hearts.add(Math.floor(Math.random()*12));
+  }
+
   let found=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
-      <h2>🔎 Heart Hunt</h2>
-
-      <p>
-        Find all 5 hidden hearts.
-      </p>
-
-      <div
-        id="huntArea"
-        style="
-          position:relative;
-          height:430px;
-          max-width:550px;
-          margin:auto;
-          border-radius:20px;
-          background:#24101a;
-          overflow:hidden;
-          border:2px solid #75304e;
-        ">
-      </div>
-
-      <p>
-        Found:
-        <b id="foundCount">0</b> / 5
-      </p>
-
+      <div class="gameNumber">LEVEL 14 OF 23</div>
+      <h2>💗 Heart Hunt</h2>
+      <p>Find all 5 hidden hearts.</p>
+      <div class="tileGrid" id="g14grid"></div>
+      <div class="message" id="g14msg">0 / 5 hearts found</div>
     </div>
   `;
 
-  const area=document.getElementById("huntArea");
+  for(let i=0;i<12;i++){
 
-  for(let i=0;i<5;i++){
+    const btn=document.createElement("button");
 
-    const b=document.createElement("button");
+    btn.className="tile";
+    btn.textContent="❔";
 
-    b.textContent="💗";
-    b.style.position="absolute";
-    b.style.left=(5+Math.random()*85)+"%";
-    b.style.top=(5+Math.random()*85)+"%";
-    b.style.fontSize="25px";
-    b.style.background="transparent";
-    b.style.border="0";
+    btn.addEventListener("click",()=>{
 
-    b.onclick=()=>{
+      if(btn.dataset.clicked) return;
 
-      if(b.disabled)return;
+      btn.dataset.clicked="yes";
 
-      b.disabled=true;
-      b.style.opacity=".25";
+      if(hearts.has(i)){
 
-      found++;
+        btn.textContent="💗";
+        btn.classList.add("found");
+        found++;
 
-      document.getElementById("foundCount").textContent=found;
+      }else{
+
+        btn.textContent="🌸";
+
+      }
+
+      document.getElementById("g14msg").textContent=
+        `${found} / 5 hearts found`;
 
       if(found===5){
 
-        finishGame(
-          250,
-          30,
-          "You found every hidden heart! 💗"
-        );
-      }
-    };
+        setTimeout(()=>{
+          finishGame(150,25,"You found every heart! 💗");
+        },300);
 
-    area.appendChild(b);
+      }
+
+    });
+
+    document.getElementById("g14grid").appendChild(btn);
+
   }
+
 }
 
 
@@ -2579,190 +1597,161 @@ function game14(){
 
 function game15(){
 
-  let step=0;
-  const answers=[3,6,7];
+  const clues=[
+
+    ["What is Liliana's favourite number?",["3","5","7"],"3"],
+    ["How many years have you been best friends?",["4","6","8"],"6"],
+    ["What month is Liliana's birthday?",["May","July","September"],"July"]
+
+  ];
+
+  let q=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 15 OF 23</div>
       <h2>🔒 Love Lock</h2>
 
-      <p class="gameDescription">
-        Solve all three clues to unlock the love lock.
-      </p>
+      <div class="lock">🔐</div>
 
-      <div
-        class="bigNumber"
-        id="lockDisplay">
-        ???
-      </div>
-
-      <div id="lockClue"></div>
-
-      <div id="lockButtons"></div>
-
-      <div class="status" id="lockStatus"></div>
-
+      <div id="g15area"></div>
     </div>
   `;
 
-  function render(){
+  function load(){
 
-    const clues=[
-      "What is Liliana's favourite number?",
-      "How many years have you been best friends?",
-      "What month is Liliana's birthday?"
-    ];
+    if(q>=clues.length){
 
-    const options=[
-      [3,5,7],
-      [4,6,8],
-      [5,7,9]
-    ];
+      finishGame(
+        300,
+        40,
+        "🔓 LOVE LOCK OPENED! The code was 367!"
+      );
 
-    document.getElementById("lockClue").innerHTML=
-      `<h3>Clue ${step+1}: ${clues[step]}</h3>`;
+      return;
 
-    const box=document.getElementById("lockButtons");
-    box.innerHTML="";
+    }
 
-    options[step].sort(()=>Math.random()-.5);
+    const clue=clues[q];
 
-    options[step].forEach(number=>{
+    document.getElementById("g15area").innerHTML=`
+      <p><b>Clue ${q+1} of 3</b></p>
+      <h3>${clue[0]}</h3>
+      <div class="choiceGrid" id="g15choices"></div>
+      <div class="message" id="g15msg"></div>
+    `;
 
-      const b=document.createElement("button");
+    clue[1].forEach(answer=>{
 
-      b.className="gameButton";
-      b.textContent=number;
+      const btn=document.createElement("button");
+      btn.className="choice";
+      btn.textContent=answer;
 
-      b.onclick=()=>{
+      btn.addEventListener("click",()=>{
 
-        if(number===answers[step]){
+        if(answer===clue[2]){
 
-          step++;
+          btn.classList.add("correct");
+          q++;
 
-          document.getElementById("lockDisplay").textContent=
-            "•".repeat(step)+"•".repeat(3-step);
-
-          if(step===3){
-
-            document.getElementById("lockDisplay").textContent=
-              "367";
-
-            finishGame(
-              300,
-              40,
-              "The Love Lock opened! 🔓💗"
-            );
-
-          }else{
-
-            render();
-          }
+          setTimeout(load,350);
 
         }else{
 
-          document.getElementById("lockStatus").innerHTML=
-            `<span class="fail">
-              ❌ Not quite. Try this clue again.
-            </span>`;
-        }
-      };
+          btn.classList.add("wrong");
 
-      box.appendChild(b);
+          document.getElementById("g15msg").textContent=
+            "❌ Not quite. Try again.";
+
+        }
+
+      });
+
+      document.getElementById("g15choices")
+        .appendChild(btn);
+
     });
+
   }
 
-  render();
+  load();
+
 }
 
 
 /* =========================================================
    GAME 16
-   CUPID SHOOTOUT
+   CUPID
 ========================================================= */
 
 function game16(){
 
   let hits=0;
 
+  const targetIndices=[];
+
+  while(targetIndices.length<6){
+
+    const x=Math.floor(Math.random()*9);
+
+    if(!targetIndices.includes(x)){
+      targetIndices.push(x);
+    }
+
+  }
+
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 16 OF 23</div>
       <h2>🏹 Cupid Shootout</h2>
-
-      <p>
-        Hit 8 hearts!
-      </p>
-
-      <div
-        id="cupidArea"
-        style="
-          position:relative;
-          height:430px;
-          max-width:550px;
-          margin:auto;
-          background:#1d0b15;
-          border-radius:20px;
-          border:2px solid #71304b;
-          overflow:hidden;
-        ">
-      </div>
-
-      <p>
-        Hits:
-        <b id="cupidHits">0</b> / 8
-      </p>
-
+      <p>Hit all 6 hearts.</p>
+      <div class="tileGrid" id="g16grid"></div>
+      <div class="message" id="g16msg">0 / 6</div>
     </div>
   `;
 
-  const area=document.getElementById("cupidArea");
+  for(let i=0;i<9;i++){
 
-  function spawn(){
+    const btn=document.createElement("button");
 
-    const b=document.createElement("button");
+    btn.className="tile";
+    btn.textContent="🎯";
 
-    b.textContent="💗";
+    btn.addEventListener("click",()=>{
 
-    b.style.position="absolute";
-    b.style.left=(5+Math.random()*85)+"%";
-    b.style.top=(5+Math.random()*85)+"%";
-    b.style.fontSize="28px";
-    b.style.background="transparent";
-    b.style.border="0";
+      if(btn.dataset.clicked) return;
 
-    b.onclick=()=>{
+      btn.dataset.clicked="yes";
 
-      if(b.disabled)return;
+      if(targetIndices.includes(i)){
 
-      b.disabled=true;
-      b.remove();
-
-      hits++;
-
-      document.getElementById("cupidHits").textContent=hits;
-
-      if(hits>=8){
-
-        finishGame(
-          300,
-          35,
-          "Cupid hit every target! 🏹💗"
-        );
+        btn.textContent="💗";
+        btn.classList.add("found");
+        hits++;
 
       }else{
 
-        spawn();
-      }
-    };
+        btn.textContent="❌";
 
-    area.appendChild(b);
+      }
+
+      document.getElementById("g16msg").textContent=
+        `${hits} / 6`;
+
+      if(hits===6){
+
+        setTimeout(()=>{
+          finishGame(150,25,"Cupid approves! 🏹💗");
+        },300);
+
+      }
+
+    });
+
+    document.getElementById("g16grid").appendChild(btn);
+
   }
 
-  for(let i=0;i<3;i++)spawn();
 }
 
 
@@ -2773,70 +1762,67 @@ function game16(){
 
 function game17(){
 
-  let number=10;
+  let number=3;
+  let stopped=false;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
+      <div class="gameNumber">LEVEL 17 OF 23</div>
+      <h2>⏳ Stop at 1</h2>
+      <p>Press STOP when the number reaches 1.</p>
 
-      <h2>⏳ Countdown</h2>
-
-      <p>
-        Tap STOP when the counter reaches exactly 1.
-      </p>
-
-      <div class="timer" id="countdownNumber">
-        10
+      <div class="numberBox" id="g17number">
+        3
       </div>
 
-      <button class="primary" id="stopCountdown">
-        🛑 STOP
+      <button class="mainBtn" id="g17stop">
+        STOP!
       </button>
 
-      <div class="status" id="countdownStatus"></div>
-
+      <div class="message" id="g17msg"></div>
     </div>
   `;
 
-  gameInterval=setInterval(()=>{
+  const timer=setInterval(()=>{
+
+    if(stopped) return;
 
     number--;
 
-    document.getElementById("countdownNumber").textContent=
-      number;
-
-    if(number<=0){
-
-      clearTimers();
-
-      document.getElementById("countdownStatus").textContent=
-        "Too late! Try again.";
-
-      setTimeout(game17,900);
+    if(number<1){
+      number=3;
     }
 
-  },600);
+    document.getElementById("g17number").textContent=number;
 
-  document.getElementById("stopCountdown").onclick=()=>{
+  },800);
 
-    clearTimers();
+  document.getElementById("g17stop")
+    .addEventListener("click",()=>{
 
-    if(number===1){
+      stopped=true;
+      clearInterval(timer);
 
-      finishGame(
-        300,
-        35,
-        "Perfect timing! ⏳💗"
-      );
+      if(number===1){
 
-    }else{
+        finishGame(150,25,"Perfect timing! ⏳");
 
-      document.getElementById("countdownStatus").textContent=
-        "Not quite! Try again.";
+      }else{
 
-      setTimeout(game17,800);
-    }
-  };
+        document.getElementById("g17msg").textContent=
+          "Missed it! Press again to restart.";
+
+        setTimeout(()=>{
+
+          number=3;
+          stopped=false;
+
+        },700);
+
+      }
+
+    });
+
 }
 
 
@@ -2847,66 +1833,56 @@ function game17(){
 
 function game18(){
 
-  let tokensBet=50;
+  const winner=Math.floor(Math.random()*3);
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 18 OF 23</div>
       <h2>🎰 Ultimate Gamble</h2>
+      <p>One of these gives you the jackpot.</p>
 
-      <p>
-        Pick a door. One contains the jackpot.
-      </p>
-
-      <div class="bigNumber">
-        🪙
+      <div class="choiceGrid">
+        <button class="choice" data-slot="0">🎰 SLOT 1</button>
+        <button class="choice" data-slot="1">🎰 SLOT 2</button>
+        <button class="choice" data-slot="2">🎰 SLOT 3</button>
       </div>
 
-      <div class="grid grid3">
-
-        <button class="gameButton" onclick="gambleDoor(0)">
-          🚪 1
-        </button>
-
-        <button class="gameButton" onclick="gambleDoor(1)">
-          🚪 2
-        </button>
-
-        <button class="gameButton" onclick="gambleDoor(2)">
-          🚪 3
-        </button>
-
-      </div>
-
-      <div class="status" id="gambleStatus"></div>
-
+      <div class="message" id="g18msg"></div>
     </div>
   `;
 
-  const winning=Math.floor(Math.random()*3);
+  document.querySelectorAll("[data-slot]")
+    .forEach(btn=>{
 
-  window.gambleDoor=function(choice){
+      btn.addEventListener("click",()=>{
 
-    if(choice===winning){
+        const chosen=Number(btn.dataset.slot);
 
-      tokens+=tokensBet;
-      score+=300;
+        if(chosen===winner){
 
-      updateTop();
+          btn.classList.add("correct");
 
-      finishGame(
-        300,
-        50,
-        "You hit the winning door! 🎰🪙"
-      );
+          setTimeout(()=>{
+            finishGame(
+              300,
+              100,
+              "🎰 JACKPOT! You won!"
+            );
+          },400);
 
-    }else{
+        }else{
 
-      document.getElementById("gambleStatus").innerHTML=
-        `<span class="fail">Wrong door! Choose again.</span>`;
-    }
-  };
+          btn.classList.add("wrong");
+
+          document.getElementById("g18msg").textContent=
+            "No jackpot there. Try another.";
+
+        }
+
+      });
+
+    });
+
 }
 
 
@@ -2917,50 +1893,76 @@ function game18(){
 
 function game19(){
 
-  let clicks=0;
-  let target=15;
+  const rounds=[
+    "A storm is coming. What do you choose?",
+    "A challenge appears. What protects you?",
+    "One final attack. What do you use?"
+  ];
+
+  const correct=[
+    "Shield",
+    "Shield",
+    "Shield"
+  ];
+
+  let q=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 19 OF 23</div>
       <h2>🛡️ Last Stand</h2>
-
-      <p>
-        Defend the heart with 15 taps!
-      </p>
-
-      <div class="bigNumber" id="standHeart">
-        💗
-      </div>
-
-      <p>
-        Defence:
-        <b id="standCount">0</b> / ${target}
-      </p>
-
-      <button class="primary" id="defend">
-        🛡️ DEFEND
-      </button>
-
+      <div id="g19area"></div>
     </div>
   `;
 
-  document.getElementById("defend").onclick=()=>{
+  function load(){
 
-    clicks++;
+    if(q>=rounds.length){
 
-    document.getElementById("standCount").textContent=clicks;
+      finishGame(150,25,"You survived the Last Stand! 🛡️");
 
-    if(clicks>=target){
+      return;
 
-      finishGame(
-        300,
-        35,
-        "You protected the heart! 🛡️💗"
-      );
     }
-  };
+
+    document.getElementById("g19area").innerHTML=`
+      <p>Round ${q+1} of 3</p>
+      <h3>${rounds[q]}</h3>
+
+      <div class="choiceGrid">
+        <button class="choice" data-answer="Shield">🛡️ Shield</button>
+        <button class="choice" data-answer="Sword">⚔️ Sword</button>
+        <button class="choice" data-answer="Flower">🌸 Flower</button>
+      </div>
+
+      <div class="message" id="g19msg"></div>
+    `;
+
+    document.querySelectorAll("[data-answer]")
+      .forEach(btn=>{
+
+        btn.addEventListener("click",()=>{
+
+          if(btn.dataset.answer===correct[q]){
+
+            q++;
+            load();
+
+          }else{
+
+            document.getElementById("g19msg").textContent=
+              "The shield was the safe choice! 🛡️";
+
+          }
+
+        });
+
+      });
+
+  }
+
+  load();
+
 }
 
 
@@ -2973,505 +1975,426 @@ function game20(){
 
   const words=[
     "LULU",
-    "DOLPHIN",
     "ROSE",
-    "SUSHI",
-    "POETRY",
+    "DOLPHIN",
     "SUNFLOWER",
-    "PINK"
+    "SUSHI"
   ];
 
-  const size=10;
-
-  let board=Array(size*size).fill("");
-
-  function placeWord(word){
-
-    const directions=[
-      [0,1],
-      [1,0],
-      [1,1],
-      [0,-1]
-    ];
-
-    for(let attempt=0;attempt<200;attempt++){
-
-      const d=directions[
-        Math.floor(Math.random()*directions.length)
-      ];
-
-      const row=Math.floor(Math.random()*size);
-      const col=Math.floor(Math.random()*size);
-
-      const cells=[];
-
-      let valid=true;
-
-      for(let i=0;i<word.length;i++){
-
-        const r=row+d[0]*i;
-        const c=col+d[1]*i;
-
-        if(
-          r<0 ||
-          r>=size ||
-          c<0 ||
-          c>=size
-        ){
-          valid=false;
-          break;
-        }
-
-        const idx=r*size+c;
-
-        if(board[idx] && board[idx]!==word[i]){
-          valid=false;
-          break;
-        }
-
-        cells.push(idx);
-      }
-
-      if(valid){
-
-        cells.forEach((idx,i)=>{
-          board[idx]=word[i];
-        });
-
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  words.forEach(placeWord);
-
-  const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  board=board.map(x=>
-    x || letters[Math.floor(Math.random()*letters.length)]
-  );
+  let found=0;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
-
+      <div class="gameNumber">LEVEL 20 OF 23</div>
       <h2>🔤 Lulu Word Find</h2>
 
-      <p>
-        Find:
-        <b>${words.join(", ")}</b>
-      </p>
+      <p>Tap each Lulu-related word.</p>
 
-      <div class="wordGrid" id="wordGrid"></div>
+      <div class="wordList" id="g20words"></div>
 
-      <div class="status" id="wordStatus">
-        Tap letters in order.
+      <div class="message" id="g20msg">
+        Found 0 / 5
       </div>
-
     </div>
   `;
 
-  const grid=document.getElementById("wordGrid");
+  const distractors=[
+    "CHAIR",
+    "MOON",
+    "TRAIN",
+    "BOOK",
+    "CLOUD",
+    "PHONE"
+  ];
 
-  let selected=[];
-  let foundWords=[];
+  const all=[...words,...distractors]
+    .sort(()=>Math.random()-.5);
 
-  board.forEach((letter,i)=>{
+  all.forEach(word=>{
 
-    const b=document.createElement("button");
+    const btn=document.createElement("button");
 
-    b.className="letter";
-    b.textContent=letter;
+    btn.className="word";
+    btn.textContent=word;
 
-    b.onclick=()=>{
+    btn.addEventListener("click",()=>{
 
-      b.classList.toggle("selected");
+      if(btn.dataset.found) return;
 
-      if(b.classList.contains("selected")){
-        selected.push({
-          letter:letter,
-          index:i
-        });
-      }else{
-        selected=selected.filter(x=>x.index!==i);
-      }
+      if(words.includes(word)){
 
-      const word=selected.map(x=>x.letter).join("");
+        btn.dataset.found="yes";
+        btn.style.background="#b8e7c4";
 
-      if(words.includes(word) && !foundWords.includes(word)){
+        found++;
 
-        foundWords.push(word);
+        document.getElementById("g20msg").textContent=
+          `Found ${found} / 5`;
 
-        selected.forEach(x=>{
-          grid.children[x.index].style.background="#d884aa";
-        });
+        if(found===5){
 
-        selected=[];
+          setTimeout(()=>{
+            finishGame(150,25,"You found all Lulu words! 🔤💗");
+          },300);
 
-        grid.querySelectorAll(".selected")
-          .forEach(x=>x.classList.remove("selected"));
-
-        document.getElementById("wordStatus").textContent=
-          "Found "+word+"! 💗";
-
-        if(foundWords.length===words.length){
-
-          finishGame(
-            350,
-            45,
-            "You found every Lulu word! 🔤💗"
-          );
         }
-      }
-    };
 
-    grid.appendChild(b);
+      }
+
+    });
+
+    document.getElementById("g20words")
+      .appendChild(btn);
+
   });
+
 }
 
 
 /* =========================================================
    GAME 21
-   DRAW A SUNFLOWER
+   SUNFLOWER BUILDER
 ========================================================= */
 
 function game21(){
 
+  let petals=0;
+  let centre=false;
+  let stem=false;
+
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
+      <div class="gameNumber">LEVEL 21 OF 23</div>
+      <h2>🌻 Build a Sunflower</h2>
 
-      <h2>🌻 Draw a Sunflower</h2>
+      <p>Build your sunflower.</p>
 
-      <p>
-        Draw your own sunflower inside the canvas.
-      </p>
+      <div style="font-size:80px" id="flowerDisplay">
+        🌱
+      </div>
 
-      <canvas
-        id="flowerCanvas"
-        class="flowerCanvas"
-        width="550"
-        height="360">
-      </canvas>
-
-      <button class="primary" onclick="submitFlower()">
-        🌻 FINISH DRAWING
+      <button class="mainBtn" id="petalBtn">
+        Add Petal 🌼
       </button>
 
-      <button class="secondary" onclick="clearFlower()">
-        Clear
+      <button class="mainBtn secondary" id="centreBtn">
+        Add Centre 🟤
       </button>
 
-      <div class="status" id="flowerStatus"></div>
+      <button class="mainBtn secondary" id="stemBtn">
+        Add Stem 🌿
+      </button>
 
+      <div class="message" id="g21msg">
+        Petals: 0 / 5
+      </div>
     </div>
   `;
 
-  const canvas=document.getElementById("flowerCanvas");
-  const ctx=canvas.getContext("2d");
+  document.getElementById("petalBtn")
+    .addEventListener("click",()=>{
 
-  ctx.lineWidth=7;
-  ctx.lineCap="round";
-  ctx.strokeStyle="#7a2348";
+      if(petals<5){
+        petals++;
+      }
 
-  let drawing=false;
+      updateFlower();
 
-  function position(e){
+    });
 
-    const rect=canvas.getBoundingClientRect();
+  document.getElementById("centreBtn")
+    .addEventListener("click",()=>{
 
-    return {
-      x:(e.clientX-rect.left)*(canvas.width/rect.width),
-      y:(e.clientY-rect.top)*(canvas.height/rect.height)
-    };
+      centre=true;
+      updateFlower();
+
+    });
+
+  document.getElementById("stemBtn")
+    .addEventListener("click",()=>{
+
+      stem=true;
+      updateFlower();
+
+    });
+
+
+  function updateFlower(){
+
+    document.getElementById("g21msg").textContent=
+      `Petals: ${petals}/5 · Centre: ${centre?"✓":"✗"} · Stem: ${stem?"✓":"✗"}`;
+
+    if(petals>=5 && centre && stem){
+
+      document.getElementById("flowerDisplay").textContent="🌻";
+
+      setTimeout(()=>{
+        finishGame(
+          150,
+          25,
+          "Your sunflower is complete! 🌻"
+        );
+      },400);
+
+    }else{
+
+      document.getElementById("flowerDisplay").textContent=
+        petals>=5 ? "🌼" : "🌱";
+
+    }
+
   }
 
-  canvas.addEventListener("pointerdown",e=>{
-
-    drawing=true;
-
-    const p=position(e);
-
-    ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-  });
-
-  canvas.addEventListener("pointermove",e=>{
-
-    if(!drawing)return;
-
-    const p=position(e);
-
-    ctx.lineTo(p.x,p.y);
-    ctx.stroke();
-  });
-
-  canvas.addEventListener("pointerup",()=>{
-    drawing=false;
-  });
-
-  canvas.addEventListener("pointerleave",()=>{
-    drawing=false;
-  });
-
-  window.clearFlower=function(){
-
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    document.getElementById("flowerStatus").textContent="";
-  };
-
-  window.submitFlower=function(){
-
-    finishGame(
-      300,
-      40,
-      "Your sunflower masterpiece is complete! 🌻"
-    );
-  };
 }
 
 
 /* =========================================================
    GAME 22
    LULU DERBY
-   100 RANDOM TRIVIA QUESTIONS
+   100 QUESTIONS
 ========================================================= */
+
+const derbyQuestions=[
+
+["What is the capital of New Zealand?","Wellington"],
+["What is the capital of Australia?","Canberra"],
+["How many days are in a week?","7"],
+["How many months are in a year?","12"],
+["What planet do we live on?","Earth"],
+["How many sides does a triangle have?","3"],
+["How many sides does a square have?","4"],
+["What is the largest ocean?","Pacific Ocean"],
+["What is the fastest land animal?","Cheetah"],
+["What is the largest mammal?","Blue whale"],
+["What colour is a ripe banana?","Yellow"],
+["How many legs does a spider have?","8"],
+["What do bees make?","Honey"],
+["What is frozen water called?","Ice"],
+["How many hours are in a day?","24"],
+["How many minutes are in an hour?","60"],
+["What is H2O commonly called?","Water"],
+["Which animal says moo?","Cow"],
+["Which animal is known as man's best friend?","Dog"],
+["What is the opposite of hot?","Cold"],
+["What colour do you get by mixing red and white?","Pink"],
+["What is 5 + 5?","10"],
+["What is 10 - 4?","6"],
+["What is 3 x 3?","9"],
+["What is 20 divided by 4?","5"],
+["Which season comes after winter?","Spring"],
+["Which season comes after summer?","Autumn"],
+["What star is at the centre of our solar system?","The Sun"],
+["What is Earth's natural satellite?","The Moon"],
+["How many planets are in our solar system?","8"],
+["What is the smallest prime number?","2"],
+["What is the first letter of the alphabet?","A"],
+["What is the last letter of the alphabet?","Z"],
+["Which ocean is between Africa and Australia?","Indian Ocean"],
+["What is the largest continent?","Asia"],
+["What is the smallest continent?","Australia"],
+["What language is mainly spoken in Brazil?","Portuguese"],
+["What language is mainly spoken in Mexico?","Spanish"],
+["What is the capital of France?","Paris"],
+["What is the capital of Japan?","Tokyo"],
+["What is the capital of Italy?","Rome"],
+["What is the capital of Canada?","Ottawa"],
+["What is the capital of the United States?","Washington, D.C."],
+["How many colours are traditionally in a rainbow?","7"],
+["What colour is grass usually?","Green"],
+["What animal has a long trunk?","Elephant"],
+["What animal has black and white stripes?","Zebra"],
+["What animal is famous for its pouch?","Kangaroo"],
+["What bird cannot fly and lives in Antarctica?","Penguin"],
+["What is a baby cat called?","Kitten"],
+["What is a baby dog called?","Puppy"],
+["What is a baby horse called?","Foal"],
+["What is a baby sheep called?","Lamb"],
+["How many fingers are on one hand?","5"],
+["How many toes are on two feet?","10"],
+["How many wheels does a bicycle have?","2"],
+["How many wheels does a tricycle have?","3"],
+["What vehicle travels on rails?","Train"],
+["What vehicle flies in the sky?","Aeroplane"],
+["What vehicle travels on water?","Boat"],
+["What do you use to tell time?","Clock"],
+["What do you use to cut paper?","Scissors"],
+["What do you use to write on paper?","Pen"],
+["What do you use to erase pencil marks?","Eraser"],
+["What is the opposite of up?","Down"],
+["What is the opposite of left?","Right"],
+["What is the opposite of day?","Night"],
+["What is the opposite of inside?","Outside"],
+["What shape is a football usually?","Oval"],
+["What shape has no corners?","Circle"],
+["What shape has three sides?","Triangle"],
+["What shape has four equal sides?","Square"],
+["How many letters are in the English alphabet?","26"],
+["What comes after Tuesday?","Wednesday"],
+["What comes before Friday?","Thursday"],
+["What day comes after Saturday?","Sunday"],
+["What month comes after January?","February"],
+["What month comes before December?","November"],
+["What is the first month of the year?","January"],
+["What is the last month of the year?","December"],
+["What is the colour of a typical emerald?","Green"],
+["What is the colour of a typical ruby?","Red"],
+["What precious stone is often blue?","Sapphire"],
+["What gas do humans breathe in to survive?","Oxygen"],
+["What organ pumps blood around the body?","Heart"],
+["What organ helps us think?","Brain"],
+["What do plants need from the Sun?","Light"],
+["What process do plants use to make food?","Photosynthesis"],
+["What is the hardest natural substance?","Diamond"],
+["What metal is represented by Au?","Gold"],
+["What metal is represented by Ag?","Silver"],
+["What is the tallest animal?","Giraffe"],
+["What is the largest land animal?","Elephant"],
+["What is the fastest bird?","Peregrine falcon"],
+["What animal is known for changing colour?","Chameleon"],
+["What animal carries its home on its back?","Turtle"],
+["What animal has eight arms?","Octopus"],
+["What animal is famous for its black-and-white fur and bamboo diet?","Panda"],
+["What is the main ingredient in bread?","Flour"],
+["What fruit is famous for having seeds on its outside?","Strawberry"],
+["What fruit is usually yellow and curved?","Banana"],
+["What vegetable is orange and associated with rabbits?","Carrot"],
+["What is the traditional sport involving a bat and ball called?","Cricket"],
+["How many players are on a football team on the field?","11"]
+
+];
+
+
+/* Make sure exactly 100 are used */
+const derbyBank=derbyQuestions.slice(0,100);
+
 
 function game22(){
 
-  const trivia=[
+  let questions=[...derbyBank]
+    .sort(()=>Math.random()-.5);
 
-    ["How many days are in a week?","7"],
-    ["How many months are in a year?","12"],
-    ["What planet do we live on?","Earth"],
-    ["What is the capital of France?","Paris"],
-    ["How many legs does a spider have?","8"],
-    ["What colour do you get by mixing red and blue?","Purple"],
-    ["How many sides does a triangle have?","3"],
-    ["What is the opposite of hot?","Cold"],
-    ["What is frozen water called?","Ice"],
-    ["Which animal says moo?","Cow"],
-    ["How many hours are in a day?","24"],
-    ["How many minutes are in an hour?","60"],
-    ["What is 5 + 5?","10"],
-    ["What is 10 - 4?","6"],
-    ["What is 3 x 3?","9"],
-    ["What is 20 divided by 2?","10"],
-    ["Which season comes after winter?","Spring"],
-    ["Which season is usually hottest?","Summer"],
-    ["What do bees make?","Honey"],
-    ["What do chickens lay?","Eggs"],
-    ["Which animal is known as man's best friend?","Dog"],
-    ["How many continents are there?","7"],
-    ["What is the largest ocean?","Pacific"],
-    ["What is the colour of grass?","Green"],
-    ["What is the colour of a banana?","Yellow"],
-    ["What do you call a baby cat?","Kitten"],
-    ["What do you call a baby dog?","Puppy"],
-    ["Which bird cannot fly and lives in Antarctica?","Penguin"],
-    ["What is the tallest animal?","Giraffe"],
-    ["What is the fastest land animal?","Cheetah"],
-    ["What is the largest land animal?","Elephant"],
-    ["What is the largest mammal?","Blue whale"],
-    ["What is the smallest prime number?","2"],
-    ["How many wheels does a bicycle have?","2"],
-    ["How many wheels does a car usually have?","4"],
-    ["What is the opposite of day?","Night"],
-    ["What is the opposite of up?","Down"],
-    ["What is the opposite of left?","Right"],
-    ["What is the opposite of happy?","Sad"],
-    ["What shape has four equal sides?","Square"],
-    ["How many sides does a pentagon have?","5"],
-    ["How many sides does a hexagon have?","6"],
-    ["What star is closest to Earth?","Sun"],
-    ["What is Earth's natural satellite?","Moon"],
-    ["Which planet is known as the Red Planet?","Mars"],
-    ["Which planet is famous for its rings?","Saturn"],
-    ["What gas do humans breathe in?","Oxygen"],
-    ["What do plants need for photosynthesis?","Sunlight"],
-    ["What is the boiling point of water in Celsius?","100"],
-    ["What is the freezing point of water in Celsius?","0"],
-    ["How many letters are in the English alphabet?","26"],
-    ["What is the first letter of the alphabet?","A"],
-    ["What is the last letter of the alphabet?","Z"],
-    ["Which instrument has black and white keys?","Piano"],
-    ["How many strings does a standard guitar have?","6"],
-    ["What sport uses a racket and shuttlecock?","Badminton"],
-    ["What sport has touchdowns?","American football"],
-    ["What sport uses a hoop?","Basketball"],
-    ["What sport is played at Wimbledon?","Tennis"],
-    ["How many players are on a soccer team on the field?","11"],
-    ["What colour are emeralds usually?","Green"],
-    ["What colour is a ruby usually?","Red"],
-    ["What is the hardest natural mineral?","Diamond"],
-    ["What do you call molten rock underground?","Magma"],
-    ["What do you call molten rock above ground?","Lava"],
-    ["Which country is famous for sushi?","Japan"],
-    ["Which country is shaped like a boot?","Italy"],
-    ["What is the capital of New Zealand?","Wellington"],
-    ["What is the capital of Australia?","Canberra"],
-    ["What is the capital of Japan?","Tokyo"],
-    ["What is the capital of Spain?","Madrid"],
-    ["Which language is mainly spoken in Brazil?","Portuguese"],
-    ["What currency is used in New Zealand?","Dollar"],
-    ["How many colours are traditionally in a rainbow?","7"],
-    ["What is a group of stars called?","Constellation"],
-    ["What do you call a scientist who studies space?","Astronomer"],
-    ["What is the centre of our solar system?","Sun"],
-    ["Which direction does the sun rise from?","East"],
-    ["Which direction does the sun set?","West"],
-    ["What is the largest planet?","Jupiter"],
-    ["What is the smallest planet?","Mercury"],
-    ["Which planet is closest to the Sun?","Mercury"],
-    ["What animal is famous for its long neck?","Giraffe"],
-    ["What animal is famous for black and white stripes?","Zebra"],
-    ["What animal is known for carrying a pouch?","Kangaroo"],
-    ["What animal can change colour?","Chameleon"],
-    ["What insect has colourful wings?","Butterfly"],
-    ["What insect makes honey?","Bee"],
-    ["What animal lives in a shell and moves slowly?","Snail"],
-    ["What animal is known for building dams?","Beaver"],
-    ["What animal is known for its black mask and ringed tail?","Raccoon"],
-    ["What is a baby horse called?","Foal"],
-    ["What is a baby sheep called?","Lamb"],
-    ["What is a baby goat called?","Kid"],
-    ["What is a baby cow called?","Calf"],
-    ["What is a baby pig called?","Piglet"],
-    ["What is a baby deer called?","Fawn"],
-    ["What is the opposite of early?","Late"],
-    ["What is the opposite of fast?","Slow"],
-    ["What is the opposite of big?","Small"],
-    ["What is the opposite of full?","Empty"]
-  ];
+  let q=0;
+  let correct=0;
 
-  let questions=[...trivia]
-    .sort(()=>Math.random()-.5)
-    .slice(0,10);
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div class="gameNumber">LEVEL 22 OF 23</div>
+      <h2>🏇 Lulu Derby</h2>
 
-  let current=0;
-  let derbyScore=0;
+      <p>
+        100 random trivia questions.
+        Answer them one at a time.
+      </p>
 
-  function render(){
+      <div id="g22area"></div>
+    </div>
+  `;
 
-    if(current>=questions.length){
+  function makeOptions(correctAnswer){
+
+    const pool=[
+      "London",
+      "Blue",
+      "12",
+      "8",
+      "Mars",
+      "5",
+      "Pacific Ocean",
+      "Elephant",
+      "60",
+      "7"
+    ];
+
+    let options=[correctAnswer];
+
+    while(options.length<4){
+
+      const x=
+        pool[Math.floor(Math.random()*pool.length)];
+
+      if(!options.includes(x)){
+        options.push(x);
+      }
+
+    }
+
+    return options.sort(()=>Math.random()-.5);
+
+  }
+
+
+  function load(){
+
+    if(q>=100){
 
       finishGame(
-        500,
-        60,
-        "You won the Lulu Derby! 🏇🏆"
+        correct*25,
+        correct*2,
+        `Derby complete! You got ${correct}/100 correct! 🏇`
       );
 
       return;
     }
 
-    const q=questions[current];
+    const item=questions[q];
 
-    let options=[
-      q[1],
-      randomWrong(q[1]),
-      randomWrong(q[1]),
-      randomWrong(q[1])
-    ].sort(()=>Math.random()-.5);
+    const options=makeOptions(item[1]);
 
-    document.getElementById("gameArea").innerHTML=`
+    document.getElementById("g22area").innerHTML=`
 
-      <div class="card">
-
-        <h2>🏇 Lulu Derby</h2>
-
-        <p>
-          Trivia Race
-          ${current+1} / ${questions.length}
-        </p>
-
-        <div class="derby">
-
-          <div
-            id="derbyHorse"
-            class="horse"
-            style="top:105px;">
-            🐎
-          </div>
-
-          <div class="derbyFinish"></div>
-
-        </div>
-
-        <h3>${q[0]}</h3>
-
-        ${options.map(o=>
-          `<button
-            class="gameButton"
-            onclick="derbyAnswer('${escapeJS(o)}','${escapeJS(q[1])}')">
-            ${o}
-          </button>`
-        ).join("")}
-
-        <div class="status" id="derbyStatus"></div>
-
+      <div class="questionCount">
+        Question ${q+1} of 100
       </div>
+
+      <div class="progress">
+        <div class="progressBar"
+          style="width:${q}%">
+        </div>
+      </div>
+
+      <h3>${item[0]}</h3>
+
+      <div class="choiceGrid" id="g22choices"></div>
+
+      <div class="message" id="g22msg"></div>
+
     `;
 
-    window.derbyAnswer=function(selected,answer){
+    options.forEach(answer=>{
 
-      if(selected===answer){
+      const btn=document.createElement("button");
 
-        derbyScore++;
-        current++;
+      btn.className="choice";
+      btn.textContent=answer;
 
-        score+=50;
-        tokens+=5;
+      btn.addEventListener("click",()=>{
 
-        updateTop();
+        if(answer===item[1]){
 
-        const horse=document.getElementById("derbyHorse");
+          correct++;
+          btn.classList.add("correct");
 
-        if(horse){
-          horse.style.left=
-            Math.min(90,derbyScore*9)+"%";
+        }else{
+
+          btn.classList.add("wrong");
+
         }
 
-        setTimeout(render,350);
+        q++;
 
-      }else{
+        setTimeout(load,120);
 
-        document.getElementById("derbyStatus").innerHTML=
-          `<span class="fail">Wrong! The horse slows down. 🐎</span>`;
-      }
-    };
+      });
+
+      document.getElementById("g22choices")
+        .appendChild(btn);
+
+    });
+
   }
 
-  render();
-}
+  load();
 
-
-function randomWrong(correct){
-
-  const wrongs=[
-    "Banana",
-    "Blue",
-    "12",
-    "Moon",
-    "Tiger",
-    "Green",
-    "Paris",
-    "4",
-    "Winter",
-    "Piano",
-    "Mars",
-    "Dog"
-  ];
-
-  let x=wrongs[Math.floor(Math.random()*wrongs.length)];
-
-  if(x===correct){
-    return "7";
-  }
-
-  return x;
 }
 
 
@@ -3481,323 +2404,308 @@ function randomWrong(correct){
    EXACTLY 50 QUESTIONS
 ========================================================= */
 
+const finalQuestions=[
+
+["What is Liliana's favourite colour?","Baby pink"],
+["What is Liliana's favourite number?","3"],
+["What food does Liliana love?","Sushi"],
+["What animal does Liliana love?","Dolphins"],
+["What is Liliana's birthday month?","July"],
+["What is Liliana's star sign?","Leo"],
+["How many years have you been best friends?","6"],
+["What university subject did Liliana study?","Psychology"],
+["What movie is one of Liliana's favourites?","Me Before You"],
+["How many siblings does Liliana have?","5"],
+["How many dogs does Liliana have?","2"],
+["What are Liliana's dogs called?","Aayla and Arlo"],
+["What colour are Liliana's eyes?","Green"],
+["How many nephews does Liliana have?","4"],
+["How many nieces does Liliana have?","1"],
+["What does Liliana want to be someday?","A mum"],
+["What gender would Liliana love to have for her future baby?","A girl"],
+["What type of songs does Liliana like?","Sad songs"],
+["What kind of writing does Liliana enjoy?","Poetry"],
+["What flowers does Liliana like?","Sunflowers and roses"],
+["What type of game does Liliana enjoy?","Poker"],
+["What other type of gambling does Liliana enjoy?","Casino games"],
+["What personality trait describes Liliana?","Caring"],
+["What other personality trait describes Liliana?","Sweet"],
+["What other personality trait describes Liliana?","Charismatic"],
+["What is Liliana's birthday date?","July 22"],
+["What is Liliana's zodiac sign?","Leo"],
+["What colour is associated with Lulu's favourite aesthetic?","Baby pink"],
+["What sea animal is connected with Liliana?","Dolphin"],
+["What food would Liliana choose over sushi?","This question has no correct answer"],
+["How many piercings does Liliana have?","4"],
+["What is Liliana's tattoo symbol?","Semicolon"],
+["What subject did Liliana study at university?","Psychology"],
+["What does Liliana love about poetry?","Its emotion"],
+["What kind of music can Liliana enjoy?","Sad music"],
+["What does Liliana hope to become?","A mother"],
+["How many children does Liliana currently have?","0"],
+["What is one thing Liliana likes to gamble on?","Poker"],
+["What animal is one of Liliana's favourite animals?","Dolphins"],
+["What is one flower Liliana likes?","Rose"],
+["What is another flower Liliana likes?","Sunflower"],
+["What is one of Liliana's favourite foods?","Sushi"],
+["What is Liliana's favourite number written as a word?","Three"],
+["What colour would fit Liliana's favourite aesthetic?","Baby pink"],
+["What is the name of one of Liliana's dogs?","Aayla"],
+["What is the name of Liliana's other dog?","Arlo"],
+["What kind of person is Liliana to her friends?","Caring"],
+["How long have Bree and Liliana been best friends?","6 years"],
+["What is this entire final challenge about?","Liliana"],
+["Who is Lulu?","Liliana"]
+
+];
+
+
+/* EXACTLY 50 */
+const finalBank=finalQuestions.slice(0,50);
+
+
 function game23(){
 
-  let questions=[...finalQuestions];
+  let questions=[...finalBank]
+    .sort(()=>Math.random()-.5);
 
-  /*
-    Guarantee exactly 50 questions.
-  */
-  questions=questions.slice(0,50);
-
-  let current=0;
+  let q=0;
   let correct=0;
-  let finalAnswered=false;
-
-  function render(){
-
-    if(current>=50){
-
-      showFinalChallengeResult(correct);
-
-      return;
-    }
-
-    finalAnswered=false;
-
-    const q=questions[current];
-
-    const options=[...q.options]
-      .sort(()=>Math.random()-.5);
-
-    document.getElementById("gameArea").innerHTML=`
-
-      <div class="card">
-
-        <h2>💗 FINAL CHALLENGE</h2>
-
-        <p>
-          Question ${current+1} / 50
-        </p>
-
-        <div class="progress">
-          <div
-            class="progressFill"
-            style="width:${current/50*100}%">
-          </div>
-        </div>
-
-        <h3>${q.q}</h3>
-
-        ${options.map(o=>
-          `<button
-             class="gameButton"
-             onclick="finalAnswer('${escapeJS(o)}','${escapeJS(q.answer)}')">
-             ${o}
-           </button>`
-        ).join("")}
-
-        <div
-          class="status"
-          id="finalStatus">
-        </div>
-
-      </div>
-    `;
-
-    window.finalAnswer=function(selected,answer){
-
-      if(finalAnswered)return;
-
-      if(selected===answer){
-
-        finalAnswered=true;
-        correct++;
-
-        score+=75;
-        tokens+=7;
-
-        updateTop();
-
-        document.getElementById("finalStatus").innerHTML=
-          `<span class="success">✓ Correct! 💗</span>`;
-
-        setTimeout(()=>{
-
-          current++;
-          render();
-
-        },300);
-
-      }else{
-
-        document.getElementById("finalStatus").innerHTML=
-          `<span class="fail">
-            ✗ Not quite. Try again.
-          </span>`;
-      }
-    };
-  }
-
-  render();
-
-  window.currentFinalCorrect=()=>correct;
-}
-
-
-function showFinalChallengeResult(correct){
-
-  clearTimers();
-
-  /*
-    Private call requirement:
-    STRICTLY GREATER THAN 3000.
-    3000 does NOT qualify.
-  */
-
-  const qualifies=score>3000;
 
   document.getElementById("gameArea").innerHTML=`
-
     <div class="card">
+      <div class="gameNumber">LEVEL 23 OF 23</div>
 
-      <div class="stars">💗 💗 💗 💗 💗</div>
-
-      <h2>🎉 JOURNEY COMPLETE 🎉</h2>
+      <h2>👑 FINAL CHALLENGE</h2>
 
       <p>
-        ${playerName}, you made it through
-        all 23 levels!
+        50 questions about Liliana.
+        This is the final test.
       </p>
 
-      <div class="resultBox">
-
-        <h3>Final Challenge</h3>
-
-        <p>
-          Correct:
-          <b>${correct} / 50</b>
-        </p>
-
-        <p>
-          Final Score:
-          <b>${score}</b>
-        </p>
-
-        <p>
-          Tokens:
-          <b>${tokens}</b>
-        </p>
-
-      </div>
-
-      ${
-        qualifies
-        ?
-        `
-        <div class="resultBox">
-
-          <h2 class="success">
-            📞 PRIVATE CALL UNLOCKED
-          </h2>
-
-          <p>
-            You scored more than 3000 points!
-          </p>
-
-          <p>
-            Your final score of
-            <b>${score}</b>
-            qualifies for the private call reward. 💗
-          </p>
-
-        </div>
-        `
-        :
-        `
-        <div class="resultBox">
-
-          <h3>💗 Almost there!</h3>
-
-          <p>
-            The private call requires a score
-            <b>strictly above 3000</b>.
-          </p>
-
-          <p>
-            Your score was
-            <b>${score}</b>.
-          </p>
-
-        </div>
-        `
-      }
-
-      <button class="primary" onclick="resetGame()">
-        ↻ PLAY AGAIN
-      </button>
-
+      <div id="g23area"></div>
     </div>
   `;
-}
 
 
-/* =========================================================
-   FINAL RESULTS HELPER
-========================================================= */
+  function makeOptions(correctAnswer){
 
-function showFinalResults(){
+    const possible=[
 
-  if(level===23){
+      "Baby pink",
+      "3",
+      "Sushi",
+      "Dolphins",
+      "July",
+      "Leo",
+      "6 years",
+      "Psychology",
+      "Me Before You",
+      "5",
+      "2",
+      "Green",
+      "4",
+      "1",
+      "A mum",
+      "A girl",
+      "Sad songs",
+      "Poetry",
+      "Sunflowers and roses",
+      "Poker",
+      "Charismatic",
+      "July 22",
+      "Aayla",
+      "Arlo",
+      "Caring",
+      "Liliana"
 
-    /*
-      If the user reaches this screen through finishGame,
-      the Final Challenge has already calculated the result.
-    */
+    ];
 
-    document.getElementById("gameArea").innerHTML=`
+    let options=[correctAnswer];
 
-      <div class="card">
+    while(options.length<4){
 
-        <h2>💗 Lulu Express</h2>
+      const answer=
+        possible[Math.floor(Math.random()*possible.length)];
 
-        <p>
-          Congratulations, ${playerName}!
-        </p>
+      if(!options.includes(answer)){
+        options.push(answer);
+      }
 
-        <p>
-          You completed the entire journey.
-        </p>
+    }
 
-        <p>
-          Final score:
-          <b>${score}</b>
-        </p>
+    return options.sort(()=>Math.random()-.5);
 
-        <button class="primary" onclick="resetGame()">
-          ↻ PLAY AGAIN
-        </button>
+  }
 
+
+  function load(){
+
+    if(q>=50){
+
+      const bonus = state.score > 3000;
+
+      document.getElementById("gameArea").innerHTML=`
+
+        <div class="card">
+
+          <div style="font-size:80px">👑💗</div>
+
+          <h1>FINAL CHALLENGE COMPLETE!</h1>
+
+          <p>
+            Amazing, ${state.name}!
+          </p>
+
+          <p>
+            You got <b>${correct}/50</b> questions correct.
+          </p>
+
+          <p>
+            Final score:
+            <b>${state.score}</b>
+          </p>
+
+          <p>
+            Tokens:
+            <b>${state.tokens}</b>
+          </p>
+
+          ${
+            bonus
+            ?
+            `
+            <div class="reward">
+              <h2>📞 PRIVATE CALL UNLOCKED!</h2>
+              <p>
+                You scored more than 3000 points!
+              </p>
+              <p>
+                Your final score is
+                <b>${state.score}</b>.
+              </p>
+            </div>
+            `
+            :
+            `
+            <div class="reward">
+              <h2>💗 Journey Complete!</h2>
+              <p>
+                You finished Lulu Express!
+              </p>
+              <p>
+                You needed <b>3001+</b> points
+                for the private call reward.
+              </p>
+            </div>
+            `
+          }
+
+          <button class="mainBtn" id="restartFinal">
+            🔄 Play Again
+          </button>
+
+        </div>
+
+      `;
+
+      document.getElementById("restartFinal")
+        .addEventListener("click",()=>{
+          location.reload();
+        });
+
+      return;
+
+    }
+
+
+    const item=questions[q];
+
+    const options=makeOptions(item[1]);
+
+    document.getElementById("g23area").innerHTML=`
+
+      <div class="questionCount">
+        Question ${q+1} of 50
       </div>
+
+      <div class="progress">
+        <div class="progressBar"
+          style="width:${(q/50)*100}%">
+        </div>
+      </div>
+
+      <h3>${item[0]}</h3>
+
+      <div class="choiceGrid" id="g23choices"></div>
+
+      <div class="message" id="g23msg"></div>
+
     `;
+
+    options.forEach(answer=>{
+
+      const btn=document.createElement("button");
+
+      btn.className="choice";
+      btn.textContent=answer;
+
+      btn.addEventListener("click",()=>{
+
+        if(answer===item[1]){
+
+          correct++;
+
+          reward(25,3);
+
+          btn.classList.add("correct");
+
+        }else{
+
+          btn.classList.add("wrong");
+
+        }
+
+        q++;
+
+        setTimeout(load,150);
+
+      });
+
+      document.getElementById("g23choices")
+        .appendChild(btn);
+
+    });
+
   }
+
+  load();
+
 }
 
 
 /* =========================================================
-   UTILITIES
+   FINAL RESULT FALLBACK
 ========================================================= */
 
-function escapeJS(value){
+function showFinalResult(){
 
-  return String(value)
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/\n/g,"\\n")
-    .replace(/\r/g,"\\r");
+  document.getElementById("gameArea").innerHTML=`
+    <div class="card">
+      <div style="font-size:80px">💗</div>
+      <h1>Congratulations!</h1>
+      <p>You completed Lulu Express.</p>
+      <p>Final score: <b>${state.score}</b></p>
+      <p>Tokens: <b>${state.tokens}</b></p>
+
+      <button class="mainBtn"
+        onclick="location.reload()">
+        Play Again
+      </button>
+    </div>
+  `;
+
 }
-
-
-/* =========================================================
-   PREVENT ACCIDENTAL DOUBLE TAP ZOOM
-========================================================= */
-
-let lastTouchEnd=0;
-
-document.addEventListener(
-  "touchend",
-  function(event){
-
-    const now=Date.now();
-
-    if(now-lastTouchEnd<=300){
-      event.preventDefault();
-    }
-
-    lastTouchEnd=now;
-  },
-  false
-);
-
-
-/* =========================================================
-   PREVENT PINCH ZOOM
-========================================================= */
-
-document.addEventListener(
-  "gesturestart",
-  function(e){
-    e.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "gesturechange",
-  function(e){
-    e.preventDefault();
-  }
-);
-
-document.addEventListener(
-  "gestureend",
-  function(e){
-    e.preventDefault();
-  }
-);
-
-
-/* =========================================================
-   START
-========================================================= */
-
-document.getElementById("playerName")
-  .addEventListener("keydown",function(e){
-
-    if(e.key==="Enter"){
-      startGame();
-    }
-
-  });
 
 </script>
 

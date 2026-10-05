@@ -1,3598 +1,2879 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#170b13">
 <title>Lulu Express 🚂💗</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#12080e;
-  --panel:#26121e;
-  --panel2:#351827;
-  --pink:#ff8fbd;
-  --pink2:#ffb7d5;
-  --burgundy:#721d3d;
-  --gold:#ffd76b;
-  --green:#83e6a5;
-  --red:#ff6d7e;
-  --text:#fff5fa;
-  --muted:#cdaabd;
+ --bg:#11070d;
+ --panel:#21101a;
+ --panel2:#2c1421;
+ --pink:#f59ac2;
+ --pink2:#ffbfdc;
+ --burg:#8e3159;
+ --gold:#ffd36b;
+ --text:#fff7fb;
+ --muted:#c9aeba;
+ --green:#77dfa2;
+ --red:#ff7185;
 }
-body{
-  margin:0;
-  background:
-    radial-gradient(circle at 20% 10%,#55203d 0,transparent 30%),
-    radial-gradient(circle at 80% 90%,#42162e 0,transparent 35%),
-    var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  min-height:100vh;
+html,body{
+ margin:0;
+ padding:0;
+ min-height:100%;
+ background:
+ radial-gradient(circle at 20% 10%,#3a1729 0,transparent 30%),
+ radial-gradient(circle at 85% 20%,#321225 0,transparent 28%),
+ var(--bg);
+ color:var(--text);
+ font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-button,input{
-  font:inherit;
-}
+body{overflow-x:hidden}
+button,input{font:inherit}
 button{
-  border:0;
-  cursor:pointer;
+ border:0;
+ cursor:pointer;
+ color:var(--text);
+ min-height:48px;
+ border-radius:14px;
+ padding:12px 18px;
+ font-weight:800;
+ transition:.15s transform,.15s opacity,.15s background;
 }
-.hidden{display:none!important}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(18,8,14,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #633047;
-  padding:10px;
+button:active{transform:scale(.96)}
+button:disabled{opacity:.45;cursor:not-allowed}
+#app{min-height:100vh}
+.topbar{
+ position:sticky;
+ top:0;
+ z-index:50;
+ background:rgba(17,7,13,.94);
+ backdrop-filter:blur(12px);
+ border-bottom:1px solid rgba(255,255,255,.08);
+ padding:10px;
 }
-.header-inner{
-  max-width:1050px;
-  margin:auto;
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
+.topinner{
+ max-width:850px;
+ margin:auto;
+ display:flex;
+ gap:8px;
+ align-items:center;
+ justify-content:space-between;
 }
-.logo{
-  font-size:20px;
-  font-weight:900;
-  margin-right:auto;
-}
+.logo{font-size:18px;font-weight:900;white-space:nowrap}
+.stats{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
 .stat{
-  background:#29131f;
-  border:1px solid #5a2c42;
-  padding:7px 10px;
-  border-radius:12px;
-  font-size:13px;
+ background:#2b1420;
+ border:1px solid rgba(255,255,255,.08);
+ padding:7px 10px;
+ border-radius:10px;
+ font-size:12px;
+ font-weight:800;
 }
 .music{
-  display:flex;
-  align-items:center;
-  gap:5px;
+ background:#5d2340;
+ padding:8px 11px;
+ font-size:12px;
 }
-.music button,.small-btn{
-  background:#452034;
-  color:white;
-  padding:7px 10px;
-  border-radius:9px;
-}
-#volume{width:70px}
 .reset{
-  background:#5a182b!important;
-  color:#ffdce8!important;
+ background:#321724;
+ padding:8px 11px;
+ font-size:12px;
 }
-
-main{
-  max-width:1050px;
-  margin:auto;
-  padding:20px 12px 70px;
+.screen{
+ display:none;
+ width:100%;
+ min-height:calc(100vh - 70px);
+ padding:22px 14px 45px;
 }
-.panel{
-  background:linear-gradient(145deg,rgba(53,24,39,.96),rgba(30,13,23,.97));
-  border:1px solid #66334b;
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 15px 45px rgba(0,0,0,.25);
+.screen.active{display:block}
+.page{
+ width:min(760px,100%);
+ margin:auto;
 }
-h1,h2,h3{margin-top:0}
-h1{font-size:34px}
-h2{font-size:26px}
-p{line-height:1.55;color:#f1dce6}
-
-.primary{
-  background:linear-gradient(135deg,#ff78ad,#b62f61);
-  color:white;
-  font-weight:900;
-  padding:13px 18px;
-  border-radius:13px;
-  box-shadow:0 7px 20px rgba(255,80,145,.22);
-}
-.secondary{
-  background:#472238;
-  color:white;
-  padding:12px 16px;
-  border-radius:12px;
-  border:1px solid #74405a;
-}
-.danger{
-  background:#5b172b;
-  color:#ffdce8;
-  padding:10px 14px;
-  border-radius:10px;
+.hero{text-align:center;padding:25px 5px 20px}
+.emoji{font-size:58px;display:block;margin-bottom:8px}
+h1{font-size:clamp(30px,8vw,54px);margin:5px 0 10px}
+h2{font-size:clamp(25px,7vw,38px);margin:5px 0 8px}
+h3{margin:7px 0}
+.subtitle{color:var(--muted);line-height:1.5}
+.card{
+ background:linear-gradient(145deg,rgba(54,24,39,.96),rgba(30,13,23,.96));
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:22px;
+ padding:18px;
+ margin:12px 0;
+ box-shadow:0 12px 35px rgba(0,0,0,.22);
 }
 .center{text-align:center}
-
-#startScreen{
-  max-width:650px;
-  margin:35px auto;
+.primary{
+ background:linear-gradient(135deg,#b94775,#e17aa5);
+ box-shadow:0 7px 18px rgba(190,62,113,.25);
 }
-.train{
-  font-size:70px;
-  animation:float 2s ease-in-out infinite;
+.secondary{background:#4b2035}
+.green{background:#246846}
+.gold{background:#775b20}
+.danger{background:#76263b}
+.bigbtn{width:100%;font-size:18px;margin-top:12px}
+input[type=text]{
+ width:100%;
+ background:#160a10;
+ color:white;
+ border:1px solid #70445a;
+ border-radius:14px;
+ padding:15px;
+ outline:none;
 }
-@keyframes float{
-  50%{transform:translateY(-8px)}
-}
-
-.name-input{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #79405a;
-  background:#160a11;
-  color:white;
-  margin:10px 0 14px;
-  outline:none;
-}
-
-.progress-wrap{
-  height:10px;
-  background:#180a11;
-  border-radius:20px;
-  overflow:hidden;
-  margin:10px 0 20px;
-}
+input:focus{border-color:var(--pink)}
 .progress{
-  height:100%;
-  background:linear-gradient(90deg,#ff83b7,#ffd76b);
-  width:0%;
-  transition:.3s;
+ height:10px;
+ background:#160a10;
+ border-radius:99px;
+ overflow:hidden;
+ margin:12px 0;
+}
+.progress i{
+ display:block;
+ height:100%;
+ width:0%;
+ background:linear-gradient(90deg,var(--burg),var(--pink));
+ transition:.3s width;
+}
+.message{
+ min-height:28px;
+ text-align:center;
+ color:var(--pink2);
+ font-weight:800;
+ margin:10px 0;
+}
+.levelhead{text-align:center;margin-bottom:12px}
+.levelnum{
+ display:inline-block;
+ background:#512039;
+ border-radius:99px;
+ padding:6px 12px;
+ font-size:12px;
+ font-weight:900;
+ letter-spacing:.08em;
+}
+.nextbox{text-align:center;margin-top:18px}
+.hidden{display:none!important}
+.small{font-size:13px;color:var(--muted)}
+.scorepop{
+ position:fixed;
+ pointer-events:none;
+ font-weight:1000;
+ color:var(--gold);
+ animation:pop 1s forwards;
+ z-index:100;
+}
+@keyframes pop{
+ 0%{opacity:1;transform:translateY(0)}
+ 100%{opacity:0;transform:translateY(-55px)}
+}
+.answergrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+.answer{
+ background:#341726;
+ border:1px solid #61364b;
+ min-height:58px;
+}
+.answer.correct{background:#246846;border-color:#77dfa2}
+.answer.wrong{background:#76263b}
+@media(max-width:480px){
+ .answergrid{grid-template-columns:1fr}
+ .stats{max-width:250px}
+ .logo{font-size:15px}
+ .screen{padding-left:10px;padding-right:10px}
 }
 
-.journey-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:12px;
+/* START */
+.namebox{max-width:500px;margin:25px auto}
+.heartfield{
+ position:relative;
+ height:170px;
+ overflow:hidden;
+ border-radius:18px;
+ background:radial-gradient(circle,#471a31,#180b12);
 }
-.level-card{
-  position:relative;
-  background:#21101a;
-  border:1px solid #5d3045;
-  border-radius:16px;
-  padding:15px;
-  min-height:150px;
+.floatingheart{
+ position:absolute;
+ font-size:25px;
+ animation:float 5s infinite ease-in-out;
 }
-.level-card.available{
-  border-color:#d45d8a;
-  box-shadow:0 0 20px rgba(255,100,160,.1);
-}
-.level-card.completed{
-  border-color:#6dcc8e;
-}
-.level-card.locked{
-  opacity:.5;
-}
-.level-number{
-  color:#ff9fc5;
-  font-weight:900;
-}
-.level-icon{
-  font-size:30px;
-  margin:7px 0;
-}
-.status{
-  font-size:12px;
-  color:#dcb7c8;
-}
-.level-card button{
-  margin-top:10px;
-  width:100%;
-}
+@keyframes float{50%{transform:translateY(-25px) rotate(10deg)}}
 
-.game-top{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
+/* BROKEN HEARTS */
+.catchgame{
+ position:relative;
+ width:min(100%,380px);
+ height:430px;
+ margin:15px auto;
+ overflow:hidden;
+ background:linear-gradient(#1b0d25,#331427);
+ border:2px solid #63324d;
+ border-radius:20px;
+ touch-action:none;
 }
-.game-top .game-info{
-  margin-right:auto;
-}
-.game-area{
-  margin-top:18px;
-}
-
-.notice{
-  padding:12px;
-  border-radius:12px;
-  background:#1b0d15;
-  border:1px solid #533047;
-  margin:10px 0;
-}
-.success{border-color:#4f9c6b;background:#12251a}
-.failure{border-color:#934356;background:#2b111a}
-
-.choice-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.choice{
-  background:#402035;
-  color:white;
-  border:1px solid #72425a;
-  padding:14px;
-  border-radius:13px;
-  text-align:left;
-}
-.choice:hover{background:#583047}
-.choice.correct{background:#235c3a;border-color:#79d79b}
-.choice.wrong{background:#662032;border-color:#ff7184}
-
-.timer{
-  font-size:25px;
-  font-weight:900;
-  color:#ffd76b;
-}
-
-.game-controls{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin-top:15px;
-}
-
-/* Broken hearts */
-#heartField{
-  height:430px;
-  max-width:420px;
-  margin:auto;
-  background:linear-gradient(#1c0b17,#321225);
-  border:2px solid #66334c;
-  border-radius:18px;
-  position:relative;
-  overflow:hidden;
-  touch-action:none;
+.catchheart{
+ position:absolute;
+ font-size:35px;
+ user-select:none;
 }
 .catcher{
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  width:85px;
-  height:24px;
-  transform:translateX(-50%);
-  border-radius:20px;
-  background:#ff91bd;
-}
-.falling-heart{
-  position:absolute;
-  font-size:27px;
-  user-select:none;
+ position:absolute;
+ bottom:10px;
+ width:90px;
+ height:42px;
+ border-radius:20px;
+ background:#d86f9d;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:27px;
 }
 
-/* Memory */
-.memory-grid{
-  display:grid;
-  grid-template-columns:repeat(4,65px);
-  justify-content:center;
-  gap:7px;
+/* MEMORY */
+.memorygrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+ max-width:430px;
+ margin:15px auto;
 }
-.memory-tile{
-  width:65px;
-  height:65px;
-  border-radius:10px;
-  background:#3c1d31;
-  color:transparent;
-  border:1px solid #63374e;
+.memorytile{
+ aspect-ratio:1;
+ background:#321625;
+ border:2px solid #63334c;
+ font-size:25px;
 }
-.memory-tile.flash{
-  background:#ff86b6;
-  color:white;
-}
+.memorytile.lit{background:#e58ab2;color:#220b17}
+.memorytile.done{background:#286b49}
 
-/* Slots */
-.reels{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:20px 0;
-}
+/* SLOTS */
+.reels{display:flex;gap:10px;justify-content:center;margin:25px 0}
 .reel{
-  width:90px;
-  height:90px;
-  background:#13090e;
-  border:3px solid #b65a7d;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  font-size:45px;
+ width:85px;
+ height:90px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:#10070c;
+ border:2px solid #9a4166;
+ border-radius:16px;
+ font-size:45px;
 }
 .lever{
-  font-size:35px;
-  background:#5b1c35;
-  color:white;
-  padding:15px;
-  border-radius:50%;
+ display:block;
+ margin:auto;
+ width:130px;
+ background:#b94775;
 }
 
-/* Logic */
-.logic-row{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin:20px 0;
-  flex-wrap:wrap;
+/* VISUAL PUZZLE */
+.patternrow,.choicevisuals{
+ display:flex;
+ gap:9px;
+ justify-content:center;
+ flex-wrap:wrap;
+ margin:16px 0;
 }
-.logic-tile{
-  width:60px;
-  height:60px;
-  display:grid;
-  place-items:center;
-  background:#140a10;
-  border:1px solid #704058;
-  border-radius:10px;
-  font-size:28px;
+.tile{
+ width:58px;height:58px;
+ border-radius:12px;
+ background:#543044;
+ display:flex;align-items:center;justify-content:center;
+ font-size:28px;
 }
-
-/* Bluff */
-.cards{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.bluff-card{
-  width:75px;
-  height:105px;
-  border-radius:10px;
-  background:linear-gradient(135deg,#652044,#29101e);
-  border:2px solid #a85278;
-  color:white;
-  font-size:28px;
+.visualchoice{
+ min-width:90px;
+ min-height:80px;
+ background:#351827;
+ border:2px solid #62344c;
+ font-size:30px;
 }
 
-/* Survival */
-.survival-actions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+/* BLUFF */
+.cardsrow{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.playcard{
+ width:70px;height:100px;
+ background:#5c2240;
+ border:2px solid #a45477;
+ display:flex;align-items:center;justify-content:center;
+ font-size:28px;
 }
-.survival-actions button{
-  padding:22px;
-  background:#412036;
-  color:white;
-  border-radius:14px;
-  font-weight:900;
+.playcard.revealed{background:#eee;color:#351522}
+
+/* RACE */
+.racehorse{
+ font-size:48px;
+ transition:margin-left .25s ease;
+}
+.racetrack{
+ position:relative;
+ height:80px;
+ background:#171019;
+ border-radius:15px;
+ overflow:hidden;
+ padding:10px;
+}
+.raceline{
+ position:absolute;
+ right:5px;top:0;
+ height:100%;
+ border-left:3px dashed var(--gold);
+}
+.timing{
+ height:45px;
+ background:#171019;
+ border-radius:99px;
+ position:relative;
+ overflow:hidden;
+ margin:15px 0;
+}
+.timingzone{
+ position:absolute;
+ left:42%;
+ width:16%;
+ height:100%;
+ background:rgba(119,223,162,.65);
+}
+.timingneedle{
+ position:absolute;
+ top:0;
+ left:0;
+ width:5px;
+ height:100%;
+ background:white;
+}
+.gallop{font-size:22px;width:100%}
+
+/* CHAMBER */
+.room{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+.roomitem{
+ min-height:105px;
+ background:#351827;
+ border:1px solid #64354c;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ font-size:32px;
+}
+.clues{display:flex;gap:7px;flex-wrap:wrap}
+.clue{
+ background:#563047;
+ padding:8px 11px;
+ border-radius:10px;
+ font-size:13px;
 }
 
-/* New Admirer Race */
-.race-track{
-  background:#190b12;
-  border:2px solid #66344b;
-  border-radius:18px;
-  padding:18px;
-  overflow:hidden;
+/* BOXING */
+.fighters{
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ font-size:65px;
 }
-.horse-lane{
-  position:relative;
-  height:65px;
-  background:repeating-linear-gradient(
-    90deg,#2c1720 0,#2c1720 35px,#24121a 35px,#24121a 70px
-  );
-  border-bottom:1px solid #593044;
-  margin-bottom:7px;
-  border-radius:8px;
+.health{
+ height:16px;
+ background:#13080e;
+ border-radius:99px;
+ overflow:hidden;
+ margin:8px 0 16px;
 }
-.horse{
-  position:absolute;
-  left:2%;
-  top:12px;
-  font-size:36px;
-  transition:left .4s ease-out;
-}
-.finish-line{
-  position:absolute;
-  right:3%;
-  top:0;
-  height:100%;
-  width:8px;
-  background:repeating-linear-gradient(
-    0deg,#fff 0 8px,#111 8px 16px
-  );
-}
-.timing-bar{
-  height:45px;
-  background:#170a10;
-  border:2px solid #5e3045;
-  border-radius:12px;
-  position:relative;
-  overflow:hidden;
-  margin:20px 0 10px;
-}
-.good-zone{
-  position:absolute;
-  left:40%;
-  width:20%;
-  top:0;
-  bottom:0;
-  background:#4b9b62;
-  opacity:.7;
-}
-.marker{
-  position:absolute;
-  width:6px;
-  top:0;
-  bottom:0;
-  background:#fff;
-  left:0;
-}
-.go-btn{
-  width:100%;
-  padding:18px;
-  font-size:21px;
-  font-weight:900;
-  background:#ff79ad;
-  color:white;
-  border-radius:14px;
-}
-.horse-select{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-.horse-choice{
-  padding:12px 5px;
-  background:#3d1b2d;
-  color:white;
-  border-radius:12px;
-}
-.horse-choice.selected{
-  outline:3px solid #ff9ac4;
+.health i{display:block;height:100%;background:#d55a7f;width:100%}
+.combatgrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
 }
 
-/* Chamber */
-.room-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
+/* MATCH */
+.matcharea{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:18px;
 }
-.room-item{
-  padding:25px 10px;
-  background:#3a1b2d;
-  border-radius:14px;
-  text-align:center;
-  cursor:pointer;
+.matchitem,.matchtarget{
+ min-height:70px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:15px;
+ font-size:30px;
+}
+.matchitem{background:#4c2437;cursor:grab}
+.matchtarget{border:2px dashed #9d6680}
+.matchtarget.matched{background:#286b49;border-style:solid}
+
+/* REACTION */
+.reactionbox{
+ min-height:230px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ border-radius:20px;
+ background:#2d1522;
+ font-size:24px;
+ text-align:center;
+}
+.reactionbutton{
+ width:85%;
+ min-height:85px;
+ font-size:25px;
+}
+
+/* HEART HUNT */
+.hunt{
+ position:relative;
+ height:390px;
+ overflow:hidden;
+ border-radius:20px;
+ background:
+ radial-gradient(circle at 30% 30%,#5c2944,transparent 12%),
+ radial-gradient(circle at 75% 65%,#4a2038,transparent 18%),
+ #190c14;
+}
+.huntheart{
+ position:absolute;
+ font-size:31px;
+ cursor:pointer;
+}
+.decoy{position:absolute;font-size:28px;opacity:.45}
+
+/* LOCK */
+.lockdisplay{
+ font-size:35px;
+ letter-spacing:10px;
+ text-align:center;
+ background:#12080d;
+ padding:18px;
+ border-radius:14px;
+ margin-bottom:12px;
 }
 .keypad{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  max-width:300px;
-  margin:auto;
-  gap:8px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ max-width:350px;
+ margin:auto;
 }
-.keypad button{
-  padding:17px;
-  background:#3e1e31;
-  color:white;
-  border-radius:10px;
+.key{background:#422035;font-size:20px}
+
+/* SHOOTOUT */
+.shooting{
+ position:relative;
+ height:380px;
+ border-radius:20px;
+ background:linear-gradient(#24112d,#351629);
+ overflow:hidden;
+}
+.target{
+ position:absolute;
+ font-size:38px;
+ cursor:pointer;
 }
 
-/* Boxing */
-.health{
-  height:18px;
-  background:#16090f;
-  border-radius:20px;
-  overflow:hidden;
-  margin:7px 0 15px;
+/* COUNTDOWN */
+.countbar{
+ position:relative;
+ height:42px;
+ border-radius:99px;
+ background:#14090e;
+ overflow:hidden;
 }
-.health-fill{
-  height:100%;
-  background:#ff6680;
-  transition:.3s;
+.countzone{
+ position:absolute;
+ left:42%;
+ width:16%;
+ top:0;
+ height:100%;
+ background:#4c9c6d;
 }
-.fight-actions{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-.fight-actions button{
-  padding:15px;
-  border-radius:12px;
-  background:#472035;
-  color:white;
-}
-
-/* Match */
-.match-board{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-}
-.match-object,.match-target{
-  min-height:75px;
-  display:grid;
-  place-items:center;
-  border-radius:14px;
-  font-size:32px;
-}
-.match-object{
-  background:#4b2138;
-  border:2px solid #81415e;
-  cursor:grab;
-}
-.match-target{
-  border:2px dashed #a96582;
-  background:#1a0c13;
+.countneedle{
+ position:absolute;
+ top:0;
+ left:0;
+ height:100%;
+ width:6px;
+ background:white;
 }
 
-/* Reaction */
-.reaction-box{
-  min-height:230px;
-  display:grid;
-  place-items:center;
-  border-radius:20px;
-  background:#1b0b14;
-  border:2px solid #5f3047;
-  font-size:30px;
-  font-weight:900;
-  text-align:center;
-  padding:20px;
+/* GAMBLE */
+.pot{
+ font-size:45px;
+ text-align:center;
+ color:var(--gold);
+ font-weight:1000;
 }
+.gamblegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* Heart hunt */
-#huntArea{
-  height:420px;
-  position:relative;
-  overflow:hidden;
-  border-radius:18px;
-  background:
-    radial-gradient(circle at 30% 30%,#642343,transparent 20%),
-    radial-gradient(circle at 80% 60%,#4c1a35,transparent 20%),
-    #170a11;
-}
-.hunt-heart{
-  position:absolute;
-  font-size:28px;
-  cursor:pointer;
-}
-
-/* Cupid */
-#shootArea{
-  height:400px;
-  position:relative;
-  background:#180a11;
-  border:2px solid #5d3045;
-  border-radius:18px;
-  overflow:hidden;
-}
-.target-heart{
-  position:absolute;
-  font-size:35px;
-  cursor:pointer;
-}
-
-/* Countdown */
-.mini-bar{
-  height:45px;
-  background:#160910;
-  border:1px solid #603147;
-  border-radius:12px;
-  position:relative;
-  overflow:hidden;
-}
-.mini-zone{
-  position:absolute;
-  left:43%;
-  width:14%;
-  height:100%;
-  background:#4f9e64;
-}
-.mini-marker{
-  position:absolute;
-  width:7px;
-  height:100%;
-  background:white;
-}
-
-/* Gamble */
-.gamble-pot{
-  font-size:42px;
-  color:#ffd76b;
-  font-weight:900;
-}
-.gamble-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-/* Boss */
+/* BOSS */
 .boss{
-  font-size:80px;
-  text-align:center;
-  animation:bossFloat 1.5s ease-in-out infinite;
+ text-align:center;
+ font-size:90px;
 }
-@keyframes bossFloat{50%{transform:translateY(-7px)}}
+.bossactions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-/* Word find */
-.word-list{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin:12px 0;
-}
-.word{
-  background:#301725;
-  border:1px solid #63344a;
-  padding:4px 7px;
-  border-radius:7px;
-  font-size:12px;
-}
-.word.found{
-  text-decoration:line-through;
-  opacity:.45;
-}
-.word-grid{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  max-width:600px;
-  margin:auto;
-  user-select:none;
-  touch-action:none;
+/* WORD FIND */
+.wordwrap{overflow:auto}
+.wordgrid{
+ display:grid;
+ grid-template-columns:repeat(12,1fr);
+ gap:3px;
+ max-width:600px;
+ margin:15px auto;
 }
 .letter{
-  aspect-ratio:1;
-  display:grid;
-  place-items:center;
-  background:#27121e;
-  border:1px solid #4c293b;
-  font-weight:800;
-  font-size:clamp(11px,3vw,18px);
+ aspect-ratio:1;
+ min-width:0;
+ padding:0;
+ background:#321625;
+ border-radius:5px;
+ font-size:clamp(11px,3vw,18px);
 }
-.letter.selected{background:#8d3156}
-.letter.found{background:#4c9d67}
+.letter.selected,.letter.found{background:#a94c76}
+.wordlist{
+ display:flex;
+ gap:6px;
+ flex-wrap:wrap;
+}
+.wordtag{
+ background:#3d2130;
+ border-radius:9px;
+ padding:6px 8px;
+ font-size:11px;
+}
+.wordtag.found{background:#286b49;text-decoration:line-through}
 
-/* Drawing */
-canvas{
-  display:block;
-  width:100%;
-  max-width:700px;
-  height:400px;
-  background:#fff9fb;
-  border-radius:15px;
-  touch-action:none;
-  margin:auto;
+/* DRAW */
+#drawCanvas{
+ display:block;
+ width:100%;
+ max-width:600px;
+ height:430px;
+ background:#fffafc;
+ border-radius:16px;
+ touch-action:none;
+ cursor:crosshair;
+ margin:auto;
 }
-.draw-controls{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin:10px 0;
+.tools{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ margin:10px 0;
 }
-.draw-controls button{
-  padding:9px 13px;
-  border-radius:9px;
-}
+.tools button{background:#4a2336}
+.colorinput{width:50px;height:48px;padding:3px}
 
-/* Derby */
-.derby-track{
-  background:#1b0d13;
-  border:2px solid #603147;
-  border-radius:15px;
-  padding:10px;
+/* DERBY */
+.horselist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.horsechoice{
+ background:#3b1d2d;
+ border:2px solid #62354c;
+ font-size:23px;
 }
-.derby-lane{
-  height:52px;
-  position:relative;
-  background:#2c1720;
-  border-bottom:1px solid #5a3043;
-  margin:4px;
+.horsechoice.selected{border-color:var(--gold);background:#624b20}
+.derbytrack{margin:15px 0}
+.horseline{
+ background:#1b0d13;
+ padding:9px;
+ border-radius:12px;
+ margin:7px 0;
 }
-.derby-horse{
-  position:absolute;
-  left:0;
-  top:5px;
-  font-size:32px;
-  transition:left .3s;
+.horsebar{
+ height:13px;
+ background:#12080d;
+ border-radius:99px;
+ overflow:hidden;
 }
+.horsebar i{display:block;height:100%;background:#d9789f;width:0%}
 
-/* Finale */
-.final-score{
-  font-size:30px;
-  color:#ffd76b;
-  font-weight:900;
+/* FINAL */
+.finalnumber{
+ font-size:14px;
+ color:var(--pink);
+ font-weight:900;
 }
-
-@media(max-width:600px){
-  h1{font-size:28px}
-  h2{font-size:22px}
-  .choice-grid{grid-template-columns:1fr}
-  .memory-grid{grid-template-columns:repeat(4,58px)}
-  .memory-tile{width:58px;height:58px}
-  .horse-select{grid-template-columns:repeat(2,1fr)}
-  .match-board{grid-template-columns:repeat(3,1fr)}
-  .room-grid{grid-template-columns:1fr}
-  header .logo{width:100%}
-  canvas{height:330px}
+.results{text-align:center}
+.reward{
+ padding:20px;
+ border-radius:20px;
+ background:linear-gradient(135deg,#5c2740,#2b1320);
+ border:1px solid #9c4c70;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">🚂 Lulu Express 💗</div>
-    <div class="stat">👤 <span id="playerName">Guest</span></div>
-    <div class="stat">⭐ <span id="score">0</span></div>
-    <div class="stat">🪙 <span id="tokens">0</span></div>
-    <div class="stat">🗺️ <span id="journeyProgress">0/23</span></div>
+<div id="app">
 
-    <div class="music">
-      <button id="musicToggle" onclick="toggleMusic()">▶️</button>
-      <input id="volume" type="range" min="0" max="1" step=".05" value=".5">
-      <label class="small-btn">
-        🎵 Music
-        <input id="musicFile" type="file" accept="audio/*" hidden>
-      </label>
-    </div>
-
-    <button class="small-btn reset" onclick="resetGame()">Reset</button>
+<header class="topbar">
+ <div class="topinner">
+  <div class="logo">🚂 Lulu Express</div>
+  <div class="stats">
+   <div class="stat">⭐ <span id="score">0</span></div>
+   <div class="stat">🪙 <span id="tokens">0</span></div>
+   <div class="stat">📍 <span id="progressText">0/23</span></div>
+   <button class="music" id="musicBtn">🎵 Music</button>
+   <button class="reset" id="resetBtn">↻ Reset</button>
   </div>
+ </div>
 </header>
 
-<audio id="music" loop></audio>
-
-<main>
-
-<section id="startScreen" class="panel center">
-  <div class="train">🚂💗</div>
-  <h1>Lulu Express</h1>
-  <h2>A Journey Made For Liliana</h2>
-  <p>
-    Welcome to the ultimate Lulu Express journey.  
-    Pass each level to unlock the next one, collect points and tokens,
-    and make it all the way to the Final Challenge.
-  </p>
-
-  <input
-    id="nameInput"
-    class="name-input"
-    maxlength="30"
-    placeholder="Enter your name..."
-    autocomplete="off"
-  >
-
-  <button class="primary" onclick="startJourney()">
-    🚂 Start My Journey
-  </button>
-</section>
-
-<section id="journeyScreen" class="hidden">
-  <div class="panel">
-    <h1>🗺️ Your Lulu Express Journey</h1>
-    <p id="journeyMessage">
-      Pass each level to unlock the next.
-    </p>
-
-    <div class="progress-wrap">
-      <div id="journeyBar" class="progress"></div>
-    </div>
-
-    <div id="journeyGrid" class="journey-grid"></div>
+<!-- START -->
+<section class="screen active" id="startScreen">
+ <div class="page">
+  <div class="hero">
+   <span class="emoji">🚂💗</span>
+   <h1>Lulu Express</h1>
+   <p class="subtitle">A 23-level journey made especially for Liliana.</p>
   </div>
-</section>
 
-<section id="gameScreen" class="hidden">
-  <div class="panel">
-    <div class="game-top">
-      <div class="game-info">
-        <div class="level-number" id="gameLevel"></div>
-        <h2 id="gameTitle"></h2>
-      </div>
-      <button class="secondary" onclick="showJourney()">🗺️ Journey</button>
-    </div>
-
-    <div id="gameArea" class="game-area"></div>
+  <div class="card namebox">
+   <h2>Ready to begin?</h2>
+   <p class="subtitle">Enter your name before the journey starts.</p>
+   <form id="nameForm">
+    <input id="playerName" type="text" maxlength="30" placeholder="Your name..." autocomplete="off" required>
+    <button class="primary bigbtn" type="submit">🚂 Start the Journey</button>
+   </form>
   </div>
+
+  <div class="heartfield">
+   <span class="floatingheart" style="left:8%;top:50%">💗</span>
+   <span class="floatingheart" style="left:28%;top:20%;animation-delay:.5s">💖</span>
+   <span class="floatingheart" style="left:50%;top:60%;animation-delay:1s">💕</span>
+   <span class="floatingheart" style="left:70%;top:25%;animation-delay:1.5s">💗</span>
+   <span class="floatingheart" style="left:88%;top:65%;animation-delay:2s">💞</span>
+  </div>
+
+  <div class="card center">
+   <b>23 levels</b>
+   <p class="small">Pass each level to unlock the next one. You can replay completed levels.</p>
+  </div>
+ </div>
 </section>
 
-</main>
+<!-- GENERIC GAME SCREENS -->
+<section class="screen" id="game1"><div class="page" id="g1"></div></section>
+<section class="screen" id="game2"><div class="page" id="g2"></div></section>
+<section class="screen" id="game3"><div class="page" id="g3"></div></section>
+<section class="screen" id="game4"><div class="page" id="g4"></div></section>
+<section class="screen" id="game5"><div class="page" id="g5"></div></section>
+<section class="screen" id="game6"><div class="page" id="g6"></div></section>
+<section class="screen" id="game7"><div class="page" id="g7"></div></section>
+<section class="screen" id="game8"><div class="page" id="g8"></div></section>
+<section class="screen" id="game9"><div class="page" id="g9"></div></section>
+<section class="screen" id="game10"><div class="page" id="g10"></div></section>
+<section class="screen" id="game11"><div class="page" id="g11"></div></section>
+<section class="screen" id="game12"><div class="page" id="g12"></div></section>
+<section class="screen" id="game13"><div class="page" id="g13"></div></section>
+<section class="screen" id="game14"><div class="page" id="g14"></div></section>
+<section class="screen" id="game15"><div class="page" id="g15"></div></section>
+<section class="screen" id="game16"><div class="page" id="g16"></div></section>
+<section class="screen" id="game17"><div class="page" id="g17"></div></section>
+<section class="screen" id="game18"><div class="page" id="g18"></div></section>
+<section class="screen" id="game19"><div class="page" id="g19"></div></section>
+<section class="screen" id="game20"><div class="page" id="g20"></div></section>
+<section class="screen" id="game21"><div class="page" id="g21"></div></section>
+<section class="screen" id="game22"><div class="page" id="g22"></div></section>
+<section class="screen" id="game23"><div class="page" id="g23"></div></section>
+<section class="screen" id="results"><div class="page" id="resultsPage"></div></section>
+
+</div>
 
 <script>
+"use strict";
+
 /* =========================================================
    CORE STATE
 ========================================================= */
 
-const levels = [
-  ["💔","Broken Hearts"],
-  ["🧠","Memory Vault"],
-  ["⏱️","Pressure Quiz"],
-  ["🎰","High Roller"],
-  ["🧩","Mind Games"],
-  ["🃏","The Bluff"],
-  ["🛡️","The Survival Round"],
-  ["🏇","The Admirer Race"],
-  ["🔎","The Heartbreak Chamber"],
-  ["🥊","The Heartbreak Boxing Match"],
-  ["🧲","The Perfect Match"],
-  ["💗","Who Knows Liliana Best?"],
-  ["⚡","The Reaction Gauntlet"],
-  ["❤️","The Heart Hunt"],
-  ["🔐","The Love Lock"],
-  ["🏹","The Cupid Shootout"],
-  ["⏳","The Countdown"],
-  ["🎲","The Ultimate Gamble"],
-  ["👑","The Admirer's Last Stand"],
-  ["🔎","Liliana's Word Find"],
-  ["🌻","Draw a Sunflower"],
-  ["🏇","THE LULU DERBY"],
-  ["💕","THE FINAL CHALLENGE"]
-];
+const TOTAL_LEVELS=23;
+const SAVE_KEY="luluExpressFinal_v3";
 
-let state = {
-  name:"",
-  score:0,
-  tokens:0,
-  unlocked:1,
-  completed:{},
-  gameBest:{},
-  currentLevel:1
+let state={
+ name:"",
+ score:0,
+ tokens:0,
+ completed:0,
+ unlocked:1
 };
 
-let game = {};
-let timerInterval = null;
-let animationFrame = null;
+let currentLevel=0;
+let cleanupFns=[];
+let timers=[];
+let intervals=[];
+let rafs=[];
+
+const $=id=>document.getElementById(id);
 
 function save(){
-  localStorage.setItem("luluExpressState",JSON.stringify(state));
+ try{
+  localStorage.setItem(SAVE_KEY,JSON.stringify(state));
+ }catch(e){}
 }
 
 function load(){
-  try{
-    const saved=JSON.parse(localStorage.getItem("luluExpressState"));
-    if(saved) state={...state,...saved};
-  }catch(e){}
+ try{
+  const s=JSON.parse(localStorage.getItem(SAVE_KEY)||"null");
+  if(s && typeof s==="object"){
+   state={...state,...s};
+  }
+ }catch(e){}
+ updateStats();
 }
 
-function updateHeader(){
-  document.getElementById("playerName").textContent=state.name||"Guest";
-  document.getElementById("score").textContent=state.score;
-  document.getElementById("tokens").textContent=state.tokens;
-
-  const done=Object.keys(state.completed).length;
-  document.getElementById("journeyProgress").textContent=done+"/23";
-  document.getElementById("journeyBar").style.width=(done/23*100)+"%";
+function updateStats(){
+ $("score").textContent=state.score;
+ $("tokens").textContent=state.tokens;
+ $("progressText").textContent=state.completed+"/23";
 }
 
 function addPoints(n){
-  state.score+=n;
-  if(state.score<0)state.score=0;
-  updateHeader();
-  save();
+ n=Math.max(0,Math.round(n||0));
+ state.score+=n;
+ updateStats();
+ save();
 }
 
 function addTokens(n){
-  state.tokens+=n;
-  if(state.tokens<0)state.tokens=0;
-  updateHeader();
-  save();
+ n=Math.max(0,Math.round(n||0));
+ state.tokens+=n;
+ updateStats();
+ save();
 }
 
-function startJourney(){
-  const input=document.getElementById("nameInput");
-  const name=input.value.trim();
-
-  if(!name){
-    input.focus();
-    input.style.borderColor="#ff6d7e";
-    return;
-  }
-
-  state.name=name;
-  state.unlocked=Math.max(1,state.unlocked||1);
-  save();
-
-  document.getElementById("startScreen").classList.add("hidden");
-  showJourney();
+function popScore(text){
+ const el=document.createElement("div");
+ el.className="scorepop";
+ el.textContent=text;
+ el.style.left=(window.innerWidth/2-25)+"px";
+ el.style.top=(window.innerHeight/2)+"px";
+ document.body.appendChild(el);
+ setTimeout(()=>el.remove(),1000);
 }
 
-function showJourney(){
-  clearTimers();
-
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("gameScreen").classList.add("hidden");
-  document.getElementById("journeyScreen").classList.remove("hidden");
-
-  updateHeader();
-
-  const grid=document.getElementById("journeyGrid");
-  grid.innerHTML="";
-
-  levels.forEach((level,i)=>{
-    const number=i+1;
-    const completed=!!state.completed[number];
-    const unlocked=number<=state.unlocked;
-
-    const card=document.createElement("div");
-    card.className="level-card "+
-      (completed?"completed ":"")+
-      (unlocked&&!completed?"available ":"")+
-      (!unlocked?"locked":"");
-
-    let status="🔒 Locked";
-    if(completed)status="✅ Completed";
-    else if(unlocked)status="▶️ Ready";
-
-    card.innerHTML=`
-      <div class="level-number">LEVEL ${number}</div>
-      <div class="level-icon">${level[0]}</div>
-      <h3>${level[1]}</h3>
-      <div class="status">${status}</div>
-      ${
-        unlocked
-        ? `<button class="${completed?"secondary":"primary"}"
-             onclick="openLevel(${number})">
-             ${completed?"Replay":"Play Level"}
-           </button>`
-        : ""
-      }
-    `;
-
-    grid.appendChild(card);
-  });
-
-  const next=state.unlocked;
-  const msg=next<=23
-    ? `Keep going, ${escapeHtml(state.name)}! Level ${next} is waiting for you.`
-    : `You have reached the end of the journey, ${escapeHtml(state.name)}! 💗`;
-
-  document.getElementById("journeyMessage").innerHTML=msg;
+function clearRuntime(){
+ cleanupFns.forEach(fn=>{
+  try{fn()}catch(e){}
+ });
+ cleanupFns=[];
+ timers.forEach(clearTimeout);
+ intervals.forEach(clearInterval);
+ timers=[];
+ intervals=[];
+ rafs.forEach(cancelAnimationFrame);
+ rafs=[];
 }
 
-function openLevel(number){
-  if(number>state.unlocked)return;
-
-  clearTimers();
-  state.currentLevel=number;
-  save();
-
-  document.getElementById("journeyScreen").classList.add("hidden");
-  document.getElementById("gameScreen").classList.remove("hidden");
-
-  document.getElementById("gameLevel").textContent="LEVEL "+number;
-  document.getElementById("gameTitle").textContent=
-    levels[number-1][0]+" "+levels[number-1][1];
-
-  const area=document.getElementById("gameArea");
-  area.innerHTML="";
-
-  game={};
-
-  const funcs=[
-    gameBrokenHearts,
-    gameMemoryVault,
-    gamePressureQuiz,
-    gameHighRoller,
-    gameMindGames,
-    gameBluff,
-    gameSurvival,
-    gameAdmirerRace,
-    gameHeartbreakChamber,
-    gameBoxing,
-    gamePerfectMatch,
-    gameLilianaQuiz,
-    gameReaction,
-    gameHeartHunt,
-    gameLoveLock,
-    gameCupid,
-    gameCountdown,
-    gameUltimateGamble,
-    gameLastStand,
-    gameWordFind,
-    gameSunflower,
-    gameDerby,
-    gameFinal
-  ];
-
-  funcs[number-1]();
+function later(fn,ms){
+ const id=setTimeout(fn,ms);
+ timers.push(id);
+ return id;
 }
 
-function completeLevel(number,points=50,tokens=5){
-  if(state.completed[number]){
-    showJourney();
-    return;
-  }
-
-  state.completed[number]=true;
-  addPoints(points);
-  addTokens(tokens);
-
-  if(number===23){
-    state.unlocked=23;
-  }else{
-    state.unlocked=Math.max(state.unlocked,number+1);
-  }
-
-  save();
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="notice success center">
-      <h2>🎉 Level Passed!</h2>
-      <p>Excellent work, ${escapeHtml(state.name)}!</p>
-      <p><strong>+${points} points</strong> &nbsp; <strong>+${tokens} tokens</strong></p>
-      ${
-        number===23
-        ? finalReward()
-        : `<button class="primary" onclick="showJourney()">
-             Continue Journey 🚂
-           </button>`
-      }
-    </div>
-  `;
-
-  updateHeader();
+function every(fn,ms){
+ const id=setInterval(fn,ms);
+ intervals.push(id);
+ return id;
 }
 
-function finalReward(){
-  if(state.score>3000){
-    return `
-      <div class="notice success">
-        <h2>💗 PRIVATE CALL UNLOCKED 💗</h2>
-        <p>Your final score is <strong>${state.score}</strong>.</p>
-        <p>You reached the required <strong>3001+</strong> points.</p>
-        <p>🎉 The private call reward is unlocked!</p>
-      </div>
-      <button class="primary" onclick="showJourney()">🗺️ View Journey</button>
-    `;
-  }
-
-  return `
-    <div class="notice">
-      <h2>🚂 Journey Complete!</h2>
-      <p>Your final score is <strong>${state.score}</strong>.</p>
-      <p>You needed <strong>3001+</strong> points for the private call reward.</p>
-    </div>
-    <button class="primary" onclick="showJourney()">🗺️ View Journey</button>
-  `;
+function listen(el,event,fn,opts){
+ if(!el)return;
+ el.addEventListener(event,fn,opts);
+ cleanupFns.push(()=>el.removeEventListener(event,fn,opts));
 }
-
-function clearTimers(){
-  if(timerInterval)clearInterval(timerInterval);
-  if(animationFrame)cancelAnimationFrame(animationFrame);
-  timerInterval=null;
-  animationFrame=null;
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",
-    '"':"&quot;","'":"&#039;"
-  }[m]));
-}
-
-/* =========================================================
-   ANSWER RANDOMISATION
-========================================================= */
 
 function shuffle(arr){
-  const a=[...arr];
-  for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
-  }
-  return a;
+ for(let i=arr.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [arr[i],arr[j]]=[arr[j],arr[i]];
+ }
+ return arr;
 }
 
-function shuffledAnswers(options,correctIndex){
-  return shuffle(
-    options.map((text,i)=>({
-      text,
-      correct:i===correctIndex
-    }))
-  );
+function shuffledAnswers(q){
+ const a=q.options.map((text,i)=>({
+  text,
+  correct:i===q.answer
+ }));
+ return shuffle(a);
 }
 
-function renderQuestion(q,container,onAnswer){
-  const answers=shuffledAnswers(q.options,q.answer);
+function showScreen(id){
+ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+ $(id).classList.add("active");
+ window.scrollTo(0,0);
+}
 
-  container.innerHTML=`
-    <div class="notice">${q.q}</div>
-    <div class="choice-grid"></div>
-  `;
+function levelHeader(n,title,emoji,desc){
+ return `
+ <div class="levelhead">
+  <div class="levelnum">LEVEL ${n} OF 23</div>
+  <h2>${emoji} ${title}</h2>
+  <p class="subtitle">${desc}</p>
+ </div>`;
+}
 
-  const grid=container.querySelector(".choice-grid");
+function finishLevel(n,message="Level complete!"){
+ if(n>state.completed){
+  state.completed=n;
+  state.unlocked=Math.min(23,n+1);
+  addTokens(3);
+  save();
+ }
+ updateStats();
 
-  answers.forEach(a=>{
-    const btn=document.createElement("button");
-    btn.className="choice";
-    btn.textContent=a.text;
-
-    btn.onclick=()=>{
-      if(grid.dataset.done)return;
-      grid.dataset.done="1";
-
-      [...grid.children].forEach(b=>b.disabled=true);
-
-      if(a.correct){
-        btn.classList.add("correct");
-        onAnswer(true);
-      }else{
-        btn.classList.add("wrong");
-        onAnswer(false);
-      }
-    };
-
-    grid.appendChild(btn);
+ const box=$(`g${n}`).querySelector(".nextbox");
+ if(box){
+  box.innerHTML=`
+   <div class="card center">
+    <h2>🎉 ${message}</h2>
+    <p>⭐ Score: ${state.score} &nbsp; 🪙 Tokens: ${state.tokens}</p>
+    ${
+      n<TOTAL_LEVELS
+      ? `<button class="primary bigbtn" id="nextLevel">➡️ Next Level</button>`
+      : `<button class="primary bigbtn" id="finishJourney">💕 Finish Journey</button>`
+    }
+   </div>`;
+  const btn=$("nextLevel")||$("finishJourney");
+  listen(btn,"click",()=>{
+   if(n<TOTAL_LEVELS)startLevel(n+1);
+   else showResults();
   });
+ }
+}
+
+function lockedScreen(n){
+ showScreen("startScreen");
+ alert("Finish the earlier levels first!");
 }
 
 /* =========================================================
-   1. BROKEN HEARTS
+   NAME / RESET
 ========================================================= */
 
-function gameBrokenHearts(){
-  const area=document.getElementById("gameArea");
-
-  area.innerHTML=`
-    <p class="center">
-      Move your catcher and catch the whole hearts. Avoid 💔 and grab 💛!
-    </p>
-    <div class="notice center">
-      Hearts: <b id="heartScore">0</b> &nbsp; Misses: <b id="heartLives">0</b>/3
-    </div>
-    <div id="heartField">
-      <div id="catcher" class="catcher"></div>
-    </div>
-    <div class="game-controls">
-      <button class="secondary" onpointerdown="moveCatcher(-1)">⬅️</button>
-      <button class="secondary" onpointerdown="moveCatcher(1)">➡️</button>
-    </div>
-  `;
-
-  game.catchScore=0;
-  game.misses=0;
-  game.heartStart=Date.now();
-  game.catcherX=50;
-  game.hearts=[];
-  game.running=true;
-
-  const field=document.getElementById("heartField");
-
-  function spawn(){
-    if(!game.running)return;
-
-    const el=document.createElement("div");
-    const type=Math.random()<.15?"💛":Math.random()<.25?"💔":"❤️";
-
-    el.className="falling-heart";
-    el.textContent=type;
-    el.dataset.type=type;
-    el.style.left=(Math.random()*88+4)+"%";
-    el.style.top="-35px";
-
-    field.appendChild(el);
-    game.hearts.push({
-      el,
-      y:-35,
-      speed:1.5+Math.random()*1.3
-    });
-  }
-
-  game.spawn=spawn;
-
-  function loop(){
-    if(!game.running)return;
-
-    const elapsed=(Date.now()-game.heartStart)/1000;
-
-    game.hearts.forEach(h=>{
-      h.y+=h.speed;
-      h.el.style.top=h.y+"px";
-
-      const r=h.el.getBoundingClientRect();
-      const c=document.getElementById("catcher").getBoundingClientRect();
-
-      if(
-        r.bottom>=c.top &&
-        r.left<c.right &&
-        r.right>c.left &&
-        r.top<c.bottom
-      ){
-        if(h.el.dataset.type==="💔"){
-          game.misses++;
-        }else{
-          const pts=h.el.dataset.type==="💛"?30:10;
-          game.catchScore+=pts;
-        }
-
-        h.el.remove();
-        h.dead=true;
-      }
-
-      if(h.y>430){
-        if(h.el.dataset.type==="❤️")game.misses++;
-        h.el.remove();
-        h.dead=true;
-      }
-    });
-
-    game.hearts=game.hearts.filter(h=>!h.dead);
-
-    document.getElementById("heartScore").textContent=game.catchScore;
-    document.getElementById("heartLives").textContent=game.misses;
-
-    if(game.misses>=3 || elapsed>=45){
-      game.running=false;
-
-      if(game.catchScore>=100){
-        addPoints(game.catchScore);
-        completeLevel(1,80,5);
-      }else{
-        area.innerHTML=`
-          <div class="notice failure center">
-            <h2>💔 Try Again</h2>
-            <p>You caught ${game.catchScore} points.</p>
-            <p>You need 100 points to pass.</p>
-            <button class="primary" onclick="openLevel(1)">Retry</button>
-          </div>`;
-      }
-      return;
-    }
-
-    animationFrame=requestAnimationFrame(loop);
-  }
-
-  timerInterval=setInterval(spawn,650);
-  loop();
-}
-
-function moveCatcher(dir){
-  if(!game.running)return;
-  game.catcherX=Math.max(8,Math.min(92,game.catcherX+dir*8));
-  document.getElementById("catcher").style.left=game.catcherX+"%";
-}
-
-/* =========================================================
-   2. MEMORY VAULT
-========================================================= */
-
-function gameMemoryVault(){
-  const area=document.getElementById("gameArea");
-
-  area.innerHTML=`
-    <p class="center">Watch the sequence, then repeat it.</p>
-    <div class="notice center">
-      Round <b id="memoryRound">1</b>/7
-    </div>
-    <div id="memoryGrid" class="memory-grid"></div>
-    <div id="memoryMessage" class="notice center">Get ready...</div>
-  `;
-
-  game.round=1;
-  game.sequence=[];
-  game.input=0;
-  game.accepting=false;
-
-  const grid=document.getElementById("memoryGrid");
-
-  for(let i=0;i<16;i++){
-    const b=document.createElement("button");
-    b.className="memory-tile";
-    b.dataset.index=i;
-    b.textContent="💗";
-    b.onclick=()=>memoryClick(i);
-    grid.appendChild(b);
-  }
-
-  showMemorySequence();
-}
-
-function showMemorySequence(){
-  game.sequence=[];
-
-  const length=Math.min(3+game.round,9);
-
-  for(let i=0;i<length;i++){
-    game.sequence.push(Math.floor(Math.random()*16));
-  }
-
-  game.input=0;
-  game.accepting=false;
-
-  document.getElementById("memoryRound").textContent=game.round;
-
-  const tiles=[...document.querySelectorAll(".memory-tile")];
-
-  let i=0;
-
-  timerInterval=setInterval(()=>{
-    tiles.forEach(t=>t.classList.remove("flash"));
-
-    if(i>=game.sequence.length){
-      clearInterval(timerInterval);
-      timerInterval=null;
-      game.accepting=true;
-      document.getElementById("memoryMessage").textContent="Your turn!";
-      return;
-    }
-
-    tiles[game.sequence[i]].classList.add("flash");
-    i++;
-  },600);
-}
-
-function memoryClick(index){
-  if(!game.accepting)return;
-
-  const tiles=[...document.querySelectorAll(".memory-tile")];
-
-  if(index!==game.sequence[game.input]){
-    game.accepting=false;
-    document.getElementById("memoryMessage").textContent="❌ Wrong tile.";
-    setTimeout(()=>openLevel(2),700);
-    return;
-  }
-
-  tiles[index].classList.add("flash");
-  setTimeout(()=>tiles[index].classList.remove("flash"),180);
-
-  game.input++;
-
-  if(game.input>=game.sequence.length){
-    game.accepting=false;
-    addPoints(20);
-
-    if(game.round>=7){
-      completeLevel(2,100,7);
-    }else{
-      game.round++;
-      setTimeout(showMemorySequence,500);
-    }
-  }
-}
-
-/* =========================================================
-   3. PRESSURE QUIZ
-========================================================= */
-
-const pressureQuestions=[
-["What planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"],0],
-["How many sides does a hexagon have?",["Five","Six","Seven","Eight"],1],
-["Which ocean is the largest?",["Atlantic","Indian","Pacific","Arctic"],2],
-["What gas do plants absorb?",["Oxygen","Helium","Carbon dioxide","Hydrogen"],2],
-["Which animal is the fastest on land?",["Lion","Cheetah","Horse","Leopard"],1],
-["What is the capital of Japan?",["Tokyo","Kyoto","Osaka","Hiroshima"],0],
-["How many minutes are in two hours?",["100","110","120","140"],2],
-["Which metal has the chemical symbol Au?",["Silver","Gold","Iron","Copper"],1],
-["What is H2O?",["Salt","Water","Oxygen","Hydrogen"],1],
-["Which continent is Egypt in?",["Asia","Europe","Africa","South America"],2],
-["What is the largest mammal?",["Elephant","Blue whale","Giraffe","Orca"],1],
-["Which instrument has black and white keys?",["Violin","Trumpet","Piano","Flute"],2],
-["How many legs does a spider have?",["Six","Eight","Ten","Twelve"],1],
-["Which shape has three sides?",["Square","Triangle","Circle","Pentagon"],1],
-["What is the boiling point of water at sea level?",["50°C","75°C","100°C","150°C"],2],
-["Which country is famous for the pyramids of Giza?",["Greece","Egypt","Mexico","Peru"],1],
-["Which season comes after spring?",["Winter","Autumn","Summer","Monsoon"],2],
-["What is the closest star to Earth?",["Sirius","The Sun","Polaris","Betelgeuse"],1],
-["Which bird cannot fly?",["Eagle","Penguin","Falcon","Swallow"],1],
-["What is 9 × 9?",["72","81","89","99"],1]
-];
-
-function gamePressureQuiz(){
-  const area=document.getElementById("gameArea");
-
-  game.questions=shuffle(pressureQuestions).slice(0,10);
-  game.index=0;
-  game.correct=0;
-
-  area.innerHTML=`
-    <div class="notice center">
-      Question <b id="quizNumber">1</b>/10
-      <br>
-      <span class="timer" id="quizTimer">7</span>
-    </div>
-    <div id="quizQuestion"></div>
-  `;
-
-  pressureNext();
-}
-
-function pressureNext(){
-  if(game.index>=10){
-    if(game.correct>=7){
-      completeLevel(3,100,7);
-    }else{
-      document.getElementById("gameArea").innerHTML=`
-        <div class="notice failure center">
-          <h2>⏱️ Pressure Got You!</h2>
-          <p>You got ${game.correct}/10.</p>
-          <p>You need 7 correct answers to pass.</p>
-          <button class="primary" onclick="openLevel(3)">Retry</button>
-        </div>`;
-    }
-    return;
-  }
-
-  const raw=game.questions[game.index];
-  const q={q:raw[0],options:raw[1],answer:raw[2]};
-  const box=document.getElementById("quizQuestion");
-
-  document.getElementById("quizNumber").textContent=game.index+1;
-
-  let time=7;
-  document.getElementById("quizTimer").textContent=time;
-
-  clearInterval(timerInterval);
-
-  timerInterval=setInterval(()=>{
-    time--;
-    document.getElementById("quizTimer").textContent=time;
-
-    if(time<=0){
-      clearInterval(timerInterval);
-      game.index++;
-      pressureNext();
-    }
-  },1000);
-
-  renderQuestion(q,box,correct=>{
-    clearInterval(timerInterval);
-
-    if(correct){
-      game.correct++;
-      addPoints(10);
-    }
-
-    setTimeout(()=>{
-      game.index++;
-      pressureNext();
-    },450);
-  });
-}
-
-/* =========================================================
-   4. HIGH ROLLER
-========================================================= */
-
-function gameHighRoller(){
-  const area=document.getElementById("gameArea");
-
-  area.innerHTML=`
-    <p class="center">Spin the reels and try to hit a winning combination.</p>
-    <div class="reels">
-      <div id="reel0" class="reel">❔</div>
-      <div id="reel1" class="reel">❔</div>
-      <div id="reel2" class="reel">❔</div>
-    </div>
-    <div class="center">
-      <button class="lever" onclick="spinSlots()">🎰</button>
-    </div>
-    <div id="slotMessage" class="notice center">
-      Hit a combination worth 30+ points to pass.
-    </div>
-  `;
-
-  game.slotScore=0;
-  game.spins=0;
-}
-
-function spinSlots(){
-  if(game.spinning)return;
-
-  game.spinning=true;
-  const symbols=["🍒","🍋","🔔","💎","7️⃣","💗"];
-
-  let ticks=0;
-
-  timerInterval=setInterval(()=>{
-    for(let i=0;i<3;i++){
-      document.getElementById("reel"+i).textContent=
-        symbols[Math.floor(Math.random()*symbols.length)];
-    }
-
-    ticks++;
-
-    if(ticks>=10){
-      clearInterval(timerInterval);
-
-      const vals=[];
-      for(let i=0;i<3;i++){
-        vals.push(document.getElementById("reel"+i).textContent);
-      }
-
-      let pts=0;
-
-      if(vals[0]===vals[1]&&vals[1]===vals[2]){
-        pts=vals[0]==="7️⃣"?100:60;
-      }else if(
-        vals[0]===vals[1]||
-        vals[1]===vals[2]||
-        vals[0]===vals[2]
-      ){
-        pts=30;
-      }
-
-      game.slotScore+=pts;
-      game.spins++;
-      addPoints(pts);
-
-      document.getElementById("slotMessage").innerHTML=
-        pts
-        ? `🎉 You won <b>${pts}</b> points!`
-        : "No match this time.";
-
-      game.spinning=false;
-
-      if(game.slotScore>=30){
-        setTimeout(()=>completeLevel(4,60,5),500);
-      }else if(game.spins>=6){
-        document.getElementById("slotMessage").innerHTML+=
-          `<br><button class="primary" onclick="openLevel(4)">Retry</button>`;
-      }
-    }
-  },100);
-}
-
-/* =========================================================
-   5. MIND GAMES
-========================================================= */
-
-function gameMindGames(){
-  const area=document.getElementById("gameArea");
-
-  game.round=0;
-  game.correct=0;
-
-  area.innerHTML=`
-    <div class="notice center">
-      Find the pattern. Round <b id="mindRound">1</b>/8
-    </div>
-    <div id="mindArea"></div>
-  `;
-
-  nextMind();
-}
-
-function nextMind(){
-  if(game.round>=8){
-    completeLevel(5,90,6);
-    return;
-  }
-
-  game.round++;
-
-  document.getElementById("mindRound").textContent=game.round;
-
-  const patterns=[
-    ["▲","▲","●","●","?",["▲","●","■","◆"],1],
-    ["1","2","3","4","?",["5","6","7","8"],0],
-    ["●","■","●","■","?",["●","▲","■","◆"],0],
-    ["2","4","6","8","?",["9","10","12","14"],2],
-    ["A","C","E","G","?",["H","I","J","K"],1],
-    ["🌙","⭐","🌙","⭐","?",["☀️","🌙","⭐","💗"],1],
-    ["5","10","15","20","?",["21","25","30","35"],1],
-    ["◆","◆","○","○","?",["◆","○","□","△"],1]
-  ];
-
-  const p=patterns[game.round-1];
-
-  const area=document.getElementById("mindArea");
-
-  area.innerHTML=`
-    <div class="logic-row">
-      ${p.slice(0,5).map(x=>`<div class="logic-tile">${x}</div>`).join("")}
-    </div>
-    <div class="choice-grid"></div>
-  `;
-
-  const answers=shuffle(
-    p[5].map((x,i)=>({text:x,correct:i===p[6]}))
-  );
-
-  const grid=area.querySelector(".choice-grid");
-
-  answers.forEach(a=>{
-    const b=document.createElement("button");
-    b.className="choice";
-    b.textContent=a.text;
-    b.onclick=()=>{
-      [...grid.children].forEach(x=>x.disabled=true);
-
-      if(a.correct){
-        b.classList.add("correct");
-        addPoints(8);
-        game.correct++;
-        setTimeout(nextMind,350);
-      }else{
-        b.classList.add("wrong");
-        setTimeout(()=>openLevel(5),500);
-      }
-    };
-    grid.appendChild(b);
-  });
-}
-
-/* =========================================================
-   6. THE BLUFF
-========================================================= */
-
-function gameBluff(){
-  const area=document.getElementById("gameArea");
-
-  game.round=1;
-  game.points=0;
-
-  renderBluff();
-}
-
-function renderBluff(){
-  const area=document.getElementById("gameArea");
-
-  area.innerHTML=`
-    <div class="notice center">
-      Round ${game.round}/5 · Choose one hidden card.
-    </div>
-    <div class="cards" id="bluffCards"></div>
-    <div id="bluffMessage" class="notice center">
-      Pick your risk.
-    </div>
-  `;
-
-  const cards=document.getElementById("bluffCards");
-
-  for(let i=0;i<4;i++){
-    const b=document.createElement("button");
-    b.className="bluff-card";
-    b.textContent="🂠";
-    b.onclick=()=>revealBluff(b);
-    cards.appendChild(b);
-  }
-}
-
-function revealBluff(btn){
-  if(game.revealed)return;
-  game.revealed=true;
-
-  const value=Math.floor(Math.random()*20)+1;
-  btn.textContent=value;
-
-  document.getElementById("bluffMessage").innerHTML=`
-    Your card is worth <b>${value}</b>.
-    <div class="game-controls">
-      <button class="primary" onclick="bluffBank(${value})">💰 Bank</button>
-      <button class="secondary" onclick="bluffRisk(${value})">🎲 Risk It</button>
-    </div>
-  `;
-}
-
-function bluffBank(value){
-  game.points+=value;
-  addPoints(value);
-
-  if(game.round>=5){
-    completeLevel(6,Math.max(50,game.points),5);
-  }else{
-    game.round++;
-    game.revealed=false;
-    renderBluff();
-  }
-}
-
-function bluffRisk(value){
-  if(Math.random()<.55){
-    const bonus=value*2;
-    document.getElementById("bluffMessage").innerHTML=
-      `🔥 You doubled it! +${bonus}`;
-    game.points+=bonus;
-    addPoints(bonus);
-  }else{
-    document.getElementById("bluffMessage").innerHTML=
-      `💔 The bluff failed.`;
-  }
-
-  setTimeout(()=>{
-    if(game.round>=5){
-      if(game.points>=25)completeLevel(6,60,5);
-      else openLevel(6);
-    }else{
-      game.round++;
-      game.revealed=false;
-      renderBluff();
-    }
-  },600);
-}
-
-/* =========================================================
-   7. SURVIVAL
-========================================================= */
-
-function gameSurvival(){
-  const area=document.getElementById("gameArea");
-
-  game.wave=1;
-  game.correct=0;
-
-  renderSurvival();
-}
-
-function renderSurvival(){
-  if(game.wave>8){
-    completeLevel(7,90,6);
-    return;
-  }
-
-  const actions=["JUMP","DUCK","SHIELD","MOVE"];
-  const safe=actions[Math.floor(Math.random()*4)];
-
-  game.safe=safe;
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="notice center">
-      WAVE ${game.wave}/8
-      <h2>${randomHazard()}</h2>
-      Choose the correct survival move.
-    </div>
-    <div class="survival-actions">
-      ${actions.map(a=>`
-        <button onclick="survivalChoice('${a}')">${actionEmoji(a)} ${a}</button>
-      `).join("")}
-    </div>
-    <div id="survivalMessage" class="notice center"></div>
-  `;
-}
-
-function randomHazard(){
-  const h=["A falling branch!","A swinging object!","A wave rushes toward you!",
-           "Something flies overhead!","A low barrier appears!","A dark tunnel closes in!"];
-  return h[Math.floor(Math.random()*h.length)];
-}
-
-function actionEmoji(a){
-  return {JUMP:"🦘",DUCK:"🙇",SHIELD:"🛡️",MOVE:"🏃"}[a];
-}
-
-function survivalChoice(a){
-  if(a===game.safe){
-    addPoints(10);
-    game.wave++;
-    setTimeout(renderSurvival,350);
-  }else{
-    document.getElementById("survivalMessage").textContent=
-      "❌ Wrong move! You survived the hit, but this round restarts.";
-    setTimeout(renderSurvival,700);
-  }
-}
-
-/* =========================================================
-   8. NEW ADMIRER RACE
-========================================================= */
-
-function gameAdmirerRace(){
-  const area=document.getElementById("gameArea");
-
-  game.horse=0;
-  game.positions=[0,0,0,0];
-  game.round=1;
-  game.finished=false;
-  game.marker=0;
-  game.direction=1;
-  game.selected=0;
-
-  area.innerHTML=`
-    <p class="center">
-      🏇 <strong>New race mechanic!</strong><br>
-      No dodging. No obstacles. Just tap <strong>GO!</strong>
-      when the marker is inside the green zone.
-    </p>
-
-    <div class="horse-select">
-      ${["🐎","🦄","🏇","🐴"].map((x,i)=>`
-        <button class="horse-choice ${i===0?"selected":""}"
-          onclick="selectRaceHorse(${i})">
-          ${x}<br>Horse ${i+1}
-        </button>
-      `).join("")}
-    </div>
-
-    <div class="notice center">
-      Round <b id="raceRound">1</b>/8
-    </div>
-
-    <div class="race-track">
-      ${["🐎","🦄","🏇","🐴"].map((x,i)=>`
-        <div class="horse-lane">
-          <span id="raceHorse${i}" class="horse">${x}</span>
-          <span class="finish-line"></span>
-        </div>
-      `).join("")}
-    </div>
-
-    <div class="notice center">
-      <b>Time your tap!</b>
-    </div>
-
-    <div class="timing-bar">
-      <div class="good-zone"></div>
-      <div id="raceMarker" class="marker"></div>
-    </div>
-
-    <button id="raceGo" class="go-btn" onclick="raceGo()">
-      🏁 GO!
-    </button>
-
-    <div id="raceMessage" class="notice center">
-      Get ready...
-    </div>
-  `;
-
-  startRaceMarker();
-}
-
-function selectRaceHorse(i){
-  if(game.round>1)return;
-
-  game.selected=i;
-
-  document.querySelectorAll(".horse-choice").forEach((b,n)=>{
-    b.classList.toggle("selected",n===i);
-  });
-}
-
-function startRaceMarker(){
-  clearInterval(timerInterval);
-
-  game.marker=0;
-  game.direction=1;
-
-  timerInterval=setInterval(()=>{
-    game.marker+=game.direction*1.7;
-
-    if(game.marker>=100){
-      game.marker=100;
-      game.direction=-1;
-    }
-
-    if(game.marker<=0){
-      game.marker=0;
-      game.direction=1;
-    }
-
-    const marker=document.getElementById("raceMarker");
-    if(marker)marker.style.left=game.marker+"%";
-  },25);
-}
-
-function raceGo(){
-  if(game.finished)return;
-
-  const m=game.marker;
-
-  let boost;
-
-  /*
-    Very generous zones:
-    40-60 = perfect
-    30-70 = good
-    otherwise small boost
-  */
-
-  if(m>=40&&m<=60){
-    boost=18;
-    document.getElementById("raceMessage").innerHTML=
-      "🌟 PERFECT TIMING! Huge boost!";
-  }else if(m>=30&&m<=70){
-    boost=13;
-    document.getElementById("raceMessage").innerHTML=
-      "✨ Great timing! Nice boost!";
-  }else{
-    boost=8;
-    document.getElementById("raceMessage").innerHTML=
-      "💗 Good enough! Your horse keeps moving!";
-  }
-
-  /*
-    The player's horse always receives the boost.
-    Rivals move more slowly so the level is intentionally
-    much easier than the old obstacle version.
-  */
-
-  game.positions[game.selected]+=boost;
-
-  for(let i=0;i<4;i++){
-    if(i!==game.selected){
-      game.positions[i]+=5+Math.random()*4;
-    }
-  }
-
-  game.positions=game.positions.map(x=>Math.min(100,x));
-
-  game.positions.forEach((p,i)=>{
-    const el=document.getElementById("raceHorse"+i);
-    if(el)el.style.left=Math.min(91,p)+"%";
-  });
-
-  if(game.positions[game.selected]>=100){
-    game.finished=true;
-    clearInterval(timerInterval);
-
-    setTimeout(()=>{
-      completeLevel(8,120,8);
-    },500);
-
-    return;
-  }
-
-  game.round++;
-
-  if(game.round>8){
-    /*
-      Even after 8 taps, give the player a final automatic boost.
-      This makes the level forgiving rather than frustrating.
-    */
-    game.positions[game.selected]+=30;
-
-    game.positions[game.selected]=Math.min(
-      100,
-      game.positions[game.selected]
-    );
-
-    const el=document.getElementById("raceHorse"+game.selected);
-    if(el)el.style.left=Math.min(91,game.positions[game.selected])+"%";
-
-    if(game.positions[game.selected]>=100){
-      game.finished=true;
-      clearInterval(timerInterval);
-      setTimeout(()=>completeLevel(8,120,8),500);
-      return;
-    }
-
-    game.round=8;
-  }
-
-  document.getElementById("raceRound").textContent=Math.min(game.round,8);
-}
-
-/* =========================================================
-   9. HEARTBREAK CHAMBER
-========================================================= */
-
-function gameHeartbreakChamber(){
-  const area=document.getElementById("gameArea");
-
-  game.clues=[];
-  game.keyFound=false;
-  game.locked=false;
-
-  area.innerHTML=`
-    <p class="center">
-      Search the room and collect three clues. Then enter the final code.
-    </p>
-
-    <div class="room-grid">
-      <button class="room-item" onclick="searchRoom('desk')">🗄️ Desk</button>
-      <button class="room-item" onclick="searchRoom('painting')">🖼️ Painting</button>
-      <button class="room-item" onclick="searchRoom('plant')">🌿 Plant</button>
-      <button class="room-item" onclick="searchRoom('book')">📚 Books</button>
-    </div>
-
-    <div id="chamberMessage" class="notice center">
-      There must be something hidden here...
-    </div>
-
-    <div id="chamberLock"></div>
-  `;
-}
-
-function searchRoom(item){
-  if(game.clues.includes(item))return;
-
-  game.clues.push(item);
-
-  const clues={
-    desk:"🔎 A note says: the first number is 0.",
-    painting:"🔎 Behind the painting: the next number is 6.",
-    plant:"🔎 Under the plant: the final clue is 0722.",
-    book:"📖 A book contains a reminder: look carefully."
-  };
-
-  document.getElementById("chamberMessage").innerHTML=
-    clues[item];
-
-  if(game.clues.length>=3){
-    document.getElementById("chamberLock").innerHTML=`
-      <div class="notice center">
-        🔐 You found enough clues.<br>
-        Enter <b>060722</b>.
-      </div>
-      <div class="keypad" id="chamberKeypad"></div>
-    `;
-
-    for(let i=1;i<=9;i++)addKey(i);
-    addKey(0);
-
-    function addKey(n){
-      const b=document.createElement("button");
-      b.textContent=n;
-      b.onclick=()=>chamberDigit(n);
-      document.getElementById("chamberKeypad").appendChild(b);
-    }
-  }
-}
-
-function chamberDigit(n){
-  if(!game.code)game.code="";
-  if(game.code.length>=6)return;
-
-  game.code+=n;
-
-  document.getElementById("chamberMessage").textContent=
-    "Code: "+"•".repeat(game.code.length);
-
-  if(game.code.length===6){
-    if(game.code==="060722"){
-      completeLevel(9,90,6);
-    }else{
-      game.code="";
-      document.getElementById("chamberMessage").textContent=
-        "❌ Wrong code. Try again.";
-    }
-  }
-}
-
-/* =========================================================
-   10. BOXING
-========================================================= */
-
-function gameBoxing(){
-  const area=document.getElementById("gameArea");
-
-  game.playerHP=100;
-  game.enemyHP=100;
-  game.busy=false;
-
-  renderBoxing();
-}
-
-function renderBoxing(){
-  document.getElementById("gameArea").innerHTML=`
-    <div class="center">
-      <h3>🥊 Your Health</h3>
-      <div class="health"><div id="playerHP" class="health-fill"></div></div>
-      <h3>👊 Opponent</h3>
-      <div class="health"><div id="enemyHP" class="health-fill"></div></div>
-    </div>
-
-    <div class="fight-actions">
-      <button onclick="fightMove('punch')">🥊 Punch</button>
-      <button onclick="fightMove('charge')">💥 Heavy Punch</button>
-      <button onclick="fightMove('block')">🛡️ Block</button>
-      <button onclick="fightMove('dodge')">💨 Dodge</button>
-    </div>
-
-    <div id="fightMessage" class="notice center">
-      Choose your move.
-    </div>
-  `;
-
-  updateFightBars();
-}
-
-function updateFightBars(){
-  document.getElementById("playerHP").style.width=game.playerHP+"%";
-  document.getElementById("enemyHP").style.width=game.enemyHP+"%";
-}
-
-function fightMove(move){
-  if(game.busy)return;
-  game.busy=true;
-
-  let damage=0;
-
-  if(move==="punch")damage=12;
-  if(move==="charge")damage=20;
-
-  if(move==="punch"||move==="charge"){
-    game.enemyHP=Math.max(0,game.enemyHP-damage);
-    addPoints(3);
-  }
-
-  if(game.enemyHP<=0){
-    updateFightBars();
-    completeLevel(10,100,7);
-    return;
-  }
-
-  let enemyDamage=Math.floor(Math.random()*10)+5;
-
-  if(move==="block")enemyDamage=Math.floor(enemyDamage*.35);
-  if(move==="dodge")enemyDamage=Math.random()<.7?0:enemyDamage;
-
-  game.playerHP=Math.max(0,game.playerHP-enemyDamage);
-
-  updateFightBars();
-
-  document.getElementById("fightMessage").textContent=
-    enemyDamage===0
-    ?"💨 Perfect dodge!"
-    :`💥 You took ${enemyDamage} damage.`;
-
-  if(game.playerHP<=0){
-    setTimeout(()=>openLevel(10),600);
-    return;
-  }
-
-  setTimeout(()=>{
-    game.busy=false;
-  },400);
-}
-
-/* =========================================================
-   11. PERFECT MATCH
-========================================================= */
-
-function gamePerfectMatch(){
-  const area=document.getElementById("gameArea");
-
-  const items=[
-    ["🌻","sunflower"],
-    ["🐬","dolphin"],
-    ["🌹","rose"],
-    ["🍣","sushi"],
-    ["💗","heart"]
-  ];
-
-  game.matches=0;
-
-  area.innerHTML=`
-    <p class="center">Drag each object onto its matching target.</p>
-    <div class="match-board" id="matchBoard"></div>
-    <div id="matchMessage" class="notice center">0/5 matched</div>
-  `;
-
-  const board=document.getElementById("matchBoard");
-
-  const shuffledObjects=shuffle(items);
-  const targets=items;
-
-  shuffledObjects.forEach(item=>{
-    const d=document.createElement("div");
-    d.className="match-object";
-    d.textContent=item[0];
-    d.draggable=true;
-    d.dataset.match=item[1];
-
-    d.addEventListener("dragstart",e=>{
-      e.dataTransfer.setData("match",item[1]);
-    });
-
-    board.appendChild(d);
-  });
-
-  targets.forEach(item=>{
-    const t=document.createElement("div");
-    t.className="match-target";
-    t.textContent="⭕";
-    t.dataset.target=item[1];
-
-    t.addEventListener("dragover",e=>e.preventDefault());
-
-    t.addEventListener("drop",e=>{
-      const value=e.dataTransfer.getData("match");
-
-      if(value===t.dataset.target&&!t.dataset.done){
-        t.dataset.done="1";
-        t.textContent=items.find(x=>x[1]===value)[0];
-        game.matches++;
-        addPoints(10);
-        document.getElementById("matchMessage").textContent=
-          `${game.matches}/5 matched`;
-
-        if(game.matches>=5)completeLevel(11,80,5);
-      }
-    });
-
-    board.appendChild(t);
-  });
-}
-
-/* =========================================================
-   12. WHO KNOWS LILIANA BEST
-========================================================= */
-
-const lilianaQuiz=[
-["What is Liliana's favourite colour?",["Baby pink","Royal blue","Emerald green","Burgundy"],0],
-["What is Liliana's favourite number?",["3","7","11","22"],0],
-["Which food does Liliana like?",["Sushi","Fish and chips","Tacos only","Curry only"],0],
-["Which animal does Liliana like?",["Dolphins","Wolves","Tigers","Koalas"],0],
-["Which flower does Liliana like?",["Sunflowers","Tulips","Lilies","Orchids"],0],
-["What is Liliana's favourite movie?",["Me Before You","Titanic","Frozen","The Notebook"],0],
-["What did Liliana study at university?",["Psychology","Engineering","Law","Architecture"],0],
-["What colour are Liliana's eyes?",["Green","Blue","Brown","Grey"],0],
-["What is Liliana's zodiac sign?",["Leo","Cancer","Libra","Pisces"],0],
-["What is Liliana afraid of?",["Drowning","Flying","Heights","Spiders"],0],
-["How many siblings does Liliana have?",["5","2","3","7"],0],
-["How many piercings does Liliana have?",["4","2","6","8"],0],
-["How many nieces does Liliana have?",["1","2","3","4"],0],
-["How many nephews does Liliana have?",["4","1","2","5"],0],
-["Which two pets belong to Liliana?",["Aayla and Arlo","Milo and Luna","Bella and Coco","Max and Daisy"],0],
-["What kind of songs does Liliana enjoy?",["Sad songs","Only country songs","Only metal","Only opera"],0],
-["What kind of writing does Liliana like?",["Poetry","News articles","Technical manuals","Biographies only"],0],
-["Which games does Liliana enjoy?",["Poker and gambling games","Chess only","Golf only","Crosswords only"],0],
-["What does Liliana hope to become one day?",["A mum","A pilot","A chef","A dancer"],0],
-["How long have Bree and Liliana been best friends?",["6 years","2 years","4 years","10 years"],0]
-];
-
-function gameLilianaQuiz(){
-  const area=document.getElementById("gameArea");
-
-  game.questions=shuffle(lilianaQuiz).slice(0,12);
-  game.index=0;
-  game.correct=0;
-
-  area.innerHTML=`
-    <div class="notice center">
-      Liliana Quiz · <b id="lqNumber">1</b>/12
-    </div>
-    <div id="lq"></div>
-  `;
-
-  nextLilianaQuestion();
-}
-
-function nextLilianaQuestion(){
-  if(game.index>=12){
-    if(game.correct>=8){
-      completeLevel(12,120,8);
-    }else{
-      document.getElementById("gameArea").innerHTML=`
-        <div class="notice failure center">
-          <h2>💗 Not quite!</h2>
-          <p>You got ${game.correct}/12.</p>
-          <p>You need 8 correct answers.</p>
-          <button class="primary" onclick="openLevel(12)">Retry</button>
-        </div>`;
-    }
-    return;
-  }
-
-  document.getElementById("lqNumber").textContent=game.index+1;
-
-  const raw=game.questions[game.index];
-
-  renderQuestion(
-    {q:raw[0],options:raw[1],answer:raw[2]},
-    document.getElementById("lq"),
-    correct=>{
-      if(correct){
-        game.correct++;
-        addPoints(8);
-      }
-
-      setTimeout(()=>{
-        game.index++;
-        nextLilianaQuestion();
-      },400);
-    }
-  );
-}
-
-/* =========================================================
-   13. REACTION GAUNTLET
-========================================================= */
-
-function gameReaction(){
-  const area=document.getElementById("gameArea");
-
-  game.round=0;
-  game.score=0;
-  game.waiting=false;
-
-  area.innerHTML=`
-    <div class="notice center">
-      10 reaction rounds. Follow the instruction exactly.
-    </div>
-    <div id="reactionBox" class="reaction-box">
-      GET READY...
-    </div>
-  `;
-
-  reactionNext();
-}
-
-function reactionNext(){
-  if(game.round>=10){
-    if(game.score>=7)completeLevel(13,100,7);
-    else openLevel(13);
-    return;
-  }
-
-  game.round++;
-
-  const commands=[
-    {text:"TAP NOW!",tap:true},
-    {text:"DON'T TAP!",tap:false},
-    {text:"TAP NOW!",tap:true},
-    {text:"TAP NOW!",tap:true},
-    {text:"DON'T TAP!",tap:false}
-  ];
-
-  const cmd=commands[Math.floor(Math.random()*commands.length)];
-
-  const box=document.getElementById("reactionBox");
-
-  box.textContent=cmd.text;
-  box.dataset.answer=cmd.tap?"tap":"dont";
-  game.waiting=true;
-
-  box.onclick=()=>{
-    if(!game.waiting)return;
-    game.waiting=false;
-
-    if(box.dataset.answer==="tap"){
-      game.score++;
-      addPoints(7);
-      box.textContent="✅";
-    }else{
-      box.textContent="❌";
-    }
-
-    setTimeout(reactionNext,350);
-  };
-
-  if(!cmd.tap){
-    timerInterval=setTimeout(()=>{
-      if(game.waiting){
-        game.waiting=false;
-        game.score++;
-        addPoints(7);
-        box.textContent="✅ Great restraint!";
-        setTimeout(reactionNext,350);
-      }
-    },900);
-  }else{
-    timerInterval=setTimeout(()=>{
-      if(game.waiting){
-        game.waiting=false;
-        box.textContent="⏱️ Too slow!";
-        setTimeout(reactionNext,350);
-      }
-    },1300);
-  }
-}
-
-/* =========================================================
-   14. HEART HUNT
-========================================================= */
-
-function gameHeartHunt(){
-  const area=document.getElementById("gameArea");
-
-  game.found=0;
-  game.targetCount=12;
-  game.start=Date.now();
-
-  area.innerHTML=`
-    <div class="notice center">
-      Find <b>12 hidden hearts</b> before time runs out!
-      <br>Found: <b id="huntScore">0</b>/12
-    </div>
-    <div id="huntArea"></div>
-  `;
-
-  spawnHuntHeart();
-}
-
-function spawnHuntHeart(){
-  const hunt=document.getElementById("huntArea");
-
-  if(!hunt)return;
-
-  if(game.found>=game.targetCount){
-    completeLevel(14,90,6);
-    return;
-  }
-
-  hunt.innerHTML="";
-
-  const decoys=8;
-
-  for(let i=0;i<decoys;i++){
-    const d=document.createElement("div");
-    d.className="hunt-heart";
-    d.textContent=["✨","🌸","⭐","💫"][Math.floor(Math.random()*4)];
-    d.style.left=Math.random()*90+"%";
-    d.style.top=Math.random()*85+"%";
-    d.style.opacity=".35";
-    hunt.appendChild(d);
-  }
-
-  const h=document.createElement("button");
-  h.className="hunt-heart";
-  h.textContent="💗";
-  h.style.left=Math.random()*88+"%";
-  h.style.top=Math.random()*82+"%";
-
-  h.onclick=()=>{
-    game.found++;
-    addPoints(5);
-    document.getElementById("huntScore").textContent=game.found;
-    spawnHuntHeart();
-  };
-
-  hunt.appendChild(h);
-}
-
-/* =========================================================
-   15. LOVE LOCK
-========================================================= */
-
-function gameLoveLock(){
-  const area=document.getElementById("gameArea");
-
-  game.lockCode="";
-
-  area.innerHTML=`
-    <div class="notice center">
-      🔐 Crack the Love Lock.
-      <p>
-        Clue 1: The friendship is measured in years.<br>
-        Clue 2: The birthday is in July.<br>
-        Clue 3: The birthday day is 22.
-      </p>
-      <strong>Combine the friendship years + birthday.</strong>
-    </div>
-
-    <div class="notice center">
-      Enter your 6-digit code:
-      <h2 id="loveCode">______</h2>
-    </div>
-
-    <div class="keypad" id="loveKeypad"></div>
-  `;
-
-  for(let i=1;i<=9;i++)loveKey(i);
-  loveKey(0);
-}
-
-function loveKey(n){
-  const b=document.createElement("button");
-  b.textContent=n;
-  b.onclick=()=>{
-    if(game.lockCode.length>=6)return;
-
-    game.lockCode+=n;
-    document.getElementById("loveCode").textContent=
-      game.lockCode.padEnd(6,"_");
-
-    if(game.lockCode.length===6){
-      if(game.lockCode==="060722"){
-        completeLevel(15,90,6);
-      }else{
-        game.lockCode="";
-        document.getElementById("loveCode").textContent="______";
-      }
-    }
-  };
-
-  document.getElementById("loveKeypad").appendChild(b);
-}
-
-/* =========================================================
-   16. CUPID SHOOTOUT
-========================================================= */
-
-function gameCupid(){
-  const area=document.getElementById("gameArea");
-
-  game.arrows=15;
-  game.points=0;
-
-  area.innerHTML=`
-    <div class="notice center">
-      🏹 Arrows: <b id="arrowCount">15</b> · Score: <b id="cupidScore">0</b>
-    </div>
-    <div id="shootArea"></div>
-  `;
-
-  moveTarget();
-}
-
-function moveTarget(){
-  const area=document.getElementById("shootArea");
-
-  if(!area)return;
-
-  area.innerHTML="";
-
-  if(game.arrows<=0){
-    if(game.points>=70)completeLevel(16,100,7);
-    else{
-      area.innerHTML=`
-        <div class="notice failure center">
-          You scored ${game.points}/70.
-          <br><button class="primary" onclick="openLevel(16)">Retry</button>
-        </div>`;
-    }
-    return;
-  }
-
-  const target=document.createElement("button");
-  target.className="target-heart";
-  target.textContent=Math.random()<.2?"💛":"💗";
-  target.style.left=Math.random()*85+"%";
-  target.style.top=Math.random()*80+"%";
-
-  target.onclick=()=>{
-    game.arrows--;
-
-    const pts=target.textContent==="💛"?20:8;
-
-    game.points+=pts;
-    addPoints(pts);
-
-    document.getElementById("arrowCount").textContent=game.arrows;
-    document.getElementById("cupidScore").textContent=game.points;
-
-    moveTarget();
-  };
-
-  area.appendChild(target);
-
-  timerInterval=setTimeout(()=>{
-    if(document.body.contains(target)){
-      game.arrows--;
-      document.getElementById("arrowCount").textContent=game.arrows;
-      moveTarget();
-    }
-  },1400);
-}
-
-/* =========================================================
-   17. COUNTDOWN
-========================================================= */
-
-function gameCountdown(){
-  const area=document.getElementById("gameArea");
-
-  game.round=0;
-  game.points=0;
-
-  countdownNext();
-}
-
-function countdownNext(){
-  if(game.round>=6){
-    completeLevel(17,90,6);
-    return;
-  }
-
-  game.round++;
-
-  const type=game.round%3;
-
-  if(type===1)countdownBar();
-  if(type===2)countdownSequence();
-  if(type===0)countdownNumber();
-}
-
-function countdownBar(){
-  document.getElementById("gameArea").innerHTML=`
-    <div class="notice center">
-      Mini-game ${game.round}/6<br>
-      Tap STOP when the marker is inside the green zone.
-    </div>
-    <div class="mini-bar">
-      <div class="mini-zone"></div>
-      <div id="miniMarker" class="mini-marker"></div>
-    </div>
-    <button class="go-btn" onclick="stopCountdownBar()">STOP!</button>
-  `;
-
-  game.marker=0;
-  game.dir=1;
-
-  timerInterval=setInterval(()=>{
-    game.marker+=game.dir*2;
-
-    if(game.marker>=100){
-      game.marker=100;
-      game.dir=-1;
-    }
-    if(game.marker<=0){
-      game.marker=0;
-      game.dir=1;
-    }
-
-    document.getElementById("miniMarker").style.left=game.marker+"%";
-  },30);
-}
-
-function stopCountdownBar(){
-  clearInterval(timerInterval);
-
-  if(game.marker>=35&&game.marker<=65){
-    game.points++;
-    addPoints(10);
-    setTimeout(countdownNext,350);
-  }else{
-    setTimeout(countdownNext,350);
-  }
-}
-
-function countdownSequence(){
-  const nums=shuffle([1,2,3,4]);
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="notice center">
-      Tap the numbers in order: 1 → 2 → 3 → 4
-    </div>
-    <div class="choice-grid" id="numberButtons"></div>
-  `;
-
-  let expected=1;
-
-  nums.forEach(n=>{
-    const b=document.createElement("button");
-    b.className="choice";
-    b.textContent=n;
-    b.onclick=()=>{
-      if(n===expected){
-        expected++;
-        b.disabled=true;
-        b.classList.add("correct");
-
-        if(expected===5){
-          game.points++;
-          addPoints(10);
-          setTimeout(countdownNext,300);
-        }
-      }else{
-        b.classList.add("wrong");
-        setTimeout(countdownNext,300);
-      }
-    };
-    document.getElementById("numberButtons").appendChild(b);
-  });
-}
-
-function countdownNumber(){
-  const target=Math.floor(Math.random()*5)+1;
-
-  document.getElementById("gameArea").innerHTML=`
-    <div class="notice center">
-      <h2>Tap exactly ${target} times!</h2>
-      <p id="tapCount">0</p>
-      <button class="go-btn" onclick="countdownTap(${target})">💗 TAP</button>
-    </div>
-  `;
-
-  game.tap=0;
-}
-
-function countdownTap(target){
-  game.tap++;
-
-  document.getElementById("tapCount").textContent=game.tap;
-
-  if(game.tap===target){
-    game.points++;
-    addPoints(10);
-    setTimeout(countdownNext,300);
-  }else if(game.tap>target){
-    setTimeout(countdownNext,300);
-  }
-}
-
-/* =========================================================
-   18. ULTIMATE GAMBLE
-========================================================= */
-
-function gameUltimateGamble(){
-  const area=document.getElementById("gameArea");
-
-  game.pot=100;
-  game.turns=0;
-
-  renderGamble();
-}
-
-function renderGamble(){
-  document.getElementById("gameArea").innerHTML=`
-    <div class="center">
-      <h2>🎲 Ultimate Gamble</h2>
-      <div class="gamble-pot">$<span id="gamblePot">${game.pot}</span></div>
-      <p>Starting pot: 100 · Turn ${game.turns}</p>
-    </div>
-
-    <div class="gamble-actions">
-      <button class="primary" onclick="gambleRisk()">🎲 Risk It</button>
-      <button class="secondary" onclick="gambleCashOut()">💰 Cash Out</button>
-    </div>
-
-    <div id="gambleMessage" class="notice center">
-      Reach $300 or cash out after at least 3 turns to pass.
-    </div>
-  `;
-}
-
-function gambleRisk(){
-  game.turns++;
-
-  if(Math.random()<.62){
-    const gain=Math.floor(game.pot*(.25+Math.random()*.5));
-    game.pot+=gain;
-    addPoints(Math.floor(gain/2));
-    document.getElementById("gambleMessage").textContent=
-      `🔥 You won $${gain}!`;
-  }else{
-    const loss=Math.floor(game.pot*.35);
-    game.pot=Math.max(0,game.pot-loss);
-    document.getElementById("gambleMessage").textContent=
-      `💔 You lost $${loss}.`;
-  }
-
-  document.getElementById("gamblePot").textContent=game.pot;
-
-  if(game.pot>=300){
-    completeLevel(18,120,10);
-    return;
-  }
-
-  if(game.pot<=0){
-    setTimeout(()=>openLevel(18),500);
-  }
-}
-
-function gambleCashOut(){
-  if(game.turns<3){
-    document.getElementById("gambleMessage").textContent=
-      "You need at least 3 turns before cashing out.";
-    return;
-  }
-
-  if(game.pot>=180){
-    addPoints(game.pot);
-    completeLevel(18,100,8);
-  }else{
-    document.getElementById("gambleMessage").textContent=
-      "Cash-out was too small. Reach at least $180.";
-  }
-}
-
-/* =========================================================
-   19. ADMIRER'S LAST STAND
-========================================================= */
-
-function gameLastStand(){
-  const area=document.getElementById("gameArea");
-
-  game.bossHP=180;
-  game.playerHP=100;
-  game.phase=1;
-
-  renderBoss();
-}
-
-function renderBoss(){
-  document.getElementById("gameArea").innerHTML=`
-    <div class="boss">👑💔</div>
-
-    <div class="notice center">
-      Phase ${game.phase}/3
-      <br>Boss HP: ${game.bossHP}
-      <br>Your HP: ${game.playerHP}
-    </div>
-
-    <div class="fight-actions">
-      <button onclick="bossMove('attack')">⚔️ Attack</button>
-      <button onclick="bossMove('guard')">🛡️ Guard</button>
-      <button onclick="bossMove('special')">💗 Heart Strike</button>
-    </div>
-
-    <div id="bossMessage" class="notice center">
-      The Admirer is waiting...
-    </div>
-  `;
-}
-
-function bossMove(move){
-  let damage=0;
-
-  if(move==="attack")damage=16;
-  if(move==="special")damage=28;
-
-  if(move==="guard")damage=5;
-
-  game.bossHP=Math.max(0,game.bossHP-damage);
-
-  if(game.bossHP<=120)game.phase=2;
-  if(game.bossHP<=60)game.phase=3;
-
-  let incoming=game.phase*7;
-
-  if(move==="guard")incoming=Math.floor(incoming*.3);
-
-  game.playerHP=Math.max(0,game.playerHP-incoming);
-
-  addPoints(damage);
-
-  if(game.bossHP<=0){
-    completeLevel(19,150,10);
-    return;
-  }
-
-  if(game.playerHP<=0){
-    openLevel(19);
-    return;
-  }
-
-  document.getElementById("bossMessage").textContent=
-    `You dealt ${damage} damage. The boss dealt ${incoming}.`;
-
-  renderBoss();
-}
-
-/* =========================================================
-   20. WORD FIND
-========================================================= */
-
-const wordBank=[
-"LILIANA","LULU","FRIENDS","PINK","DOLPHIN",
-"SUNFLOWER","ROSE","SUSHI","POETRY","MUSIC",
-"PSYCHOLOGY","LEO","JULY","LOVE","FAMILY",
-"HEART","DREAM","AAYLA","ARLO","OCEAN",
-"FOREVER","THREE","SIXYEARS","CHARM","EMPATHY"
-];
-
-function gameWordFind(){
-  const area=document.getElementById("gameArea");
-
-  game.size=12;
-  game.grid=Array.from(
-    {length:game.size*game.size},
-    ()=>""
-  );
-  game.words=shuffle(wordBank);
-  game.found=new Set();
-  game.startCell=null;
-
-  createWordPuzzle();
-
-  area.innerHTML=`
-    <p class="center">
-      Find all 25 words. Words can go horizontally, vertically,
-      diagonally, forwards or backwards.
-    </p>
-
-    <div id="wordList" class="word-list"></div>
-    <div id="wordGrid" class="word-grid"></div>
-    <div id="wordMessage" class="notice center">0/25 found</div>
-  `;
-
-  renderWordList();
-  renderWordGrid();
-}
-
-function createWordPuzzle(){
-  const size=game.size;
-
-  const dirs=[
-    [0,1],[0,-1],[1,0],[-1,0],
-    [1,1],[-1,-1],[1,-1],[-1,1]
-  ];
-
-  for(const word of game.words){
-    let placed=false;
-
-    for(let attempt=0;attempt<500&&!placed;attempt++){
-      const d=dirs[Math.floor(Math.random()*dirs.length)];
-      const r=Math.floor(Math.random()*size);
-      const c=Math.floor(Math.random()*size);
-
-      const endR=r+d[0]*(word.length-1);
-      const endC=c+d[1]*(word.length-1);
-
-      if(
-        endR<0||endR>=size||
-        endC<0||endC>=size
-      )continue;
-
-      let good=true;
-
-      for(let i=0;i<word.length;i++){
-        const rr=r+d[0]*i;
-        const cc=c+d[1]*i;
-        const idx=rr*size+cc;
-
-        if(game.grid[idx] &&
-           game.grid[idx]!==word[i]){
-          good=false;
-          break;
-        }
-      }
-
-      if(!good)continue;
-
-      for(let i=0;i<word.length;i++){
-        const rr=r+d[0]*i;
-        const cc=c+d[1]*i;
-        game.grid[rr*size+cc]=word[i];
-      }
-
-      placed=true;
-    }
-  }
-
-  const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  game.grid=game.grid.map(x=>
-    x||letters[Math.floor(Math.random()*letters.length)]
-  );
-}
-
-function renderWordList(){
-  const list=document.getElementById("wordList");
-
-  list.innerHTML=game.words.map(w=>`
-    <span class="word ${game.found.has(w)?"found":""}">
-      ${w}
-    </span>
-  `).join("");
-}
-
-function renderWordGrid(){
-  const grid=document.getElementById("wordGrid");
-  grid.innerHTML="";
-
-  game.grid.forEach((letter,i)=>{
-    const b=document.createElement("div");
-    b.className="letter";
-    b.textContent=letter;
-    b.dataset.i=i;
-
-    b.onpointerdown=e=>{
-      e.preventDefault();
-      game.startCell=i;
-      b.classList.add("selected");
-    };
-
-    b.onpointerenter=()=>{
-      if(game.startCell!==null)b.classList.add("selected");
-    };
-
-    b.onpointerup=()=>{
-      if(game.startCell===null)return;
-
-      const end=i;
-      checkWordSelection(game.startCell,end);
-
-      document.querySelectorAll(".letter")
-        .forEach(x=>x.classList.remove("selected"));
-
-      game.startCell=null;
-    };
-
-    grid.appendChild(b);
-  });
-}
-
-document.addEventListener("pointerup",()=>{
-  if(game.startCell!==null){
-    game.startCell=null;
-    document.querySelectorAll(".letter")
-      .forEach(x=>x.classList.remove("selected"));
-  }
+$("nameForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const name=$("playerName").value.trim();
+ if(!name)return;
+ state.name=name;
+ save();
+ startLevel(1);
 });
 
-function checkWordSelection(start,end){
-  const size=game.size;
-
-  const sr=Math.floor(start/size);
-  const sc=start%size;
-  const er=Math.floor(end/size);
-  const ec=end%size;
-
-  const dr=er-sr;
-  const dc=ec-sc;
-
-  const stepR=dr===0?0:dr>0?1:-1;
-  const stepC=dc===0?0:dc>0?1:-1;
-
-  if(
-    dr!==0&&dc!==0&&Math.abs(dr)!==Math.abs(dc)
-  )return;
-
-  const len=Math.max(Math.abs(dr),Math.abs(dc))+1;
-
-  let word="";
-
-  for(let i=0;i<len;i++){
-    const r=sr+stepR*i;
-    const c=sc+stepC*i;
-    word+=game.grid[r*size+c];
-  }
-
-  const reverse=word.split("").reverse().join("");
-
-  const foundWord=
-    game.words.find(w=>
-      !game.found.has(w)&&(w===word||w===reverse)
-    );
-
-  if(!foundWord)return;
-
-  game.found.add(foundWord);
-  addPoints(6);
-
-  renderWordList();
-
-  document.getElementById("wordMessage").textContent=
-    `${game.found.size}/25 found`;
-
-  if(game.found.size>=25){
-    completeLevel(20,150,10);
-  }
-}
-
-/* =========================================================
-   21. DRAW A SUNFLOWER
-========================================================= */
-
-function gameSunflower(){
-  const area=document.getElementById("gameArea");
-
-  area.innerHTML=`
-    <p class="center">
-      Draw a sunflower! Add a stem, leaves, petals and a centre.
-    </p>
-
-    <div class="draw-controls">
-      <button onclick="setBrush('#4d9b57',8)">🌿 Stem</button>
-      <button onclick="setBrush('#e6b83d',10)">🌻 Petals</button>
-      <button onclick="setBrush('#7a4b25',15)">🟤 Centre</button>
-      <button onclick="setBrush('#4b73c2',5)">💙 Decoration</button>
-      <button onclick="undoDraw()">↩️ Undo</button>
-      <button onclick="clearDraw()">🗑️ Clear</button>
-    </div>
-
-    <canvas id="sunCanvas" width="900" height="500"></canvas>
-
-    <div class="game-controls">
-      <button class="primary" onclick="finishDrawing()">
-        🌻 Finish Sunflower
-      </button>
-    </div>
-
-    <div id="drawMessage" class="notice center">
-      Use your finger or mouse to draw.
-    </div>
-  `;
-
-  const canvas=document.getElementById("sunCanvas");
-  const ctx=canvas.getContext("2d");
-
-  game.canvas=canvas;
-  game.ctx=ctx;
-  game.drawing=false;
-  game.history=[];
-  game.brush="#4d9b57";
-  game.size=8;
-
-  ctx.fillStyle="#fff9fb";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  function pos(e){
-    const r=canvas.getBoundingClientRect();
-    const touch=e.touches?e.touches[0]:e;
-    return {
-      x:(touch.clientX-r.left)*canvas.width/r.width,
-      y:(touch.clientY-r.top)*canvas.height/r.height
-    };
-  }
-
-  canvas.addEventListener("pointerdown",e=>{
-    game.drawing=true;
-    game.history.push(ctx.getImageData(0,0,canvas.width,canvas.height));
-
-    const p=pos(e);
-    ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-  });
-
-  canvas.addEventListener("pointermove",e=>{
-    if(!game.drawing)return;
-
-    const p=pos(e);
-
-    ctx.lineTo(p.x,p.y);
-    ctx.strokeStyle=game.brush;
-    ctx.lineWidth=game.size;
-    ctx.lineCap="round";
-    ctx.lineJoin="round";
-    ctx.stroke();
-  });
-
-  canvas.addEventListener("pointerup",()=>{
-    game.drawing=false;
-  });
-
-  canvas.addEventListener("pointerleave",()=>{
-    game.drawing=false;
-  });
-}
-
-function setBrush(color,size){
-  game.brush=color;
-  game.size=size;
-}
-
-function undoDraw(){
-  if(!game.history.length)return;
-  game.ctx.putImageData(game.history.pop(),0,0);
-}
-
-function clearDraw(){
-  game.ctx.fillStyle="#fff9fb";
-  game.ctx.fillRect(0,0,game.canvas.width,game.canvas.height);
-  game.history=[];
-}
-
-function finishDrawing(){
-  completeLevel(21,100,7);
-}
-
-/* =========================================================
-   22. LULU DERBY
-   100 UNIQUE RANDOM TRIVIA QUESTIONS
-========================================================= */
-
-const derbyQuestions=[
-["Which planet is closest to the Sun?",["Mercury","Venus","Earth","Mars"],0],
-["What is the capital of Canada?",["Toronto","Ottawa","Vancouver","Montreal"],1],
-["Which animal is known for changing colour?",["Chameleon","Elephant","Penguin","Horse"],0],
-["How many bones are in the adult human body approximately?",["106","206","306","406"],1],
-["Which country invented pizza in its modern form?",["Italy","France","Spain","Greece"],0],
-["What is the largest desert on Earth?",["Sahara","Gobi","Antarctic Desert","Arabian"],2],
-["Which sport uses a shuttlecock?",["Tennis","Badminton","Hockey","Rugby"],1],
-["What is the chemical symbol for oxygen?",["Ox","O","Og","On"],1],
-["Which city is known as the Big Apple?",["Chicago","Boston","New York City","Seattle"],2],
-["How many players are on a standard football team on the field?",["9","10","11","12"],2],
-["Which bird is famous for mimicking human speech?",["Parrot","Penguin","Swan","Ostrich"],0],
-["What is the hardest natural substance?",["Iron","Diamond","Quartz","Granite"],1],
-["Which country has the maple leaf on its flag?",["Canada","Austria","Sweden","Norway"],0],
-["What is the smallest prime number?",["0","1","2","3"],2],
-["Which ocean lies between Africa and Australia?",["Atlantic","Indian","Pacific","Arctic"],1],
-["What is the main ingredient in hummus?",["Chickpeas","Potatoes","Rice","Lentils"],0],
-["Which planet has famous rings?",["Mars","Saturn","Venus","Mercury"],1],
-["Who painted the Mona Lisa?",["Michelangelo","Leonardo da Vinci","Raphael","Van Gogh"],1],
-["Which animal is the largest land animal?",["Rhino","Hippo","Elephant","Giraffe"],2],
-["What is the currency of Japan?",["Won","Yuan","Yen","Ringgit"],2],
-["Which NZ city is known as the Garden City?",["Hamilton","Christchurch","Dunedin","Napier"],1],
-["What is the capital of Australia?",["Sydney","Melbourne","Canberra","Perth"],2],
-["Which gas makes up most of Earth's atmosphere?",["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],1],
-["How many continents are there commonly taught?",["5","6","7","8"],2],
-["Which animal is known for building dams?",["Beaver","Otter","Badger","Fox"],0],
-["Which sport is played at Wimbledon?",["Cricket","Tennis","Golf","Rugby"],1],
-["What is the largest organ of the human body?",["Heart","Liver","Skin","Lung"],2],
-["Which country is shaped like a boot?",["Portugal","Italy","Chile","Croatia"],1],
-["How many degrees are in a right angle?",["45","90","180","360"],1],
-["What is the freezing point of water in Celsius?",["0","10","32","100"],0],
-["Which instrument measures temperature?",["Barometer","Thermometer","Compass","Altimeter"],1],
-["Which animal is known as the king of the jungle?",["Tiger","Lion","Jaguar","Leopard"],1],
-["Which country is home to Machu Picchu?",["Peru","Brazil","Bolivia","Ecuador"],0],
-["What is the largest planet in our solar system?",["Earth","Jupiter","Saturn","Neptune"],1],
-["Which fruit is traditionally used to make guacamole?",["Avocado","Mango","Apple","Pear"],0],
-["What is the capital of France?",["Lyon","Paris","Nice","Marseille"],1],
-["Which sport uses a bat, ball and wickets?",["Baseball","Cricket","Hockey","Tennis"],1],
-["What is the opposite of nocturnal?",["Aquatic","Diurnal","Tropical","Arctic"],1],
-["Which sea creature has eight arms?",["Squid","Octopus","Jellyfish","Starfish"],1],
-["What is the square root of 64?",["6","7","8","9"],2],
-["Which country is famous for the Eiffel Tower?",["Italy","France","Belgium","Germany"],1],
-["Which planet is famous for its Great Red Spot?",["Jupiter","Saturn","Neptune","Mars"],0],
-["What do bees collect from flowers?",["Nectar","Sand","Leaves","Bark"],0],
-["Which animal is a marsupial?",["Kangaroo","Tiger","Horse","Wolf"],0],
-["What is the capital of Spain?",["Madrid","Barcelona","Seville","Valencia"],0],
-["Which vitamin is commonly associated with sunlight?",["Vitamin A","Vitamin B12","Vitamin C","Vitamin D"],3],
-["What is 12 × 12?",["124","132","144","154"],2],
-["Which country is home to the Taj Mahal?",["India","Pakistan","Nepal","Sri Lanka"],0],
-["Which ocean is smallest?",["Arctic","Indian","Atlantic","Southern"],0],
-["What is the name of Earth's natural satellite?",["Mars","The Moon","Europa","Titan"],1],
-["Which animal has black and white stripes?",["Zebra","Cheetah","Moose","Camel"],0],
-["Which city is the capital of New Zealand?",["Auckland","Wellington","Hamilton","Tauranga"],1],
-["What is the largest internal organ?",["Brain","Liver","Heart","Kidney"],1],
-["Which food is traditionally made from fermented cabbage?",["Kimchi","Hummus","Falafel","Paella"],0],
-["Which planet is known for its blue colour?",["Neptune","Mercury","Mars","Venus"],0],
-["What is the capital of Italy?",["Rome","Milan","Naples","Turin"],0],
-["Which animal can sleep standing up?",["Horse","Dolphin","Rabbit","Penguin"],0],
-["Which sport uses a puck?",["Basketball","Ice hockey","Cricket","Tennis"],1],
-["What is the largest species of shark?",["Great white","Hammerhead","Whale shark","Tiger shark"],2],
-["Which language has the most native speakers?",["English","Mandarin Chinese","French","Spanish"],1],
-["What is the main language spoken in Brazil?",["Spanish","Portuguese","French","Italian"],1],
-["Which planet is sometimes called Earth's twin?",["Venus","Mars","Mercury","Neptune"],0],
-["Which animal is famous for having a pouch?",["Kangaroo","Elephant","Lion","Polar bear"],0],
-["What is the capital of Germany?",["Berlin","Munich","Hamburg","Frankfurt"],0],
-["Which material is made from trees?",["Glass","Paper","Steel","Ceramic"],1],
-["What is 100 divided by 4?",["20","25","30","40"],1],
-["Which continent contains the Amazon rainforest?",["Africa","Asia","South America","Europe"],2],
-["Which animal is known for its long neck?",["Giraffe","Hippo","Seal","Panda"],0],
-["Which sport has a scrum?",["Rugby","Tennis","Golf","Swimming"],0],
-["What is the capital of Greece?",["Athens","Rome","Sofia","Lisbon"],0],
-["Which metal is liquid at room temperature?",["Iron","Mercury","Copper","Gold"],1],
-["What is the largest ocean?",["Atlantic","Pacific","Indian","Southern"],1],
-["Which country is famous for tulips and windmills?",["Netherlands","Denmark","Ireland","Poland"],0],
-["What is the process plants use to make food from light?",["Respiration","Photosynthesis","Digestion","Fermentation"],1],
-["Which animal is the tallest?",["Giraffe","Elephant","Moose","Camel"],0],
-["Which sport is associated with a hole-in-one?",["Golf","Tennis","Rugby","Cricket"],0],
-["What is the capital of Ireland?",["Dublin","Cork","Galway","Limerick"],0],
-["Which planet has the most prominent visible rings?",["Saturn","Earth","Mars","Venus"],0],
-["Which fruit is yellow and curved?",["Banana","Apple","Peach","Plum"],0],
-["What is the largest country by land area?",["China","Canada","Russia","USA"],2],
-["Which animal is known for echolocation?",["Bat","Horse","Giraffe","Panda"],0],
-["What is the capital of Portugal?",["Lisbon","Porto","Madrid","Faro"],0],
-["Which sport uses a hoop and backboard?",["Basketball","Volleyball","Football","Baseball"],0],
-["Which famous ship sank in 1912?",["Titanic","Endeavour","Bismarck","Mayflower"],0],
-["What is the nearest planet to Earth on average?",["Mercury","Mars","Venus","Jupiter"],0],
-["Which animal is a feline?",["Lion","Wolf","Otter","Horse"],0],
-["What is the capital of South Korea?",["Seoul","Busan","Incheon","Daegu"],0],
-["Which food is made from cocoa beans?",["Chocolate","Bread","Cheese","Pasta"],0],
-["Which number comes after 999?",["1000","1001","9990","990"],0],
-["Which country is home to the Great Barrier Reef?",["Australia","New Zealand","Indonesia","Fiji"],0],
-["Which animal is known for carrying its home on its back?",["Turtle","Rabbit","Fox","Horse"],0],
-["What is the capital of Mexico?",["Cancun","Mexico City","Tijuana","Puebla"],1],
-["Which planet is farthest from the Sun?",["Uranus","Neptune","Saturn","Jupiter"],1],
-["Which sport is famous for touchdowns?",["American football","Tennis","Golf","Cricket"],0],
-["What is the largest bird?",["Eagle","Ostrich","Albatross","Emu"],1],
-["Which NZ animal is flightless and iconic?",["Kiwi","Swan","Falcon","Penguin"],0],
-["Which country is home to Mount Fuji?",["China","Japan","Thailand","South Korea"],1],
-["What is the capital of Norway?",["Oslo","Bergen","Stockholm","Helsinki"],0],
-["Which animal is famous for producing honey?",["Bee","Ant","Butterfly","Moth"],0],
-["What is the boiling point of water in Celsius at sea level?",["80","90","100","120"],2],
-["Which sport is played on a diamond-shaped field?",["Baseball","Rugby","Golf","Tennis"],0]
-];
-
-function gameDerby(){
-  const area=document.getElementById("gameArea");
-
-  game.questions=shuffle(derbyQuestions);
-  game.q=0;
-  game.horse=0;
-  game.horses=[0,0,0,0];
-  game.correct=0;
-
-  area.innerHTML=`
-    <p class="center">
-      🏇 Pick your horse. Answer 100 trivia questions.
-      Correct answers give your horse a boost!
-    </p>
-
-    <div class="horse-select">
-      ${["🐎","🦄","🏇","🐴"].map((x,i)=>`
-        <button class="horse-choice ${i===0?"selected":""}"
-          onclick="selectDerbyHorse(${i})">
-          ${x}<br>Horse ${i+1}
-        </button>
-      `).join("")}
-    </div>
-
-    <div class="derby-track">
-      ${["🐎","🦄","🏇","🐴"].map((x,i)=>`
-        <div class="derby-lane">
-          <span id="derbyHorse${i}" class="derby-horse">${x}</span>
-        </div>
-      `).join("")}
-    </div>
-
-    <div class="notice center">
-      Question <b id="derbyNumber">1</b>/100
-    </div>
-
-    <div id="derbyQuestion"></div>
-  `;
-
-  derbyNext();
-}
-
-function selectDerbyHorse(i){
-  if(game.q>0)return;
-
-  game.horse=i;
-
-  document.querySelectorAll(".horse-choice").forEach((b,n)=>{
-    b.classList.toggle("selected",n===i);
-  });
-}
-
-function derbyNext(){
-  if(game.q>=100){
-    completeLevel(22,250,15);
-    return;
-  }
-
-  const raw=game.questions[game.q];
-
-  document.getElementById("derbyNumber").textContent=game.q+1;
-
-  renderQuestion(
-    {q:raw[0],options:raw[1],answer:raw[2]},
-    document.getElementById("derbyQuestion"),
-    correct=>{
-      if(correct){
-        game.correct++;
-        game.horses[game.horse]+=3;
-        addPoints(5);
-      }else{
-        game.horses[game.horse]+=1;
-      }
-
-      /*
-        Keep all horses moving so the race remains visually active.
-      */
-      for(let i=0;i<4;i++){
-        if(i!==game.horse){
-          game.horses[i]+=Math.random()*2;
-        }
-      }
-
-      game.horses=game.horses.map(x=>Math.min(100,x));
-
-      game.horses.forEach((p,i)=>{
-        const el=document.getElementById("derbyHorse"+i);
-        if(el)el.style.left=Math.min(92,p)+"%";
-      });
-
-      game.q++;
-
-      setTimeout(derbyNext,80);
-    }
-  );
-}
-
-/* =========================================================
-   23. FINAL CHALLENGE
-   50 UNIQUE LILIANA QUESTIONS
-========================================================= */
-
-const finalQuestions=[
-["Which colour is most associated with Liliana's favourite colour?",["Baby pink","Navy blue","Bright orange","Forest green"],0],
-["Which number is Liliana's favourite?",["3","5","7","9"],0],
-["Which food is one of Liliana's favourites?",["Sushi","Porridge","Steak","Pancakes"],0],
-["Which sea animal does Liliana like?",["Dolphin","Shark","Seal","Walrus"],0],
-["Which pair of flowers does Liliana like?",["Sunflowers and roses","Tulips and lilies","Orchids and daisies","Lavender and violets"],0],
-["On what date is Liliana's birthday?",["July 22","June 22","July 12","August 22"],0],
-["What colour are Liliana's eyes?",["Green","Hazel","Blue","Brown"],0],
-["What is Liliana's zodiac sign?",["Leo","Virgo","Gemini","Taurus"],0],
-["Which fear is associated with Liliana?",["Drowning","Thunder","Flying","Dark rooms"],0],
-["What is Liliana's favourite movie?",["Me Before You","The Notebook","Titanic","La La Land"],0],
-["What kind of songs does Liliana enjoy?",["Sad songs","Only happy songs","Only classical music","Only instrumental music"],0],
-["What type of writing does Liliana enjoy?",["Poetry","Manuals","Textbooks","Newspapers"],0],
-["Which games does Liliana enjoy?",["Poker and gambling games","Only chess","Only golf","Only racing games"],0],
-["What did Liliana study at university?",["Psychology","Medicine","Physics","Accounting"],0],
-["How many nieces does Liliana have?",["1","2","3","4"],0],
-["How many nephews does Liliana have?",["4","2","5","6"],0],
-["How many siblings does Liliana have?",["5","3","4","6"],0],
-["How many piercings does Liliana have?",["4","2","5","7"],0],
-["Which pair are Liliana's dogs?",["Aayla and Arlo","Bella and Luna","Milo and Max","Daisy and Coco"],0],
-["What does Liliana hope to become someday?",["A mum","A pilot","A doctor","A singer"],0],
-["What kind of child does Liliana hope to have?",["A baby girl","Twin boys","A baby boy only","Triplets"],0],
-["How long have Bree and Liliana been best friends?",["6 years","3 years","5 years","8 years"],0],
-["Which combination correctly matches Liliana's favourite number and colour?",["3 and baby pink","7 and blue","22 and burgundy","5 and green"],0],
-["Which combination correctly matches her favourite animal and food?",["Dolphin and sushi","Otter and pizza","Horse and pasta","Koala and curry"],0],
-["Which combination correctly matches her flowers?",["Sunflowers and roses","Roses and orchids","Tulips and roses","Lilies and daisies"],0],
-["Which combination correctly matches her birthday month and day?",["July 22","June 27","July 12","August 22"],0],
-["Which combination correctly matches her eyes and zodiac sign?",["Green and Leo","Blue and Virgo","Brown and Leo","Hazel and Taurus"],0],
-["Which combination correctly matches her movie and writing interest?",["Me Before You and poetry","Titanic and history","Frozen and novels","The Notebook and journalism"],0],
-["Which combination correctly matches her study area and games?",["Psychology and poker","Law and chess","Medicine and golf","Engineering and tennis"],0],
-["Which combination correctly matches her family counts?",["1 niece and 4 nephews","2 nieces and 3 nephews","4 nieces and 1 nephew","3 nieces and 2 nephews"],0],
-["Which combination correctly matches her siblings and piercings?",["5 siblings and 4 piercings","4 siblings and 5 piercings","6 siblings and 2 piercings","3 siblings and 6 piercings"],0],
-["Which pair of names belongs together as Liliana's dogs?",["Aayla and Arlo","Aayla and Luna","Arlo and Bella","Milo and Arlo"],0],
-["Which statement about Liliana's personality is known?",["She is caring","She dislikes helping people","She avoids children","She is described as unfriendly"],0],
-["Which quality is associated with Liliana?",["Empathy","Impatience","Coldness","Indifference"],0],
-["Which description fits Liliana?",["Sweet and charismatic","Quiet and uncaring","Unfriendly and distant","Strict and serious"],0],
-["What does Liliana like involving children?",["She likes children","She dislikes children","She avoids children","She has no interest in children"],0],
-["Which word best matches Liliana's social personality?",["Flirtatious","Withdrawn","Hostile","Unapproachable"],0],
-["Which ocean-related wish is associated with Liliana?",["Seeing the ocean someday","Living on a submarine","Avoiding beaches forever","Becoming a sailor"],0],
-["Which pair combines one of Liliana's hobbies with something she enjoys reading/writing?",["Gambling games and poetry","Golf and manuals","Chess and textbooks","Running and newspapers"],0],
-["Which pair combines one of Liliana's favourite things with her zodiac sign?",["Baby pink and Leo","Blue and Virgo","Green and Taurus","Purple and Gemini"],0],
-["How many children-related family members are counted when combining her niece and nephews?",["5","4","6","7"],0],
-["Which number connects her favourite number with her friendship length?",["3 and 6","4 and 5","7 and 8","2 and 10"],0],
-["Which pair combines her birthday with the length of the friendship?",["July 22 and 6 years","June 22 and 4 years","July 12 and 5 years","August 7 and 3 years"],0],
-["Which set contains only things known to be associated with Liliana?",["Sushi, dolphins and sunflowers","Pizza, wolves and tulips","Pasta, horses and orchids","Curry, tigers and lilies"],0],
-["Which set contains only Liliana's known interests?",["Poetry, sad songs and gambling games","Football, opera and painting","Golf, ballet and chess","Fishing, metal and coding"],0],
-["Which set correctly includes her favourite film and academic subject?",["Me Before You and Psychology","Titanic and Medicine","Frozen and Physics","The Notebook and Law"],0],
-["Which set correctly includes her pets and eye colour?",["Aayla and Arlo, green eyes","Bella and Coco, blue eyes","Milo and Luna, brown eyes","Max and Daisy, hazel eyes"],0],
-["Which set correctly includes her birthday and zodiac sign?",["July 22 and Leo","June 22 and Cancer","July 12 and Virgo","August 22 and Gemini"],0],
-["Which set correctly describes several things Liliana likes?",["Sushi, dolphins, sunflowers and roses","Pizza, sharks, orchids and chess","Pasta, wolves, tulips and golf","Rice, horses, lilies and football"],0],
-["Which set correctly combines her family dream and her university study?",["Becoming a mum and studying Psychology","Becoming a pilot and studying Physics","Becoming a chef and studying Chemistry","Becoming an artist and studying Engineering"],0]
-];
-
-function gameFinal(){
-  const area=document.getElementById("gameArea");
-
-  game.questions=finalQuestions;
-  game.index=0;
-  game.correct=0;
-
-  area.innerHTML=`
-    <div class="notice center">
-      💕 THE FINAL CHALLENGE 💕
-      <br>
-      50 unique questions about Liliana.
-      <br>
-      <strong>No tattoo questions.</strong>
-      <br><br>
-      Question <b id="finalNumber">1</b>/50
-    </div>
-    <div id="finalQuestion"></div>
-  `;
-
-  finalNext();
-}
-
-function finalNext(){
-  if(game.index>=50){
-    const finalScore=game.correct;
-
-    if(finalScore>=40){
-      addPoints(200);
-      completeLevel(23,250,20);
-    }else{
-      document.getElementById("gameArea").innerHTML=`
-        <div class="notice failure center">
-          <h2>💕 Final Challenge Complete</h2>
-          <div class="final-score">${finalScore}/50</div>
-          <p>You need 40/50 to pass.</p>
-          <button class="primary" onclick="openLevel(23)">Try Again</button>
-        </div>
-      `;
-    }
-
-    return;
-  }
-
-  document.getElementById("finalNumber").textContent=game.index+1;
-
-  const raw=game.questions[game.index];
-
-  renderQuestion(
-    {
-      q:raw[0],
-      options:raw[1],
-      answer:raw[2]
-    },
-    document.getElementById("finalQuestion"),
-    correct=>{
-      if(correct){
-        game.correct++;
-        addPoints(10);
-      }
-
-      setTimeout(()=>{
-        game.index++;
-        finalNext();
-      },250);
-    }
-  );
+$("resetBtn").addEventListener("click",()=>{
+ if(!confirm("Reset the entire Lulu Express journey?"))return;
+ clearRuntime();
+ localStorage.removeItem(SAVE_KEY);
+ state={name:"",score:0,tokens:0,completed:0,unlocked:1};
+ $("playerName").value="";
+ updateStats();
+ showScreen("startScreen");
+});
+
+load();
+
+function startLevel(n){
+ if(n<1||n>23)return;
+ if(n>state.unlocked)return lockedScreen(n);
+ clearRuntime();
+ currentLevel=n;
+ showScreen("game"+n);
+ const fn=games[n];
+ if(fn)fn();
 }
 
 /* =========================================================
    MUSIC
 ========================================================= */
 
-const audio=document.getElementById("music");
+const music=new Audio();
+music.loop=true;
+music.volume=.45;
 
-document.getElementById("volume").addEventListener("input",e=>{
-  audio.volume=e.target.value;
+let musicLoaded=false;
+
+const musicBtn=$("musicBtn");
+
+musicBtn.addEventListener("click",()=>{
+ if(!musicLoaded){
+  const input=document.createElement("input");
+  input.type="file";
+  input.accept="audio/*";
+  input.style.display="none";
+  document.body.appendChild(input);
+
+  input.addEventListener("change",()=>{
+   const file=input.files[0];
+   if(!file)return;
+   music.src=URL.createObjectURL(file);
+   musicLoaded=true;
+   music.play().then(()=>{
+    musicBtn.textContent="⏸️ Music";
+   }).catch(()=>{
+    musicBtn.textContent="▶️ Music";
+   });
+  },{once:true});
+
+  input.click();
+  return;
+ }
+
+ if(music.paused){
+  music.play().then(()=>musicBtn.textContent="⏸️ Music").catch(()=>{});
+ }else{
+  music.pause();
+  musicBtn.textContent="▶️ Music";
+ }
 });
 
-document.getElementById("musicFile").addEventListener("change",e=>{
-  const file=e.target.files[0];
+/* =========================================================
+   1 BROKEN HEARTS
+========================================================= */
 
-  if(!file)return;
+function game1(){
+ const root=$("g1");
+ root.innerHTML=`
+ ${levelHeader(1,"Broken Hearts","💔","Move your heart basket and catch 15 whole hearts. Avoid the broken ones!")}
+ <div class="card">
+  <div class="center">Caught: <b id="caught">0</b>/15 &nbsp; ❤️ Lives: <b id="lives">3</b></div>
+  <div class="progress"><i id="catchProgress"></i></div>
+  <div class="catchgame" id="catchgame">
+   <div class="catcher" id="catcher">🧺💗</div>
+  </div>
+  <div class="message" id="catchMsg">Use your finger to move the basket.</div>
+ </div>
+ <div class="nextbox"></div>`;
 
-  const url=URL.createObjectURL(file);
-  audio.src=url;
-  audio.volume=document.getElementById("volume").value;
+ const area=$("catchgame"), catcher=$("catcher");
+ let x=145,caught=0,lives=3,active=true;
+ const hearts=new Set();
 
-  audio.play()
-    .then(()=>{
-      document.getElementById("musicToggle").textContent="⏸️";
-    })
-    .catch(()=>{
-      document.getElementById("musicToggle").textContent="▶️";
-    });
-});
+ function move(px){
+  const r=area.getBoundingClientRect();
+  x=Math.max(0,Math.min(r.width-90,px-r.left-45));
+  catcher.style.left=x+"px";
+ }
+ listen(area,"pointermove",e=>{
+  if(e.buttons)move(e.clientX);
+ });
+ listen(area,"pointerdown",e=>move(e.clientX));
 
-function toggleMusic(){
-  if(!audio.src){
-    document.getElementById("musicFile").click();
+ const spawn=()=>{
+  if(!active)return;
+  const h=document.createElement("div");
+  h.className="catchheart";
+  h.textContent=Math.random()<.16?"💔":"💗";
+  h.dataset.x=String(Math.random()*(area.clientWidth-40));
+  h.dataset.y="-40";
+  h.style.left=h.dataset.x+"px";
+  h.style.top="-40px";
+  area.appendChild(h);
+  hearts.add(h);
+ };
+
+ every(spawn,650);
+
+ const tick=every(()=>{
+  if(!active)return;
+  hearts.forEach(h=>{
+   let y=parseFloat(h.dataset.y)+3.2;
+   h.dataset.y=y;
+   h.style.top=y+"px";
+
+   const hx=parseFloat(h.dataset.x);
+   if(y>area.clientHeight-70){
+    const hit=hx<x+90&&hx+35>x;
+    if(hit){
+     if(h.textContent==="💗"){
+      caught++;
+      $("caught").textContent=caught;
+      $("catchProgress").style.width=(caught/15*100)+"%";
+      addPoints(10);
+      popScore("+10");
+      if(caught>=15){
+       active=false;
+       hearts.forEach(q=>q.remove());
+       finishLevel(1,"You caught all the hearts! 💗");
+      }
+     }else{
+      lives--;
+      $("lives").textContent=lives;
+      addPoints(0);
+      if(lives<=0){
+       active=false;
+       hearts.forEach(q=>q.remove());
+       $("catchMsg").textContent="💔 Try again! You caught too many broken hearts.";
+       later(game1,1200);
+      }
+     }
+    }
+    h.remove();
+    hearts.delete(h);
+   }
+  });
+ },45);
+
+ cleanupFns.push(()=>{
+  active=false;
+  hearts.forEach(h=>h.remove());
+ });
+}
+
+/* =========================================================
+   2 MEMORY VAULT
+========================================================= */
+
+function game2(){
+ const root=$("g2");
+ root.innerHTML=`
+ ${levelHeader(2,"Memory Vault","🧠","Watch the glowing sequence, then tap the same tiles. Eight rounds wins the level.")}
+ <div class="card center">
+  <b>Round <span id="memRound">1</span>/8</b>
+  <div class="memorygrid" id="memoryGrid"></div>
+  <div class="message" id="memMsg">Watch carefully...</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const grid=$("memoryGrid");
+ let round=1,sequence=[],input=0,accepting=false;
+
+ for(let i=0;i<16;i++){
+  const b=document.createElement("button");
+  b.className="memorytile";
+  b.dataset.i=i;
+  b.textContent="♥";
+  listen(b,"click",()=>{
+   if(!accepting)return;
+   const i2=Number(b.dataset.i);
+   if(i2===sequence[input]){
+    b.classList.add("done");
+    later(()=>b.classList.remove("done"),180);
+    input++;
+    if(input===sequence.length){
+     accepting=false;
+     addPoints(15+round*2);
+     addTokens(1);
+     if(round>=8){
+      finishLevel(2,"Your memory is seriously impressive! 🧠💗");
+     }else{
+      round++;
+      $("memRound").textContent=round;
+      later(newRound,600);
+     }
+    }
+   }else{
+    accepting=false;
+    $("memMsg").textContent="Almost! Let's give you another try.";
+    later(newRound,700);
+   }
+  });
+  grid.appendChild(b);
+ }
+
+ function newRound(){
+  sequence=[];
+  input=0;
+  accepting=false;
+  while(sequence.length<Math.min(2+Math.floor(round/2),6)){
+   const n=Math.floor(Math.random()*16);
+   if(!sequence.includes(n))sequence.push(n);
+  }
+  $("memMsg").textContent="Watch...";
+  let i=0;
+  const show=every(()=>{
+   if(i>=sequence.length){
+    clearInterval(show);
+    accepting=true;
+    $("memMsg").textContent="Your turn!";
     return;
+   }
+   const tile=grid.children[sequence[i]];
+   tile.classList.add("lit");
+   later(()=>tile.classList.remove("lit"),350);
+   i++;
+  },500);
+  cleanupFns.push(()=>clearInterval(show));
+ }
+ newRound();
+}
+
+/* =========================================================
+   3 PRESSURE QUIZ
+========================================================= */
+
+const pressureQuestions=[
+["Which planet is known as the Red Planet?",["Mars","Venus","Jupiter","Mercury"],0],
+["How many sides does a hexagon have?",["5","6","7","8"],1],
+["What is the largest ocean on Earth?",["Atlantic","Indian","Pacific","Arctic"],2],
+["Which animal is the fastest on land?",["Lion","Cheetah","Horse","Kangaroo"],1],
+["How many minutes are in one hour?",["30","45","60","90"],2],
+["What is H2O commonly called?",["Salt","Water","Oxygen","Hydrogen"],1],
+["Which country is famous for the pyramids of Giza?",["Egypt","Greece","Italy","Mexico"],0],
+["What colour do you get by mixing blue and yellow?",["Purple","Orange","Green","Pink"],2],
+["Which is the smallest prime number?",["0","1","2","3"],2],
+["What is the capital of Japan?",["Seoul","Tokyo","Beijing","Bangkok"],1],
+["Which bird is commonly associated with delivering messages?",["Penguin","Pigeon","Owl","Swan"],1],
+["How many days are in a leap year?",["364","365","366","367"],2],
+["Which gas do humans need to breathe?",["Oxygen","Helium","Carbon dioxide","Neon"],0],
+["What is the largest mammal?",["Elephant","Blue whale","Giraffe","Orca"],1],
+["Which instrument has black and white keys?",["Violin","Flute","Piano","Trumpet"],2],
+["What is 9 × 9?",["72","81","90","99"],1],
+["Which continent is Australia part of?",["Europe","Oceania","Africa","Asia"],1],
+["What do bees make?",["Honey","Milk","Silk","Bread"],0],
+["Which season usually follows spring?",["Winter","Autumn","Summer","Monsoon"],2],
+["What is the freezing point of water in Celsius?",["0","10","32","100"],0],
+["Which shape has three sides?",["Square","Triangle","Circle","Pentagon"],1],
+["Which planet is famous for its rings?",["Mars","Saturn","Earth","Venus"],1],
+["What is the opposite of nocturnal?",["Diurnal","Circular","Seasonal","Lunar"],0],
+["Which metal is strongly associated with the Olympic medals' top rank?",["Copper","Gold","Iron","Tin"],1],
+["How many colours are traditionally in a rainbow?",["5","6","7","8"],2]
+];
+
+function game3(){
+ const root=$("g3");
+ root.innerHTML=`
+ ${levelHeader(3,"Pressure Quiz","⏱️","Ten quick general-knowledge questions. The answers move around every time.")}
+ <div class="card">
+  <div class="center">Question <b id="pqNum">1</b>/10</div>
+  <div class="progress"><i id="pqProg"></i></div>
+  <h3 id="pqQuestion"></h3>
+  <div class="answergrid" id="pqAnswers"></div>
+  <div class="message" id="pqMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const qs=shuffle([...pressureQuestions]).slice(0,10);
+ let index=0;
+
+ function show(){
+  const q=qs[index];
+  $("pqNum").textContent=index+1;
+  $("pqProg").style.width=(index/10*100)+"%";
+  $("pqQuestion").textContent=q[0];
+  const answers=shuffledAnswers({options:q[1],answer:q[2]});
+  const box=$("pqAnswers");
+  box.innerHTML="";
+  answers.forEach(a=>{
+   const b=document.createElement("button");
+   b.className="answer";
+   b.textContent=a.text;
+   listen(b,"click",()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+    if(a.correct){
+     b.classList.add("correct");
+     addPoints(20);
+     addTokens(1);
+     $("pqMsg").textContent="Correct! 💗";
+    }else{
+     b.classList.add("wrong");
+     $("pqMsg").textContent="Not quite!";
+    }
+    index++;
+    if(index>=10){
+     later(()=>finishLevel(3,"Pressure Quiz complete! ⏱️"),500);
+    }else later(show,500);
+   });
+   box.appendChild(b);
+  });
+ }
+ show();
+}
+
+/* =========================================================
+   4 HIGH ROLLER
+========================================================= */
+
+function game4(){
+ const root=$("g4");
+ root.innerHTML=`
+ ${levelHeader(4,"High Roller","🎰","Pull the lever and stop each reel. Matching symbols win points.")}
+ <div class="card center">
+  <div class="reels">
+   <div class="reel" id="r1">🍒</div>
+   <div class="reel" id="r2">⭐</div>
+   <div class="reel" id="r3">💎</div>
+  </div>
+  <button class="primary lever" id="spin">🎰 PULL LEVER</button>
+  <div class="message" id="slotMsg">You get three spins.</div>
+  <b>Spins: <span id="spins">0</span>/3</b>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const symbols=["🍒","🍋","⭐","💎","💗","7️⃣"];
+ let spins=0;
+
+ $("spin").addEventListener("click",()=>{
+  if(spins>=3)return;
+  spins++;
+  $("spins").textContent=spins;
+  const vals=[];
+  for(let i=1;i<=3;i++){
+   const v=symbols[Math.floor(Math.random()*symbols.length)];
+   vals.push(v);
+   $(`r${i}`).textContent=v;
   }
 
-  if(audio.paused){
-    audio.play();
-    document.getElementById("musicToggle").textContent="⏸️";
+  if(vals[0]===vals[1]&&vals[1]===vals[2]){
+   addPoints(80);
+   addTokens(5);
+   $("slotMsg").textContent="🎉 JACKPOT! Three matching symbols!";
+  }else if(vals[0]===vals[1]||vals[1]===vals[2]||vals[0]===vals[2]){
+   addPoints(30);
+   addTokens(2);
+   $("slotMsg").textContent="✨ Two matched!";
   }else{
-    audio.pause();
-    document.getElementById("musicToggle").textContent="▶️";
+   addPoints(5);
+   $("slotMsg").textContent="Try another spin!";
   }
+
+  if(spins>=3)later(()=>finishLevel(4,"High Roller complete! 🎰"),700);
+ });
 }
 
 /* =========================================================
-   RESET
+   5 MIND GAMES
 ========================================================= */
 
-function resetGame(){
-  const yes=confirm(
-    "Reset Lulu Express completely?\n\n"+
-    "This will erase your name, score, tokens, completed levels "+
-    "and journey progress."
-  );
+const patterns=[
+ {tiles:["❤️","💗","❤️","💗"],choices:["❤️","💗","💔","⭐"],answer:"❤️"},
+ {tiles:["⭐","⭐","💎","⭐"],choices:["⭐","💎","💗","🍒"],answer:"💎"},
+ {tiles:["🌸","🌻","🌸","🌻"],choices:["🌻","🌸","🌹","🌼"],answer:"🌸"},
+ {tiles:["1","2","3","4"],choices:["5","6","4","7"],answer:"5"},
+ {tiles:["🔵","🔴","🔵","🔴"],choices:["🔵","🔴","🟢","🟡"],answer:"🔵"},
+ {tiles:["🐶","🐱","🐶","🐱"],choices:["🐱","🐶","🐭","🐰"],answer:"🐶"},
+ {tiles:["A","B","A","B"],choices:["A","B","C","D"],answer:"A"},
+ {tiles:["🌙","☀️","🌙","☀️"],choices:["🌙","☀️","⭐","🌈"],answer:"🌙"}
+];
 
-  if(!yes)return;
+function game5(){
+ const root=$("g5");
+ root.innerHTML=`
+ ${levelHeader(5,"Mind Games","🧩","Complete eight simple visual patterns.")}
+ <div class="card center">
+  <b>Pattern <span id="mindNum">1</span>/8</b>
+  <div class="patternrow" id="pattern"></div>
+  <p class="small">What comes next?</p>
+  <div class="choicevisuals" id="mindChoices"></div>
+  <div class="message" id="mindMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
 
-  clearTimers();
+ let i=0;
 
-  localStorage.removeItem("luluExpressState");
+ function show(){
+  const p=patterns[i];
+  $("mindNum").textContent=i+1;
+  $("pattern").innerHTML=p.tiles.map(x=>`<div class="tile">${x}</div>`).join("")+
+   `<div class="tile">?</div>`;
+  const box=$("mindChoices");
+  box.innerHTML="";
+  shuffle([...p.choices]).forEach(c=>{
+   const b=document.createElement("button");
+   b.className="visualchoice";
+   b.textContent=c;
+   listen(b,"click",()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+    if(c===p.answer){
+     b.classList.add("correct");
+     addPoints(15);
+     $("mindMsg").textContent="Perfect pattern! ✨";
+    }else{
+     b.classList.add("wrong");
+     $("mindMsg").textContent="Close!";
+    }
+    i++;
+    if(i>=patterns.length)later(()=>finishLevel(5,"Your brain solved the Mind Games! 🧩"),450);
+    else later(show,450);
+   });
+   box.appendChild(b);
+  });
+ }
+ show();
+}
 
-  state={
-    name:"",
-    score:0,
-    tokens:0,
-    unlocked:1,
-    completed:{},
-    gameBest:{},
-    currentLevel:1
+/* =========================================================
+   6 THE BLUFF
+========================================================= */
+
+function game6(){
+ const root=$("g6");
+ root.innerHTML=`
+ ${levelHeader(6,"The Bluff","🃏","Pick a hidden card. Then decide whether to risk your winnings or bank them.")}
+ <div class="card center">
+  <div>Round <b id="bluffRound">1</b>/5</div>
+  <div class="pot">🪙 <span id="bluffPot">0</span></div>
+  <div class="cardsrow" id="bluffCards"></div>
+  <div class="message" id="bluffMsg">Choose one card.</div>
+  <div id="bluffActions"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let round=1,pot=0;
+
+ function newRound(){
+  $("bluffRound").textContent=round;
+  $("bluffMsg").textContent="Choose one hidden card.";
+  $("bluffActions").innerHTML="";
+  const box=$("bluffCards");
+  box.innerHTML="";
+  for(let i=0;i<4;i++){
+   const b=document.createElement("button");
+   b.className="playcard";
+   b.textContent="❓";
+   listen(b,"click",()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+    const value=1+Math.floor(Math.random()*20);
+    b.textContent=value;
+    b.classList.add("revealed");
+    pot+=value*5;
+    $("bluffPot").textContent=pot;
+    $("bluffMsg").textContent=`You found ${value * 5} coins!`;
+    const actions=$("bluffActions");
+    actions.innerHTML=`
+     <button class="gold bigbtn" id="risk">🔥 Risk it</button>
+     <button class="green bigbtn" id="bank">🪙 Bank it</button>`;
+    $("bank").addEventListener("click",()=>{
+     addPoints(Math.round(pot/2));
+     addTokens(1);
+     round++;
+     if(round>5)finishLevel(6,"You played The Bluff! 🃏");
+     else newRound();
+    });
+    $("risk").addEventListener("click",()=>{
+     if(Math.random()<.72){
+      pot=Math.round(pot*1.5);
+      $("bluffPot").textContent=pot;
+      $("bluffMsg").textContent="🔥 Risk paid off!";
+      round++;
+      if(round>5)finishLevel(6,"You survived The Bluff! 🃏");
+      else later(newRound,500);
+     }else{
+      pot=Math.floor(pot/2);
+      $("bluffPot").textContent=pot;
+      $("bluffMsg").textContent="😅 You lost half. Bank it or risk again.";
+     }
+    });
+   });
+   box.appendChild(b);
+  }
+ }
+ newRound();
+}
+
+/* =========================================================
+   7 SURVIVAL
+========================================================= */
+
+function game7(){
+ const root=$("g7");
+ root.innerHTML=`
+ ${levelHeader(7,"Survival Round","🛡️","Eight easy survival decisions. Pick the safest action before the timer runs out.")}
+ <div class="card center">
+  <b>Wave <span id="survNum">1</span>/8</b>
+  <div class="progress"><i id="survProg"></i></div>
+  <h3 id="survSituation"></h3>
+  <div class="answergrid" id="survChoices"></div>
+  <div class="message" id="survMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const situations=[
+  ["A ball flies toward your face!","JUMP","DUCK"],
+  ["Something falls from above!","MOVE","FREEZE"],
+  ["A bright flash appears!","SHIELD","STARE"],
+  ["A puddle blocks the path!","STEP OVER","SIT DOWN"],
+  ["A door starts closing!","MOVE","WAIT"],
+  ["A loud noise comes from behind!","TURN SAFELY","RUN BLINDLY"],
+  ["A low branch is ahead!","DUCK","JUMP"],
+  ["The floor looks slippery!","WALK SLOWLY","SPRINT"]
+ ];
+ let i=0;
+
+ function show(){
+  const s=situations[i];
+  $("survNum").textContent=i+1;
+  $("survProg").style.width=(i/8*100)+"%";
+  $("survSituation").textContent=s[0];
+  const correct=s[1];
+  const options=shuffle([s[1],s[2]]);
+  $("survChoices").innerHTML="";
+  options.forEach(x=>{
+   const b=document.createElement("button");
+   b.className="answer";
+   b.textContent=x;
+   listen(b,"click",()=>{
+    $("survChoices").querySelectorAll("button").forEach(q=>q.disabled=true);
+    if(x===correct){
+     b.classList.add("correct");
+     addPoints(18);
+     $("survMsg").textContent="🛡️ Safe!";
+    }else{
+     b.classList.add("wrong");
+     $("survMsg").textContent="You survived anyway! 😅";
+     addPoints(5);
+    }
+    i++;
+    if(i>=8)later(()=>finishLevel(7,"You survived every wave! 🛡️"),400);
+    else later(show,400);
+   });
+   $("survChoices").appendChild(b);
+  });
+ }
+ show();
+}
+
+/* =========================================================
+   8 NEW ADMIRER RACE
+========================================================= */
+
+function game8(){
+ const root=$("g8");
+ root.innerHTML=`
+ ${levelHeader(8,"The Admirer Race","🏇","No obstacles. No dodging. Just tap GALLop when the marker reaches the green zone!")}
+ <div class="card center">
+  <div>🏇 You <b id="playerDist">0</b>%</div>
+  <div class="progress"><i id="playerBar"></i></div>
+  <div class="racetrack">
+   <div class="racehorse" id="playerHorse">🏇</div>
+   <div class="raceline"></div>
+  </div>
+  <div>💨 Admirer <b id="aiDist">0</b>%</div>
+  <div class="progress"><i id="aiBar"></i></div>
+  <div class="timing">
+   <div class="timingzone"></div>
+   <div class="timingneedle" id="needle"></div>
+  </div>
+  <button class="primary gallop" id="gallop">🏇 GALLop!</button>
+  <div class="message" id="raceMsg">Hit the button while the marker is green.</div>
+  <div>Round <b id="raceRound">1</b>/12</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let player=0,ai=0,round=1,running=true,dir=1,needle=0;
+
+ const animate=()=>{
+  if(!running)return;
+  needle+=dir*2.7;
+  if(needle>=100){needle=100;dir=-1}
+  if(needle<=0){needle=0;dir=1}
+  $("needle").style.left=needle+"%";
+  rafs[0]=requestAnimationFrame(animate);
+ };
+ animate();
+
+ every(()=>{
+  if(!running)return;
+  ai=Math.min(100,ai+5.3);
+  $("aiDist").textContent=Math.round(ai);
+  $("aiBar").style.width=ai+"%";
+ },600);
+
+ $("gallop").addEventListener("click",()=>{
+  if(!running)return;
+
+  let gain;
+  if(needle>=42&&needle<=58){
+   gain=10;
+   $("raceMsg").textContent="🌟 PERFECT GALLop!";
+   addPoints(18);
+  }else if(needle>=30&&needle<=70){
+   gain=7;
+   $("raceMsg").textContent="✨ Good timing!";
+   addPoints(12);
+  }else{
+   gain=4;
+   $("raceMsg").textContent="💗 Keep going!";
+   addPoints(7);
+  }
+
+  player=Math.min(100,player+gain);
+  round++;
+  $("playerDist").textContent=Math.round(player);
+  $("playerBar").style.width=player+"%";
+  $("raceRound").textContent=Math.min(round,12);
+
+  if(player>=100){
+   running=false;
+   finishLevel(8,"You won The Admirer Race! 🏆");
+  }else if(round>12){
+   if(player>=ai){
+    running=false;
+    finishLevel(8,"You won the race! 🏆");
+   }else{
+    player=Math.min(100,player+12);
+    $("playerDist").textContent=Math.round(player);
+    $("playerBar").style.width=player+"%";
+    if(player>=ai){
+     running=false;
+     finishLevel(8,"Photo finish! You won! 🏆");
+    }
+   }
+  }
+ });
+}
+
+/* =========================================================
+   9 HEARTBREAK CHAMBER
+========================================================= */
+
+function game9(){
+ const root=$("g9");
+ root.innerHTML=`
+ ${levelHeader(9,"Heartbreak Chamber","🔎","Search the room, collect three clues, then unlock the exit.")}
+ <div class="card">
+  <div class="room" id="room">
+   <button class="roomitem" data-clue="key">🔑<small>Drawer</small></button>
+   <button class="roomitem" data-clue="star">⭐<small>Painting</small></button>
+   <button class="roomitem" data-clue="number">7️⃣<small>Clock</small></button>
+   <button class="roomitem" data-clue="nothing">🪴<small>Plant</small></button>
+  </div>
+  <div class="clues" id="clues"></div>
+  <div class="message" id="chamberMsg">Find three useful clues.</div>
+  <button class="primary bigbtn hidden" id="unlockDoor">🔓 Unlock the Door</button>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const found=new Set();
+ const names={key:"🔑 Golden Key",star:"⭐ Star Clue",number:"7️⃣ Number Clue"};
+
+ document.querySelectorAll("#room .roomitem").forEach(b=>{
+  b.addEventListener("click",()=>{
+   const c=b.dataset.clue;
+   if(c==="nothing"){
+    $("chamberMsg").textContent="Just a plant. 🌱";
+    return;
+   }
+   if(found.has(c))return;
+   found.add(c);
+   const tag=document.createElement("span");
+   tag.className="clue";
+   tag.textContent=names[c];
+   $("clues").appendChild(tag);
+   b.disabled=true;
+   if(found.size===3){
+    $("chamberMsg").textContent="You found everything!";
+    $("unlockDoor").classList.remove("hidden");
+   }
+  });
+ });
+
+ $("unlockDoor").addEventListener("click",()=>{
+  addPoints(40);
+  finishLevel(9,"You escaped the Heartbreak Chamber! 🔓");
+ });
+}
+
+/* =========================================================
+   10 BOXING
+========================================================= */
+
+function game10(){
+ const root=$("g10");
+ root.innerHTML=`
+ ${levelHeader(10,"Heartbreak Boxing Match","🥊","Beat the opponent using simple attacks and defence.")}
+ <div class="card">
+  <div class="fighters"><span>🥊</span><span id="enemy">💔</span></div>
+  <small>Opponent</small>
+  <div class="health"><i id="enemyHP"></i></div>
+  <small>You</small>
+  <div class="health"><i id="playerHP"></i></div>
+  <div class="combatgrid">
+   <button class="primary" data-fight="punch">👊 Punch</button>
+   <button class="secondary" data-fight="block">🛡️ Block</button>
+   <button class="secondary" data-fight="dodge">↪️ Dodge</button>
+   <button class="gold" data-fight="special">💥 Special</button>
+  </div>
+  <div class="message" id="fightMsg">Choose your move!</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let hp=100,enemy=100,blocking=false;
+
+ function update(){
+  $("playerHP").style.width=Math.max(0,hp)+"%";
+  $("enemyHP").style.width=Math.max(0,enemy)+"%";
+ }
+
+ document.querySelectorAll("[data-fight]").forEach(b=>{
+  b.addEventListener("click",()=>{
+   const move=b.dataset.fight;
+   let damage=0;
+
+   blocking=false;
+   if(move==="punch")damage=12;
+   if(move==="special")damage=25;
+   if(move==="block"){blocking=true;hp=Math.min(100,hp+5)}
+   if(move==="dodge")damage=6;
+
+   enemy=Math.max(0,enemy-damage);
+
+   if(enemy<=0){
+    update();
+    addPoints(80);
+    addTokens(3);
+    finishLevel(10,"You won the boxing match! 🥊");
+    return;
+   }
+
+   const enemyAttack=8+Math.floor(Math.random()*10);
+   if(!blocking && move!=="dodge")hp=Math.max(0,hp-enemyAttack);
+   else if(move==="dodge")hp=Math.max(0,hp-3);
+
+   update();
+
+   if(hp<=0){
+    $("fightMsg").textContent="You were knocked down. Try again!";
+    later(game10,900);
+    return;
+   }
+
+   $("fightMsg").textContent=
+    move==="block"?"🛡️ Nice block!":
+    move==="dodge"?"↪️ You slipped away!":
+    move==="special"?"💥 Big hit!":"👊 Direct hit!";
+  });
+ });
+ update();
+}
+
+/* =========================================================
+   11 PERFECT MATCH
+========================================================= */
+
+function game11(){
+ const root=$("g11");
+ root.innerHTML=`
+ ${levelHeader(11,"Perfect Match","🧲","Tap an item, then tap its matching target. Five matches wins.")}
+ <div class="card">
+  <div class="matcharea">
+   <div><h3 class="center">Items</h3><div id="matchItems"></div></div>
+   <div><h3 class="center">Targets</h3><div id="matchTargets"></div></div>
+  </div>
+  <div class="message" id="matchMsg">Choose an item.</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const pairs=[
+  ["🌻","SUNFLOWER"],
+  ["🐬","DOLPHIN"],
+  ["🌹","ROSE"],
+  ["💗","HEART"],
+  ["🍣","SUSHI"]
+ ];
+ let selected=null,matched=0;
+
+ const items=$("matchItems"),targets=$("matchTargets");
+
+ shuffle([...pairs]).forEach((p,i)=>{
+  const b=document.createElement("button");
+  b.className="matchitem";
+  b.textContent=p[0];
+  b.dataset.id=p[1];
+  b.style.width="100%";
+  b.style.marginBottom="8px";
+  b.addEventListener("click",()=>{
+   selected=b;
+   $("matchMsg").textContent=`Now choose the ${p[1]} target.`;
+  });
+  items.appendChild(b);
+ });
+
+ shuffle([...pairs]).forEach(p=>{
+  const b=document.createElement("button");
+  b.className="matchtarget";
+  b.textContent=p[1];
+  b.dataset.id=p[1];
+  b.style.width="100%";
+  b.style.marginBottom="8px";
+  b.addEventListener("click",()=>{
+   if(!selected)return;
+   if(selected.dataset.id===b.dataset.id){
+    selected.disabled=true;
+    b.disabled=true;
+    b.classList.add("matched");
+    matched++;
+    addPoints(15);
+    selected=null;
+    $("matchMsg").textContent="Perfect match! 💗";
+    if(matched===5)finishLevel(11,"Five perfect matches! 🧲");
+   }else{
+    $("matchMsg").textContent="Not that one. Try another target!";
+   }
+  });
+  targets.appendChild(b);
+ });
+}
+
+/* =========================================================
+   12 WHO KNOWS LILIANA BEST
+========================================================= */
+
+const lilianaQuiz=[
+["What is Liliana's favourite colour?",["Baby pink","Burgundy","Purple","Green"],0],
+["What is Liliana's favourite number?",["3","7","5","9"],0],
+["Which food does Liliana like?",["Sushi","Curry","Tacos","Porridge"],0],
+["Which animal does Liliana like?",["Dolphins","Tigers","Koalas","Foxes"],0],
+["What flowers does Liliana like?",["Sunflowers and roses","Tulips and lilies","Daisies and orchids","Lavender and violets"],0],
+["When is Liliana's birthday?",["22 July","12 June","7 August","2 May"],0],
+["What colour are Liliana's eyes?",["Green","Blue","Brown","Grey"],0],
+["What is Liliana's star sign?",["Leo","Gemini","Libra","Aries"],0],
+["What is Liliana afraid of?",["Drowning","Flying","Spiders","Heights"],0],
+["Which film is a favourite of Liliana's?",["Me Before You","Titanic","Frozen","The Notebook"],0],
+["What did Liliana study at university?",["Psychology","Law","Medicine","Art"],0],
+["Which dogs belong to Liliana?",["Aayla and Arlo","Luna and Milo","Bella and Coco","Max and Teddy"],0]
+];
+
+function makeLilianaQuiz(n,questions,finishText){
+ const root=$(`g${n}`);
+ root.innerHTML=`
+ ${levelHeader(n,n===12?"Who Knows Liliana Best?":"The Final Challenge",n===12?"💗":"💕",
+ n===12?"How well do you know Liliana?":"The ultimate 50-question Liliana challenge.")}
+ <div class="card">
+  <div class="center">${n===23?`<span class="finalnumber">FINAL CHALLENGE</span>`:`Question <b id="lqNum">1</b>/${questions.length}`}</div>
+  <div class="progress"><i id="lqProg"></i></div>
+  <h3 id="lqQuestion"></h3>
+  <div class="answergrid" id="lqAnswers"></div>
+  <div class="message" id="lqMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let i=0;
+
+ function show(){
+  const q=questions[i];
+  if($("lqNum"))$("lqNum").textContent=i+1;
+  $("lqProg").style.width=(i/questions.length*100)+"%";
+  $("lqQuestion").textContent=q[0];
+  $("lqMsg").textContent="";
+  const box=$("lqAnswers");
+  box.innerHTML="";
+  shuffledAnswers({options:q[1],answer:q[2]}).forEach(a=>{
+   const b=document.createElement("button");
+   b.className="answer";
+   b.textContent=a.text;
+   listen(b,"click",()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+    if(a.correct){
+     b.classList.add("correct");
+     addPoints(n===23?12:20);
+     addTokens(1);
+     $("lqMsg").textContent="Correct! 💗";
+    }else{
+     b.classList.add("wrong");
+     $("lqMsg").textContent="Not quite!";
+    }
+    i++;
+    if(i>=questions.length){
+     later(()=>finishLevel(n,finishText),350);
+    }else later(show,350);
+   });
+   box.appendChild(b);
+  });
+ }
+ show();
+}
+
+function game12(){
+ makeLilianaQuiz(12,shuffle([...lilianaQuiz]).slice(0,12),"You know Liliana so well! 💗");
+}
+
+/* =========================================================
+   13 REACTION GAUNTLET
+========================================================= */
+
+function game13(){
+ const root=$("g13");
+ root.innerHTML=`
+ ${levelHeader(13,"Reaction Gauntlet","⚡","Ten tiny reaction challenges. Read the instruction and tap the correct button.")}
+ <div class="card center">
+  <b>Round <span id="reactNum">1</span>/10</b>
+  <div class="reactionbox" id="reactionBox">
+   <div id="reactionText">Get ready...</div>
+   <button class="primary reactionbutton hidden" id="reactionButton">TAP!</button>
+  </div>
+  <div class="message" id="reactionMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let round=0,active=false,trap=false;
+
+ function next(){
+  round++;
+  if(round>10){
+   finishLevel(13,"Reaction Gauntlet complete! ⚡");
+   return;
+  }
+  $("reactNum").textContent=round;
+  const box=$("reactionBox"),btn=$("reactionButton");
+  trap=Math.random()<.25;
+  const type=Math.floor(Math.random()*3);
+  active=false;
+  btn.classList.remove("hidden");
+
+  if(trap){
+   $("reactionText").textContent="🚫 DON'T TAP!";
+   btn.textContent="WAIT";
+   btn.className="danger reactionbutton";
+  }else if(type===0){
+   $("reactionText").textContent="💗 TAP NOW!";
+   btn.textContent="TAP!";
+   btn.className="primary reactionbutton";
+  }else if(type===1){
+   $("reactionText").textContent="🌸 TAP THE HEART";
+   btn.textContent="💗";
+   btn.className="primary reactionbutton";
+  }else{
+   $("reactionText").textContent="⭐ TAP THE STAR";
+   btn.textContent="⭐";
+   btn.className="gold reactionbutton";
+  }
+  active=true;
+
+  const wait=900+Math.random()*1000;
+  later(()=>{
+   if(!active)return;
+   if(!trap){
+    $("reactionText").textContent="NOW! ⚡";
+   }
+  },wait);
+ }
+
+ $("reactionButton").addEventListener("click",()=>{
+  if(!active)return;
+  active=false;
+  if(trap){
+   $("reactionMsg").textContent="😅 Too early! But you can keep going.";
+   addPoints(5);
+  }else{
+   $("reactionMsg").textContent="⚡ Great reaction!";
+   addPoints(15);
+  }
+  later(next,350);
+ });
+
+ next();
+}
+
+/* =========================================================
+   14 HEART HUNT
+========================================================= */
+
+function game14(){
+ const root=$("g14");
+ root.innerHTML=`
+ ${levelHeader(14,"Heart Hunt","🕵️","Find and tap 12 hidden hearts. Some things in the scene are decoys!")}
+ <div class="card">
+  <div class="center">Hearts found: <b id="huntFound">0</b>/12</div>
+  <div class="hunt" id="hunt"></div>
+  <div class="message" id="huntMsg">Find the hearts! 💗</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const hunt=$("hunt");
+ let found=0;
+
+ for(let i=0;i<12;i++){
+  const h=document.createElement("button");
+  h.className="huntheart";
+  h.textContent=["💗","💖","💕","💘"][Math.floor(Math.random()*4)];
+  h.style.left=(5+Math.random()*85)+"%";
+  h.style.top=(5+Math.random()*85)+"%";
+  h.style.background="none";
+  listen(h,"click",()=>{
+   h.disabled=true;
+   h.style.transform="scale(1.5)";
+   found++;
+   $("huntFound").textContent=found;
+   addPoints(8);
+   if(found>=12)finishLevel(14,"You found every hidden heart! 💗");
+  });
+  hunt.appendChild(h);
+ }
+
+ for(let i=0;i<10;i++){
+  const d=document.createElement("span");
+  d.className="decoy";
+  d.textContent=["⭐","🌸","✨","🌙"][Math.floor(Math.random()*4)];
+  d.style.left=(Math.random()*90)+"%";
+  d.style.top=(Math.random()*90)+"%";
+  hunt.appendChild(d);
+ }
+}
+
+/* =========================================================
+   15 LOVE LOCK
+========================================================= */
+
+function game15(){
+ const root=$("g15");
+ root.innerHTML=`
+ ${levelHeader(15,"Love Lock","🔐","Use the clues to discover the six-digit combination.")}
+ <div class="card center">
+  <p class="subtitle">
+   🎂 Liliana's birthday is <b>22 July</b>.<br>
+   💗 You have been best friends for <b>6 years</b>.
+  </p>
+  <p class="small">Put the birthday first, then the friendship years.</p>
+  <div class="lockdisplay" id="lockDisplay">______</div>
+  <div class="keypad" id="keypad"></div>
+  <button class="danger bigbtn" id="lockClear">Clear</button>
+  <div class="message" id="lockMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const code="060722";
+ let entered="";
+
+ for(let i=1;i<=9;i++)makeKey(String(i));
+ makeKey("0");
+
+ function makeKey(x){
+  const b=document.createElement("button");
+  b.className="key";
+  b.textContent=x;
+  listen(b,"click",()=>{
+   if(entered.length>=6)return;
+   entered+=x;
+   $("lockDisplay").textContent=entered.padEnd(6,"_");
+   if(entered.length===6){
+    if(entered===code){
+     $("lockMsg").textContent="🔓 LOCK OPEN!";
+     addPoints(60);
+     addTokens(3);
+     finishLevel(15,"You cracked the Love Lock! 🔐");
+    }else{
+     $("lockMsg").textContent="❌ Not quite. Try again.";
+     later(()=>{
+      entered="";
+      $("lockDisplay").textContent="______";
+     },500);
+    }
+   }
+  });
+  $("keypad").appendChild(b);
+ }
+
+ $("lockClear").addEventListener("click",()=>{
+  entered="";
+  $("lockDisplay").textContent="______";
+  $("lockMsg").textContent="";
+ });
+}
+
+/* =========================================================
+   16 CUPID SHOOTOUT
+========================================================= */
+
+function game16(){
+ const root=$("g16");
+ root.innerHTML=`
+ ${levelHeader(16,"Cupid Shootout","🏹","Tap 15 moving hearts before Cupid runs out of arrows.")}
+ <div class="card">
+  <div class="center">🎯 Hits: <b id="shotHits">0</b>/15 &nbsp; 🏹 Arrows: <b id="arrows">20</b></div>
+  <div class="shooting" id="shooting"></div>
+  <div class="message" id="shotMsg">Tap a heart!</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const area=$("shooting");
+ let hits=0,arrows=20;
+
+ function spawn(){
+  if(hits>=15)return;
+  area.querySelectorAll(".target").forEach(x=>x.remove());
+  const t=document.createElement("button");
+  t.className="target";
+  t.textContent=Math.random()<.2?"💖":"💗";
+  t.style.left=(5+Math.random()*80)+"%";
+  t.style.top=(5+Math.random()*80)+"%";
+  listen(t,"click",()=>{
+   hits++;
+   arrows++;
+   $("shotHits").textContent=hits;
+   $("arrows").textContent=arrows;
+   addPoints(t.textContent==="💖"?15:10);
+   t.remove();
+   if(hits>=15)finishLevel(16,"Cupid hit every target! 🏹");
+   else later(spawn,200);
+  });
+  area.appendChild(t);
+  arrows--;
+  $("arrows").textContent=arrows;
+  if(arrows<=0){
+   arrows=20;
+   $("arrows").textContent=20;
+  }
+ }
+
+ every(spawn,850);
+ spawn();
+}
+
+/* =========================================================
+   17 COUNTDOWN MINI GAMES
+========================================================= */
+
+function game17(){
+ const root=$("g17");
+ root.innerHTML=`
+ ${levelHeader(17,"The Countdown","⏳","Six tiny challenges. The game changes every round, so it never feels like another quiz.")}
+ <div class="card center">
+  <b>Challenge <span id="cdNum">1</span>/6</b>
+  <div id="cdArea"></div>
+  <div class="message" id="cdMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let round=0;
+
+ function next(){
+  round++;
+  if(round>6){
+   finishLevel(17,"You conquered The Countdown! ⏳");
+   return;
+  }
+  $("cdNum").textContent=round;
+  const area=$("cdArea");
+  area.innerHTML="";
+  const type=round%4;
+
+  if(type===1){
+   area.innerHTML=`
+    <p>Stop the marker inside the green zone.</p>
+    <div class="countbar"><div class="countzone"></div><div class="countneedle" id="cdNeedle"></div></div>
+    <button class="primary bigbtn" id="cdStop">STOP!</button>`;
+   let x=0,d=1;
+   const id=every(()=>{
+    x+=d*4;
+    if(x>=100){x=100;d=-1}
+    if(x<=0){x=0;d=1}
+    $("cdNeedle").style.left=x+"%";
+   },30);
+   cleanupFns.push(()=>clearInterval(id));
+   $("cdStop").addEventListener("click",()=>{
+    clearInterval(id);
+    addPoints(x>=42&&x<=58?25:10);
+    $("cdMsg").textContent=x>=35&&x<=65?"Perfect!":"Nice try!";
+    later(next,400);
+   });
+  }else if(type===2){
+   const seq=shuffle(["💗","🌸","⭐","🌻"]).slice(0,3);
+   area.innerHTML=`
+    <p>Tap these in order:</p>
+    <h2>${seq.join(" → ")}</h2>
+    <div class="answergrid" id="cdButtons"></div>`;
+   let pos=0;
+   ["💗","🌸","⭐","🌻"].forEach(x=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.textContent=x;
+    b.addEventListener("click",()=>{
+     if(x===seq[pos]){
+      pos++;
+      b.disabled=true;
+      if(pos===seq.length){
+       addPoints(25);
+       $("cdMsg").textContent="Sequence complete! ✨";
+       later(next,400);
+      }
+     }else{
+      $("cdMsg").textContent="Close! Try this challenge again.";
+      pos=0;
+      document.querySelectorAll("#cdButtons button").forEach(q=>q.disabled=false);
+     }
+    });
+    $("cdButtons").appendChild(b);
+   });
+  }else if(type===3){
+   const nums=shuffle([1,2,3,4]);
+   area.innerHTML=`
+    <p>Tap the numbers from 1 to 4.</p>
+    <div class="answergrid" id="numButtons"></div>`;
+   let want=1;
+   nums.forEach(n=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.textContent=n;
+    b.addEventListener("click",()=>{
+     if(n===want){
+      b.disabled=true;
+      want++;
+      if(want===5){
+       addPoints(25);
+       $("cdMsg").textContent="Perfect order! 🔢";
+       later(next,400);
+      }
+     }else{
+      $("cdMsg").textContent="Oops! Start again.";
+      want=1;
+      document.querySelectorAll("#numButtons button").forEach(q=>q.disabled=false);
+     }
+    });
+    $("numButtons").appendChild(b);
+   });
+  }else{
+   area.innerHTML=`
+    <p>Tap the giant heart as many times as you can!</p>
+    <button class="primary" id="bigHeart" style="font-size:60px;width:100%">💗</button>
+    <p>Hits: <b id="heartTaps">0</b>/8</p>`;
+   let taps=0;
+   $("bigHeart").addEventListener("click",()=>{
+    taps++;
+    $("heartTaps").textContent=taps;
+    if(taps>=8){
+     addPoints(25);
+     $("cdMsg").textContent="💗 Done!";
+     later(next,400);
+    }
+   });
+  }
+ }
+ next();
+}
+
+/* =========================================================
+   18 ULTIMATE GAMBLE
+========================================================= */
+
+function game18(){
+ const root=$("g18");
+ root.innerHTML=`
+ ${levelHeader(18,"Ultimate Gamble","🎲","Start with 100 coins. Keep risking for a bigger prize, or cash out.")}
+ <div class="card center">
+  <div class="pot">🪙 <span id="gamblePot">100</span></div>
+  <p>Turn <b id="gambleTurn">0</b>/6</p>
+  <div class="gamblegrid">
+   <button class="gold" id="gambleRisk">🎲 Risk</button>
+   <button class="green" id="gambleCash">🪙 Cash Out</button>
+  </div>
+  <div class="message" id="gambleMsg">Will you risk it?</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let pot=100,turn=0,done=false;
+
+ $("gambleRisk").addEventListener("click",()=>{
+  if(done)return;
+  turn++;
+  if(Math.random()<.68){
+   pot+=Math.floor(30+Math.random()*90);
+   $("gambleMsg").textContent="🎉 You won more coins!";
+  }else{
+   pot=Math.max(0,Math.floor(pot/2));
+   $("gambleMsg").textContent="😅 You lost half.";
+  }
+  $("gamblePot").textContent=pot;
+  $("gambleTurn").textContent=turn;
+
+  if(turn>=6){
+   done=true;
+   addPoints(Math.max(20,Math.floor(pot/2)));
+   finishLevel(18,"You finished the Ultimate Gamble! 🎲");
+  }
+ });
+
+ $("gambleCash").addEventListener("click",()=>{
+  if(done)return;
+  done=true;
+  addPoints(Math.max(20,Math.floor(pot/2)));
+  addTokens(2);
+  finishLevel(18,"You cashed out! 🪙");
+ });
+}
+
+/* =========================================================
+   19 ADMIRER'S LAST STAND
+========================================================= */
+
+function game19(){
+ const root=$("g19");
+ root.innerHTML=`
+ ${levelHeader(19,"Admirer's Last Stand","👑","A friendly boss battle with three simple phases.")}
+ <div class="card">
+  <div class="boss" id="boss">👑</div>
+  <div class="center">Boss HP</div>
+  <div class="health"><i id="bossHP"></i></div>
+  <div class="center">Your Energy: <b id="bossEnergy">3</b></div>
+  <div class="bossactions">
+   <button class="primary" id="bossAttack">👊 Attack</button>
+   <button class="secondary" id="bossGuard">🛡️ Guard</button>
+   <button class="gold" id="bossSpecial">💥 Special</button>
+   <button class="secondary" id="bossHeal">💗 Heal</button>
+  </div>
+  <div class="message" id="bossMsg">Phase 1: attack carefully!</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let hp=100,energy=3,guard=false;
+
+ function update(){
+  $("bossHP").style.width=hp+"%";
+  $("bossEnergy").textContent=energy;
+  $("boss").textContent=hp>65?"👑":hp>30?"😈":"🔥";
+ }
+
+ function enemyTurn(){
+  if(guard){
+   guard=false;
+   $("bossMsg").textContent="🛡️ Blocked!";
+   return;
+  }
+  if(Math.random()<.65)energy=Math.max(0,energy-1);
+ }
+
+ $("bossAttack").addEventListener("click",()=>{
+  hp=Math.max(0,hp-11);
+  enemyTurn();
+  addPoints(8);
+  if(hp<=0)win();
+  else{
+   $("bossMsg").textContent=hp>65?"Phase 1":"The boss is getting angry!";
+   update();
+  }
+ });
+
+ $("bossGuard").addEventListener("click",()=>{
+  guard=true;
+  enemyTurn();
+  update();
+  $("bossMsg").textContent="🛡️ Guard ready!";
+ });
+
+ $("bossSpecial").addEventListener("click",()=>{
+  if(energy<2){
+   $("bossMsg").textContent="Need 2 energy!";
+   return;
+  }
+  energy-=2;
+  hp=Math.max(0,hp-25);
+  addPoints(20);
+  enemyTurn();
+  if(hp<=0)win();
+  else{
+   $("bossMsg").textContent="💥 Special attack!";
+   update();
+  }
+ });
+
+ $("bossHeal").addEventListener("click",()=>{
+  energy=Math.min(5,energy+1);
+  $("bossMsg").textContent="💗 Energy restored.";
+  update();
+ });
+
+ function win(){
+  update();
+  addPoints(80);
+  addTokens(3);
+  finishLevel(19,"The Admirer's Last Stand is defeated! 👑");
+ }
+ update();
+}
+
+/* =========================================================
+   20 WORD FIND
+========================================================= */
+
+const wordBank=[
+"LILIANA","LULU","FRIENDS","PINK","DOLPHIN","SUNFLOWER",
+"ROSE","SUSHI","POETRY","MUSIC","PSYCHOLOGY","LEO",
+"JULY","LOVE","FAMILY","HEART","DREAM","AAYLA","ARLO",
+"OCEAN","FOREVER","THREE","SIXYEARS","CHARM","EMPATHY"
+];
+
+function game20(){
+ const root=$("g20");
+ root.innerHTML=`
+ ${levelHeader(20,"Liliana's Word Find","🔎","Find all 25 hidden words. Words may go forwards, backwards, up, down or diagonally.")}
+ <div class="card">
+  <div class="center">Found <b id="wordsFound">0</b>/25</div>
+  <div class="wordwrap"><div class="wordgrid" id="wordGrid"></div></div>
+  <div class="wordlist" id="wordList"></div>
+  <div class="message" id="wordMsg">Drag across a word.</div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const SIZE=12;
+ const grid=Array.from({length:SIZE},()=>Array(SIZE).fill(""));
+ const placed=[];
+ const dirs=[
+  [0,1],[0,-1],[1,0],[-1,0],
+  [1,1],[1,-1],[-1,1],[-1,-1]
+ ];
+
+ function tryPlace(word){
+  for(let tries=0;tries<300;tries++){
+   const [dr,dc]=dirs[Math.floor(Math.random()*dirs.length)];
+   const r=Math.floor(Math.random()*SIZE);
+   const c=Math.floor(Math.random()*SIZE);
+   const er=r+dr*(word.length-1);
+   const ec=c+dc*(word.length-1);
+   if(er<0||er>=SIZE||ec<0||ec>=SIZE)continue;
+   let ok=true;
+   for(let i=0;i<word.length;i++){
+    const x=grid[r+dr*i][c+dc*i];
+    if(x!==""&&x!==word[i]){ok=false;break}
+   }
+   if(!ok)continue;
+   for(let i=0;i<word.length;i++)grid[r+dr*i][c+dc*i]=word[i];
+   placed.push({word,r,c,dr,dc});
+   return true;
+  }
+  return false;
+ }
+
+ shuffle([...wordBank]).forEach(w=>tryPlace(w));
+
+ const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+ for(let r=0;r<SIZE;r++){
+  for(let c=0;c<SIZE;c++){
+   if(!grid[r][c])grid[r][c]=letters[Math.floor(Math.random()*26)];
+  }
+ }
+
+ const gridEl=$("wordGrid");
+ const cells=[];
+ for(let r=0;r<SIZE;r++){
+  for(let c=0;c<SIZE;c++){
+   const b=document.createElement("button");
+   b.className="letter";
+   b.textContent=grid[r][c];
+   b.dataset.r=r;
+   b.dataset.c=c;
+   gridEl.appendChild(b);
+   cells.push(b);
+  }
+ }
+
+ $("wordList").innerHTML=wordBank.map(w=>`<span class="wordtag" data-word="${w}">${w}</span>`).join("");
+
+ let start=null;
+ let found=new Set();
+
+ function cellAt(e){
+  const el=document.elementFromPoint(e.clientX,e.clientY);
+  return el&&el.classList.contains("letter")?el:null;
+ }
+
+ function selectLine(a,b){
+  if(!a||!b)return;
+  const r1=Number(a.dataset.r),c1=Number(a.dataset.c);
+  const r2=Number(b.dataset.r),c2=Number(b.dataset.c);
+  const dr=Math.sign(r2-r1),dc=Math.sign(c2-c1);
+  if(r1!==r2&&c1!==c2&&Math.abs(r2-r1)!==Math.abs(c2-c1))return;
+
+  const len=Math.max(Math.abs(r2-r1),Math.abs(c2-c1))+1;
+  let word="";
+  const selected=[];
+  for(let i=0;i<len;i++){
+   const r=r1+dr*i,c=c1+dc*i;
+   const cell=cells[r*SIZE+c];
+   selected.push(cell);
+   word+=grid[r][c];
+  }
+
+  const reverse=word.split("").reverse().join("");
+  const match=wordBank.find(w=>w===word||w===reverse);
+
+  cells.forEach(x=>x.classList.remove("selected"));
+  selected.forEach(x=>x.classList.add("selected"));
+
+  if(match&&!found.has(match)){
+   found.add(match);
+   selected.forEach(x=>x.classList.add("found"));
+   const tag=document.querySelector(`[data-word="${match}"]`);
+   if(tag)tag.classList.add("found");
+   $("wordsFound").textContent=found.size;
+   addPoints(12);
+   $("wordMsg").textContent=`Found ${match}!`;
+   if(found.size===wordBank.length)finishLevel(20,"You found every word! 🔎");
+  }
+ }
+
+ gridEl.addEventListener("pointerdown",e=>{
+  const c=cellAt(e);
+  if(c){
+   start=c;
+   gridEl.setPointerCapture?.(e.pointerId);
+  }
+ });
+
+ gridEl.addEventListener("pointerup",e=>{
+  const end=cellAt(e);
+  if(start&&end)selectLine(start,end);
+  start=null;
+ });
+}
+
+/* =========================================================
+   21 DRAW A SUNFLOWER
+========================================================= */
+
+function game21(){
+ const root=$("g21");
+ root.innerHTML=`
+ ${levelHeader(21,"Draw a Sunflower","🌻","Draw your own sunflower. There is no wrong way to make it!")}
+ <div class="card">
+  <canvas id="drawCanvas" width="600" height="430"></canvas>
+  <div class="tools">
+   <button data-size="4">Small</button>
+   <button data-size="9">Medium</button>
+   <button data-size="16">Large</button>
+   <input class="colorinput" type="color" id="brushColor" value="#8e3159" aria-label="Brush colour">
+   <button id="undoDraw">↩ Undo</button>
+   <button id="clearDraw">🗑 Clear</button>
+  </div>
+  <div class="message" id="drawMsg">Draw petals, leaves, a stem, or anything you like! 🌻</div>
+  <button class="primary bigbtn" id="finishDrawing">🌻 I'm Finished!</button>
+ </div>
+ <div class="nextbox"></div>`;
+
+ const canvas=$("drawCanvas"),ctx=canvas.getContext("2d");
+ let drawing=false,lastX=0,lastY=0,size=9,color="#8e3159";
+ const history=[];
+
+ function pos(e){
+  const r=canvas.getBoundingClientRect();
+  return {
+   x:(e.clientX-r.left)*canvas.width/r.width,
+   y:(e.clientY-r.top)*canvas.height/r.height
   };
+ }
 
-  audio.pause();
-  audio.removeAttribute("src");
-  audio.load();
+ function saveHistory(){
+  if(history.length>8)history.shift();
+  history.push(ctx.getImageData(0,0,canvas.width,canvas.height));
+ }
 
-  document.getElementById("nameInput").value="";
-  document.getElementById("musicToggle").textContent="▶️";
+ listen(canvas,"pointerdown",e=>{
+  saveHistory();
+  drawing=true;
+  const p=pos(e);
+  lastX=p.x;lastY=p.y;
+  canvas.setPointerCapture?.(e.pointerId);
+ });
 
-  document.getElementById("journeyScreen").classList.add("hidden");
-  document.getElementById("gameScreen").classList.add("hidden");
-  document.getElementById("startScreen").classList.remove("hidden");
+ listen(canvas,"pointermove",e=>{
+  if(!drawing)return;
+  const p=pos(e);
+  ctx.strokeStyle=color;
+  ctx.lineWidth=size;
+  ctx.lineCap="round";
+  ctx.beginPath();
+  ctx.moveTo(lastX,lastY);
+  ctx.lineTo(p.x,p.y);
+  ctx.stroke();
+  lastX=p.x;lastY=p.y;
+ });
 
-  updateHeader();
+ listen(canvas,"pointerup",()=>drawing=false);
+ listen(canvas,"pointercancel",()=>drawing=false);
+
+ document.querySelectorAll("[data-size]").forEach(b=>{
+  listen(b,"click",()=>size=Number(b.dataset.size));
+ });
+
+ listen($("brushColor"),"input",e=>color=e.target.value);
+
+ listen($("undoDraw"),"click",()=>{
+  const last=history.pop();
+  if(last)ctx.putImageData(last,0,0);
+ });
+
+ listen($("clearDraw"),"click",()=>{
+  saveHistory();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+ });
+
+ listen($("finishDrawing"),"click",()=>{
+  addPoints(50);
+  addTokens(3);
+  finishLevel(21,"Your sunflower is beautiful! 🌻");
+ });
 }
 
 /* =========================================================
-   STARTUP
+   22 LULU DERBY — 100 RANDOM TRIVIA
 ========================================================= */
 
-load();
+const derbyQuestions=[
+["Which planet is closest to the Sun?",["Mercury","Venus","Earth","Mars"],0],
+["How many continents are there?",["5","6","7","8"],2],
+["What is the capital of France?",["Paris","Rome","Madrid","Berlin"],0],
+["Which animal is known as the king of the jungle?",["Lion","Tiger","Bear","Wolf"],0],
+["What is 12 × 5?",["50","60","70","80"],1],
+["Which ocean is between Africa and Australia?",["Atlantic","Indian","Pacific","Arctic"],1],
+["What is the chemical symbol for gold?",["Ag","Au","Fe","Gd"],1],
+["Which language has the most native speakers?",["English","Spanish","Mandarin Chinese","French"],2],
+["How many legs does a spider have?",["6","8","10","12"],1],
+["Which country is shaped like a boot?",["Italy","Spain","Greece","Portugal"],0],
+["What is the largest planet?",["Earth","Jupiter","Saturn","Neptune"],1],
+["Which organ pumps blood around the body?",["Lung","Heart","Liver","Kidney"],1],
+["What is the square root of 64?",["6","7","8","9"],2],
+["Which month has 28 days in a normal year?",["January","February","March","April"],1],
+["Which animal is the largest land animal?",["Rhino","Elephant","Hippo","Giraffe"],1],
+["What is the capital of Canada?",["Toronto","Vancouver","Ottawa","Montreal"],2],
+["Which gas makes up most of Earth's atmosphere?",["Oxygen","Nitrogen","Helium","Hydrogen"],1],
+["How many players are on a soccer team on the field?",["9","10","11","12"],2],
+["Which planet is famous for a giant red storm?",["Mars","Jupiter","Saturn","Uranus"],1],
+["What is the hardest natural substance?",["Gold","Diamond","Iron","Quartz"],1],
+["Which country gave the Statue of Liberty to the United States?",["France","Canada","Italy","Spain"],0],
+["What is 100 divided by 4?",["20","25","30","40"],1],
+["Which mammal can fly?",["Bat","Squirrel","Monkey","Rabbit"],0],
+["What is the capital of Italy?",["Venice","Milan","Rome","Naples"],2],
+["Which sea creature has eight arms?",["Shark","Octopus","Dolphin","Seal"],1],
+["How many colours are traditionally in a rainbow?",["5","6","7","8"],2],
+["Which metal is liquid at room temperature?",["Iron","Mercury","Copper","Aluminium"],1],
+["What is the largest desert in the world by area?",["Sahara","Antarctic Desert","Gobi","Arabian"],1],
+["Which country is home to the Great Barrier Reef?",["Australia","Brazil","India","Mexico"],0],
+["How many degrees are in a full circle?",["90","180","270","360"],3],
+["Which instrument measures temperature?",["Barometer","Thermometer","Compass","Altimeter"],1],
+["What is the capital of New Zealand?",["Auckland","Wellington","Christchurch","Hamilton"],1],
+["Which bird cannot fly?",["Eagle","Penguin","Falcon","Hawk"],1],
+["What is the opposite of north?",["East","West","South","Up"],2],
+["Which planet is called Earth's twin because of similar size?",["Venus","Mars","Mercury","Neptune"],0],
+["How many bones are in the adult human body approximately?",["106","206","306","406"],1],
+["Which sport uses a racket and shuttlecock?",["Tennis","Badminton","Golf","Cricket"],1],
+["What is the capital of Spain?",["Barcelona","Madrid","Seville","Valencia"],1],
+["Which animal is famous for changing colour?",["Chameleon","Horse","Elephant","Penguin"],0],
+["What is 15 + 27?",["40","41","42","43"],2],
+["Which planet has the most prominent rings?",["Mars","Saturn","Earth","Venus"],1],
+["Which country is home to Machu Picchu?",["Peru","Chile","Brazil","Bolivia"],0],
+["What do plants absorb from the air for photosynthesis?",["Oxygen","Nitrogen","Carbon dioxide","Helium"],2],
+["How many sides does an octagon have?",["6","7","8","9"],2],
+["Which animal is known for its black and white stripes?",["Zebra","Leopard","Panda","Skunk"],0],
+["What is the capital of Germany?",["Berlin","Munich","Hamburg","Frankfurt"],0],
+["Which famous scientist developed the theory of relativity?",["Newton","Einstein","Darwin","Galileo"],1],
+["How many hours are in two days?",["24","36","48","72"],2],
+["Which fruit is traditionally associated with keeping doctors away?",["Apple","Banana","Orange","Pear"],0],
+["What is the boiling point of water at sea level in Celsius?",["50","75","100","125"],2],
+["Which country has the city of Cairo?",["Egypt","Jordan","Morocco","Turkey"],0],
+["Which animal is known for building dams?",["Beaver","Otter","Badger","Fox"],0],
+["What is the largest internal organ in the human body?",["Heart","Liver","Lung","Kidney"],1],
+["Which planet rotates on its side?",["Uranus","Mars","Venus","Mercury"],0],
+["What is 7 × 8?",["48","54","56","64"],2],
+["Which continent contains the Sahara Desert?",["Asia","Africa","Europe","Australia"],1],
+["Which famous ship sank in 1912?",["Titanic","Endeavour","Mayflower","Beagle"],0],
+["What is the capital of Greece?",["Athens","Sparta","Thessaloniki","Corinth"],0],
+["Which animal is the fastest bird in a dive?",["Eagle","Peregrine falcon","Owl","Swan"],1],
+["How many planets are in our Solar System?",["7","8","9","10"],1],
+["Which country is famous for the ancient city of Petra?",["Jordan","Egypt","Greece","Lebanon"],0],
+["What is the primary ingredient in bread?",["Rice","Flour","Corn","Potato"],1],
+["Which sport is played at Wimbledon?",["Tennis","Football","Rugby","Golf"],0],
+["What is the capital of Ireland?",["Dublin","Cork","Galway","Limerick"],0],
+["Which animal has a trunk?",["Elephant","Rhino","Giraffe","Walrus"],0],
+["What is 144 ÷ 12?",["10","11","12","14"],2],
+["Which planet is farthest from the Sun?",["Saturn","Uranus","Neptune","Jupiter"],2],
+["What do caterpillars become?",["Bees","Butterflies or moths","Birds","Beetles"],1],
+["Which country is home to the city of Kyoto?",["China","Japan","South Korea","Thailand"],1],
+["Which blood cells help fight infection?",["Red cells","White cells","Platelets","Plasma"],1],
+["What is the capital of Portugal?",["Lisbon","Porto","Faro","Braga"],0],
+["Which animal is known for carrying its baby in a pouch?",["Kangaroo","Tiger","Panda","Wolf"],0],
+["What is the largest planet's main composition?",["Gas","Rock","Ice","Metal"],0],
+["Which ancient civilisation built the Colosseum?",["Romans","Vikings","Aztecs","Maya"],0],
+["What is 11 squared?",["111","121","131","141"],1],
+["Which country is famous for the Taj Mahal?",["India","Pakistan","Nepal","Bangladesh"],0],
+["What is the name of our galaxy?",["Andromeda","Milky Way","Whirlpool","Sombrero"],1],
+["Which animal is famous for its long neck?",["Giraffe","Camel","Llama","Horse"],0],
+["Which planet is closest in size to Earth?",["Venus","Mars","Mercury","Jupiter"],0],
+["What is the capital of Norway?",["Oslo","Bergen","Stockholm","Helsinki"],0],
+["Which sport uses wickets?",["Cricket","Tennis","Basketball","Hockey"],0],
+["What is the main language spoken in Brazil?",["Spanish","Portuguese","French","English"],1],
+["Which shape has four equal sides?",["Triangle","Rectangle","Square","Pentagon"],2],
+["Which animal produces wool?",["Sheep","Cow","Horse","Goat"],0],
+["What is 5 cubed?",["25","75","100","125"],3],
+["Which country is famous for the Eiffel Tower?",["France","Belgium","Switzerland","Austria"],0],
+["What is the name of the Earth's natural satellite?",["Mars","Moon","Sun","Europa"],1],
+["Which bird is often associated with wisdom?",["Owl","Pigeon","Duck","Chicken"],0],
+["What is the capital of South Korea?",["Seoul","Busan","Incheon","Daegu"],0],
+["Which ocean is the smallest?",["Arctic","Indian","Atlantic","Southern"],0],
+["Which animal is known for its ability to echolocate?",["Bat","Horse","Rabbit","Sheep"],0],
+["What is 9 + 17?",["24","25","26","27"],2],
+["Which country has Mount Fuji?",["Japan","China","Nepal","Indonesia"],0],
+["What is the process by which plants make food using sunlight?",["Respiration","Photosynthesis","Digestion","Fermentation"],1],
+["Which planet is known for its blue colour and strong winds?",["Neptune","Mars","Mercury","Venus"],0],
+["What is the capital of Iceland?",["Reykjavik","Oslo","Dublin","Helsinki"],0],
+["Which animal is often called man's best friend?",["Dog","Cat","Horse","Rabbit"],0],
+["How many months are in a year?",["10","11","12","13"],2],
+["Which famous wall divided Berlin during the Cold War?",["Berlin Wall","Iron Wall","Eastern Wall","German Wall"],0],
+["What is the largest continent?",["Africa","Asia","Europe","North America"],1],
+["Which country is home to the Acropolis?",["Greece","Italy","Turkey","Egypt"],0],
+["What is 50% of 80?",["20","30","40","50"],2],
+["Which animal is famous for its quills?",["Porcupine","Rabbit","Deer","Otter"],0],
+["What is the capital of China?",["Beijing","Shanghai","Hong Kong","Shenzhen"],0],
+["Which planet is sometimes visible as the morning or evening star?",["Venus","Mars","Jupiter","Saturn"],0]
+];
 
-if(state.name){
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("journeyScreen").classList.remove("hidden");
+function game22(){
+ const root=$("g22");
+ root.innerHTML=`
+ ${levelHeader(22,"THE LULU DERBY","🏇","Choose your horse, then answer 100 random trivia questions to help it race!")}
+ <div class="card" id="derbySelectCard">
+  <h3 class="center">Choose your horse</h3>
+  <div class="horselist" id="horseChoices">
+   <button class="horsechoice" data-horse="0">🌸 Pink Lulu</button>
+   <button class="horsechoice" data-horse="1">💙 Blue Star</button>
+   <button class="horsechoice" data-horse="2">💜 Purple Dream</button>
+   <button class="horsechoice" data-horse="3">💛 Golden Heart</button>
+  </div>
+  <button class="primary bigbtn hidden" id="startDerby">🏁 Start Derby</button>
+ </div>
+ <div class="card hidden" id="derbyGame">
+  <div class="center">Question <b id="derbyNum">1</b>/100</div>
+  <div class="progress"><i id="derbyProg"></i></div>
+  <div class="derbytrack">
+   <div>🌸 <span id="dh0">Pink Lulu</span><div class="horsebar"><i id="db0"></i></div></div>
+   <div>💙 Blue Star<div class="horsebar"><i id="db1"></i></div></div>
+   <div>💜 Purple Dream<div class="horsebar"><i id="db2"></i></div></div>
+   <div>💛 Golden Heart<div class="horsebar"><i id="db3"></i></div></div>
+  </div>
+  <h3 id="derbyQuestion"></h3>
+  <div class="answergrid" id="derbyAnswers"></div>
+  <div class="message" id="derbyMsg"></div>
+ </div>
+ <div class="nextbox"></div>`;
+
+ let selected=-1;
+ let questions=[];
+ let qi=0;
+ let distance=[0,0,0,0];
+ let running=false;
+
+ document.querySelectorAll(".horsechoice").forEach(b=>{
+  b.addEventListener("click",()=>{
+   selected=Number(b.dataset.horse);
+   document.querySelectorAll(".horsechoice").forEach(x=>x.classList.remove("selected"));
+   b.classList.add("selected");
+   $("startDerby").classList.remove("hidden");
+  });
+ });
+
+ $("startDerby").addEventListener("click",()=>{
+  if(selected<0)return;
+  questions=shuffle([...derbyQuestions]).slice(0,100);
+  qi=0;
+  running=true;
+  $("derbySelectCard").classList.add("hidden");
+  $("derbyGame").classList.remove("hidden");
+  showQuestion();
+ });
+
+ function showQuestion(){
+  const q=questions[qi];
+  $("derbyNum").textContent=qi+1;
+  $("derbyProg").style.width=(qi/100*100)+"%";
+  $("derbyQuestion").textContent=q[0];
+  $("derbyMsg").textContent="";
+  const box=$("derbyAnswers");
+  box.innerHTML="";
+
+  shuffledAnswers({options:q[1],answer:q[2]}).forEach(a=>{
+   const b=document.createElement("button");
+   b.className="answer";
+   b.textContent=a.text;
+   b.addEventListener("click",()=>{
+    box.querySelectorAll("button").forEach(x=>x.disabled=true);
+
+    if(a.correct){
+     distance[selected]=Math.min(100,distance[selected]+1.7);
+     addPoints(5);
+     addTokens(1);
+     $("derbyMsg").textContent="🏇 Correct! Your horse surges ahead!";
+    }else{
+     distance[selected]=Math.max(0,distance[selected]-.3);
+     const rival=Math.floor(Math.random()*4);
+     if(rival!==selected)distance[rival]=Math.min(100,distance[rival]+.7);
+     $("derbyMsg").textContent="The field moves on!";
+    }
+
+    for(let i=0;i<4;i++)$(`db${i}`).style.width=distance[i]+"%";
+
+    qi++;
+    if(qi>=100){
+     running=false;
+     const winner=distance.indexOf(Math.max(...distance));
+     const won=winner===selected;
+     if(won){
+      addPoints(120);
+      addTokens(10);
+      $("derbyMsg").textContent="🏆 YOUR HORSE WON THE LULU DERBY!";
+     }else{
+      addPoints(40);
+      $("derbyMsg").textContent="🏇 What a race! Your horse gave it everything.";
+     }
+     later(()=>finishLevel(22,won?"You won THE LULU DERBY! 🏆":"THE LULU DERBY is complete! 🏇"),500);
+    }else{
+     later(showQuestion,120);
+    }
+   });
+   box.appendChild(b);
+  });
+ }
 }
 
-updateHeader();
+/* =========================================================
+   23 FINAL CHALLENGE — 50 UNIQUE LILIANA QUESTIONS
+========================================================= */
 
-document.getElementById("nameInput").addEventListener("keydown",e=>{
-  if(e.key==="Enter")startJourney();
-});
+const finalQuestions=[
+["What is Liliana's favourite colour?",["Baby pink","Burgundy","Navy","Yellow"],0],
+["Which number has special meaning as Liliana's favourite?",["3","4","6","9"],0],
+["Which food is Liliana known to like?",["Sushi","Steak","Pasta","Cereal"],0],
+["Which sea animal does Liliana like?",["Dolphin","Shark","Seal","Whale"],0],
+["Which yellow flower does Liliana like?",["Sunflower","Daffodil","Tulip","Marigold"],0],
+["Which other flower does Liliana like?",["Rose","Orchid","Violet","Lily"],0],
+["What day of the month is Liliana's birthday?",["22","12","2","27"],0],
+["Which month is Liliana's birthday in?",["July","June","August","May"],0],
+["What colour are Liliana's eyes?",["Green","Hazel","Blue","Brown"],0],
+["What is Liliana's star sign?",["Leo","Cancer","Virgo","Libra"],0],
+["What fear has Liliana shared?",["Drowning","Thunder","Flying","Darkness"],0],
+["Which film is one of Liliana's favourites?",["Me Before You","Clueless","Frozen","Mamma Mia"],0],
+["What type of songs does Liliana like?",["Sad songs","Only dance songs","Only rock","Only country"],0],
+["What type of writing does Liliana enjoy?",["Poetry","News articles","Manuals","Textbooks"],0],
+["Which card game does Liliana enjoy?",["Poker","Solitaire only","Bridge only","Go Fish"],0],
+["Liliana enjoys poker and what broader type of activity?",["Gambling games","Cooking competitions","Chess tournaments","Marathons"],0],
+["What career-related subject did Liliana study at university?",["Psychology","Engineering","History","Physics"],0],
+["How many nieces does Liliana have?",["1","2","3","4"],0],
+["How many nephews does Liliana have?",["4","1","2","5"],0],
+["How many siblings does Liliana have?",["5","3","4","6"],0],
+["How many piercings does Liliana have?",["4","2","5","6"],0],
+["What is the name of one of Liliana's dogs?",["Aayla","Bella","Luna","Daisy"],0],
+["What is the name of Liliana's other dog?",["Arlo","Milo","Teddy","Coco"],0],
+["Which pair are Liliana's dogs?",["Aayla and Arlo","Luna and Milo","Bella and Coco","Daisy and Max"],0],
+["How long have Bree and Liliana been best friends?",["6 years","2 years","4 years","8 years"],0],
+["Which word best describes Liliana?",["Caring","Careless","Distant","Impatient"],0],
+["Which quality is associated with Liliana?",["Empathy","Indifference","Rudeness","Impatience"],0],
+["Which personality description fits Liliana?",["Charismatic","Shy and unfriendly","Cold and distant","Uninterested"],0],
+["Which description fits Liliana's nature?",["Sweet","Mean","Unkind","Aloof"],0],
+["Liliana is known for being what with people she likes?",["Flirtatious","Silent","Hostile","Reserved"],0],
+["What does Liliana like about children?",["She likes children","She dislikes children","She avoids children","She is frightened of children"],0],
+["What future family dream has Liliana shared?",["Being a mum","Owning a yacht","Becoming a pilot","Living alone forever"],0],
+["What kind of child does Liliana dream of having?",["A baby girl","Twin boys","A teenage son","No children"],0],
+["Which ocean-related dream belongs to Liliana?",["Seeing the ocean someday","Never seeing water","Learning to surf professionally","Living on a boat"],0],
+["Which combination contains two of Liliana's favourite things?",["Baby pink and sushi","Green and steak","Black and curry","Orange and pizza"],0],
+["Which combination correctly pairs Liliana with an animal she likes?",["Dolphin","Crocodile","Snake","Scorpion"],0],
+["Which combination contains two flowers Liliana likes?",["Sunflowers and roses","Roses and orchids","Tulips and lilies","Daisies and violets"],0],
+["Which statement about Liliana's birthday is correct?",["It is 22 July","It is 22 June","It is 12 July","It is 27 July"],0],
+["Which statement about Liliana's eyes is correct?",["They are green","They are blue","They are brown","They are grey"],0],
+["Which statement about Liliana's studies is correct?",["She studied Psychology","She studied Architecture","She studied Chemistry","She studied Music"],0],
+["Which statement about Liliana's pets is correct?",["She has dogs named Aayla and Arlo","She has cats named Aayla and Arlo","She has horses named Aayla and Arlo","She has birds named Aayla and Arlo"],0],
+["Which statement combines Liliana's favourite number and birthday?",["3 and 22 July","6 and 12 June","4 and 7 August","5 and 2 May"],0],
+["Which statement combines Liliana's flowers correctly?",["Sunflowers and roses","Daffodils and orchids","Tulips and lilies","Violets and daisies"],0],
+["Which statement combines Liliana's interests correctly?",["Poetry and sad songs","Only science and maths","Only sports and cooking","Only documentaries"],0],
+["Which statement combines Liliana's games correctly?",["Poker and gambling games","Only board puzzles","Only video games","Only crossword puzzles"],0],
+["Which statement correctly combines Liliana's family numbers?",["1 niece and 4 nephews","4 nieces and 1 nephew","2 nieces and 2 nephews","5 nieces and no nephews"],0],
+["Which statement correctly describes the friendship?",["Bree and Liliana have been best friends for 6 years","They have been friends for 1 year","They met last month","They have been friends for 12 years"],0],
+["Which description brings together several known Liliana traits?",["Sweet, caring, charismatic and empathetic","Quiet, distant, impatient and careless","Strict, cold, shy and indifferent","Competitive, rude, distant and serious"],0],
+["Which final combination is entirely correct about Liliana?",["Baby pink, dolphins, poetry and sushi","Blue, sharks, football and steak","Purple, horses, opera and curry","Green, snakes, chess and soup"],0]
+];
+
+function game23(){
+ makeLilianaQuiz(23,shuffle([...finalQuestions]),"THE FINAL CHALLENGE COMPLETE! 💕");
+}
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+function showResults(){
+ clearRuntime();
+ showScreen("results");
+
+ const qualifies=state.score>3000;
+
+ $("resultsPage").innerHTML=`
+ <div class="hero">
+  <span class="emoji">🎉🚂💗</span>
+  <h1>Journey Complete!</h1>
+  <p class="subtitle">${escapeHTML(state.name)}, you made it through all 23 levels.</p>
+ </div>
+
+ <div class="card results">
+  <h2>🏆 Final Score</h2>
+  <div class="pot">${state.score}</div>
+  <p>🪙 Tokens earned: <b>${state.tokens}</b></p>
+  <p>📍 Levels completed: <b>23/23</b></p>
+ </div>
+
+ <div class="reward center">
+  ${
+   qualifies
+   ? `<h2>📞 PRIVATE CALL UNLOCKED!</h2>
+      <p>You finished with <b>${state.score}</b> points, which is above the 3000-point requirement.</p>
+      <p>💗 3001+ qualifies. Exactly 3000 would not qualify.</p>`
+   : `<h2>💕 You did it!</h2>
+      <p>You completed the whole Lulu Express journey.</p>
+      <p>Private call reward requires a score of <b>3001+</b>.</p>`
+  }
+ </div>
+
+ <button class="secondary bigbtn" id="replayJourney">🔄 Replay From Level 1</button>
+ `;
+
+ $("replayJourney").addEventListener("click",()=>{
+  state.completed=0;
+  state.unlocked=1;
+  state.score=0;
+  state.tokens=0;
+  save();
+  updateStats();
+  startLevel(1);
+ });
+}
+
+function escapeHTML(s){
+ return String(s||"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+ }[c]));
+}
+
+/* =========================================================
+   GAME REGISTRY
+========================================================= */
+
+const games={
+ 1:game1,
+ 2:game2,
+ 3:game3,
+ 4:game4,
+ 5:game5,
+ 6:game6,
+ 7:game7,
+ 8:game8,
+ 9:game9,
+ 10:game10,
+ 11:game11,
+ 12:game12,
+ 13:game13,
+ 14:game14,
+ 15:game15,
+ 16:game16,
+ 17:game17,
+ 18:game18,
+ 19:game19,
+ 20:game20,
+ 21:game21,
+ 22:game22,
+ 23:game23
+};
+
 </script>
-
 </body>
 </html>

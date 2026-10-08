@@ -81,7 +81,7 @@ What is Liliana’s zodiac sign?|Leo|Scorpio|Gemini|Virgo
 What colour are Liliana’s eyes?|Green|Brown|Blue|Hazel
 How many siblings does Liliana have?|5|3|4|6
 How many nieces does Liliana have?|1|2|3|0
-How many nephews does Liliana have?|2|1|3|4
+How many nephews does Liliana have?|4|1|2|3
 How many dogs does Liliana have?|2|1|3|4
 What are Liliana’s dogs’ names?|Arlo & Aayla|Luna & Max|Bella & Rocky|Charlie & Daisy
 What is Liliana’s favourite type of game to play?|Poker|Blackjack|Chess|Monopoly

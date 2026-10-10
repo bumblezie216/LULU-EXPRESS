@@ -38,7 +38,7 @@ button.sel{background:linear-gradient(180deg,#ffe08a,#e0b84a);box-shadow:0 3px 0
 .big{text-shadow:0 0 12px rgba(255,194,218,.55)}
 canvas{border-radius:16px;border:3px solid #d8b865;box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 14px rgba(255,111,181,.2)}
 input{border-radius:14px;border:2px solid #e0c070;box-shadow:inset 0 2px 5px rgba(0,0,0,.15)}
-</style></head><body>
+#lulu-express,#project_title,.project-name,.page-header,#header_wrap,body>header{display:none!important}</style></head><body>
 <h1>💗 The Lulu Express 💗</h1>
 <div id="hd"></div>
 <div id="app"></div>
